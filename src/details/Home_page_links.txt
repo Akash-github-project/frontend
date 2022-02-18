@@ -1,0 +1,22 @@
+home domain
+https://www.rechargeaxn.com/
+    mobile recharge
+    https://www.rechargeaxn.com/home/index
+    dth recharge
+    https://www.rechargeaxn.com/home/recharge_bill_dth
+    electricity
+    https://www.rechargeaxn.com/home/recharge_bill_electricity
+    broadband /landline
+    https://www.rechargeaxn.com/home/range_bill
+    lpg gas
+    https://www.rechargeaxn.com/home/recharge_bill_gas
+    water recharge
+    https://www.rechargeaxn.com/home/recharge_bill_water
+    fast tag
+        requires domain modification 
+        https://www.rechargeaxn.com/home/index
+        
+    insurance 
+
+    https://www.rechargeaxn.com/home/    
+

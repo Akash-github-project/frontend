@@ -1,0 +1,4 @@
+breakpoint 1
+    normal page display
+breakpoint 2 
+    

@@ -1,0 +1,72 @@
+.logo{
+  background-image:url('./components/images/RechargeLogo.jpeg');
+  background-size:contain;
+  background-repeat: no-repeat;
+  min-width: 150px;
+  min-height: 65px;
+  padding:0;
+}
+* {
+    color: #f5317c ;
+}
+.bg-primary{
+  background-color: #f5317c ;
+}
+.text-primary{
+  color:#f5317c;
+}
+.text-secondary{
+  color:#536b61;
+}
+.text-tertiary{
+  color:white;
+}
+.width-80{
+  width: 80%;
+}
+input.field{
+	width: 65%;
+	padding: .375rem .75rem;
+	font-weight: 400;
+	border: 1px solid #f5317c;
+	border-radius: .25rem;
+	font-size: 12px;
+}
+input.field:focus{
+	border: 1px solid steelblue;
+	outline: 1px solid steelblue;
+
+}
+.blankCheckbox{
+  width:0.25rem;
+  height: 0.25rem;
+  border:1px #f5317c solid ;
+}
+
+.filledCheckbox{
+  width:0.25rem;
+  height: 0.25rem;
+  border-radius:2px;
+  /* workrequired */
+  background-image: url("./components/images/tick.svg"); 
+  background-size:contain;
+  border: 1px solid #f5317c;
+}
+.eye{
+  width:40px;
+  height: 1rem;
+  margin-top:7px;
+}
+.m-header{
+  margin-left:5%;
+  margin-right:5%;
+}
+  .bg-primary{
+    background-color: #f5317c;
+    color:white;
+  }
+/* button, [type="button"], [type="reset"], [type="submit"]{
+  padding: 1rem 2rem;;
+  color:white;
+  background-color: #f5317c;
+} */
