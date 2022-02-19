@@ -4,7 +4,7 @@ import React from 'react'
 export const HeaderLogged = () => {
   return (
       <header  className=' max-w-screen-[1170px] w-full flex gap-4 m-header mt-2 items-start'>
-          <div className="logo mr-auto "></div>
+          <div className="logo mr-auto relative -top-[0.5rem]"></div>
 
           <div className="nav flex gap-2 items-start ">
             <div className="rewards">Rewards</div>

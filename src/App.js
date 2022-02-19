@@ -6,6 +6,7 @@ import {Login} from './components/Login'
 // import './css/skeleton.css'
 import './App.css';
 import './index.css';
+import { Footer } from './components/Footer';
 function App() {
     // <BrowserRouter>
     //     <Routes>
@@ -15,11 +16,12 @@ function App() {
     //     </Routes> 
     // </BrowserRouter>
   return (
-    <div className='container w-full max-w-screen-[1170px] mx-auto'>
+    <div className='container w-full max-w-screen-[1170px] mx-auto pt-[1px]'>
       <Header />
       <div>
         <Login />
       </div>
+    <Footer />
     </div>
   )
 }

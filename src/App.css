@@ -1,13 +1,21 @@
+body{
+  margin:0;
+}
+* {
+    color: #f5317c ;
+}
 .logo{
   background-image:url('./components/images/RechargeLogo.jpeg');
   background-size:contain;
   background-repeat: no-repeat;
   min-width: 150px;
-  min-height: 65px;
-  padding:0;
+  max-width: 150px;
+  max-height: 27.7px;
+  min-height: 27.7px;
 }
-* {
-    color: #f5317c ;
+
+.fit-content{
+  width:fit-content;
 }
 .bg-primary{
   background-color: #f5317c ;
@@ -58,8 +66,8 @@ input.field:focus{
   margin-top:7px;
 }
 .m-header{
-  margin-left:5%;
-  margin-right:5%;
+  margin-left:3.5%;
+  margin-right:3.5%;
 }
   .bg-primary{
     background-color: #f5317c;
@@ -70,3 +78,84 @@ input.field:focus{
   color:white;
   background-color: #f5317c;
 } */
+
+*{
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+}
+
+.root{
+    width:100%;
+}
+header,section,main,footer{
+    width:100%;
+    min-height:10rem;
+    padding:1rem 0;
+}
+header{
+    background-color: red;
+}
+section{
+    background-color: blue;
+}
+main{
+    background-color: green;
+}
+footer{
+    background-color: brown;
+}
+.width{
+        max-width: 1180px;
+        padding: 1rem 0.2rem;
+        box-sizing: border-box;
+}
+@media screen and (max-width: 1200px) {
+    .width{
+        
+        max-width:754px;
+    }
+  }
+@media screen and (max-width: 1024px) {
+    .width{
+         
+        width:945px;
+    }
+  }
+@media screen and (max-width: 991px) {
+    .width{   
+        box-sizing: border-box;
+        width:705px;
+    }
+  }
+@media screen and (max-width: 767px) {
+    .width{
+        width:525px;
+    }
+  }
+
+@media screen and (max-width: 660px) {
+    .width{
+        width:576px;
+    }
+  }
+
+
+@media screen and (max-width: 600px) {
+    .width{
+        width:400px;
+    }
+  }
+
+
+@media screen and (max-width: 440px) {
+    .width{
+        width:80vw;
+    }
+  }
+
+@media screen and (min-width: 1201px) {
+    .width{
+        width:1190px;
+    }
+  }
