@@ -1,3 +1,4 @@
+@import "~react-image-gallery/styles/css/image-gallery.css";
 body{
   margin:0;
 }
@@ -40,7 +41,7 @@ input.field{
 	border-radius: .25rem;
 	font-size: 12px;
 }
-input.field:focus{
+input.field:focus-within{
 	border: 1px solid steelblue;
 	outline: 1px solid steelblue;
 
@@ -85,72 +86,131 @@ input.field:focus{
     padding:0;
 }
 
-.root{
+#root{
     width:100%;
 }
 header,section,main,footer{
     width:100%;
     min-height:10rem;
-    padding:1rem 0;
+    padding:3px 0;
 }
 header{
-    background-color: red;
+  outline:1px solid red;
 }
 section{
-    background-color: blue;
+    
+  outline:1px solid blue;
 }
 main{
-    background-color: green;
+  outline:1px solid green;
 }
 footer{
-    background-color: brown;
+  outline:1px solid purple;
 }
+
+
+.item{
+  background-color:#f5317c;
+  color:white;
+}
+.item:hover{
+  background-color:white;
+  color:#f5317c;
+  border:1px solid #f5317c;
+}
+
+.items-box{
+  cursor: pointer;
+    position: absolute;
+    width: 6rem;
+    display: none;
+  }
+
+/* code for small menu */
+  .show-small{
+    display: none;
+  }
+  .menu > .btn:focus + .items-box{
+    display: block;
+  }
+
+.bar{
+    width: 3rem;
+    height: 3rem;
+    color: pink;
+}
+  .btn{
+    width: 2rem;
+    height: 2rem;
+  }
+/* code for small menu */
+
 .width{
         max-width: 1180px;
-        padding: 1rem 0.2rem;
+        padding: 1rem 0;
         box-sizing: border-box;
+        outline:1px solid black;
+        transition: width 0.6s ease-in;
 }
 @media screen and (max-width: 1200px) {
     .width{
         
-        max-width:754px;
+        /* max-width:754px; */
+        max-width:88%;
     }
   }
 @media screen and (max-width: 1024px) {
     .width{
-         
-        width:945px;
+        width:88%; 
     }
   }
 @media screen and (max-width: 991px) {
     .width{   
         box-sizing: border-box;
-        width:705px;
+        width:88%;
     }
   }
 @media screen and (max-width: 767px) {
     .width{
-        width:525px;
+        width:85%;
     }
   }
 
 @media screen and (max-width: 660px) {
     .width{
-        width:576px;
+        width:85%;
     }
   }
 
 
 @media screen and (max-width: 600px) {
     .width{
-        width:400px;
+        width:90%;
     }
   }
 
 
+
+  @media screen and (max-width: 910px){
+    .flat-menu{
+        display: none;
+    }
+    .show-small{
+      font-size:minmax(2vw, 1rem);
+      display: block;
+    }
+    .small-left{
+      left:-0.7rem
+    }
+  }
+
 @media screen and (max-width: 440px) {
     .width{
-        width:80vw;
+        width:90vw;
+    }
+    .show-small{
+      float: right;
+      height: auto;
     }
   }
 
@@ -158,4 +218,15 @@ footer{
     .width{
         width:1190px;
     }
+  }
+
+
+  @media screen and (min-width: 911px){
+    .menu{
+        display: none;
+    }
+  }
+  .banner{
+    width:30vw;
+    height:40vw;
   }

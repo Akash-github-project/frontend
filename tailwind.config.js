@@ -12,8 +12,12 @@ module.exports = {
 
       "2xl": "1200px",
     },
-    colors: {
-      primary:"#f5317c",
+    extend: {
+      colors: {
+        pink: {
+          primary: "#f5317c",
+        },
+      },
     },
   },
 };
