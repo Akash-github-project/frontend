@@ -6,8 +6,9 @@ import { useState } from 'react'
 // import {Login} from './components/Login'
 import './App.css';
 import './index.css';
-import { Crosel } from './components/Crosel';
+// import { Crosel } from './components/Crosel';
 import { Footer } from './components/Footer';
+import { HeaderLogged } from './components/HeaderLogged';
 function App() {
   const [menu,setMenu] = useState(false);
     // <BrowserRouter>
@@ -30,10 +31,8 @@ function App() {
     // }
   return (
     <div className='m-0 p-0'>
-      <Header />
-      <div className="width">
-        <Crosel/>
-      </div>
+      <HeaderLogged />
+      
       
         {/* <Login /> */}
 

@@ -1,0 +1,22 @@
+.notificaton{
+    position: relative;
+}
+.notificaton-box{
+    display: none;
+}
+
+.notificaton > button#notify:hover + .notificaton-box{
+    display: block;
+    z-index:4;
+}
+.user{
+    min-width: .7rem;
+    min-height: .7rem;
+    border-radius: 50%;
+}
+.add-money{
+    cursor: pointer;
+    background-image: url(../components/images/300-3003183_money-icon-png.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}

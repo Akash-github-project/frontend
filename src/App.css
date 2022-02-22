@@ -124,6 +124,11 @@ lh-14{
   .show-small{
     display: none;
   }
+
+  .show-in-small{
+    display: none;
+  }
+
   .menu > .btn:focus + .items-box{
     display: block;
   }
@@ -136,6 +141,9 @@ lh-14{
   .btn{
     width: 2rem;
     height: 2rem;
+  }
+  .hide-in-small{
+    display: inline-block;
   }
 /* code for small menu */
 
@@ -199,6 +207,13 @@ lh-14{
         width:90%;
     }
     
+    .show-in-small{
+      display: inline-block;
+    }
+    .add-money{
+      translate: scale(.8);
+    }
+
     .show-small.show-small{
       transform: scale(.8);
     }
@@ -220,8 +235,24 @@ lh-14{
     .small-left{
       left:-0.7rem
     }
+
+    .show-in-small{
+      display: inline-block;
+    }
+
+    .add-money{
+      translate: scale(.8);
+    }
   }
 
+  @media screen and (max-width:500px){
+    .hide-in-small{
+      display: none;
+    }
+    .scale-small{
+      transform: scale(.9);
+    }
+  }
 @media screen and (max-width: 440px) {
     .width{
         width:90vw;
@@ -230,14 +261,23 @@ lh-14{
       width:50vw;
     }
     .show-small.show-small{
-      transform: scale(.7);
+      transform: scale(.8);
       top:4px;
       height: auto;
     }
     logo.logo{
-      transform:scale(.6);
+      transform:scale(.8);
+    }
+
+    .scale-small{
+      transform: scale(.8);
+    }
+
+    .hide-at-large{
+      display: none;
     }
   }
+
 
 @media screen and (min-width: 1201px) {
     .width{
@@ -249,6 +289,10 @@ lh-14{
   @media screen and (min-width: 911px){
     .menu{
         display: none;
+    }
+
+    .hide-at-large{
+      display: none;
     }
   }
   @media  screen and (min-width:1020px) {
