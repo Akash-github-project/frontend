@@ -37,7 +37,7 @@ function App() {
       
         {/* <Login /> */}
 
-    <Footer />
+    {/* <Footer /> */}
   </div>
   )
 }
