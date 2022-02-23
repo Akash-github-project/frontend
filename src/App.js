@@ -6,8 +6,9 @@ import { useState } from 'react'
 // import {Login} from './components/Login'
 import './App.css';
 import './index.css';
-// import { Crosel } from './components/Crosel';
+import { Crosel } from './components/Crosel';
 import { Footer } from './components/Footer';
+import Wrapper from './components/wrapper';
 import { HeaderLogged } from './components/HeaderLogged';
 function App() {
   const [menu,setMenu] = useState(false);
@@ -33,10 +34,16 @@ function App() {
     <div className='m-0 p-0'>
       <HeaderLogged />
       
+
       
+      <Wrapper>
+        <Crosel/>
+      </Wrapper>
         {/* <Login /> */}
 
-    {/* <Footer /> */}
+    <Wrapper>
+      <Footer />
+    </Wrapper>
   </div>
   )
 }
