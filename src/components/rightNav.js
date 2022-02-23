@@ -9,7 +9,7 @@ const RightNav = React.memo(({
   return (
     <button
       type="button"
-      className="image-gallery-icon image-gallery-right-nav opacity-4 hover:opacity-1 p-0  h-4"
+      className="image-gallery-icon image-gallery-right-nav  hover:opacity-1 p-0  h-4"
       disabled={disabled}
       onClick={onClick}
       aria-label="Previous Slide"

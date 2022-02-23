@@ -9,7 +9,7 @@ const LeftNav = React.memo(({
   return (
     <button
       type="button"
-      className="image-gallery-icon image-gallery-left-nav text-white p-2 w-4 h-4"
+      className="image-gallery-icon image-gallery-left-nav text-white p-0 h-4"
       disabled={disabled}
       onClick={onClick}
       aria-label="Previous Slide"

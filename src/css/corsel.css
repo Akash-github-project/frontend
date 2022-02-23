@@ -29,3 +29,46 @@
  .image-gallery-slide-wrapper:hover  :is(button.image-gallery-left-nav:hover, button.image-gallery-right-nav:hover){
     opacity: 1;
 }
+
+.image-gallery-slide-wrapper{
+    width:fit-content;
+}
+
+.image-gallery-slides {
+max-height: 9.7rem;
+}
+.image-gallery-slides {
+    border-radius: 5px 5px 0 0;
+    width:100%;
+    min-height: 9.7rem;
+    max-height:9.7rem; 
+}
+
+.image-gallery-slide img {
+    width: 100%;
+    height: auto;
+    max-height: 9.5rem;
+    object-fit: contain;
+    overflow: hidden;
+    object-position: center center;
+}
+.image-gallery-bullets .image-gallery-bullet.active {
+	transform: scale(1.2);
+
+	border:none;
+	background: rgba(0, 0, 0, 0.5); 
+}
+.image-gallery-bullets .image-gallery-bullet.active:hover {
+	background:black; 
+}
+
+.image-gallery-bullets .image-gallery-bullet:hover {
+	background:black; 
+    border:none;
+}
+.image-gallery-bullets .image-gallery-bullet{
+    border:none;
+    padding:4px;
+    box-shadow: ;
+}
+/* size changin css */

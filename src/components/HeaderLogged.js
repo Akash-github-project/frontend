@@ -20,7 +20,7 @@ export const HeaderLogged = () => {
 					</div>
 				</div>
 				{/*logo declaration   */}
-				<div className="pl-[2px] pr-4 logo mr-auto relative  mt-[1px] ml-2  small-logo"></div>
+				<div className="pl-[2px] pr-4 logo mr-auto relative  mt-[1px] ml-2  small-logo shrink-[0.5]"></div>
 
 				<div className="nav flex  gap-[0.9rem] items-center flat-menu ">
 					<div className="rewards ">Rewards</div>

@@ -301,6 +301,6 @@ lh-14{
     } 
   }
   .banner{
-    width:30vw;
-    height:40vw;
+    width:33.75rem;
+    max-height: 9.5rem;
   }

@@ -51,8 +51,8 @@ export const Crosel = () => {
           <ImageGallery
           items={images}
           onClick={called}
-          autoPlay={true}
-          infinite={true}
+        //   autoPlay={true}
+        //   infinite={true}
           showBullets={true}
           showFullscreenButton={false}
           showPlayButton={false}
