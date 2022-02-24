@@ -3,6 +3,7 @@
 import "../App.css";
 import "../css/loggedHeader.css";
 import React from "react";
+import { Link } from "react-router-dom";
 
 export const HeaderLogged = () => {
 	return (
@@ -14,18 +15,30 @@ export const HeaderLogged = () => {
 					</button>
 
 					<div className="items-box flex flex-col items-center justify-center w-[50vw]">
-						<div className="item bg-white px-4 py-2 border">Rewards</div>
-						<div className="item bg-white px-4 py-2 border">Offers</div>
-						<div className="item bg-white px-4 py-2 border">Suggestions</div>
+						<Link to="/Rewards">
+							<div className="item bg-white px-4 py-2 border">Rewards</div>
+						</Link>
+						<Link to="/Offers">
+							<div className="item bg-white px-4 py-2 border">Offers</div>
+						</Link>
+						<Link to="/Suggestions">
+							<div className="item bg-white px-4 py-2 border">Suggestions</div>
+						</Link>
 					</div>
 				</div>
 				{/*logo declaration   */}
 				<div className="pl-[2px] pr-4 logo mr-auto relative  mt-[1px] ml-2  small-logo shrink-[0.5]"></div>
 
 				<div className="nav flex  gap-[0.9rem] items-center flat-menu ">
-					<div className="rewards ">Rewards</div>
-					<div className="offers ">Offers</div>
-					<div className="suggestion ">Suggestions</div>
+					<Link to="/Rewards">
+						<div className="rewards ">Rewards</div>
+					</Link>
+					<Link to="/Offers">
+						<div className="offers ">Offers</div>
+					</Link>
+					<Link to="/Suggestions">
+						<div className="suggestion ">Suggestions</div>
+					</Link>
 
 					<div className="notification">
 						<button
@@ -51,14 +64,17 @@ export const HeaderLogged = () => {
 						</div>
 					</div>
 
-					<span className="flex items-center justify-center ">
-						<button className="flex w-8 h-8 items-center justify-center add-money"></button>
-						<span>Add Money</span>
-					</span>
-
-					<button className="flex w-8 h-8 user bg-pink-primary items-center justify-center">
-						<i class="fas fa-user text-white" area-hidden="true"></i>
-					</button>
+					<Link to="/AddMoney">
+						<span className="flex items-center justify-center ">
+							<button className="flex w-8 h-8 items-center justify-center add-money"></button>
+							<span>Add Money</span>
+						</span>
+					</Link>
+					<Link to="/User">
+						<button className="flex w-8 h-8 user bg-pink-primary items-center justify-center">
+							<i class="fas fa-user text-white" area-hidden="true"></i>
+						</button>
+					</Link>
 				</div>
 
 				<div className="notification show-in-small ml-[0.9rem]  mt-[6px] scale-small">
@@ -85,14 +101,18 @@ export const HeaderLogged = () => {
 					</div>
 				</div>
 
-				<span className="flex items-center justify-center show-in scale-small">
-					<button className="flex w-8 h-8  items-center justify-center add-money show-in-small ml-[0.9rem]  mt-[6px] scale-small sm-font-sm"></button>
-					<span className="hide-in-small hide-at-large">Add Money</span>
-				</span>
+				<Link to="/AddMoney">
+					<span className="flex items-center justify-center show-in scale-small">
+						<button className="flex w-8 h-8  items-center justify-center add-money show-in-small ml-[0.9rem]  mt-[6px] scale-small sm-font-sm"></button>
+						<span className="hide-in-small hide-at-large">Add Money</span>
+					</span>
+				</Link>
 
-				<button className="w-8 h-8 user bg-pink-primary   show-in-small ml-[0.9rem]  mt-[6px] scale-small">
-					<i class="fas fa-user text-white" area-hidden="true"></i>
-				</button>
+				<Link to="/User">
+					<button className="w-8 h-8 user bg-pink-primary   show-in-small ml-[0.9rem]  mt-[6px] scale-small">
+						<i class="fas fa-user text-white" area-hidden="true"></i>
+					</button>
+				</Link>
 			</div>
 		</header>
 	);
