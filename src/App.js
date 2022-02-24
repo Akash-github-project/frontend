@@ -9,6 +9,9 @@ import { Footer } from "./components/Footer";
 import { Dropdown, NormalElement } from "./components/Dropdown";
 import Wrapper from "./components/wrapper";
 import { HeaderLogged } from "./components/HeaderLogged";
+import MainWrapper from "./components/MainWrapper";
+import NotificationBar from "./components/NotificationBar";
+import Services from "./components/Services";
 function App() {
 	const [store, setStore] = useState("");
 	// function closeMenu(e){
@@ -34,24 +37,26 @@ function App() {
 	};
 	return (
 		<div className="m-0 p-0">
-			<HeaderLogged />
-
-			<Wrapper>
-				<Crosel />
-			</Wrapper>
-			{/* <Login /> */}
-
-			{/* <Link to="/extra">some Extra</Link> */}
-			<Wrapper>
-				<Dropdown store={store} select={setStore} data={item}>
-					{/* <NormalElement val="option1">option 1</NormalElement>
-					<NormalElement val="option2">option 2</NormalElement>
-					<NormalElement val="option3">option 3</NormalElement> */}
-				</Dropdown>
-			</Wrapper>
-			<Wrapper>
-				<Footer />
-			</Wrapper>
+			<MainWrapper>
+				<HeaderLogged />
+				<Wrapper extraClass="mt-0">
+					<NotificationBar />
+				</Wrapper>
+				<Wrapper>
+					<Crosel />
+				</Wrapper>
+				{/* <Login /> */}
+				{/* <Link to="/extra">some Extra</Link> */}
+				{/* <Wrapper>
+					<Dropdown store={store} select={setStore} data={item} />
+				</Wrapper> */}
+				<Wrapper>
+					<Services />
+				</Wrapper>
+				<Wrapper>
+					<Footer />
+				</Wrapper>
+			</MainWrapper>
 		</div>
 	);
 }

@@ -7,6 +7,7 @@ export const Dropdown = ({ store, select, errorMessage = "", data }) => {
 	let selectOption = e => {
 		console.log(e.target.getAttribute("data-val"));
 		select(e.target.getAttribute("data-val"));
+		setStatus(false);
 	};
 
 	console.log(Object.keys(data));
@@ -17,14 +18,15 @@ export const Dropdown = ({ store, select, errorMessage = "", data }) => {
 	});
 
 	let defaultClasses =
-		"border-box overflow-y-scroll scrollbar absolute top-8 w-full";
+		"border-box overflow-y-scroll scrollbar absolute top-8 w-full z-10";
 	let finalClasses = "";
 
-	if (status) finalClasses = defaultClasses + " hidden";
+	if (!status) finalClasses = defaultClasses + " hidden";
 
 	return (
 		<div
-			className="relative flex"
+			tabIndex={0}
+			className="relative flex flex-col"
 			onFocus={() => setStatus(true)}
 			onBlur={() => setStatus(false)}
 		>
@@ -44,6 +46,7 @@ export const Dropdown = ({ store, select, errorMessage = "", data }) => {
 	);
 };
 
+//for drop down elememnt
 export const NormalElement = ({ val = "", otherClasses = "", children }) => {
 	let defaultClasses = "p-2 w-full text-left bg-white";
 	console.log(children);

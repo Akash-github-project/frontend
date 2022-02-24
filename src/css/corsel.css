@@ -1,74 +1,74 @@
-
-.image-gallery-left-nav, .image-gallery-right-nav {
-    box-sizing: border-box;
-    padding:1.1rem 0.95rem;
+.image-gallery-left-nav,
+.image-gallery-right-nav {
+	box-sizing: border-box;
+	padding: 1.1rem 0.95rem;
 	top: 50%;
 	transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    opacity:0;
-    display:flex;
-    align-items: center;
-    justify-content: center;
+	background-color: rgba(0, 0, 0, 0.5);
+	opacity: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
-.image-gallery-left-nav{
-    left: 7px;    
+.image-gallery-left-nav {
+	left: 7px;
 }
 
-.image-gallery-right-nav{
-    right: 7px;    
+.image-gallery-right-nav {
+	right: 7px;
 }
 
-.image-gallery-slide-wrapper:hover button.image-gallery-left-nav{
-    opacity:0.5;
+.image-gallery-slide-wrapper:hover button.image-gallery-left-nav {
+	opacity: 0.5;
 }
-.image-gallery-slide-wrapper:hover button.image-gallery-right-nav{
-    opacity:0.5;
-}
-
- .image-gallery-slide-wrapper:hover  :is(button.image-gallery-left-nav:hover, button.image-gallery-right-nav:hover){
-    opacity: 1;
+.image-gallery-slide-wrapper:hover button.image-gallery-right-nav {
+	opacity: 0.5;
 }
 
-.image-gallery-slide-wrapper{
-    width:fit-content;
+.image-gallery-slide-wrapper:hover
+	:is(button.image-gallery-left-nav:hover, button.image-gallery-right-nav:hover) {
+	opacity: 1;
+}
+
+.image-gallery-slide-wrapper {
+	width: fit-content;
 }
 
 .image-gallery-slides {
-max-height: 9.7rem;
+	max-height: 9.7rem;
 }
 .image-gallery-slides {
-    border-radius: 5px 5px 0 0;
-    width:100%;
-    min-height: 9.7rem;
-    max-height:9.7rem; 
+	border-radius: 5px 5px 0 0;
+	width: 100%;
+	/* min-height: 9.7rem; */
+	max-height: 9.7rem;
 }
 
 .image-gallery-slide img {
-    width: 100%;
-    height: auto;
-    max-height: 9.5rem;
-    object-fit: contain;
-    overflow: hidden;
-    object-position: center center;
+	width: 100%;
+	height: auto;
+	max-height: 9.5rem;
+	object-fit: contain;
+	overflow: hidden;
+	object-position: center center;
 }
 .image-gallery-bullets .image-gallery-bullet.active {
 	transform: scale(1.2);
 
-	border:none;
-	background: rgba(0, 0, 0, 0.5); 
+	border: none;
+	background: rgba(0, 0, 0, 0.5);
 }
 .image-gallery-bullets .image-gallery-bullet.active:hover {
-	background:black; 
+	background: black;
 }
 
 .image-gallery-bullets .image-gallery-bullet:hover {
-	background:black; 
-    border:none;
+	background: black;
+	border: none;
 }
-.image-gallery-bullets .image-gallery-bullet{
-    border:none;
-    padding:4px;
-    box-shadow: ;
+.image-gallery-bullets .image-gallery-bullet {
+	border: none;
+	padding: 4px;
 }
 /* size changin css */

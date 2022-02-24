@@ -11,7 +11,10 @@ export const HeaderLogged = () => {
 			<div className=" width mx-auto flex items-center mt-[3px] pl-1 ">
 				<div className="menu">
 					<button className="btn flex px-1">
-						<i className="fa fa-bars items-center " aria-hidden="true"></i>
+						<i
+							className="fa fa-bars items-center flex justify-center"
+							aria-hidden="true"
+						></i>
 					</button>
 
 					<div className="items-box flex flex-col items-center justify-center w-[50vw]">
@@ -27,7 +30,7 @@ export const HeaderLogged = () => {
 					</div>
 				</div>
 				{/*logo declaration   */}
-				<div className="pl-[2px] pr-4 logo mr-auto relative  mt-[1px] ml-2  small-logo shrink-[0.5]"></div>
+				<div className="pl-[2px] pr-4 logo mr-auto relative  mt-[1px] ml-2  small-logo shrink-[0.2]"></div>
 
 				<div className="nav flex  gap-[0.9rem] items-center flat-menu ">
 					<Link to="/Rewards">
@@ -72,12 +75,12 @@ export const HeaderLogged = () => {
 					</Link>
 					<Link to="/User">
 						<button className="flex w-8 h-8 user bg-pink-primary items-center justify-center">
-							<i class="fas fa-user text-white" area-hidden="true"></i>
+							<i className="fas fa-user text-white" area-hidden="true"></i>
 						</button>
 					</Link>
 				</div>
 
-				<div className="notification show-in-small ml-[0.9rem]  mt-[6px] scale-small">
+				<div className="notification show-in-small ml-[0.9rem]  mt-[6px] scale-small small-btn">
 					<button
 						className="flex px-1 items-center justify-center"
 						id="notifiy"
@@ -103,14 +106,14 @@ export const HeaderLogged = () => {
 
 				<Link to="/AddMoney">
 					<span className="flex items-center justify-center show-in scale-small">
-						<button className="flex w-8 h-8  items-center justify-center add-money show-in-small ml-[0.9rem]  mt-[6px] scale-small sm-font-sm"></button>
+						<button className="flex w-8 h-8  items-center justify-center add-money show-in-small ml-[0.9rem] small-margin  mt-[6px] scale-small sm-font-sm small-btn"></button>
 						<span className="hide-in-small hide-at-large">Add Money</span>
 					</span>
 				</Link>
 
 				<Link to="/User">
-					<button className="w-8 h-8 user bg-pink-primary   show-in-small ml-[0.9rem]  mt-[6px] scale-small">
-						<i class="fas fa-user text-white" area-hidden="true"></i>
+					<button className="w-8 h-8 user bg-pink-primary   show-in-small ml-[0.9rem]  mt-[6px] small-margin  scale-small small-btn">
+						<i className="fas fa-user text-white" area-hidden="true"></i>
 					</button>
 				</Link>
 			</div>
