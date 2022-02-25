@@ -3,6 +3,9 @@
 	color: red;
 	width: 100%;
 }
+.zindex {
+	z-index: calc(var(--base-z) + 1);
+}
 .scrollbar::-webkit-scrollbar {
 	width: 0.5rem;
 }

@@ -1,5 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+
+const listStyle = {
+	display: "flex",
+	justifyContent: "center",
+	padding: "0 10.5px",
+};
 
 const Services = () => {
 	let data = {
@@ -20,32 +27,32 @@ const Services = () => {
 		},
 		BroadbandLandline: {
 			icon: "fa fa-wifi",
-			heading: "Broadband",
+			heading: "Broadband /Landline",
 			link: "/mobile",
 		},
 		GasLpg: {
-			icon: "fa fa-mobile",
-			heading: "Mobile",
+			icon: "fab fa-free-code-camp",
+			heading: "Gas & LPG",
 			link: "/mobile",
 		},
 		Water: {
-			icon: "fa fa-mobile",
-			heading: "Mobile",
+			icon: "fas fa-tint",
+			heading: "Water",
 			link: "/mobile",
 		},
 		FASTag: {
-			icon: "fa fa-mobile",
-			heading: "Mobile",
+			icon: "fas fa-tags",
+			heading: "FASTag",
 			link: "/mobile",
 		},
 		Insurance: {
-			icon: "fa fa-mobile",
-			heading: "Mobile",
+			icon: "fas fa-file-medical",
+			heading: "Insurance",
 			link: "/mobile",
 		},
 		gifts: {
-			icon: "fa fa-mobile fa-w-10",
-			heading: "Mobile",
+			icon: "fa fa-gift",
+			heading: "GiftCard",
 			link: "/mobile",
 		},
 	};
@@ -55,13 +62,15 @@ const Services = () => {
 			<ul className="services">
 				{Object.keys(data).map((value, i) => {
 					return (
-						<li key={i} className="">
-							<Link to={data[`${value}`].link}>
+						<li key={i} className=" text-center flex flex-col justiy-center ">
+							<Link to={data[`${value}`].link} style={listStyle}>
 								<div className="flex justify-center items-center border border-pink-600 rounded-md w-[40px] h-[40px]">
 									<i className={data[`${value}`].icon}></i>
 								</div>
 							</Link>
-							{data[`${value}`].heading}
+							<div className="break-words w-[64px] leading-[11px] mt-1 text-secondary text-[12px]">
+								{data[`${value}`].heading}
+							</div>
 						</li>
 					);
 				})}

@@ -39,10 +39,19 @@
 	max-height: 9.7rem;
 }
 .image-gallery-slides {
-	border-radius: 5px 5px 0 0;
+	border-radius: 5px;
 	width: 100%;
 	/* min-height: 9.7rem; */
 	max-height: 9.7rem;
+}
+.image-gallery-bullets {
+	bottom: 5px;
+	left: 0;
+	margin: 0 auto;
+	position: absolute;
+	right: 0;
+	width: 80%;
+	z-index: 4;
 }
 
 .image-gallery-slide img {
@@ -70,5 +79,7 @@
 .image-gallery-bullets .image-gallery-bullet {
 	border: none;
 	padding: 4px;
+	box-shadow: none;
+	background-color: rgba(0, 0, 0, 0.3);
 }
 /* size changin css */

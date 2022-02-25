@@ -1,9 +1,19 @@
 @import "~react-image-gallery/styles/css/image-gallery.css";
+
 body {
 	margin: 0;
+	--base-z: calc(1000000000 + 1);
 }
 * {
 	color: #f5317c;
+}
+
+.user i {
+	font-size: 16px;
+}
+li {
+	font-size: 11px;
+	line-height: 11px;
 }
 .logo {
 	background-image: url("./components/images/RechargeLogo.jpeg");
@@ -12,6 +22,9 @@ body {
 	width: 150px;
 	max-height: 27.7px;
 	min-height: 27.7px;
+}
+.z-base {
+	z-index: var(--base-z);
 }
 
 .fit-content {
@@ -88,10 +101,8 @@ input.field:focus-within {
 	/* display: grid; */
 	/* grid-template-columns: repeat(auto-fit, minmax(fit-content, 1fr)); */
 	display: flex;
-
 	flex-wrap: wrap;
 	justify-content: space-around;
-	gap: 1rem;
 }
 
 #root {
