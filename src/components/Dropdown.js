@@ -5,7 +5,7 @@ import "../css/Dropdown.css";
 export const Dropdown = ({ store, select, errorMessage = "", data }) => {
 	let [status, setStatus] = useState(false);
 	let selectOption = e => {
-		console.log(e.target.getAttribute("data-val"));
+		// console.log(e.target.getAttribute("data-val"));
 		select(e.target.getAttribute("data-val"));
 		setStatus(false);
 	};

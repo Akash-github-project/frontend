@@ -1,12 +1,13 @@
 import React from "react";
+import "../css/notificationBar.css";
+import Marquee from "react-fast-marquee";
 
-// work required for scroll effect
 const NotificationBar = () => {
 	return (
-		<div className="w-full   overflow-hidden">
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque tenetur
-			dolore voluptates nulla rem dignissimos modi consectetur consequatur,
-		</div>
+		<Marquee gradient={false} className="marqueeStyles">
+			Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vitae
+			distinctio, quibusdam odio hic labore optio? Enim esse fugit optio neque?
+		</Marquee>
 	);
 };
 

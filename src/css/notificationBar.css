@@ -1,0 +1,10 @@
+.marqueeStyles {
+	border: none;
+	height: 20px;
+}
+.marqueeStyles * {
+	font-size: 13px;
+	margin-top: 1px;
+	padding-bottom: 1px;
+	color: rgb(67, 46, 215);
+}

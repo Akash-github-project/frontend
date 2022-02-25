@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import "../css/services.css";
 
 const listStyle = {
 	display: "flex",
@@ -58,17 +59,17 @@ const Services = () => {
 	};
 	let defalultBefore = "";
 	return (
-		<div className="h-20">
-			<ul className="services">
+		<div className="min-h-[20px]">
+			<ul className="service-grid">
 				{Object.keys(data).map((value, i) => {
 					return (
 						<li key={i} className=" text-center flex flex-col justiy-center ">
 							<Link to={data[`${value}`].link} style={listStyle}>
-								<div className="flex justify-center items-center border border-pink-600 rounded-md w-[40px] h-[40px]">
+								<div className="flex justify-center items-center border border-pink-600 rounded-md w-[40px] min-h-[40px]">
 									<i className={data[`${value}`].icon}></i>
 								</div>
 							</Link>
-							<div className="break-words w-[64px] leading-[11px] mt-1 text-secondary text-[12px]">
+							<div className="break-words w-[64px] leading-[11px] mt-1 text-secondary text-[11px]">
 								{data[`${value}`].heading}
 							</div>
 						</li>
