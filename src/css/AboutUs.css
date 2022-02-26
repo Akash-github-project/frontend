@@ -1,0 +1,20 @@
+[data-content] p {
+	font-size: 14px;
+	color: #535b61;
+	line-height: 1.5;
+	margin-bottom: 1rem;
+	padding-left: 45px;
+	font-weight: 500;
+	text-align: justify;
+}
+#heading + div p {
+	padding-inline: 0;
+	max-width: fit-content;
+}
+svg {
+	width: 40px;
+	height: 30px;
+}
+h3 {
+	font-weight: 500;
+}
