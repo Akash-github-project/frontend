@@ -17,6 +17,9 @@ module.exports = {
 				pink: {
 					primary: "#f5317c",
 				},
+				gray: {
+					primary: "#535b61",
+				},
 			},
 		},
 	},

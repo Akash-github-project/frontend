@@ -30,7 +30,7 @@ export const Footer = () => {
 						</li>
 					</Link>
 
-					<Link to="/Contact Us">
+					<Link to="/FAQ">
 						<li className="inline-block py-1 px-2 text-[10px] text-tertiary ">
 							FAQ
 						</li>

@@ -7,7 +7,7 @@ import Home from "./components/home";
 import { store } from "./app/store";
 import { Provider } from "react-redux";
 import AboutUs from "./components/AboutUs";
-import Faq from "./components/Faq";
+import FaqSection from "./components/Faq";
 
 ReactDOM.render(
 	<React.StrictMode>
@@ -17,7 +17,7 @@ ReactDOM.render(
 					<Route path="/" element={<App />}>
 						<Route path="home" element={<Home />} />
 						<Route path="AboutUs" element={<AboutUs />} />
-						<Route path="FAQ" element={<Faq />} />
+						<Route path="FAQ" element={<FaqSection />} />
 					</Route>
 				</Routes>
 			</Router>
