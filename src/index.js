@@ -8,6 +8,7 @@ import { store } from "./app/store";
 import { Provider } from "react-redux";
 import AboutUs from "./components/AboutUs";
 import FaqSection from "./components/Faq";
+import ContactUs from "./components/ContactUs";
 
 ReactDOM.render(
 	<React.StrictMode>
@@ -18,6 +19,7 @@ ReactDOM.render(
 						<Route path="home" element={<Home />} />
 						<Route path="AboutUs" element={<AboutUs />} />
 						<Route path="FAQ" element={<FaqSection />} />
+						<Route path="ContactUs" element={<ContactUs />} />
 					</Route>
 				</Routes>
 			</Router>

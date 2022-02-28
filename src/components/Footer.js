@@ -35,7 +35,7 @@ export const Footer = () => {
 							FAQ
 						</li>
 					</Link>
-					<Link to="/Contact Us">
+					<Link to="/ContactUs">
 						<li className="inline-block py-1 px-2 text-[10px] text-tertiary ">
 							Contact Us
 						</li>
