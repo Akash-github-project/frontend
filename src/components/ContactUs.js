@@ -1,5 +1,6 @@
 import React from "react";
 import Wrapper from "./wrapper";
+import { Input } from "./input";
 import "../css/ContactUs.css";
 
 const ContactUs = () => {
@@ -25,16 +26,16 @@ const ContactUs = () => {
 						</div>
 					</div>
 					<div className="px-4">
-						<div className=" mt-1 mb-5 min-h-[3rem] flex items-center">
+						<div className=" mt-1 mb-1  flex items-center">
 							<h2 className="text-2xl">Get in touch</h2>
 						</div>
 						<hr className="mb-4" />
 						{/* content start from here */}
 						<div>
-							<p className="text-gray-primary ">
+							{/* <p className="text-gray-primary ">
 								For Customer Support and Query, get in touch with us
-							</p>
-							<div className="flex flex-col relative pl-10 my-3">
+							</p> */}
+							<div className="flex flex-col relative pl-10 my-3 gap-1">
 								<div className="details">
 									<svg
 										className="svg-inline--fa fa-map-marker-alt fa-w-12"
@@ -60,7 +61,7 @@ const ContactUs = () => {
 								</p>
 							</div>
 
-							<div className="flex flex-col relative pl-10 my-2">
+							<div className="flex flex-col relative pl-10 my-2 gap-1">
 								<div className="details">
 									<svg
 										className="svg-inline--fa fa-phone fa-w-16"
@@ -82,7 +83,7 @@ const ContactUs = () => {
 								<h3 className="px-2">Telephone</h3>
 								<p className="px-2 text-gray-primary">Lorem, ipsum.</p>
 							</div>
-							<div className="flex flex-col relative pl-10 my-2">
+							<div className="flex flex-col relative pl-10 my-2 gap-1">
 								<div className="details">
 									<svg
 										className="svg-inline--fa fa-whatsapp fa-w-14"
@@ -104,7 +105,7 @@ const ContactUs = () => {
 								<h3 className="px-2">Whatsapp</h3>
 								<p className="px-2  text-gray-primary">Lorem, ipsum.</p>
 							</div>
-							<div className="flex flex-col relative pl-10  my-2">
+							<div className="flex flex-col relative pl-10  my-2 gap-1">
 								<div className="details">
 									<svg
 										className="svg-inline--fa fa-envelope fa-w-16"
@@ -126,6 +127,37 @@ const ContactUs = () => {
 								<h3 className="px-2">Enquiries</h3>
 								<p className="px-2 text-gray-primary">
 									Lorem ipsum dolor sit amet.
+								</p>
+							</div>
+							<div className="flex flex-col relative pl-10  my-2 gap-1">
+								<div className="details">
+									<svg
+										id="Layer_1"
+										data-name="Layer 1"
+										xmlns="http://www.w3.org/2000/svg"
+										viewBox="0 0 512 512"
+									>
+										<defs></defs>
+										<title>oval-padlock-unlocked-outline</title>
+
+										<path
+											fill="currentColor"
+											className="cls-1"
+											d="M256,128a191.12,191.12,0,0,0-64,11V106.67a64,64,0,0,1,126-16A21.33,21.33,0,0,0,359.32,80a106.69,106.69,0,0,0-210,26.67v53.77A192,192,0,0,0,64,320c0,105.86,86.13,192,192,192s192-86.14,192-192S361.87,128,256,128Zm0,341.33c-82.34,0-149.33-67-149.33-149.33s67-149.33,149.33-149.33,149.33,67,149.33,149.33S338.34,469.33,256,469.33Z"
+										/>
+										<path
+											fill="currentColor"
+											class="cls-1"
+											d="M256,234.67A64,64,0,0,0,234.67,359v46.34a21.33,21.33,0,0,0,42.67,0V359A64,64,0,0,0,256,234.67ZM256,320a21.33,21.33,0,1,1,21.33-21.33A21.36,21.36,0,0,1,256,320Z"
+										/>
+									</svg>
+								</div>
+								<h3 className="px-2">Unlock Account</h3>
+								<p className="px-2 text-gray-primary flex gap-1">
+									<Input extraClasses="w-4 focus:text-black" />
+									<button className="rounded bg-pink-primary hover:bg-pink-600 text-white p-2 text-sm">
+										OTP
+									</button>
 								</p>
 							</div>
 						</div>

@@ -9,6 +9,9 @@ import { Provider } from "react-redux";
 import AboutUs from "./components/AboutUs";
 import FaqSection from "./components/Faq";
 import ContactUs from "./components/ContactUs";
+import Terms from "./components/terms";
+import Privacy from "./components/Privacy";
+import Refund from "./components/Refund";
 
 ReactDOM.render(
 	<React.StrictMode>
@@ -20,6 +23,9 @@ ReactDOM.render(
 						<Route path="AboutUs" element={<AboutUs />} />
 						<Route path="FAQ" element={<FaqSection />} />
 						<Route path="ContactUs" element={<ContactUs />} />
+						<Route path="Terms" element={<Terms />} />
+						<Route path="PrivacyPolicy" element={<Privacy />} />
+						<Route path="refundpolicy" element={<Refund />} />
 					</Route>
 				</Routes>
 			</Router>

@@ -1,0 +1,16 @@
+.terms p {
+	font-size: 14px;
+	color: #535b61;
+	line-height: 1.5;
+	margin-bottom: 1rem;
+	padding-inline: 15px;
+	font-weight: 500;
+	text-align: justify;
+}
+.terms a {
+	color: #f5317c;
+}
+
+.terms a:hover {
+	color: black;
+}
