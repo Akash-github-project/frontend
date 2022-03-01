@@ -174,9 +174,9 @@ function FaqSection() {
 						Can't find what you're looking for? Our customer care team are here
 						to help
 					</p>
-					<Link to="/customerCare " className="mx-auto ">
+					<Link to="/contactus" className="mx-auto ">
 						<button className="bg-pink-primary text-white p-[11px] text-[13px] leading-[13px] rounded btn-primary box-border">
-							Contect Customer Care
+							Contact Customer Care
 						</button>
 					</Link>
 				</div>

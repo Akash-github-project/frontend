@@ -1,7 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import {
+	BrowserRouter as Router,
+	Routes,
+	Route,
+	Navigate,
+} from "react-router-dom";
 import App from "./App";
 import Home from "./components/home";
 import { store } from "./app/store";
@@ -18,13 +23,17 @@ ReactDOM.render(
 		<Provider store={store}>
 			<Router>
 				<Routes>
-					<Route path="/" element={<App />}>
+					<Route
+						path="/"
+						element={<App />}
+						// element={<Navigate to="/home" />}
+					>
 						<Route path="home" element={<Home />} />
-						<Route path="AboutUs" element={<AboutUs />} />
-						<Route path="FAQ" element={<FaqSection />} />
-						<Route path="ContactUs" element={<ContactUs />} />
-						<Route path="Terms" element={<Terms />} />
-						<Route path="PrivacyPolicy" element={<Privacy />} />
+						<Route path="aboutus" element={<AboutUs />} />
+						<Route path="faq" element={<FaqSection />} />
+						<Route path="contactus" element={<ContactUs />} />
+						<Route path="terms" element={<Terms />} />
+						<Route path="privacypolicy" element={<Privacy />} />
 						<Route path="refundpolicy" element={<Refund />} />
 					</Route>
 				</Routes>

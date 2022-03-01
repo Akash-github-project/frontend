@@ -58,6 +58,10 @@ const ContactUs = () => {
 								<p className="px-2 text-gray-primary text-justify">
 									Lorem ipsum dolor sit amet consectetur adipisicing elit.
 									Error, at! Lorem, ipsum dolor sit amet consectetur adipisicing
+									Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut
+									voluptate rerum aut ad aperiam recusandae et itaque asperiores
+									commodi fuga porro minima sunt voluptatum saepe, nulla omnis
+									excepturi voluptas suscipit.
 								</p>
 							</div>
 

@@ -11,6 +11,9 @@
 	color: #f5317c;
 }
 
+.terms p strong {
+	letter-spacing: 0.05em;
+}
 .terms a:hover {
 	color: black;
 }

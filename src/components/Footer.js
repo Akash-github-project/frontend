@@ -24,34 +24,34 @@ export const Footer = () => {
 
 			<div className="flex items-center justify-center bg-primary text-white  p-[9px]  w-full">
 				<ul className="flex flex-wrap justify-center  list-none ">
-					<Link to="/AboutUs">
+					<Link to="/aboutus">
 						<li className="inline-block py-1 px-2 text-[10px] text-tertiary ">
 							About Us
 						</li>
 					</Link>
 
-					<Link to="/FAQ">
+					<Link to="/faq">
 						<li className="inline-block py-1 px-2 text-[10px] text-tertiary ">
 							FAQ
 						</li>
 					</Link>
-					<Link to="/ContactUs">
+					<Link to="/contactus">
 						<li className="inline-block py-1 px-2 text-[10px] text-tertiary ">
 							Contact Us
 						</li>
 					</Link>
 
-					<Link to="/Terms">
+					<Link to="/terms">
 						<li className="inline-block py-1 px-2 text-[10px] text-tertiary ">
 							Terms & Conditions
 						</li>
 					</Link>
-					<Link to="/PrivacyPolicy">
+					<Link to="/privacypolicy">
 						<li className="inline-block py-1 px-2 text-[10px] text-tertiary ">
 							Privacy Policy
 						</li>
 					</Link>
-					<Link to="/RefundPolicy">
+					<Link to="/refundpolicy">
 						<li className="inline-block py-1 px-2 text-[10px] text-tertiary ">
 							Refund Policy
 						</li>

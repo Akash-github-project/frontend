@@ -25,7 +25,9 @@ export const Header = () => {
 					</div>
 				</div>
 				{/*logo declaration   */}
-				<div className="pl-[2px] pr-4 logo mr-auto relative  mt-[1px] ml-2  small-logo"></div>
+				<Link to="/home">
+					<div className="pl-[2px] pr-4 logo mr-auto relative  mt-[1px] ml-2  small-logo"></div>
+				</Link>
 
 				<div className="nav flex  gap-[0.9rem] items-center flat-menu ">
 					<Link to="/Rewards">

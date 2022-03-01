@@ -3,9 +3,10 @@
 import "../App.css";
 import "../css/loggedHeader.css";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const HeaderLogged = () => {
+	const navigate = useNavigate();
 	return (
 		<header className="">
 			<div className=" width mx-auto flex items-center mt-[3px] pl-1 ">
@@ -30,7 +31,12 @@ export const HeaderLogged = () => {
 					</div>
 				</div>
 				{/*logo declaration   */}
-				<div className="pl-[2px] pr-4 logo mr-auto relative  mt-[1px] ml-2  small-logo shrink-[0.2]"></div>
+				{/* <Link to="/home" className="mr-auto relative flex"> */}
+				<div
+					className="pl-[2px] pr-4 logo mr-auto relative  mt-[1px] ml-2  small-logo shrink-[0.2] cursor-pointer"
+					onClick={() => navigate("/home")}
+				></div>
+				{/* </Link> */}
 
 				<div className="nav flex  gap-[0.9rem] items-center flat-menu ">
 					<Link to="/Rewards">
