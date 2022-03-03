@@ -46,7 +46,7 @@ const Terms = () => {
 				<div
 					data-content
 					dangerouslySetInnerHTML={{ __html: cmsData }}
-					className="mt-4 lg:mt-12 terms"
+					className="mt-4  terms"
 				></div>
 			</div>
 		</Wrapper>

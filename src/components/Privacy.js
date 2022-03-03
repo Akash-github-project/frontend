@@ -57,7 +57,7 @@ const Privacy = () => {
 				<div
 					data-content
 					dangerouslySetInnerHTML={{ __html: cmsData }}
-					className="mt-4 lg:mt-12 terms privacy"
+					className="mt-4  terms privacy"
 				></div>
 			</div>
 		</Wrapper>

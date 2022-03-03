@@ -17,6 +17,7 @@ import ContactUs from "./components/ContactUs";
 import Terms from "./components/terms";
 import Privacy from "./components/Privacy";
 import Refund from "./components/Refund";
+import Offers from "./components/Offers";
 
 ReactDOM.render(
 	<React.StrictMode>
@@ -35,6 +36,7 @@ ReactDOM.render(
 						<Route path="terms" element={<Terms />} />
 						<Route path="privacypolicy" element={<Privacy />} />
 						<Route path="refundpolicy" element={<Refund />} />
+						<Route path="offers" element={<Offers />} />
 					</Route>
 				</Routes>
 			</Router>

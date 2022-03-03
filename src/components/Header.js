@@ -12,14 +12,14 @@ export const Header = () => {
 					</button>
 
 					<div className="items-box flex flex-col items-center justify-center w-[50vw]">
-						<Link to="/Rewards">
+						<Link to="/rewards">
 							<div className="item bg-white px-4 py-2 border">Rewards</div>
 						</Link>
 
-						<Link to="/Offers">
+						<Link to="/offers">
 							<div className="item bg-white px-4 py-2 border">Offers</div>
 						</Link>
-						<Link to="/Suggestions">
+						<Link to="/suggestions">
 							<div className="item bg-white px-4 py-2 border">Suggestions</div>
 						</Link>
 					</div>
@@ -30,14 +30,14 @@ export const Header = () => {
 				</Link>
 
 				<div className="nav flex  gap-[0.9rem] items-center flat-menu ">
-					<Link to="/Rewards">
+					<Link to="/rewards">
 						<div className="rewards ">Rewards</div>
 					</Link>
-					<Link to="/Offers">
+					<Link to="/offers">
 						<div className="offers ">Offers</div>
 					</Link>
 
-					<Link to="/Suggestions">
+					<Link to="/suggestions">
 						<div className="suggestion ">Suggestions</div>
 					</Link>
 					<button className="flex border-box h-9 rounded bg-primary font-normal  p-[5px] items-center  relative  -top-[2px]">

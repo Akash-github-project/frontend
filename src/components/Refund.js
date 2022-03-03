@@ -9,7 +9,7 @@ let cmsData = `<p>Our focus is complete customer satisfaction. In the event of r
 <p>All sales of prepaid recharge on the RechargeAXN platform are final with no refund or exchange permitted. You&nbsp;are responsible for the mobile number or DTH&nbsp;account number for which you&nbsp;purchased the prepaid recharge and all charges that result from those purchases. RechargeAXN is not responsible for any purchase of prepaid recharge for an incorrect mobile number or DTH&nbsp;account number or similar services.</p>
 
 <p><strong>Process Of Refund</strong><br />
-Refund(if any) will get initiated automatically. If refund takes longer time, user&nbsp;can write to <a href="mailto:help@rechargeaxn.com">help@rechargeaxn.com</a>&nbsp;or use <a href="https://rechargeaxn.com/welcome/contactus">contact us</a> page.</p>
+Refund(if any) will get initiated automatically. If refund takes longer time, user&nbsp;can write to <a href="mailto:help@rechargeaxn.com">help@rechargeaxn.com</a>&nbsp;or use <a href="/contactus">contact us</a> page.</p>
 
 `;
 
@@ -25,7 +25,7 @@ const Refund = () => {
 				<div
 					data-content
 					dangerouslySetInnerHTML={{ __html: cmsData }}
-					className="mt-4 lg:mt-12 terms privacy"
+					className="mt-4 terms privacy"
 				></div>
 			</div>
 		</Wrapper>

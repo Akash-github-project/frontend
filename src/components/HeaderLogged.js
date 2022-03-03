@@ -19,13 +19,13 @@ export const HeaderLogged = () => {
 					</button>
 
 					<div className="items-box flex flex-col items-center justify-center w-[50vw]">
-						<Link to="/Rewards">
+						<Link to="/rewards">
 							<div className="item bg-white px-4 py-2 border">Rewards</div>
 						</Link>
-						<Link to="/Offers">
+						<Link to="/offers">
 							<div className="item bg-white px-4 py-2 border">Offers</div>
 						</Link>
-						<Link to="/Suggestions">
+						<Link to="/suggestions">
 							<div className="item bg-white px-4 py-2 border">Suggestions</div>
 						</Link>
 					</div>
@@ -39,13 +39,13 @@ export const HeaderLogged = () => {
 				{/* </Link> */}
 
 				<div className="nav flex  gap-[0.9rem] items-center flat-menu ">
-					<Link to="/Rewards">
+					<Link to="/rewards">
 						<div className="rewards ">Rewards</div>
 					</Link>
-					<Link to="/Offers">
+					<Link to="/offers">
 						<div className="offers ">Offers</div>
 					</Link>
-					<Link to="/Suggestions">
+					<Link to="/suggestions">
 						<div className="suggestion ">Suggestions</div>
 					</Link>
 
@@ -73,13 +73,13 @@ export const HeaderLogged = () => {
 						</div>
 					</div>
 
-					<Link to="/AddMoney">
+					<Link to="/addmoney">
 						<span className="flex items-center justify-center ">
 							<button className="flex w-8 h-8 items-center justify-center add-money"></button>
 							<span>Add Money</span>
 						</span>
 					</Link>
-					<Link to="/User">
+					<Link to="/user">
 						<button className="flex w-8 h-8 user bg-pink-primary items-center justify-center">
 							<i className="fas fa-user text-white" area-hidden="true"></i>
 						</button>
@@ -110,14 +110,14 @@ export const HeaderLogged = () => {
 					</div>
 				</div>
 
-				<Link to="/AddMoney">
+				<Link to="/addmoney">
 					<span className="flex items-center justify-center show-in scale-small">
 						<button className="flex w-8 h-8  items-center justify-center add-money show-in-small ml-[0.9rem] small-margin  mt-[6px] scale-small sm-font-sm small-btn"></button>
 						<span className="hide-in-small hide-at-large">Add Money</span>
 					</span>
 				</Link>
 
-				<Link to="/User">
+				<Link to="/user">
 					<button className="w-8 h-8 user bg-pink-primary   show-in-small ml-[0.9rem]  mt-[6px] small-margin  scale-small small-btn">
 						<i className="fas fa-user text-white" area-hidden="true"></i>
 					</button>
