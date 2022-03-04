@@ -1,7 +1,7 @@
 import React from "react";
 import "../css/offer.css";
 import Wrapper from "./wrapper";
-import Tabbed from "./testTab";
+import Tabbed from "./Offertab";
 import Overlay from "./overlay";
 
 const Offers = () => {
