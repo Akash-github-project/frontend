@@ -70,16 +70,19 @@
 }
 
 .tab {
-	padding: 0.2rem 0.5rem;
+	box-sizing: border-box;
+	padding: 10px;
 	background-color: transparent;
-	color: black;
+	color: gray;
 	border-radius: 2px;
 	transition: background-color, color 200ms ease;
 	transition: all 200ms ease;
+	line-height: 16px;
 }
+
 .tab-list {
 	width: 100%;
-	padding: 3px 3px 0px 3px;
+	padding: 1px 3px 0px 3px;
 	justify-content: center;
 	margin-top: 1rem;
 }
@@ -91,4 +94,20 @@
 
 .tab-progress {
 	margin-bottom: 5px;
+}
+
+@media screen and (max-width: 512px) {
+	button.tab {
+		font-size: 11px;
+	}
+}
+@media screen and (max-width: 370px) {
+	.tab {
+		box-sizing: border-box;
+		padding: 3px 4px;
+		border-radius: 2px;
+		transition: background-color, color 200ms ease;
+		transition: all 200ms ease;
+		line-height: 16px;
+	}
 }

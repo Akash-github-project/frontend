@@ -1,7 +1,15 @@
 import React, { useRef, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { toggleOverlay, addContent } from "../app/features/overlaySlice";
 
 const Offercard = ({ promocode, cashback, title, frequency, details }) => {
-	const detail = useRef("");
+	const dispatch = useDispatch();
+	const detail = useRef();
+
+	const handleClick = () => {
+		dispatch(addContent(detail.current));
+		dispatch(toggleOverlay());
+	};
 
 	useEffect(() => {
 		detail.current = details;
@@ -31,8 +39,11 @@ const Offercard = ({ promocode, cashback, title, frequency, details }) => {
 					{promocode}
 				</strong>
 			</div>
-			<button className="bg-pink-primary text-white p-1 rounded capitalize hover:bg-pink-600">
-				hello
+			<button
+				className="bg-pink-primary text-white p-1 rounded capitalize hover:bg-pink-600"
+				onClick={handleClick}
+			>
+				View Details
 			</button>
 		</div>
 	);
