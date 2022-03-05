@@ -158,7 +158,7 @@ const ContactUs = () => {
 								</div>
 								<h3 className="px-2">Unlock Account</h3>
 								<p className="px-2 text-gray-primary flex gap-1">
-									<Input extraClasses="w-4 focus:text-black" />
+									<Input extraClasses="w-48 focus:text-black" />
 									<button className="rounded bg-pink-primary hover:bg-pink-600 text-white p-2 text-sm">
 										OTP
 									</button>

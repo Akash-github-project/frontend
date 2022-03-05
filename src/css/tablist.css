@@ -4,10 +4,9 @@
 }
 
 .rewardsTab {
-	padding: 0.5rem 1rem;
+	padding: 1rem 2rem;
 	min-width: fit-content;
-	flex-basis: 280px;
-	/* font-size: minmax(11px, 15px); */
+	flex-basis: 33%;
 	text-align: center;
 	cursor: pointer;
 	color: darkslategray;
@@ -23,7 +22,7 @@ li.rewardsTab {
 
 @media screen and (max-width: 680px) {
 	li.rewardsTab {
-		font-size: l1px;
+		font-size: 11px;
 	}
 }
 

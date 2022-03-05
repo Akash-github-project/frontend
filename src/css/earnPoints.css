@@ -1,0 +1,12 @@
+@media screen and (max-width: 780px) {
+	.change-to-row {
+		display: flex;
+		flex-direction: column;
+	}
+	.no-margin {
+		margin-left: 0;
+	}
+	.be-full {
+		width: 100%;
+	}
+}

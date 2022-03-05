@@ -3,6 +3,7 @@ import "../css/tablist.css";
 import { Tabs, useTabState, Panel } from "@bumaga/tabs";
 import PointsCounter from "./rewardPoints/pointsCounter";
 import TransactionList from "./TransactionList";
+import EarnPoints from "./EarnPoints";
 
 const cn = (...args) => args.filter(Boolean).join(" ");
 const Tab = ({ children }) => {
@@ -23,24 +24,23 @@ export default ({ data }) => {
 
 	return (
 		<Tabs state={[state, setState]}>
-			<div className="">
-				<ul className="tab-list flex lg:justify-center md:gap-2 overflow-x-auto p-[10px]">
+			<div className="hello">
+				<ul className="rewards-tab-list flex lg:justify-center md:gap-2 overflow-x-auto">
 					<Tab>Rewards Points</Tab>
 					<Tab>Earn Rewards Points</Tab>
 					<Tab>Redeem Rewards Points</Tab>
 				</ul>
-				{/* className="max-w-[33rem] 2xl:ml-4"  */}
 				<div className="tab-progress h-2" />
-				{/* <Panel> */}
-				<Panel>
-					<div className="">
-						<div>hello tab 1</div>
-					</div>
-				</Panel>
+
 				<Panel>
 					<div className="">
 						<PointsCounter points={88882} />
 						<TransactionList />
+					</div>
+				</Panel>
+				<Panel>
+					<div className="">
+						<EarnPoints />
 					</div>
 				</Panel>
 				<Panel>
