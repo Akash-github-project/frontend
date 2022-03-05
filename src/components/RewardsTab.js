@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../css/offer.css";
+import "../css/tablist.css";
 import { Tabs, useTabState, Panel } from "@bumaga/tabs";
 import PointsCounter from "./rewardPoints/pointsCounter";
 import TransactionList from "./TransactionList";
@@ -9,9 +9,9 @@ const Tab = ({ children }) => {
 	const { isActive, onClick } = useTabState();
 
 	return (
-		<button className={cn("tab ", isActive && "active")} onClick={onClick}>
+		<li className={cn("rewardsTab", isActive && "active")} onClick={onClick}>
 			{children}
-		</button>
+		</li>
 	);
 };
 
@@ -24,11 +24,11 @@ export default ({ data }) => {
 	return (
 		<Tabs state={[state, setState]}>
 			<div className="">
-				<div className="tab-list flex md:gap-2 overflow-x-scroll p-[10px]">
+				<ul className="tab-list flex lg:justify-center md:gap-2 overflow-x-auto p-[10px]">
 					<Tab>Rewards Points</Tab>
 					<Tab>Earn Rewards Points</Tab>
 					<Tab>Redeem Rewards Points</Tab>
-				</div>
+				</ul>
 				{/* className="max-w-[33rem] 2xl:ml-4"  */}
 				<div className="tab-progress h-2" />
 				{/* <Panel> */}

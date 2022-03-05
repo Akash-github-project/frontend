@@ -1,0 +1,36 @@
+.rewards-tab-list {
+	width: 100%;
+	display: flex;
+}
+
+.rewardsTab {
+	padding: 0.5rem 1rem;
+	min-width: fit-content;
+	flex-basis: 280px;
+	/* font-size: minmax(11px, 15px); */
+	text-align: center;
+	cursor: pointer;
+	color: darkslategray;
+}
+.rewardsTab.active {
+	background-color: white;
+	color: #f5317c;
+	border-bottom: 2px solid #f5317c;
+}
+li.rewardsTab {
+	font-size: medium;
+}
+
+@media screen and (max-width: 680px) {
+	li.rewardsTab {
+		font-size: l1px;
+	}
+}
+
+.rewardsTab:first-of-type {
+	margin-left: auto;
+}
+
+.rewardsTab:last-of-type {
+	margin-right: auto;
+}
