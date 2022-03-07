@@ -1,0 +1,12 @@
+.msg::after {
+	content: attr(data-message);
+	font-size: 11px;
+	color: white;
+}
+.error::after {
+	color: red;
+}
+
+.success::after {
+	color: green;
+}

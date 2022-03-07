@@ -6,7 +6,7 @@ const Table = ({ headings, items }) => {
 			{headings.map(element => {
 				return (
 					<div className=" overflow-x-auto mt-1 flex">
-						<div className="flex-1 text-gray-800 flex items-center text-left text-sm lg:text-base bg-gray-400/30">
+						<div className="flex-1 text-gray-800 flex items-center text-left text-sm lg:text-base font-bold bg-gray-400/30">
 							<span className="text-gray-primary mx-3">{element}</span>
 						</div>
 					</div>

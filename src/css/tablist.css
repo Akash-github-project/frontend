@@ -10,6 +10,7 @@
 	text-align: center;
 	cursor: pointer;
 	color: darkslategray;
+	font-weight: 700;
 }
 .rewardsTab.active {
 	background-color: white;

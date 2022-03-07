@@ -19,18 +19,15 @@ import Privacy from "./components/Privacy";
 import Refund from "./components/Refund";
 import Offers from "./components/Offers";
 import Rewards from "./components/Rewards";
+import Suggestions from "./components/Suggestions";
 
 ReactDOM.render(
 	<React.StrictMode>
 		<Provider store={store}>
 			<Router>
 				<Routes>
-					<Route
-						path="/"
-						element={<App />}
-						// element={<Navigate to="/home" />}
-					>
-						<Route path="home" element={<Home />} />
+					<Route path="/" element={<App />}>
+						<Route index element={<Home />} />
 						<Route path="aboutus" element={<AboutUs />} />
 						<Route path="faq" element={<FaqSection />} />
 						<Route path="contactus" element={<ContactUs />} />
@@ -39,6 +36,7 @@ ReactDOM.render(
 						<Route path="refundpolicy" element={<Refund />} />
 						<Route path="offers" element={<Offers />} />
 						<Route path="rewards" element={<Rewards />} />
+						<Route path="suggestions" element={<Suggestions />} />
 					</Route>
 				</Routes>
 			</Router>

@@ -4,6 +4,7 @@ import { Tabs, useTabState, Panel } from "@bumaga/tabs";
 import PointsCounter from "./rewardPoints/pointsCounter";
 import TransactionList from "./TransactionList";
 import EarnPoints from "./EarnPoints";
+import Redeem from "./Redeem";
 
 const cn = (...args) => args.filter(Boolean).join(" ");
 const Tab = ({ children }) => {
@@ -44,8 +45,8 @@ export default ({ data }) => {
 					</div>
 				</Panel>
 				<Panel>
-					<div className="">
-						<div>hello tab 3</div>
+					<div className="w-full">
+						<Redeem />
 					</div>
 				</Panel>
 			</div>
