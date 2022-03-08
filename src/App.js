@@ -12,11 +12,6 @@ import MainWrapper from "./components/MainWrapper";
 import NotificationBar from "./components/NotificationBar";
 function App() {
 	const [store, setStore] = useState("");
-	// let navigate = useNavigate();
-	// useEffect(() => {
-	// 	navigate("/home/");
-	// }, []);
-
 	let item = {
 		one: {
 			text: "option 1",

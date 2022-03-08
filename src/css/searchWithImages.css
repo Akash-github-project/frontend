@@ -1,0 +1,8 @@
+.select-search__row button.select-search__option > span {
+	display: flex;
+	align-items: center;
+}
+
+.select-search__row button.select-search__option > span > span {
+	color: darkslategray;
+}

@@ -1,0 +1,119 @@
+{
+	"list": [
+		{
+			"id": 1,
+			"name": "Andhra Pradesh & Telangana",
+			"code": "AP"
+		},
+		{
+			"id": 2,
+			"name": "Assam",
+			"code": "AS"
+		},
+		{
+			"id": 3,
+			"name": "Bihar and Jharkhand",
+			"code": "BR"
+		},
+		{
+			"id": 4,
+			"name": "Delhi Metro",
+			"code": "DL"
+		},
+		{
+			"id": 5,
+			"name": "Gujarat",
+			"code": "GJ"
+		},
+		{
+			"id": 6,
+			"name": "Himachal Pradesh",
+			"code": "HP"
+		},
+		{
+			"id": 7,
+			"name": "Haryana",
+			"code": "HR"
+		},
+		{
+			"id": 8,
+			"name": "Jammu and Kashmir",
+			"code": "JK"
+		},
+		{
+			"id": 9,
+			"name": "Kerala",
+			"code": "KL"
+		},
+		{
+			"id": 10,
+			"name": "Karnataka",
+			"code": "KA"
+		},
+		{
+			"id": 11,
+			"name": "Kolkata Metro",
+			"code": "KO"
+		},
+		{
+			"id": 12,
+			"name": "Maharashtra",
+			"code": "MH"
+		},
+		{
+			"id": 13,
+			"name": "Madhya Pradesh and Chhattisgarh",
+			"code": "MP"
+		},
+		{
+			"id": 14,
+			"name": "Mumbai Metro",
+			"code": "MU"
+		},
+		{
+			"id": 15,
+			"name": "North East India",
+			"code": "NE"
+		},
+		{
+			"id": 16,
+			"name": "Odisha",
+			"code": "OR"
+		},
+		{
+			"id": 17,
+			"name": "Punjab",
+			"code": "PB"
+		},
+		{
+			"id": 18,
+			"name": "Rajasthan",
+			"code": "RJ"
+		},
+		{
+			"id": 19,
+			"name": "Tamil Nadu",
+			"code": "TN"
+		},
+		{
+			"id": 20,
+			"name": "Uttar Pradesh (East)",
+			"code": "UE"
+		},
+		{
+			"id": 21,
+			"name": "Uttar Pradesh (West) and Uttarakhand",
+			"code": "UW"
+		},
+		{
+			"id": 22,
+			"name": "West Bengal",
+			"code": "WB"
+		},
+		{
+			"id": 23,
+			"name": "Chennai",
+			"code": "CN"
+		}
+	]
+}

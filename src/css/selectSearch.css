@@ -10,7 +10,7 @@
 	border-color: deepskyblue;
 }
 .select-search:hover {
-	color: white;
+	/* color:white */
 }
 
 .select-search *,
@@ -120,14 +120,14 @@
 
 .select-search__option.is-highlighted,
 .select-search__option:not(.is-selected):hover {
-	background-color: darkslategray;
-	color: white;
+	background-color: lightpink;
+	/* color: white; */
 }
 
 .select-search__option.is-highlighted.is-selected,
 .select-search__option.is-selected:hover {
-	background-color: darkslategray;
-	color: #fff;
+	background-color: lightpink;
+	/* color: #fff; */
 }
 
 /**
@@ -204,7 +204,7 @@
 }
 
 .select-search:not(.select-search--multiple) .select-search__select:hover {
-	color: white;
+	color: darkslategray;
 }
 .select-search--multiple .select-search__select {
 	position: relative;

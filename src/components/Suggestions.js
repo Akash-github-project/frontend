@@ -52,7 +52,7 @@ const Suggestions = () => {
 							<span className="text-gray-primary req">Name</span>
 							<InputSec
 								wrapperClasses="rounded"
-								extraClasses="rounded p-1"
+								extraClasses="rounded p-1 text-gray-600"
 								req="true"
 								place="Name"
 							/>
@@ -62,7 +62,7 @@ const Suggestions = () => {
 							<span className="text-gray-primary req">Email</span>
 							<InputSec
 								wrapperClasses="rounded"
-								extraClasses="rounded p-1"
+								extraClasses="rounded p-1 text-gray-600"
 								req="true"
 								place="Email"
 							/>
@@ -72,21 +72,25 @@ const Suggestions = () => {
 								Mobile
 							</span>
 							<InputSec
-								wrapperClasses="rounded"
-								extraClasses="rounded p-1"
+								wrapperClasses="rounded text-gray-600"
+								extraClasses="rounded p-1 text-gray-600"
 								req="true"
 								place="Mobile Number"
 							/>
 						</div>
 						<div>
 							<span className="text-gray-primary req">Message Type</span>
-							<SelectSearch
-								options={options}
-								value="sv"
-								name="language"
-								placeholder="Choose your language"
-							/>
-							{/* <InputSec wrapperClasses="rounded" extraClasses="rounded p-1" /> */}
+							<select
+								name=""
+								id=""
+								className="w-full border border-pink-primary p-1 rounded text-gray-600"
+							>
+								{options.map(element => (
+									<option value={element.value} className="text-gray-600">
+										{element.name}
+									</option>
+								))}
+							</select>
 						</div>
 						<div className="col-span-full row-span-5 ">
 							<span className="text-gray-primary req">Query</span>
@@ -94,7 +98,7 @@ const Suggestions = () => {
 								required
 								name=""
 								id=""
-								className="w-full border  border-pink-primary focus-within:border-1 focus-within:border-blue-400 outline-none rounded min-h-[7rem]"
+								className="w-full border  border-pink-primary focus-within:border-1 focus-within:border-blue-400 outline-none rounded min-h-[7rem] text-gray-600"
 								placeholder="Specify your query"
 							></textarea>
 						</div>
@@ -113,8 +117,8 @@ const Suggestions = () => {
 									title="select a file"
 									onChange={handleFileUpload}
 								/>
-								<span className="">Size:{size}</span>
-								<span className="ml-auto mr-10">{fileName}</span>
+								<span className="text-gray-600">Size:{size}</span>
+								<span className="ml-auto mr-10 text-gray-600">{fileName}</span>
 								<label
 									htmlFor="file"
 									className="p-1 bg-pink-primary text-white mr-1 text-[11px] hover:bg-gray-500"
