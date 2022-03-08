@@ -4,6 +4,7 @@
 	box-sizing: border-box;
 	border: 1px solid #f5317c;
 	border-radius: 4px;
+	color: darkslategray;
 }
 .select-search:focus-within {
 	border-color: deepskyblue;
@@ -105,25 +106,27 @@
 	font-size: 14px;
 	text-align: left;
 	cursor: pointer;
+	color: darkslategray;
 }
 
 .select-search--multiple .select-search__option {
 	height: 48px;
+	color: darkslategray;
 }
 
 .select-search__option.is-selected {
-	color: #f5317c;
+	color: darkslategray;
 }
 
 .select-search__option.is-highlighted,
 .select-search__option:not(.is-selected):hover {
-	background-color: #f5317c;
+	background-color: darkslategray;
 	color: white;
 }
 
 .select-search__option.is-highlighted.is-selected,
 .select-search__option.is-selected:hover {
-	background-color: #f5317c;
+	background-color: darkslategray;
 	color: #fff;
 }
 
@@ -191,7 +194,8 @@
 	border: 1px solid darkslategray;
 	position: absolute;
 	z-index: 2;
-	top: 44px;
+	/* top: 44px; */
+	top: 34px;
 	right: 0;
 	left: 0;
 	border-radius: 3px;

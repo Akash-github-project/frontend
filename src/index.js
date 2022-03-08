@@ -14,12 +14,14 @@ import { Provider } from "react-redux";
 import AboutUs from "./components/AboutUs";
 import FaqSection from "./components/Faq";
 import ContactUs from "./components/ContactUs";
+
 import Terms from "./components/terms";
 import Privacy from "./components/Privacy";
 import Refund from "./components/Refund";
 import Offers from "./components/Offers";
 import Rewards from "./components/Rewards";
 import Suggestions from "./components/Suggestions";
+import PrepaidMobile from "./components/subServices/prepaidMobile";
 
 ReactDOM.render(
 	<React.StrictMode>
@@ -27,7 +29,11 @@ ReactDOM.render(
 			<Router>
 				<Routes>
 					<Route path="/" element={<App />}>
-						<Route index element={<Home />} />
+						<Route index element={<Navigate replace to="/home/prepaid" />} />
+						<Route path="home" element={<Home />}>
+							<Route index element={<Navigate replace to="/home/prepaid" />} />
+							<Route path="prepaid" element={<PrepaidMobile />} />
+						</Route>
 						<Route path="aboutus" element={<AboutUs />} />
 						<Route path="faq" element={<FaqSection />} />
 						<Route path="contactus" element={<ContactUs />} />
