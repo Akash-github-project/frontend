@@ -23,7 +23,6 @@ let operatorList = operator.list.map(item => ({
 const PrepaidMobile = () => {
 	const [outputCircle, setCircle] = useState(circleList);
 	const [outputOperator, setOperator] = useState(operatorList);
-	const [rechargeType, setRechargeType] = useState("prepaid");
 
 	const handleOperator = value => {
 		let filterCircle = circleList.filter(element => {
@@ -42,87 +41,8 @@ const PrepaidMobile = () => {
 	const handleCircle = value => {
 		console.log(value);
 	};
-	const handleRadioChange = e => {
-		if (e.target.id === "prepaid") setRechargeType("prepaid");
-		else if (e.target.id === "postpaid") {
-			setRechargeType("postpaid");
-		} else if (e.target.id === "postpaidLabel") {
-			setRechargeType("postpaid");
-		} else if (e.target.id === "prepaidLabel") {
-			setRechargeType("prepaid");
-		}
-		console.log(e.target);
-	};
-
 	return (
-		<div className="w-full">
-			<h2>{}</h2>
-			<div className="flex gap-4">
-				<div className="flex items-center gap-2">
-					<div
-						className={classnames({
-							cricle: true,
-							radio: true,
-							radioChecked: rechargeType === "prepaid",
-						})}
-					>
-						<input
-							type="radio"
-							name="rechargeType"
-							// id="prepaid"
-							className="invisible "
-							onChange={handleRadioChange}
-							checked={"prepaid" === rechargeType ? true : false}
-						/>
-						<div
-							className="cover"
-							id="prepaid"
-							onClick={handleRadioChange}
-						></div>
-					</div>
-
-					<label
-						id="prepaidLabel"
-						htmlFor="prepaid"
-						className=""
-						onClick={handleRadioChange}
-					>
-						Prepaid
-					</label>
-				</div>
-				<div className="flex items-center gap-2">
-					<div
-						className={classnames({
-							cricle: true,
-							radio: true,
-							radioChecked: rechargeType === "postpaid",
-						})}
-					>
-						<input
-							type="radio"
-							name="rechargeType"
-							// id="prepaid"
-							className="invisible "
-							onChange={handleRadioChange}
-							checked={"postpaid" === rechargeType ? true : false}
-						/>
-						<div
-							className="cover"
-							id="postpaid"
-							onClick={handleRadioChange}
-						></div>
-					</div>
-
-					<label
-						id="postpaidLabel"
-						htmlFor="postpaid"
-						className=""
-						onClick={handleRadioChange}
-					>
-						Postpaid
-					</label>
-				</div>
-			</div>
+		<>
 			<div className="grid grid-cols-5 gap-3 w-full">
 				<InputSec
 					wrapperClasses="rounded flex-1"
@@ -166,11 +86,25 @@ const PrepaidMobile = () => {
 						</span>
 					</span>
 				</div>
+				<div className="md:hidden"></div>
 				<button className="p-1 bg-pink-primary hover:bg-blue-600 text-white rounded text-sm">
 					Continue to Recharge
 				</button>
 			</div>
-		</div>
+			<div className="grid grid-col-1 md:grid-cols-5 gap-3 w-full">
+				<div className="hidden md:block md:col-span-3"></div>
+				<small className="col-span-2 text-[11px] leading-[11px] text-green-info text-justify">
+					Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam,
+					illum ducimus labore error laboriosam quia et blanditiis sapiente vero
+					facilis iste officia inventore minima unde eius. At amet possimus
+					minus.
+				</small>
+			</div>
+			<div className="grid grid-col-1 md:grid-cols-5 gap-3 w-full">
+				<div className="hidden md:block md:col-span-3"></div>
+				<small className=""></small>
+			</div>
+		</>
 	);
 };
 

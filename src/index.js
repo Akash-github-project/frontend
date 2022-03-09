@@ -21,7 +21,8 @@ import Refund from "./components/Refund";
 import Offers from "./components/Offers";
 import Rewards from "./components/Rewards";
 import Suggestions from "./components/Suggestions";
-import PrepaidMobile from "./components/subServices/prepaidMobile";
+import WrapperPrepaid from "./components/wrapperPrepaid";
+import WrapperPostpaid from "./components/wrapperPostpaid";
 
 ReactDOM.render(
 	<React.StrictMode>
@@ -30,10 +31,13 @@ ReactDOM.render(
 				<Routes>
 					<Route path="/" element={<App />}>
 						<Route index element={<Navigate replace to="/home/prepaid" />} />
+
 						<Route path="home" element={<Home />}>
 							<Route index element={<Navigate replace to="/home/prepaid" />} />
-							<Route path="prepaid" element={<PrepaidMobile />} />
+							<Route path="prepaid" element={<WrapperPrepaid />} />
+							<Route path="postpaid" element={<WrapperPostpaid />} />
 						</Route>
+
 						<Route path="aboutus" element={<AboutUs />} />
 						<Route path="faq" element={<FaqSection />} />
 						<Route path="contactus" element={<ContactUs />} />

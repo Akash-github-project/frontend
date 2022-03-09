@@ -12,17 +12,7 @@ const Home = () => {
 			<Wrapper extraClass="mt-[0px]">
 				<NotificationBar />
 			</Wrapper>
-
-			<Wrapper>
-				<Crosel />
-			</Wrapper>
-
-			<Wrapper>
-				<Services />
-			</Wrapper>
-			<Wrapper>
-				<Outlet />
-			</Wrapper>
+			<Outlet />
 		</>
 	);
 };

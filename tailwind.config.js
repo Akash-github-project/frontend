@@ -20,6 +20,9 @@ module.exports = {
 				gray: {
 					primary: "#535b61",
 				},
+				green: {
+					info: "B4E0DC",
+				},
 			},
 		},
 	},

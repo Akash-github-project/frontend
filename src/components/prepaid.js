@@ -1,26 +1,26 @@
-import React from "react";
+import React, { Children, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import classNames from "classnames";
-import "../../css/radio.css";
+import "../css/radio.css";
 
-const Mobile = () => {
+const Prepaid = ({ children }) => {
 	const navigate = useNavigate();
 	const [rechargeType, setRechargeType] = useState("prepaid");
+
 	const handleRadioChange = e => {
-		if (e.target.id === "prepaid") setRechargeType("prepaid");
-		else if (e.target.id === "postpaid") {
+		if (e.target.id === "prepaid") {
+			setRechargeType("prepaid");
+			navigate("/home/prepaid", { replace: true });
+		} else if (e.target.id === "postpaid") {
 			setRechargeType("postpaid");
+			navigate("/home/postpaid", { replace: true });
 		} else if (e.target.id === "postpaidLabel") {
 			setRechargeType("postpaid");
+			navigate("/home/postpaid", { replace: true });
 		} else if (e.target.id === "prepaidLabel") {
 			setRechargeType("prepaid");
+			navigate("/home/prepaid", { replace: true });
 		}
-		console.log(e.target);
-
-		if (rechargeType === "prepaid")
-			navigate("/home/mobile/prepaid", { replace: true });
-		else if (rechargeType === "postpaid")
-			navigate("/home/mobile/postpaid", { replace: true });
 	};
 
 	return (
@@ -91,9 +91,9 @@ const Mobile = () => {
 					</label>
 				</div>
 			</div>
-			<Outlet />
+			{children}
 		</div>
 	);
 };
 
-export default Mobile;
+export default Prepaid;
