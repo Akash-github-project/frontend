@@ -1,0 +1,24 @@
+.radio {
+	position: relative;
+}
+.radio .cover {
+	content: "";
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: 100%;
+	border-radius: 50%;
+	border: 1px solid deeppink;
+	left: 1;
+	background-color: white;
+	width: 1.5ch;
+	height: 1.5ch;
+}
+.radioChecked .cover {
+	content: "";
+	border: 5px solid deeppink;
+}
+.circle {
+	border-radius: 50%;
+}
