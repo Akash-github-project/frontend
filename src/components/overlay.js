@@ -42,7 +42,7 @@ const Overlay = () => {
 					<div
 						data-cms
 						dangerouslySetInnerHTML={{ __html: overlayContent }}
-						className="flex flex-col justify-left py-1 h-96 overflow-y-auto circle text-gray-primary"
+						className="flex flex-col justify-left py-1 h-96 overflow-y-auto text-gray-primary"
 					></div>
 				</div>
 			</div>

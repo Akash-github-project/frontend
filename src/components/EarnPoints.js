@@ -9,11 +9,11 @@ const EarnPoints = () => {
 	const [balance, setBalance] = useState(110);
 
 	const saveDonationValue = value => {
-		if (donation < balance) {
-			setDonation(value);
-			setBalance(balance - donation);
-		} else {
-			setDonation(0);
+		if (isNaN(value) === true) setDonation(0);
+		else {
+			if (value > 25000) {
+				setDonation(25000);
+			} else setDonation(value);
 		}
 	};
 

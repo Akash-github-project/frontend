@@ -126,20 +126,13 @@ lh-14 {
 	line-height: 14px;
 }
 
-.item {
-	background-color: #f5317c;
-	color: white;
-}
 .item:hover {
 	background-color: white;
 	color: #f5317c;
-	border: 1px solid #f5317c;
 }
 
 .items-box {
 	cursor: pointer;
-	position: absolute;
-	display: none;
 }
 
 /* code for small menu */
@@ -151,9 +144,9 @@ lh-14 {
 	display: none;
 }
 
-.menu > .btn:focus + .items-box {
+/* .menu > .btn:focus + .items-box {
 	display: block;
-}
+} */
 
 .bar {
 	width: 3rem;

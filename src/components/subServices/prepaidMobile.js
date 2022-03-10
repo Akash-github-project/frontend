@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import classnames from "classnames";
 import SelectSearch, { fuzzySearch } from "react-select-search";
 import { Link } from "react-router-dom";
 import InputSec from "../InputSec";
@@ -9,6 +8,7 @@ import { renderProvider, providers } from "../../otherData/inputWithImage";
 import "../../css/searchWithImages.css";
 import "../../css/selectSearch.css";
 import Radio from "../radio";
+import classNames from "classnames";
 
 let circleList = circle.list.map(item => ({
 	name: item.name,
@@ -44,7 +44,7 @@ const PrepaidMobile = () => {
 	};
 	return (
 		<>
-			<div className="grid grid-cols-5 gap-3 w-full">
+			<div className="grid grid-cols-1 md:grid-cols-5 gap-3 w-full">
 				<InputSec
 					wrapperClasses="rounded flex-1"
 					req="true"
@@ -94,7 +94,7 @@ const PrepaidMobile = () => {
 				<div className="md:hidden"></div>
 
 				{/* button of recharge */}
-				<button className="p-1 bg-pink-primary hover:bg-blue-600 text-white rounded text-[13px] leading-[13px] font-medium">
+				<button className="p-4 md:p-1 bg-pink-primary hover:bg-blue-600 text-white rounded text-[13px] leading-[13px] font-medium">
 					Continue to Recharge
 				</button>
 			</div>
@@ -113,7 +113,7 @@ const PrepaidMobile = () => {
 			{/* row 3 for special case of bsnl to show topup and spacial offer options */}
 			<div className="grid grid-col-1 md:grid-cols-5 gap-3 w-full">
 				<div className="hidden md:block md:col-span-3"></div>
-				<div className="">
+				<div className={classNames({ hidden: true, bsnl: false })}>
 					<Radio lableValue="Special Recharge" labelId="spcl" />
 				</div>
 			</div>

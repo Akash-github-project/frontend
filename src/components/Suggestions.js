@@ -24,8 +24,10 @@ const Suggestions = () => {
 	if (fileRef.current.files) {
 		if (fileRef.current.files[0]) {
 			if (fileRef.current.files[0].size / 1024 >= 1024) {
-				size = Math.floor(fileRef.current.files[0].size / (1024 * 1024)) + "MB";
-			} else size = Math.floor(fileRef.current.files[0].size / 1024) + "KB ";
+				// size = Math.floor(fileRef.current.files[0].size / (1024 * 1024)) + "MB";
+				size = fileRef.current.files[0].size / (1024 * 1024) + "MB";
+				// } else size = Math.floor(fileRef.current.files[0].size / 1024) + "KB ";
+			} else size = fileRef.current.files[0].size / 1024 + "KB ";
 		}
 	}
 	const handleFileUpload = () => {
@@ -39,7 +41,8 @@ const Suggestions = () => {
 						Suggestions
 					</h1>
 				</div>
-				<div className="py-4 px-1 md:p-4 border border-white border-b-gray-200 mb-2 ">
+
+				<div className="py-2 px-1 md:p-3 border border-white border-b-gray-200  ">
 					<h2 className="text-2xl font-medium">Send A Request</h2>
 				</div>
 
@@ -50,7 +53,9 @@ const Suggestions = () => {
 				<div>
 					<div className="grid grid-col-1 md:grid-cols-2 gap-2 ">
 						<div>
-							<span className="text-gray-primary req">Name</span>
+							<span className="text-gray-primary req text-sm leading-[14px]">
+								Name
+							</span>
 							<InputSec
 								wrapperClasses="rounded"
 								extraClasses="rounded text-gray-600"
@@ -60,7 +65,9 @@ const Suggestions = () => {
 						</div>
 
 						<div>
-							<span className="text-gray-primary req">Email</span>
+							<span className="text-gray-primary req text-sm leading-[14px]">
+								Email
+							</span>
 							<InputSec
 								wrapperClasses="rounded"
 								extraClasses="rounded  text-gray-600"
@@ -69,7 +76,7 @@ const Suggestions = () => {
 							/>
 						</div>
 						<div>
-							<span className="text-gray-primary req" req="true">
+							<span className="text-gray-primary req  text-sm leading-[14px]">
 								Mobile
 							</span>
 							<InputSec
@@ -80,7 +87,9 @@ const Suggestions = () => {
 							/>
 						</div>
 						<div>
-							<span className="text-gray-primary req">Message Type</span>
+							<span className="text-gray-primary req text-sm leading-[14px]">
+								Message Type
+							</span>
 							<select
 								name=""
 								id=""
@@ -94,7 +103,9 @@ const Suggestions = () => {
 							</select>
 						</div>
 						<div className="col-span-full row-span-5 ">
-							<span className="text-gray-primary req">Query</span>
+							<span className="text-gray-primary req text-sm leading-[14px]">
+								Query
+							</span>
 							<textarea
 								required
 								name=""
@@ -104,7 +115,7 @@ const Suggestions = () => {
 							></textarea>
 						</div>
 						<div
-							className="text-gray-primary flex flex-col msg"
+							className="text-gray-primary flex flex-col msg text-sm "
 							data-message=" "
 						>
 							Attachment file (Max 2MB) Only Pdf/Image
@@ -114,17 +125,18 @@ const Suggestions = () => {
 									type="file"
 									name=""
 									id="file"
+									accept=".pdf,.jpeg,.jpg,.png"
 									className="hidden"
 									title="select a file"
 									onChange={handleFileUpload}
 								/>
-								<span className="text-gray-600">Size:{size}</span>
+								{/* <span className="text-gray-600">Size:{size}</span> */}
 								<span className="ml-auto mr-10 text-gray-600">{fileName}</span>
 								<label
 									htmlFor="file"
 									className="p-1 bg-pink-primary text-white mr-1 text-[11px] hover:bg-gray-500"
 								>
-									Attach
+									Attach file
 								</label>
 							</div>
 						</div>

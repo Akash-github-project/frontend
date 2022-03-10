@@ -32,18 +32,22 @@ export default ({ data }) => {
 					<Tab>Redeem Rewards Points</Tab>
 				</ul>
 				<div className="tab-progress h-2" />
-
+				{/* tabs 1 */}
 				<Panel>
 					<div className="">
 						<PointsCounter points={88882} />
 						<TransactionList />
 					</div>
 				</Panel>
+
+				{/* tab 2 */}
 				<Panel>
 					<div className="">
 						<EarnPoints />
 					</div>
 				</Panel>
+
+				{/* tab 3 */}
 				<Panel>
 					<div className="w-full">
 						<Redeem />

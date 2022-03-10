@@ -63,7 +63,7 @@ const Postpaid = ({ children }) => {
 					<label
 						id="prepaidLabel"
 						htmlFor="prepaid"
-						className=""
+						className="text-gray-primary"
 						onClick={handleRadioChange}
 					>
 						Prepaid
@@ -97,7 +97,7 @@ const Postpaid = ({ children }) => {
 					<label
 						id="postpaidLabel"
 						htmlFor="postpaid"
-						className=""
+						className="text-gray-600"
 						onClick={handleRadioChange}
 					>
 						Postpaid
