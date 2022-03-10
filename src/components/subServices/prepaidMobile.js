@@ -8,6 +8,7 @@ import circle from "../../otherData/circle.json";
 import { renderProvider, providers } from "../../otherData/inputWithImage";
 import "../../css/searchWithImages.css";
 import "../../css/selectSearch.css";
+import Radio from "../radio";
 
 let circleList = circle.list.map(item => ({
 	name: item.name,
@@ -46,12 +47,11 @@ const PrepaidMobile = () => {
 			<div className="grid grid-cols-5 gap-3 w-full">
 				<InputSec
 					wrapperClasses="rounded flex-1"
-					extraClasses="rounded p-1"
 					req="true"
 					place="Mobile Number"
 				/>
 				<SelectSearch
-					className="select-search"
+					className="select-search "
 					options={outputOperator}
 					renderOption={renderProvider}
 					search
@@ -67,6 +67,7 @@ const PrepaidMobile = () => {
 					onChange={value => handleCircle(value)}
 				/>
 
+				{/* spacially made custom input box just for this page to show view plans */}
 				<div className="rounded">
 					<span
 						className="flex border border-pink-600 focus-within:border-blue-400  m-0 w-full relative rounded"
@@ -74,10 +75,12 @@ const PrepaidMobile = () => {
 					>
 						<input
 							type="tel"
-							className="border-0 w-full  m-0 outline-none p-1 rounded"
+							className="border-0 w-full  m-0 outline-none p-[11px] rounded text-[13px] leading-[21px] h-[34px]"
 							required
-							placeholder="select "
+							placeholder="View Plans"
 						/>
+
+						{/* this <span> will be visible inside the input box so be careful before editing it */}
 						<span
 							className="absolute  underline capitalize right-0 mt-2 text-xs cursor-pointer hover:text-black"
 							onClick={() => console.log("helelo")}
@@ -86,23 +89,33 @@ const PrepaidMobile = () => {
 						</span>
 					</span>
 				</div>
+
+				{/* this div should only be visible in mobile mode */}
 				<div className="md:hidden"></div>
-				<button className="p-1 bg-pink-primary hover:bg-blue-600 text-white rounded text-sm">
+
+				{/* button of recharge */}
+				<button className="p-1 bg-pink-primary hover:bg-blue-600 text-white rounded text-[13px] leading-[13px] font-medium">
 					Continue to Recharge
 				</button>
 			</div>
+
+			{/* row 2 for information display */}
 			<div className="grid grid-col-1 md:grid-cols-5 gap-3 w-full">
 				<div className="hidden md:block md:col-span-3"></div>
-				<small className="col-span-2 text-[11px] leading-[11px] text-green-info text-justify">
+				<small className="col-span-2 text-[11px] leading-[11px] text-green-info text-justify pr-4 hidden">
 					Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam,
 					illum ducimus labore error laboriosam quia et blanditiis sapiente vero
 					facilis iste officia inventore minima unde eius. At amet possimus
 					minus.
 				</small>
 			</div>
+
+			{/* row 3 for special case of bsnl to show topup and spacial offer options */}
 			<div className="grid grid-col-1 md:grid-cols-5 gap-3 w-full">
 				<div className="hidden md:block md:col-span-3"></div>
-				<small className=""></small>
+				<div className="">
+					<Radio lableValue="Special Recharge" labelId="spcl" />
+				</div>
 			</div>
 		</>
 	);

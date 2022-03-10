@@ -13,6 +13,9 @@ module.exports = {
 			"2xl": "1200px",
 		},
 		extend: {
+			spacing: {
+				ms: "13px",
+			},
 			colors: {
 				pink: {
 					primary: "#f5317c",
@@ -21,7 +24,7 @@ module.exports = {
 					primary: "#535b61",
 				},
 				green: {
-					info: "B4E0DC",
+					info: "#009688",
 				},
 			},
 		},

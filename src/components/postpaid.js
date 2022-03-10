@@ -26,9 +26,15 @@ const Postpaid = ({ children }) => {
 		console.log(rechargeType);
 	};
 
+	const handleEnter = e => {
+		if (e.key === "Enter") {
+			handleRadioChange(e);
+		}
+	};
 	return (
 		<div className="w-full">
-			<div className="flex gap-4">
+			<h2 className="font-medium leading-[19px]">Postpaid Bill Payment</h2>
+			<div className="flex gap-4 mb-2">
 				<div className="flex items-center gap-2">
 					<div
 						className={classNames({
@@ -49,6 +55,8 @@ const Postpaid = ({ children }) => {
 							className="cover"
 							id="prepaid"
 							onClick={handleRadioChange}
+							tabIndex={0}
+							onKeyUp={handleEnter}
 						></div>
 					</div>
 
@@ -81,6 +89,8 @@ const Postpaid = ({ children }) => {
 							className="cover"
 							id="postpaid"
 							onClick={handleRadioChange}
+							tabIndex={0}
+							onKeyUp={handleEnter}
 						></div>
 					</div>
 

@@ -55,13 +55,11 @@ const ContactUs = () => {
 									</svg>
 								</div>
 								<h3 className="px-2">RechargeAXN</h3>
-								<p className="px-2 text-gray-primary text-justify">
-									Lorem ipsum dolor sit amet consectetur adipisicing elit.
-									Error, at! Lorem, ipsum dolor sit amet consectetur adipisicing
-									Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut
-									voluptate rerum aut ad aperiam recusandae et itaque asperiores
-									commodi fuga porro minima sunt voluptatum saepe, nulla omnis
-									excepturi voluptas suscipit.
+								<p className="px-2 text-gray-primary text-justify text-sm leading-[21px]">
+									RechargeAXN Technologies Ltd <br />
+									Khara Kuan, Idgah Road <br />
+									Gulzarbagh, Patna <br />
+									800007 Bihar
 								</p>
 							</div>
 
@@ -85,7 +83,9 @@ const ContactUs = () => {
 									</svg>
 								</div>
 								<h3 className="px-2">Telephone</h3>
-								<p className="px-2 text-gray-primary">Lorem, ipsum.</p>
+								<p className="px-2 text-gray-primary text-sm leading-[21px]">
+									9523150373
+								</p>
 							</div>
 							<div className="flex flex-col relative pl-10 my-2 gap-1">
 								<div className="details">
@@ -107,7 +107,9 @@ const ContactUs = () => {
 									</svg>
 								</div>
 								<h3 className="px-2">Whatsapp</h3>
-								<p className="px-2  text-gray-primary">Lorem, ipsum.</p>
+								<p className="px-2  text-gray-primary text-sm leading-[21px]">
+									9523150373
+								</p>
 							</div>
 							<div className="flex flex-col relative pl-10  my-2 gap-1">
 								<div className="details">
@@ -129,8 +131,8 @@ const ContactUs = () => {
 									</svg>
 								</div>
 								<h3 className="px-2">Enquiries</h3>
-								<p className="px-2 text-gray-primary">
-									Lorem ipsum dolor sit amet.
+								<p className="px-2 text-gray-primary text-sm leading-[21px]">
+									help@rechargeaxn.com
 								</p>
 							</div>
 							<div className="flex flex-col relative pl-10  my-2 gap-1">

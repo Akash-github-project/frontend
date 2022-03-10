@@ -62,6 +62,7 @@ export const Crosel = () => {
 			showPlayButton={false}
 			showNav={true}
 			slideDuration={250}
+			lazyLoad={true}
 			additionalClass="banner"
 			renderLeftNav={function (onClick, disabled) {
 				return <LeftNav onClick={onClick} disabled={disabled} />;

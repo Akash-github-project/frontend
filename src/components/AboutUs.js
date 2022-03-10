@@ -15,21 +15,16 @@ const AboutUs = () => {
 	let cmsData = {
 		AboutUs: `
 			<p>
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde tempore,
-				error tenetur maxime autem deleniti. Nihil animi deleniti alias porro?Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro totam omnis officiis cum minus perferendis. Vitae officia voluptatum recusandae doloribus
-			</p>`,
+			We are technology driven Instant Online recharging and Bill Payments solution company. Started RechargeAXN with a vision to grow and put our footprint in digital world of recharge and bill payment business.			</p>`,
 		WhyUs: `<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos minima
-				illo enim nam, eum corporis soluta! Nulla deserunt cupiditate sit?
+		We know your requirement and to make your life better financially.
 			</p>`,
 		OurMission: `	<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos minima
-				illo enim nam, eum corporis soluta! Nulla deserunt cupiditate sit?
+		To provide best margin to our users and helps them to grow in market.
 			</p>`,
 		OutVision: `
 			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos minima
-				illo enim nam, eum corporis soluta! Nulla deserunt cupiditate sit?
+			To grow and reach to everyone mind.
 			</p>`,
 	};
 	return (

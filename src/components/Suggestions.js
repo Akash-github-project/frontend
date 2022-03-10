@@ -42,7 +42,8 @@ const Suggestions = () => {
 				<div className="py-4 px-1 md:p-4 border border-white border-b-gray-200 mb-2 ">
 					<h2 className="text-2xl font-medium">Send A Request</h2>
 				</div>
-				<div className="text-gray-primary text-sm py-5">
+
+				<div className="text-gray-primary text-sm py-4">
 					Please fill out the form below. we will get back to you within a
 					couple of hours.
 				</div>
@@ -52,7 +53,7 @@ const Suggestions = () => {
 							<span className="text-gray-primary req">Name</span>
 							<InputSec
 								wrapperClasses="rounded"
-								extraClasses="rounded p-1 text-gray-600"
+								extraClasses="rounded text-gray-600"
 								req="true"
 								place="Name"
 							/>
@@ -62,7 +63,7 @@ const Suggestions = () => {
 							<span className="text-gray-primary req">Email</span>
 							<InputSec
 								wrapperClasses="rounded"
-								extraClasses="rounded p-1 text-gray-600"
+								extraClasses="rounded  text-gray-600"
 								req="true"
 								place="Email"
 							/>
@@ -73,7 +74,7 @@ const Suggestions = () => {
 							</span>
 							<InputSec
 								wrapperClasses="rounded text-gray-600"
-								extraClasses="rounded p-1 text-gray-600"
+								extraClasses="rounded text-gray-600"
 								req="true"
 								place="Mobile Number"
 							/>
