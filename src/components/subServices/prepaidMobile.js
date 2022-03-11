@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SelectSearch, { fuzzySearch } from "react-select-search";
 import operator from "../../otherData/operator.json";
 import circle from "../../otherData/circle.json";
@@ -12,9 +12,9 @@ import { NumberInput } from "../numberInput";
 // imports for using redux
 import { useSelector, useDispatch } from "react-redux";
 import {
-	setPhoneNo,
-	setCircle,
-	setOperator,
+	storePhoneNo,
+	storeCircle,
+	storeOperator,
 } from "../../app/features/prepaidPlansSlice";
 
 let circleList = circle.list.map(item => ({
@@ -30,10 +30,17 @@ let operatorList = operator.list.map(item => ({
 }));
 
 const PrepaidMobile = () => {
-	const [outputCircle, storeCircle] = useState(circleList);
+	const [outputCircle, setCircle] = useState(circleList);
 	const [outputOperator, setOperator] = useState(operatorList);
 	const dispatch = useDispatch();
 	const phoneNo = useSelector(state => state.prepaidPlan.phoneNo);
+	const Operator = useSelector(state => state.prepaidPlan.operator);
+	const circle = useSelector(state => state.prepaidPlan.circle);
+
+	useEffect(() => {
+		if (Object.keys(Operator).length > 0 && circle.length > 1) {
+		}
+	}, [Operator, circle]);
 
 	const handleOperator = value => {
 		let filterCircle = circleList.filter(element => {
@@ -47,10 +54,12 @@ const PrepaidMobile = () => {
 		});
 
 		let currentOperator = operatorList.filter(
-			operator => operator.op_key === value
+			operator => operator.value === value
 		);
+
 		console.log(currentOperator);
-		storeCircle([...filterCircle]);
+		setCircle([...filterCircle]);
+		dispatch(storeOperator(currentOperator[0]));
 	};
 
 	const handleCircle = value => {
@@ -65,7 +74,7 @@ const PrepaidMobile = () => {
 					onleft="91 "
 					id="phoneNo"
 					holder="Mobile Number"
-					change={value => dispatch(setPhoneNo(value))}
+					change={value => dispatch(storePhoneNo(value))}
 					extraClasses=" text-[15px] focus:text-gray-primary "
 					fieldClasses="border-pink-600 focus:outline-none focus-within:border-blue-400 flex-1"
 				/>
@@ -84,7 +93,7 @@ const PrepaidMobile = () => {
 					value="sv"
 					name="circle"
 					placeholder="Circle"
-					onChange={value => handleCircle(value)}
+					onChange={value => dispatch(storeCircle(value))}
 				/>
 
 				{/* spacially made custom input box just for this page to show view plans */}

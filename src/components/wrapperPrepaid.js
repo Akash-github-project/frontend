@@ -4,7 +4,7 @@ import { Crosel } from "./Crosel";
 import Services from "./Services";
 import Prepaid from "./prepaid";
 import PrepaidMobile from "./subServices/prepaidMobile";
-
+import PlansList from "./subServices/plansList";
 const WrapperPrepaid = () => {
 	return (
 		<>
@@ -19,6 +19,9 @@ const WrapperPrepaid = () => {
 				<Prepaid>
 					<PrepaidMobile />
 				</Prepaid>
+			</Wrapper>
+			<Wrapper>
+				<PlansList />
 			</Wrapper>
 		</>
 	);

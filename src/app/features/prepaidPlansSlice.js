@@ -21,22 +21,22 @@ export const prepaidPlan = createSlice({
 			state.selectedPlan = "";
 			state.circle = "";
 		},
-		setPlanList: function (state, action) {
+		storePlansList: function (state, action) {
 			state.overlayContent = action.payload;
 		},
-		setPlansInfo: function (state, action) {
+		storetPlansInfo: function (state, action) {
 			state.plansInfo = [...action.payload];
 		},
-		setPhoneNo: function (state, action) {
+		storePhoneNo: function (state, action) {
 			state.phoneNo = action.payload;
 		},
-		setOperator: function (state, action) {
-			state.operator = { ...action.payload };
+		storeOperator: function (state, action) {
+			state.operator = action.payload;
 		},
-		setSelectPlan: function (state, action) {
+		storeSelectPlan: function (state, action) {
 			state.selectedPlan = action.payload;
 		},
-		setCircle: function (state, action) {
+		storeCircle: function (state, action) {
 			state.circle = action.payload;
 		},
 	},
@@ -45,11 +45,11 @@ export const prepaidPlan = createSlice({
 // Action creators are generated for each case reducer function
 export const {
 	clearAll,
-	setOperator,
-	setPhoneNo,
-	setPlanList,
-	setPlansInfo,
-	setSelectPlan,
-	setCircle,
+	storeOperator,
+	storePhoneNo,
+	storePlansList,
+	storetPlansInfo,
+	storeSelectPlan,
+	storeCircle,
 } = prepaidPlan.actions;
 export default prepaidPlan.reducer;
