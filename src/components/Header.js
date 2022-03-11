@@ -1,28 +1,29 @@
 import "../App.css";
 import React, { useState, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import classNames from "classnames";
 
 export const Header = () => {
 	const [menuState, setMenuState] = useState(false);
-	const navigate = useNavigate();
 
 	const menu = useRef();
 
-	const handleMenuState = e => {
-		setMenuState(!menuState);
-		console.log(e);
+	const handleMenuState = () => {
+		if (menuState === true) {
+			menu.current.focus();
+			setMenuState(!menuState);
+		} else setMenuState(!menuState);
 	};
 
 	return (
 		<header className="">
 			<div className=" width mx-auto flex items-center mt-[3px] pl-1 ">
 				{/* menu box */}
-				<div className="menu relative">
+				<div className="menu relative" tabIndex={0}>
 					{/* <button className="btn flex px-1"> */}
 
 					<button
-						className="btn px-1 w-3 h-3 bg-white"
+						className="relative btn px-1 w-3 h-3 bg-white"
 						onClick={handleMenuState}
 					>
 						{/* <i className="fa fa-bars items-center " aria-hidden="true"></i> */}
@@ -37,15 +38,11 @@ export const Header = () => {
 							absolute: true,
 							"items-box": true,
 							flex: true,
-							"flex-col": true,
 							"z-base": true,
 							"w-[50vw]": true,
-							block: true,
-							hidden: menuState,
 							"left-0": true,
 							"p-2": true,
 						})}
-						onBlur={handleMenuState}
 					>
 						<Link to="/rewards" data-route="/rewards">
 							<div className="item bg-white px-4 py-2  border-0 border-b border-gray-200 text-sm ">
@@ -72,7 +69,12 @@ export const Header = () => {
 					</div>
 				</div>
 				{/*logo declaration   */}
-				<Link to="/home" className="mr-auto">
+				<Link
+					to="/home"
+					className="mr-auto outline-none"
+					tabIndex={0}
+					ref={menu}
+				>
 					<div className="pl-[2px] pr-4 logo mr-auto relative  mt-[1px] ml-2 small-logo"></div>
 				</Link>
 

@@ -132,7 +132,7 @@ lh-14 {
 }
 
 .items-box {
-	cursor: pointer;
+	display: none;
 }
 
 /* code for small menu */
@@ -143,10 +143,25 @@ lh-14 {
 .show-in-small {
 	display: none;
 }
+.btn > span {
+	transition: transform 500ms ease;
+}
 
-/* .menu > .btn:focus + .items-box {
+.menu:focus-within > .btn > span:is(:nth-child(1)) {
+	transform: translateY(calc(0.25rem + 2px)) rotate(-45deg);
+}
+.menu:focus-within > .btn > span:is(:nth-child(2)) {
+	visibility: hidden;
+	transform: rotate(-45deg) translateX(1px);
+}
+.menu:focus-within > .btn > span:nth-child(3) {
+	transform: translateY(calc(-0.25rem - 2px)) rotate(45deg);
+}
+
+.menu:focus-within > .items-box {
+	cursor: pointer;
 	display: block;
-} */
+}
 
 .bar {
 	width: 3rem;
