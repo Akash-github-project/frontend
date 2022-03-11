@@ -1,30 +1,55 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+	plansList: [],
 	plansInfo: "",
 	phoneNo: "",
-	operator: "",
+	operator: {},
 	selectedPlan: "",
 	circle: "",
 };
 
-export const overlaySlice = createSlice({
-	name: "prepaidMobile",
+export const prepaidPlan = createSlice({
+	name: "prepaidPlan",
 	initialState,
 	reducers: {
-		toggleOverlay: function (state) {
-			state.overlayStatus = state.overlayStatus === true ? false : true;
+		clearAll: function (state) {
+			state.plansList = [];
+			state.plansInfo = "";
+			state.phoneNo = "";
+			state.operator = {};
+			state.selectedPlan = "";
+			state.circle = "";
 		},
-		addContent: function (state, action) {
+		setPlanList: function (state, action) {
 			state.overlayContent = action.payload;
 		},
-		clearDetails: function (state) {
-			state.overlayStatus = false;
-			state.overlayContent = false;
+		setPlansInfo: function (state, action) {
+			state.plansInfo = [...action.payload];
+		},
+		setPhoneNo: function (state, action) {
+			state.phoneNo = action.payload;
+		},
+		setOperator: function (state, action) {
+			state.operator = { ...action.payload };
+		},
+		setSelectPlan: function (state, action) {
+			state.selectedPlan = action.payload;
+		},
+		setCircle: function (state, action) {
+			state.circle = action.payload;
 		},
 	},
 });
 
 // Action creators are generated for each case reducer function
-export const { toggleOverlay, addContent, clearDetails } = overlaySlice.actions;
-export default overlaySlice.reducer;
+export const {
+	clearAll,
+	setOperator,
+	setPhoneNo,
+	setPlanList,
+	setPlansInfo,
+	setSelectPlan,
+	setCircle,
+} = prepaidPlan.actions;
+export default prepaidPlan.reducer;

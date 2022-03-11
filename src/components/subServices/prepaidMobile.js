@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import SelectSearch, { fuzzySearch } from "react-select-search";
-import { Link } from "react-router-dom";
-import InputSec from "../InputSec";
 import operator from "../../otherData/operator.json";
 import circle from "../../otherData/circle.json";
 import { renderProvider, providers } from "../../otherData/inputWithImage";
@@ -9,6 +7,15 @@ import "../../css/searchWithImages.css";
 import "../../css/selectSearch.css";
 import Radio from "../radio";
 import classNames from "classnames";
+import { NumberInput } from "../numberInput";
+
+// imports for using redux
+import { useSelector, useDispatch } from "react-redux";
+import {
+	setPhoneNo,
+	setCircle,
+	setOperator,
+} from "../../app/features/prepaidPlansSlice";
 
 let circleList = circle.list.map(item => ({
 	name: item.name,
@@ -19,11 +26,14 @@ let operatorList = operator.list.map(item => ({
 	name: item.op_name,
 	value: item.op_key,
 	photo: item.image,
+	code: item.op_code,
 }));
 
 const PrepaidMobile = () => {
-	const [outputCircle, setCircle] = useState(circleList);
+	const [outputCircle, storeCircle] = useState(circleList);
 	const [outputOperator, setOperator] = useState(operatorList);
+	const dispatch = useDispatch();
+	const phoneNo = useSelector(state => state.prepaidPlan.phoneNo);
 
 	const handleOperator = value => {
 		let filterCircle = circleList.filter(element => {
@@ -36,7 +46,11 @@ const PrepaidMobile = () => {
 			} else return true;
 		});
 
-		setCircle([...filterCircle]);
+		let currentOperator = operatorList.filter(
+			operator => operator.op_key === value
+		);
+		console.log(currentOperator);
+		storeCircle([...filterCircle]);
 	};
 
 	const handleCircle = value => {
@@ -45,11 +59,17 @@ const PrepaidMobile = () => {
 	return (
 		<>
 			<div className="grid grid-cols-1 lg:grid-cols-5 gap-1 lg:gap-2 xl:gap-3 w-full">
-				<InputSec
-					wrapperClasses="rounded flex-1"
-					req="true"
-					place="Mobile Number"
+				<NumberInput
+					iType="tel"
+					val={phoneNo}
+					onleft="91 "
+					id="phoneNo"
+					holder="Mobile Number"
+					change={value => dispatch(setPhoneNo(value))}
+					extraClasses=" text-[15px] focus:text-gray-primary "
+					fieldClasses="border-pink-600 focus:outline-none focus-within:border-blue-400 flex-1"
 				/>
+
 				<SelectSearch
 					className="select-search "
 					options={outputOperator}

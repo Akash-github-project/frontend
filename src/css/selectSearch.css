@@ -28,6 +28,9 @@
 	z-index: 1;
 }
 
+.select-search__row > .select-search__option > span > img {
+	width: 30px;
+}
 /* .select-search__value::after {
 	content: "";
 	display: inline-block;
@@ -201,7 +204,7 @@
 	left: 0;
 	border-radius: 3px;
 	overflow: auto;
-	max-height: 250px;
+	max-height: 200px;
 }
 
 .select-search:not(.select-search--multiple) .select-search__select:hover {

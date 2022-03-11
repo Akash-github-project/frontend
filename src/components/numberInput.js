@@ -11,7 +11,7 @@ export const NumberInput = ({
 	onleft = " ",
 }) => {
 	let defaultClasses =
-		"border rounded-md text-black focus:text-red-400 border-0 w-full outline-none";
+		"border rounded-md text-black focus:text-red-400 border-0 w-full outline-none  ";
 	let defaultField = "flex border rounded items-center p-1 ";
 
 	if (extraClasses !== " ") {
