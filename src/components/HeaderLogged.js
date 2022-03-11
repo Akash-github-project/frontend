@@ -1,46 +1,48 @@
 //header for logged user
-
 import "../App.css";
 import "../css/loggedHeader.css";
-import React from "react";
+import React, { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import DropMenu from "./dropMenu";
 
 export const HeaderLogged = () => {
 	const navigate = useNavigate();
+	const logo = useRef();
+
 	return (
 		<header className="">
 			<div className=" width mx-auto flex items-center mt-[3px] pl-1 ">
-				<div className="menu">
+				{/* <div className="menu">
 					<button className="btn flex px-1">
 						<i
 							className="fa fa-bars items-center flex justify-center"
 							aria-hidden="true"
 						></i>
-					</button>
+					</button> */}
 
-					<div className="items-box flex flex-col items-center justify-center w-[50vw]">
-						<Link to="/rewards">
-							<div className="item bg-white px-4 py-2 border text-sm">
-								Rewards
-							</div>
-						</Link>
-						<Link to="/offers">
-							<div className="item bg-white px-4 py-2 border text-sm">
-								Offers
-							</div>
-						</Link>
-						<Link to="/suggestions">
-							<div className="item bg-white px-4 py-2 border text-sm">
-								Suggestions
-							</div>
-						</Link>
-					</div>
-				</div>
+				<DropMenu reference={logo}>
+					<Link to="/rewards">
+						<div className="item bg-white px-4 py-2 border text-sm">
+							Rewards
+						</div>
+					</Link>
+					<Link to="/offers">
+						<div className="item bg-white px-4 py-2 border text-sm">Offers</div>
+					</Link>
+					<Link to="/suggestions">
+						<div className="item bg-white px-4 py-2 border text-sm">
+							Suggestions
+						</div>
+					</Link>
+				</DropMenu>
+
 				{/*logo declaration   */}
 				{/* <Link to="/home" className="mr-auto relative flex"> */}
 				<div
 					className="pl-[2px] pr-4 logo mr-auto relative  mt-[1px] ml-2  small-logo shrink-[0.2] cursor-pointer"
 					onClick={() => navigate("/home")}
+					tabIndex={0}
+					ref={logo}
 				></div>
 				{/* </Link> */}
 

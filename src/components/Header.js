@@ -1,80 +1,51 @@
 import "../App.css";
 import React, { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import DropMenu from "./dropMenu";
 import classNames from "classnames";
 
 export const Header = () => {
-	const [menuState, setMenuState] = useState(false);
+	const logo = useRef();
 	const navigate = useNavigate();
-
-	const menu = useRef();
-
-	const handleMenuState = e => {
-		setMenuState(!menuState);
-		console.log(e);
-	};
 
 	return (
 		<header className="">
 			<div className=" width mx-auto flex items-center mt-[3px] pl-1 ">
 				{/* menu box */}
-				<div className="menu relative">
-					{/* <button className="btn flex px-1"> */}
 
-					<button
-						className="btn px-1 w-3 h-3 bg-white"
-						onClick={handleMenuState}
-					>
-						{/* <i className="fa fa-bars items-center " aria-hidden="true"></i> */}
-						<span className="border-b-gray-900 block mb-1 border-0 border-b-2 "></span>
-						<span className="border-b-gray-900 block mb-1 border-0 border-b-2 "></span>
-						<span className="border-b-gray-900 block mb-1 border-0 border-b-2 "></span>
-					</button>
+				<DropMenu reference={logo}>
+					<Link to="/rewards" data-route="/rewards">
+						<div className="item bg-white px-4 py-2  border-0 border-b border-gray-200 text-sm ">
+							Rewards
+						</div>
+					</Link>
 
-					{/* menu items */}
-					<div
-						className={classNames({
-							absolute: true,
-							"items-box": true,
-							flex: true,
-							"flex-col": true,
-							"z-base": true,
-							"w-[50vw]": true,
-							block: true,
-							hidden: menuState,
-							"left-0": true,
-							"p-2": true,
-						})}
-						onBlur={handleMenuState}
-					>
-						<Link to="/rewards" data-route="/rewards">
-							<div className="item bg-white px-4 py-2  border-0 border-b border-gray-200 text-sm ">
-								Rewards
-							</div>
-						</Link>
+					<Link to="/offers" data-route="/offers">
+						<div
+							className="item bg-white px-4 py-2  border-0 border-b border-gray-200 text-sm"
+							data-route="/offers"
+						>
+							Offers
+						</div>
+					</Link>
+					<Link to="/suggestions" data-route="/suggestions">
+						<div
+							className="item bg-white px-4 py-2  border-0 border-b border-gray-200 text-sm"
+							data-route="/suggestions"
+						>
+							Suggestions
+						</div>
+					</Link>
+				</DropMenu>
 
-						<Link to="/offers" data-route="/offers">
-							<div
-								className="item bg-white px-4 py-2  border-0 border-b border-gray-200 text-sm"
-								data-route="/offers"
-							>
-								Offers
-							</div>
-						</Link>
-						<Link to="/suggestions" data-route="/suggestions">
-							<div
-								className="item bg-white px-4 py-2  border-0 border-b border-gray-200 text-sm"
-								data-route="/suggestions"
-							>
-								Suggestions
-							</div>
-						</Link>
-					</div>
-				</div>
-				{/*logo declaration   */}
-				<Link to="/home" className="mr-auto">
-					<div className="pl-[2px] pr-4 logo mr-auto relative  mt-[1px] ml-2 small-logo"></div>
-				</Link>
+				{/* logo declaration */}
+
+				<div
+					className="pl-[2px] pr-4 logo mr-auto relative  mt-[1px] ml-2  small-logo shrink-[0.2] cursor-pointer"
+					tabIndex={0}
+					ref={logo}
+					onClick={() => navigate("/home")}
+				></div>
 
 				<div className="  nav flex  gap-[0.9rem] items-center flat-menu ">
 					<Link to="/rewards">

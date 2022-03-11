@@ -44,7 +44,7 @@ const PrepaidMobile = () => {
 	};
 	return (
 		<>
-			<div className="grid grid-cols-1 md:grid-cols-5 gap-3 w-full">
+			<div className="grid grid-cols-1 lg:grid-cols-5 gap-1 lg:gap-2 xl:gap-3 w-full">
 				<InputSec
 					wrapperClasses="rounded flex-1"
 					req="true"
@@ -94,7 +94,7 @@ const PrepaidMobile = () => {
 				<div className="md:hidden"></div>
 
 				{/* button of recharge */}
-				<button className="p-4 md:p-1 bg-pink-primary hover:bg-blue-600 text-white rounded text-[13px] leading-[13px] font-medium">
+				<button className="p-3 lg:p-1 bg-pink-primary hover:bg-blue-600 text-white rounded text-[13px] leading-[13px] font-medium">
 					Continue to Recharge
 				</button>
 			</div>
