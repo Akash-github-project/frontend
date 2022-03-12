@@ -22,15 +22,18 @@ const Tab = ({ children }) => {
 };
 
 const PlansList = () => {
+	const testScreen = e => {
+		console.log(e.target.innerWidth);
+	};
+
 	const [state, setState] = useState(0);
-	const [renderType, setRenderType] = useState("desk");
 
 	useEffect(() => {
+		const resize = window.addEventListener("resize", testScreen);
 		setState(1);
-		if (window.innerWidth < 820) {
-			console.log("mobileSize");
-			setRenderType("mob");
-		}
+		return () => {
+			window.removeEventListener(resize);
+		};
 	}, []);
 
 	let res = apires.categories;
@@ -116,8 +119,3 @@ const PlansList = () => {
 };
 
 export default PlansList;
-
-// benefit
-// validity
-// data
-// ammount
