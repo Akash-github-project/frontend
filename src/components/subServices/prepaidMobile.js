@@ -31,6 +31,8 @@ let operatorList = operator.list.map(item => ({
 
 const PrepaidMobile = () => {
 	const [outputCircle, setCircle] = useState(circleList);
+	const [fakeRadio, setFakeRadio] = useState(true);
+
 	const [outputOperator, setOperator] = useState(operatorList);
 	const dispatch = useDispatch();
 	const phoneNo = useSelector(state => state.prepaidPlan.phoneNo);
@@ -65,6 +67,12 @@ const PrepaidMobile = () => {
 	const handleCircle = value => {
 		console.log(value);
 	};
+	const handleFakeRadio = e => {
+		console.log(e.target.tagName);
+		// if(e.target.tagName === "LABEL")
+		console.log(e.target);
+	};
+
 	return (
 		<>
 			<div className="grid grid-cols-1 lg:grid-cols-5 gap-1 lg:gap-2 xl:gap-3 w-full">
@@ -141,9 +149,29 @@ const PrepaidMobile = () => {
 
 			{/* row 3 for special case of bsnl to show topup and spacial offer options */}
 			<div className="grid grid-col-1 md:grid-cols-5 gap-3 w-full">
-				<div className="hidden md:block md:col-span-3"></div>
-				<div className={classNames({ hidden: true, bsnl: false })}>
-					<Radio lableValue="Special Recharge" labelId="spcl" />
+				<div className="md:block md:col-span-3"></div>
+				<div
+					className={classNames({
+						hidden: false,
+						bsnl: false,
+						flex: true,
+						"gap-3": true,
+					})}
+				>
+					<Radio
+						lableValue="Special Recharge"
+						labelId="spcl"
+						handle={handleFakeRadio}
+						rName="fake"
+						rId="special"
+					/>
+					<Radio
+						lableValue="Top Up"
+						labelId="topup"
+						handle={handleFakeRadio}
+						rName="fake"
+						rId="topup"
+					/>
 				</div>
 			</div>
 		</>

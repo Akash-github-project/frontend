@@ -1,28 +1,35 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import classNames from "classnames";
 import "../css/radio.css";
 
-const Radio = ({ match, rId, labelId, rName, value, handle, lableValue }) => {
+const Radio = ({ rId, rName, value, handle, lableValue }) => {
+	const [status, setStatus] = useState(false);
+
+	const handleItself = () => {};
+	const radio = useRef("");
+
 	return (
-		<div className="flex items-center gap-2">
+		<div className="flex items-center gap-1">
 			<div
 				className={classNames({
 					cricle: true,
 					radio: true,
-					radioChecked: value === match,
+					radioChecked: radio.current.checked,
 				})}
 			>
 				<input
 					type="radio"
 					name={rName}
-					className="invisible "
-					onChange={handle}
-					checked={match === value ? true : false}
+					// className="invisible "
+					className="inline-block"
+					onChange={handleItself}
+					id={rId}
+					ref={radio}
 				/>
-				<div className="cover" id={rId} onClick={handle}></div>
+				<div className="cover pointer-events-none"></div>
 			</div>
 
-			<label id={labelId} htmlFor={rId} onClick={handle}>
+			<label htmlFor={rId} className="text-xs">
 				{lableValue}
 			</label>
 		</div>

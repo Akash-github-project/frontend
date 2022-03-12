@@ -1,18 +1,22 @@
-.planListGrid {
-	display: grid;
-	grid-template-columns: repeat(12, 1fr);
+.des {
+	flex: 0 0 50%;
+	max-width: 50%;
 }
-.description {
-	grid-column: minmax(fit-content, 49%);
-}
-
-.data {
-	grid-column: minmax(max-content, 17%);
+.oth {
+	flex: 0 0 16.666667%;
+	max-width: 16.666667%;
 }
 
-.validity {
-	grid-column: minmax(max-content, 17%);
+.activePlan {
+	background-color: transparent;
+	color: #f5317c;
+	border-bottom: 2px solid #f5317c;
 }
-.amount {
-	grid-column: minmax(max-content, 17%);
+@media screen and (min-width: 820px) {
+	.activePlan {
+		background-color: transparent;
+		color: white;
+		background-color: #f5317c;
+		border: none;
+	}
 }
