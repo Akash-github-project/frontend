@@ -1,0 +1,18 @@
+.planListGrid {
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+}
+.description {
+	grid-column: minmax(fit-content, 49%);
+}
+
+.data {
+	grid-column: minmax(max-content, 17%);
+}
+
+.validity {
+	grid-column: minmax(max-content, 17%);
+}
+.amount {
+	grid-column: minmax(max-content, 17%);
+}
