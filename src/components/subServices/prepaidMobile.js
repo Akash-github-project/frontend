@@ -146,7 +146,7 @@ const PrepaidMobile = () => {
 				{/* this div should only be visible in mobile mode */}
 				<div
 					className={
-						typeof planInfo === "undefined"
+						Object.keys(planInfo).length === 0
 							? "hidden  "
 							: " " +
 							  "text-[11px] leading-[11px] text-green-info text-justify lg:hidden"
@@ -166,7 +166,7 @@ const PrepaidMobile = () => {
 				<div className="lg:block md:col-span-3"></div>
 				<small
 					className={
-						typeof planInfo === "undefined"
+						Object.keys(planInfo).length === 0
 							? "hidden  "
 							: " " +
 							  "col-span-2 text-[11px] leading-[11px] text-green-info text-justify pr-4"
