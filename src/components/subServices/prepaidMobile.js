@@ -8,6 +8,7 @@ import "../../css/selectSearch.css";
 import Radio from "../radio";
 import classNames from "classnames";
 import { NumberInput } from "../numberInput";
+import MobileView from "./mobileView";
 
 // imports for using redux
 import { useSelector, useDispatch } from "react-redux";
@@ -15,7 +16,10 @@ import {
 	storePhoneNo,
 	storeCircle,
 	storeOperator,
+	storeShowPlan,
+	storeRenderType,
 } from "../../app/features/prepaidPlansSlice";
+import { addElement, toggleOverlay } from "../../app/features/overlaySlice";
 
 let circleList = circle.list.map(item => ({
 	name: item.name,
@@ -38,6 +42,7 @@ const PrepaidMobile = () => {
 	const phoneNo = useSelector(state => state.prepaidPlan.phoneNo);
 	const Operator = useSelector(state => state.prepaidPlan.operator);
 	const circle = useSelector(state => state.prepaidPlan.circle);
+	const planInfo = useSelector(state => state.prepaidPlan.plansInfo);
 
 	useEffect(() => {
 		if (Object.keys(Operator).length > 0 && circle.length > 1) {
@@ -64,12 +69,23 @@ const PrepaidMobile = () => {
 		dispatch(storeOperator(currentOperator[0]));
 	};
 
+	const handlePlansRequest = () => {
+		dispatch(storeShowPlan(true));
+
+		if (window.innerWidth > 820) dispatch(storeRenderType("desktop"));
+		else {
+			dispatch(addElement(<MobileView />));
+			dispatch(storeRenderType("mobile"));
+			dispatch(toggleOverlay());
+		}
+	};
+
 	const handleCircle = value => {
 		console.log(value);
 	};
 	const handleFakeRadio = e => {
 		console.log(e.target.tagName);
-		// if(e.target.tagName === "LABEL")
+
 		console.log(e.target);
 	};
 
@@ -120,7 +136,7 @@ const PrepaidMobile = () => {
 						{/* this <span> will be visible inside the input box so be careful before editing it */}
 						<span
 							className="absolute  underline capitalize right-0 mt-2 text-xs cursor-pointer hover:text-black"
-							onClick={() => console.log("helelo")}
+							onClick={handlePlansRequest}
 						>
 							view plans
 						</span>
@@ -128,7 +144,16 @@ const PrepaidMobile = () => {
 				</div>
 
 				{/* this div should only be visible in mobile mode */}
-				<div className="md:hidden"></div>
+				<div
+					className={
+						typeof planInfo === "undefined"
+							? "hidden  "
+							: " " +
+							  "text-[11px] leading-[11px] text-green-info text-justify lg:hidden"
+					}
+				>
+					{planInfo.benefit} | Validity:{planInfo.validity}
+				</div>
 
 				{/* button of recharge */}
 				<button className="p-3 lg:p-1 bg-pink-primary hover:bg-blue-600 text-white rounded text-[13px] leading-[13px] font-medium">
@@ -137,13 +162,17 @@ const PrepaidMobile = () => {
 			</div>
 
 			{/* row 2 for information display */}
-			<div className="grid grid-col-1 md:grid-cols-5 gap-3 w-full">
-				<div className="hidden md:block md:col-span-3"></div>
-				<small className="col-span-2 text-[11px] leading-[11px] text-green-info text-justify pr-4 hidden">
-					Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam,
-					illum ducimus labore error laboriosam quia et blanditiis sapiente vero
-					facilis iste officia inventore minima unde eius. At amet possimus
-					minus.
+			<div className="hidden lg:grid grid-col-1 md:grid-cols-5 gap-3 w-full">
+				<div className="lg:block md:col-span-3"></div>
+				<small
+					className={
+						typeof planInfo === "undefined"
+							? "hidden  "
+							: " " +
+							  "col-span-2 text-[11px] leading-[11px] text-green-info text-justify pr-4"
+					}
+				>
+					{planInfo.benefit} | Validity:{planInfo.validity}
 				</small>
 			</div>
 

@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Wrapper from "./wrapper";
 import { Crosel } from "./Crosel";
 import Services from "./Services";
 import Prepaid from "./prepaid";
 import PrepaidMobile from "./subServices/prepaidMobile";
 import PlansList from "./subServices/plansList";
+import Overlay from "../components/overlay";
+import { useDispatch, useSelector } from "react-redux";
+import { storeRenderType } from "../app/features/prepaidPlansSlice";
+import {
+	addElement,
+	toggleOverlay,
+	clearDetails,
+} from "../app/features/overlaySlice";
+import MobileView from "./subServices/mobileView";
+
 const WrapperPrepaid = () => {
+	const showPlan = useSelector(state => state.prepaidPlan.showPlan);
+	const renderType = useSelector(state => state.prepaidPlan.renderType);
+
 	return (
 		<>
 			<Wrapper>
@@ -21,7 +34,20 @@ const WrapperPrepaid = () => {
 				</Prepaid>
 			</Wrapper>
 			<Wrapper>
-				<PlansList />
+				{showPlan === true ? (
+					renderType === "desktop" ? (
+						<PlansList />
+					) : (
+						<Overlay
+							toUse="element"
+							side="left"
+							title="Plans of Some company"
+							icon="fa-solid fa-arrow-left"
+						/>
+					)
+				) : (
+					<div></div>
+				)}
 			</Wrapper>
 		</>
 	);

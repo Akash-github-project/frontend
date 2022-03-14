@@ -2,11 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
 	plansList: [],
-	plansInfo: "",
+	plansInfo: {},
 	phoneNo: "",
 	operator: {},
 	selectedPlan: "",
 	circle: "",
+	showPlan: false,
+	renderType: "desktop",
 };
 
 export const prepaidPlan = createSlice({
@@ -15,17 +17,24 @@ export const prepaidPlan = createSlice({
 	reducers: {
 		clearAll: function (state) {
 			state.plansList = [];
-			state.plansInfo = "";
+			state.plansInfo = {};
 			state.phoneNo = "";
 			state.operator = {};
 			state.selectedPlan = "";
 			state.circle = "";
+			state.showPlan = false;
+		},
+		storeRenderType: function (state, action) {
+			state.renderType = action.payload;
+		},
+		storeShowPlan: function (state, action) {
+			state.showPlan = action.payload;
 		},
 		storePlansList: function (state, action) {
 			state.overlayContent = action.payload;
 		},
 		storetPlansInfo: function (state, action) {
-			state.plansInfo = [...action.payload];
+			state.plansInfo = { ...action.payload };
 		},
 		storePhoneNo: function (state, action) {
 			state.phoneNo = action.payload;
@@ -45,8 +54,10 @@ export const prepaidPlan = createSlice({
 // Action creators are generated for each case reducer function
 export const {
 	clearAll,
+	storeShowPlan,
 	storeOperator,
 	storePhoneNo,
+	storeRenderType,
 	storePlansList,
 	storetPlansInfo,
 	storeSelectPlan,

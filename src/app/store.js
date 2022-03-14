@@ -9,4 +9,11 @@ export const store = configureStore({
 		overlay: overlayReducer,
 		prepaidPlan: prepaidPlansSlice,
 	},
+	middleware: getDefaultMiddleware =>
+		getDefaultMiddleware({
+			serializableCheck: {
+				// Ignore these action types
+				ignoredActions: ["storeElement"],
+			},
+		}),
 });

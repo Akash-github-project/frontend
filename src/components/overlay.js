@@ -66,7 +66,7 @@ const Overlay = ({
 				id="overlay"
 				onClick={closeOverlay}
 			>
-				<div className="fixed  top-0 bottom-0 right-0 left-0 md:max-w-[34rem] p-5 border border-white h-auto md:h-[28rem] bg-white">
+				<div className="fixed  top-0 bottom-0 right-0 left-0 lg:right-1/2 lg:top-1/2 lg:bottom-1/2 lg:translate-x-1/2 lg:-translate-y-1/2 lg:max-w-[45rem] p-5 border border-white h-auto lg:h-[40rem] bg-white">
 					<div className="flex top-0 min-h-[2rem] mb-1">
 						<h2 className="flex-1 text-center text-2xl capitalize font-medium leading-7">
 							{title}
@@ -84,17 +84,14 @@ const Overlay = ({
 							></i>
 						</button>
 					</div>
-					<div
-						data-cms
-						className="flex flex-col justify-left py-1 h-full overflow-y-auto text-gray-primary"
-					>
+					<div className=" w-full block py-1 h-full text-gray-primary">
 						{overlayElement}
 					</div>
 				</div>
 			</div>
 		);
 	} else {
-		return <div className="hidden"></div>;
+		return <div className="hidden" id="hello"></div>;
 	}
 };
 

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import apires from "../../otherData/api_finder_response.json";
 import { Tabs, useTabState, Panel } from "@bumaga/tabs";
 import "../../css/planList.css";
+import { useDispatch } from "react-redux";
+import { storetPlansInfo } from "../../app/features/prepaidPlansSlice";
 
 const cn = (...args) => args.filter(Boolean).join(" ");
 
@@ -22,19 +24,25 @@ const Tab = ({ children }) => {
 };
 
 const PlansList = () => {
-	const testScreen = e => {
-		console.log(e.target.innerWidth);
-	};
-
+	const dispatch = useDispatch();
 	const [state, setState] = useState(0);
 
 	useEffect(() => {
-		const resize = window.addEventListener("resize", testScreen);
 		setState(1);
-		return () => {
-			window.removeEventListener(resize);
-		};
 	}, []);
+
+	const handlePlanChoose = e => {
+		let flatList;
+		let plan;
+		let receivedId = e.target.getAttribute("data-val");
+		console.log(receivedId);
+		if (receivedId) {
+			flatList = plansList.flat(2);
+			console.log(flatList);
+			plan = flatList.filter(plan => plan.id == receivedId);
+			dispatch(storetPlansInfo({ ...plan[0] }));
+		}
+	};
 
 	let res = apires.categories;
 	let planTypes = res.map(category => category.name);
@@ -59,7 +67,7 @@ const PlansList = () => {
 						</div>
 					}
 				</div>
-				<div className=" col-span-full lg:col-span-10 pl-16 xl:pl-12">
+				<div className=" col-span-full lg:col-span-10 lg:pl-16 xl:pl-12">
 					<div className="hidden lg:block text-center w-full">Borwse Plans</div>
 					<h2 className="hidden lg:block w-full font-medium leading-5 capitalize">
 						some company plans
@@ -74,18 +82,21 @@ const PlansList = () => {
 					<div className="flex flex-col h-96 overflow-auto text-sm text-gray-primary">
 						{plansList.map(plan => (
 							<Panel>
-								<div className="grid items-center text-gray-primary">
+								<div
+									className="grid items-center text-gray-primary"
+									onClick={handlePlanChoose}
+								>
 									{plan.map(eachPlan => (
 										<div className="flex col-span-full w-full border-b items-center justify-around text-inherit">
 											<div className="lg:hidden flex flex-col text-gray-primary mr-auto">
-												<div className="p-1 text-gray-primary  text-inherit text-center oth font-bold ">
-													Data:{eachPlan.data}
+												<div className="p-1 text-gray-primary  text-inherit text-left font-bold ">
+													Data: {eachPlan.data}
 												</div>
-												<div className="p-1 text-gray-primary  text-inherit des">
+												<div className="p-1 text-gray-primary leading-[13px] text-[13px] text-inherit des">
 													{eachPlan.benefit}
 												</div>
-												<div className="p-1 text-gray-primary  text-inherit text-center oth">
-													{eachPlan.validity}
+												<div className="p-1 text-gray-500 leading-3 text-xs text-inherit text-left">
+													Validity: {eachPlan.validity}
 												</div>
 											</div>
 
@@ -100,8 +111,14 @@ const PlansList = () => {
 											</div>
 
 											<div className="p-1  text-pink-primary flex oth">
-												<button className=" mx-auto border border-pink-primary w-[75px] hover:bg-pink-primary hover:text-white rounded text-inherit p-1">
-													<span className="mx-auto text-inherit hover:text-white">
+												<button
+													className=" mx-auto border border-pink-primary w-[75px] hover:bg-pink-primary hover:text-white rounded text-inherit p-1"
+													data-val={eachPlan.id}
+												>
+													<span
+														className="mx-auto text-inherit hover:text-white"
+														data-val={eachPlan.id}
+													>
 														Rs {eachPlan.amount}
 													</span>
 												</button>
