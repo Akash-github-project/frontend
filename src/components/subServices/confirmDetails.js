@@ -4,27 +4,43 @@ const data = {
 	dataColumns: [
 		{
 			bold: false,
-			title: "teitle",
+			title: "Mobile No",
 			value: 123,
 		},
 		{
 			bold: false,
-			title: "teitle",
+			title: "Operator",
 			value: 123,
 		},
 		{
 			bold: false,
-			title: "teitle",
+			title: "Circle",
 			value: 123,
 		},
 		{
 			bold: false,
-			title: "teitle",
+			title: "Plan",
 			value: 123,
 		},
 		{
 			bold: false,
-			title: "teitle",
+			title: "Validity",
+			value: 123,
+		},
+		{
+			bold: false,
+			title: "Talktime",
+			value: 123,
+		},
+		{
+			bold: false,
+			title: "Plan Description",
+			value: 123,
+		},
+		,
+		{
+			bold: false,
+			title: "Ammount",
 			value: 123,
 		},
 	],
@@ -45,7 +61,7 @@ const ConfirmDetails = () => {
 									el.bold === true
 										? "bg-gray-100 "
 										: " text-gray-primary " +
-										  " text-gray-primary font-semibold text-sm leading-[14px] px-6 py-2 "
+										  " text-gray-primary font-semibold text-[13px] leading-[14px] px-6 py-2 "
 								}
 							>
 								{el.title}
@@ -55,7 +71,7 @@ const ConfirmDetails = () => {
 									el.bold === true
 										? "bg-gray-100 "
 										: " text-gray-primary " +
-										  "  px-6 py-2 font-semibold text-gray-primary text-sm leading-[14px]"
+										  "  px-6 py-2 font-semibold text-gray-primary text-right text-[13px] leading-[14px]"
 								}
 							>
 								{el.value}

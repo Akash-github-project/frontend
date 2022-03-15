@@ -4,6 +4,7 @@ import { Tabs, useTabState, Panel } from "@bumaga/tabs";
 import "../../css/planList.css";
 import { useDispatch } from "react-redux";
 import { storetPlansInfo } from "../../app/features/prepaidPlansSlice";
+import useWindowSize from "./pageChangeHook";
 
 const cn = (...args) => args.filter(Boolean).join(" ");
 
@@ -51,14 +52,14 @@ const PlansList = () => {
 
 	return (
 		<Tabs state={[state, setState]}>
-			<div className="grid grid-cols-12 w-full gap-2 mt-2">
+			<div className="grid grid-cols-12 w-full gap-4 mt-2">
 				<div className="lg:hidden text-center w-full col-span-full">
 					Borwse Plans
 				</div>
 				<div className="lg:hidden w-full font-medium leading-5 capitalize col-span-full text-center">
 					some company plans
 				</div>
-				<div className=" flex flex-col col-span-full w-full lg:col-span-2 lg:w-40 xl:w-48 mr-auto pr-2 ">
+				<div className=" flex flex-col col-span-full w-full lg:col-span-2 lg:w-40 xl:w-48 mr-auto pr-4  lg:pr-4 ">
 					{
 						<div className="flex justify-center lg:justify-start lg:flex-col border-b lg:border w-full lg:mx-0 bg-white lg:bg-gray-100">
 							{planTypes.map(planType => (
@@ -67,19 +68,20 @@ const PlansList = () => {
 						</div>
 					}
 				</div>
-				<div className=" col-span-full lg:col-span-10 lg:pl-16 xl:pl-12">
+				<div className=" col-span-full lg:col-span-10 pl-8 xl:pl-4">
 					<div className="hidden lg:block text-center w-full">Borwse Plans</div>
 					<h2 className="hidden lg:block w-full font-medium leading-5 capitalize">
 						some company plans
 					</h2>
 					<hr className="mt-4" />
-					<div className="hidden  w-full lg:flex justify-around items-center">
-						<div className="des  text-left">Description</div>
-						<div className="oth  text-center pr-4">Data</div>
-						<div className="oth  text-center pr-4">Validity</div>
-						<div className="oth  text-center pr-4">Amount</div>
-					</div>
-					<div className="flex flex-col h-96 overflow-auto text-sm text-gray-primary">
+
+					<div className="flex flex-col h-96 overflow-auto relative text-sm text-gray-primary">
+						<div className="hidden  w-full sticky top-0 lg:flex justify-around items-center bg-white">
+							<div className="des  text-left">Description</div>
+							<div className="oth  text-center ">Data</div>
+							<div className="oth  text-center ">Validity</div>
+							<div className="oth  text-center ">Amount</div>
+						</div>
 						{plansList.map(plan => (
 							<Panel>
 								<div
@@ -96,7 +98,10 @@ const PlansList = () => {
 													{eachPlan.benefit}
 												</div>
 												<div className="p-1 text-gray-500 leading-3 text-xs text-inherit text-left">
-													Validity: {eachPlan.validity}
+													Validity:
+													{eachPlan.validity.toString().trim() == "na"
+														? "N/A"
+														: eachPlan.validity}
 												</div>
 											</div>
 
@@ -104,13 +109,13 @@ const PlansList = () => {
 												{eachPlan.benefit}
 											</div>
 											<div className="hidden lg:block  p-1 text-gray-primary  text-inherit text-center oth">
-												{eachPlan.validity}
-											</div>
-											<div className="hidden lg:block p-1 text-gray-primary  text-inherit text-center oth">
 												{eachPlan.data}
 											</div>
+											<div className="hidden lg:block p-1 text-gray-primary  text-inherit text-center oth">
+												{eachPlan.validity === "na" ? "N/A" : eachPlan.validity}
+											</div>
 
-											<div className="p-1  text-pink-primary flex oth">
+											<div className="p-1  text-pink-primary flex flex-col oth justify-center">
 												<button
 													className=" mx-auto border border-pink-primary w-[75px] hover:bg-pink-primary hover:text-white rounded text-inherit p-1"
 													data-val={eachPlan.id}
@@ -122,6 +127,9 @@ const PlansList = () => {
 														Rs {eachPlan.amount}
 													</span>
 												</button>
+												<span className="text-center text-green-info">
+													Rs. {eachPlan.dailyCost}/day
+												</span>
 											</div>
 										</div>
 									))}

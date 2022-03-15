@@ -102,7 +102,7 @@ const PrepaidMobile = () => {
 
 	return (
 		<>
-			<div className="grid grid-cols-1 lg:grid-cols-5 gap-1 lg:gap-2 xl:gap-3 w-[95%] mx-auto">
+			<div className="grid grid-cols-1 lg:grid-cols-5 gap-1 lg:gap-2 xl:gap-3 w-full mx-auto">
 				<NumberInput
 					iType="tel"
 					val={phoneNo}
@@ -233,16 +233,16 @@ const PrepaidMobile = () => {
 				<div className="p-1 bg-gray-200 font-semibold text-black text-left px-6 py-2">
 					1000
 				</div>
-				<div className="capitalize col-span-full">
+				<div className="capitalize col-span-full text-xs">
 					<span
-						className="inline-block w-full text-center cursor-pointer "
+						className="inline-block w-full text-center   cursor-pointer hover:text-black"
 						onClick={() => setCouponState(!openCoupon)}
 					>
 						Apply A Coupon code
 						<i
 							class={`fas fa-chevron-${
 								openCoupon ? "up" : "down"
-							} text-sm mx-1`}
+							} text-xs mx-1 hover:text-black`}
 						></i>
 					</span>
 					<span
@@ -260,7 +260,9 @@ const PrepaidMobile = () => {
 							borderColor="#f5317c"
 							icon={<i class="fa-solid fa-square-check text-pink-600"></i>}
 						/>
-						<span className="ml-1 text-gray-primary">Wallet Balance</span>
+						<span className="ml-1 text-gray-primary text-sm">
+							Wallet Balance
+						</span>
 					</div>
 					<span className="mx-auto text-gray-800 font-semibold">{3343}</span>
 				</div>

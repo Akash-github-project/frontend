@@ -4,9 +4,12 @@ import "../css/loggedHeader.css";
 import React, { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import DropMenu from "./dropMenu";
+import { useDispatch } from "react-redux";
+import { clearAll } from "../app/features/prepaidPlansSlice";
 
 export const HeaderLogged = () => {
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 	const logo = useRef();
 
 	return (
@@ -40,7 +43,10 @@ export const HeaderLogged = () => {
 				{/* <Link to="/home" className="mr-auto relative flex"> */}
 				<div
 					className="pl-[2px] pr-4 logo mr-auto relative  mt-[1px] ml-2  small-logo shrink-[0.2] cursor-pointer"
-					onClick={() => navigate("/home")}
+					onClick={() => {
+						dispatch(clearAll());
+						navigate("/home");
+					}}
 					tabIndex={0}
 					ref={logo}
 				></div>
