@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import Checkbox from "react-custom-checkbox";
 import SelectSearch, { fuzzySearch } from "react-select-search";
 import operator from "../../otherData/operator.json";
+import ConfirmDetails from "./confirmDetails";
 import circle from "../../otherData/circle.json";
 import { renderProvider, providers } from "../../otherData/inputWithImage";
 import "../../css/searchWithImages.css";
@@ -9,6 +11,8 @@ import Radio from "../radio";
 import classNames from "classnames";
 import { NumberInput } from "../numberInput";
 import MobileView from "./mobileView";
+import { Input } from "../input";
+import Button from "../button";
 
 // imports for using redux
 import { useSelector, useDispatch } from "react-redux";
@@ -18,6 +22,7 @@ import {
 	storeOperator,
 	storeShowPlan,
 	storeRenderType,
+	showConfirmBill,
 } from "../../app/features/prepaidPlansSlice";
 import { addElement, toggleOverlay } from "../../app/features/overlaySlice";
 
@@ -37,12 +42,14 @@ const PrepaidMobile = () => {
 	const [outputCircle, setCircle] = useState(circleList);
 	const [fakeRadio, setFakeRadio] = useState(true);
 
+	const [openCoupon, setCouponState] = useState(false);
 	const [outputOperator, setOperator] = useState(operatorList);
 	const dispatch = useDispatch();
 	const phoneNo = useSelector(state => state.prepaidPlan.phoneNo);
 	const Operator = useSelector(state => state.prepaidPlan.operator);
 	const circle = useSelector(state => state.prepaidPlan.circle);
 	const planInfo = useSelector(state => state.prepaidPlan.plansInfo);
+	const billState = useSelector(state => state.prepaidPlan.confirmBillState);
 
 	useEffect(() => {
 		if (Object.keys(Operator).length > 0 && circle.length > 1) {
@@ -89,9 +96,13 @@ const PrepaidMobile = () => {
 		console.log(e.target);
 	};
 
+	const handleRechargeRequest = () => {
+		if (billState === false) dispatch(showConfirmBill(true));
+	};
+
 	return (
 		<>
-			<div className="grid grid-cols-1 lg:grid-cols-5 gap-1 lg:gap-2 xl:gap-3 w-full">
+			<div className="grid grid-cols-1 lg:grid-cols-5 gap-1 lg:gap-2 xl:gap-3 w-[95%] mx-auto">
 				<NumberInput
 					iType="tel"
 					val={phoneNo}
@@ -156,7 +167,10 @@ const PrepaidMobile = () => {
 				</div>
 
 				{/* button of recharge */}
-				<button className="p-3 lg:p-1 bg-pink-primary hover:bg-blue-600 text-white rounded text-[13px] leading-[13px] font-medium">
+				<button
+					className="p-3 lg:p-1 bg-pink-primary hover:bg-blue-600 text-white rounded text-[13px] leading-[13px] font-medium"
+					onClick={handleRechargeRequest}
+				>
 					Continue to Recharge
 				</button>
 			</div>
@@ -201,6 +215,57 @@ const PrepaidMobile = () => {
 						rName="fake"
 						rId="topup"
 					/>
+				</div>
+			</div>
+
+			{/* confirm details section */}
+			<div
+				className={
+					billState
+						? " grid grid-cols-2 w-full lg:w-[348px] border mx-auto mt-4"
+						: "hidden "
+				}
+			>
+				<ConfirmDetails />
+				<div className="p-1 bg-gray-200 font-semibold text-black text-left px-6 py-2">
+					final details
+				</div>
+				<div className="p-1 bg-gray-200 font-semibold text-black text-left px-6 py-2">
+					1000
+				</div>
+				<div className="capitalize col-span-full">
+					<span
+						className="inline-block w-full text-center cursor-pointer "
+						onClick={() => setCouponState(!openCoupon)}
+					>
+						Apply A Coupon code
+						<i
+							class={`fas fa-chevron-${
+								openCoupon ? "up" : "down"
+							} text-sm mx-1`}
+						></i>
+					</span>
+					<span
+						className={` ${
+							openCoupon ? "" : "hidden"
+						} flex w-full gap-2 justify-center`}
+					>
+						<Input extraClasses="w-1/2 " />
+						<Button text="Apply" exClasses="w-1/3 " />
+					</span>
+				</div>
+				<div className="col-span-full flex">
+					<div className="flex ml-6">
+						<Checkbox
+							borderColor="#f5317c"
+							icon={<i class="fa-solid fa-square-check text-pink-600"></i>}
+						/>
+						<span className="ml-1 text-gray-primary">Wallet Balance</span>
+					</div>
+					<span className="mx-auto text-gray-800 font-semibold">{3343}</span>
+				</div>
+				<div className=" col-span-full px-2 py-4">
+					<Button text="Pay Rs 1000 " exClasses="w-full" />
 				</div>
 			</div>
 		</>

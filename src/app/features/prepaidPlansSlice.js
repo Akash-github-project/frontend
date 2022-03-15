@@ -9,6 +9,7 @@ const initialState = {
 	circle: "",
 	showPlan: false,
 	renderType: "desktop",
+	confirmBillState: false,
 };
 
 export const prepaidPlan = createSlice({
@@ -48,6 +49,9 @@ export const prepaidPlan = createSlice({
 		storeCircle: function (state, action) {
 			state.circle = action.payload;
 		},
+		showConfirmBill: function (state, action) {
+			state.confirmBillState = action.payload;
+		},
 	},
 });
 
@@ -62,5 +66,6 @@ export const {
 	storetPlansInfo,
 	storeSelectPlan,
 	storeCircle,
+	showConfirmBill,
 } = prepaidPlan.actions;
 export default prepaidPlan.reducer;
