@@ -11,7 +11,7 @@ export const NumberInput = ({
 	onleft = " ",
 }) => {
 	let defaultClasses =
-		"border rounded-md text-black focus:text-red-400 border-0 w-full outline-none  ";
+		"border rounded-md text-black focus:text-red-400 border-0 w-full outline-none text-[13px] leading-[21px]";
 	let defaultField = "flex border rounded items-center p-1 ";
 
 	if (extraClasses !== " ") {
@@ -27,7 +27,9 @@ export const NumberInput = ({
 	}
 	return (
 		<div className={defaultField} tabIndex={0}>
-			<span className="text-gray-primary mr-1">{onleft}</span>
+			<span className="text-gray-primary mr-1 inline-block w-[max-content] text-sm leading-[21px]">
+				{onleft}
+			</span>
 			<input
 				type={iType}
 				id={Id}

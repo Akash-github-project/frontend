@@ -63,7 +63,11 @@ const Services = () => {
 			<ul className="service-grid">
 				{Object.keys(data).map((value, i) => {
 					return (
-						<li key={i} className=" text-center flex flex-col justiy-center ">
+						<li
+							key={i}
+							className=" text-center flex flex-col justiy-center "
+							title={data[`${value}`].heading}
+						>
 							<Link to={data[`${value}`].link} style={listStyle}>
 								<div className="flex justify-center items-center border border-pink-600 rounded-md w-[40px] min-h-[40px]">
 									<i className={data[`${value}`].icon}></i>

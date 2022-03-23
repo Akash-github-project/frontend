@@ -106,11 +106,11 @@ const PrepaidMobile = () => {
 				<NumberInput
 					iType="tel"
 					val={phoneNo}
-					onleft="91 "
+					onleft="+91-"
 					id="phoneNo"
 					holder="Mobile Number"
 					change={value => dispatch(storePhoneNo(value))}
-					extraClasses=" text-[15px] focus:text-gray-primary "
+					extraClasses="focus:text-gray-primary "
 					fieldClasses="border-pink-600 focus:outline-none focus-within:border-blue-400 flex-1"
 				/>
 

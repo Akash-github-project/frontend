@@ -45,6 +45,7 @@ export const Header = () => {
 					tabIndex={0}
 					ref={logo}
 					onClick={() => navigate("/home")}
+					title="RechargeAXN"
 				></div>
 
 				<div className="  nav flex  gap-[0.9rem] items-center flat-menu ">
@@ -64,7 +65,10 @@ export const Header = () => {
 						</span>
 					</button>
 				</div>
-				<button className="flex border-box h-9 rounded bg-primary font-normal  items-center p-[5px] relative top-[2px] show-small">
+				<button
+					className="flex border-box h-9 rounded bg-primary font-normal  items-center p-[5px] relative top-[2px] show-small"
+					title="Login / Sign Up"
+				>
 					<span className="text-tertiary leading-[13px] text-[13px]">
 						Login / Sign In
 					</span>

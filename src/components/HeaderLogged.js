@@ -49,6 +49,7 @@ export const HeaderLogged = () => {
 					}}
 					tabIndex={0}
 					ref={logo}
+					title="RechargeAXN"
 				></div>
 				{/* </Link> */}
 
@@ -87,13 +88,13 @@ export const HeaderLogged = () => {
 						</div>
 					</div>
 
-					<Link to="/addmoney">
+					<Link to="/addmoney" title="Add Money">
 						<span className="flex items-center justify-center ">
 							<button className="flex w-8 h-8 items-center justify-center add-money"></button>
 							<span className="text-sm">Add Money</span>
 						</span>
 					</Link>
-					<Link to="/user">
+					<Link to="/user" title="User Menu">
 						<button className="flex w-8 h-8 user bg-pink-primary items-center justify-center">
 							<i className="fas fa-user text-white" area-hidden="true"></i>
 						</button>
