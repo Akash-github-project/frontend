@@ -87,7 +87,7 @@ const MobileView = () => {
 														Validity: {eachPlan.validity}
 													</div>
 												</div>
-												<div className="p-1  text-pink-primary flex  items-center">
+												<div className="p-1  text-pink-primary flex  flex-col justify-center  items-center">
 													<button
 														className=" mx-auto border border-pink-primary w-[75px] hover:bg-pink-primary hover:text-white rounded text-inherit p-1"
 														data-val={eachPlan.id}
@@ -99,6 +99,9 @@ const MobileView = () => {
 															Rs {eachPlan.amount}
 														</span>
 													</button>
+													<span className="text-center text-green-info text-xs">
+														Rs.{eachPlan.dailyCost}/day
+													</span>
 												</div>
 											</div>
 										))}
