@@ -21,13 +21,7 @@ const Prepaid = ({ children }) => {
 			setRechargeType("postpaid");
 			navigate("/home/postpaid", { replace: true });
 		}
-		// } else if (e.target.id === "postpaidLabel") {
-		// 	setRechargeType("postpaid");
-		// 	navigate("/home/postpaid", { replace: true });
-		// } else if (e.target.id === "prepaidLabel") {
-		// 	setRechargeType("prepaid");
-		// 	navigate("/home/prepaid", { replace: true });
-		// }
+
 		console.log(e.target.value);
 	};
 
@@ -40,75 +34,11 @@ const Prepaid = ({ children }) => {
 	return (
 		<FormControl>
 			<div className="w-full">
-				<h2 className="font-medium leading-[19px]">Mobile Recharge</h2>
+				<h2 className="font-medium leading-[19px]">
+					Mobile Recharge or Bill Payment
+				</h2>
 				<div className="flex gap-4 mb-2">
 					<div className="flex items-center gap-2">
-						{/* <div
-							className={classNames({
-								cricle: true,
-								radio: true,
-								radioChecked: rechargeType === "prepaid",
-							})}
-						>
-							<input
-								type="radio"
-								name="rechargeType"
-								className="invisible "
-								onChange={handleRadioChange}
-								checked={"prepaid" === rechargeType ? true : false}
-							/>
-							<div
-								className="cover"
-								id="prepaid"
-								onClick={handleRadioChange}
-								tabIndex={0}
-								onKeyUp={handleEnter}
-							></div>
-						</div>
-
-						<label
-							id="prepaidLabel"
-							htmlFor="prepaid"
-							className="text-gray-primary text-sm"
-							onClick={handleRadioChange}
-						>
-							Prepaid
-						</label> */}
-					</div>
-					<div className="flex items-center gap-2">
-						{/* <div
-							className={classNames({
-								cricle: true,
-								radio: true,
-								radioChecked: rechargeType === "postpaid",
-							})}
-						>
-							<input
-								type="radio"
-								name="rechargeType"
-								// id="prepaid"
-								className="invisible "
-								onChange={handleRadioChange}
-								checked={"postpaid" === rechargeType ? true : false}
-							/>
-							<div
-								className="cover"
-								id="postpaid"
-								onClick={handleRadioChange}
-								tabIndex={0}
-								onKeyUp={handleEnter}
-							></div>
-						</div>
-
-						<label
-							id="postpaidLabel"
-							htmlFor="postpaid"
-							className="text-gray-primary text-sm"
-							onClick={handleRadioChange}
-						>
-							Postpaid
-						</label> */}
-
 						<RadioGroup
 							aria-labelledby="demo-radio-buttons-group-label"
 							defaultValue="prepaid"
@@ -120,6 +50,7 @@ const Prepaid = ({ children }) => {
 								control={<Radio onClick={handleRadioChange} checked />}
 								id="prepaid"
 								label="Prepaid"
+								classes={{ fontSize: 14 }}
 							/>
 							<FormControlLabel
 								value="postpaid"

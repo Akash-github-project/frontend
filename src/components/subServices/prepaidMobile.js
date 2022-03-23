@@ -4,10 +4,16 @@ import SelectSearch, { fuzzySearch } from "react-select-search";
 import operator from "../../otherData/operator.json";
 import ConfirmDetails from "./confirmDetails";
 import circle from "../../otherData/circle.json";
+import {
+	FormControl,
+	Radio,
+	RadioGroup,
+	FormControlLabel,
+} from "@mui/material";
 import { renderProvider, providers } from "../../otherData/inputWithImage";
 import "../../css/searchWithImages.css";
 import "../../css/selectSearch.css";
-import Radio from "../radio";
+
 import classNames from "classnames";
 import { NumberInput } from "../numberInput";
 import MobileView from "./mobileView";
@@ -90,11 +96,7 @@ const PrepaidMobile = () => {
 	const handleCircle = value => {
 		console.log(value);
 	};
-	const handleFakeRadio = e => {
-		console.log(e.target.tagName);
-
-		console.log(e.target);
-	};
+	const handleFakeRadio = e => {};
 
 	const handleRechargeRequest = () => {
 		if (billState === false) dispatch(showConfirmBill(true));
@@ -146,7 +148,7 @@ const PrepaidMobile = () => {
 
 						{/* this <span> will be visible inside the input box so be careful before editing it */}
 						<span
-							className="absolute  underline capitalize right-0 mt-2 text-xs cursor-pointer hover:text-black"
+							className="absolute  underline capitalize right-0 mt-2 text-xs cursor-pointer hover:text-black hover:no-underline"
 							onClick={handlePlansRequest}
 						>
 							view plans
@@ -191,32 +193,37 @@ const PrepaidMobile = () => {
 			</div>
 
 			{/* row 3 for special case of bsnl to show topup and spacial offer options */}
-			<div className="grid grid-col-1 md:grid-cols-5 gap-3 w-full">
-				<div className="md:block md:col-span-3"></div>
+
+			<FormControl>
 				<div
-					className={classNames({
-						hidden: false,
-						bsnl: false,
-						flex: true,
-						"gap-3": true,
-					})}
+					className={`${
+						Operator.name !== "BSNL" ? "hidden " : " grid"
+					} grid-col-1 md:grid-cols-5 gap-3 w-full self-end`}
 				>
-					<Radio
-						lableValue="Special Recharge"
-						labelId="spcl"
-						handle={handleFakeRadio}
-						rName="fake"
-						rId="special"
-					/>
-					<Radio
-						lableValue="Top Up"
-						labelId="topup"
-						handle={handleFakeRadio}
-						rName="fake"
-						rId="topup"
-					/>
+					<div className="md:block md:col-span-3"></div>
+
+					<RadioGroup
+						aria-labelledby="demo-radio-buttons-group-label"
+						defaultValue="special"
+						name="radio-buttons-group"
+						row={true}
+					>
+						<FormControlLabel
+							value="special"
+							control={<Radio onClick={handleFakeRadio} />}
+							id="special"
+							label="Special"
+							classes={{ fontSize: 14 }}
+						/>
+						<FormControlLabel
+							value="topup"
+							control={<Radio onClick={handleFakeRadio} />}
+							id="topup"
+							label="Topup"
+						/>
+					</RadioGroup>
 				</div>
-			</div>
+			</FormControl>
 
 			{/* confirm details section */}
 			<div
@@ -240,7 +247,7 @@ const PrepaidMobile = () => {
 					>
 						Apply A Coupon code
 						<i
-							class={`fas fa-chevron-${
+							className={`fas fa-chevron-${
 								openCoupon ? "up" : "down"
 							} text-xs mx-1 hover:text-black`}
 						></i>
