@@ -5,16 +5,12 @@ import { NumberInput } from "./numberInput";
 import "../css/earnPoints.css";
 
 const EarnPoints = () => {
-	const [donation, setDonation] = useState();
+	const [donation, setDonation] = useState("");
 	const [balance, setBalance] = useState(110);
 
 	const saveDonationValue = value => {
-		if (isNaN(value) === true) setDonation(0);
-		else {
-			if (value > 25000) {
-				setDonation(25000);
-			} else setDonation(value);
-		}
+		if (isNaN(value) === true) setDonation("");
+		else setDonation(value);
 	};
 
 	let items = [
@@ -56,6 +52,14 @@ const EarnPoints = () => {
 						extraClasses=" text-[15px]"
 						fieldClasses="border-pink-600 focus:outline-none focus-within:border-blue-400 flex-1"
 					/>
+
+					<div
+						className={`${
+							donation < 25000 ? "hidden" : "inline-block"
+						} text-red-600`}
+					>
+						You can't donate more than 25000
+					</div>
 				</div>
 				<button className="bg-pink-primary px-2 w-full md:w-40 rounded mr-auto mt-6">
 					<span className="text-white font-normal">Donate Rs {donation}</span>

@@ -2,10 +2,15 @@ import React, { useState, useRef } from "react";
 import InputSec from "./InputSec";
 import Wrapper from "./wrapper";
 import "../css/selectSearch.css";
+import Button from "./button";
 import SelectSearch from "react-select-search";
 
 const Suggestions = () => {
 	const [fileName, changeName] = useState("Select a File...");
+	const [isFileError, changeError] = useState({
+		isError: false,
+		errorMessage: "",
+	});
 	const fileRef = useRef(false);
 
 	const options = [
@@ -19,20 +24,57 @@ const Suggestions = () => {
 		{ name: "Giftcards", value: "Giftcards" },
 	];
 
-	let size = "";
+	let postfix = "";
+	let sizeNumber = 0;
 
 	if (fileRef.current.files) {
 		if (fileRef.current.files[0]) {
 			if (fileRef.current.files[0].size / 1024 >= 1024) {
-				// size = Math.floor(fileRef.current.files[0].size / (1024 * 1024)) + "MB";
-				size = fileRef.current.files[0].size / (1024 * 1024) + "MB";
-				// } else size = Math.floor(fileRef.current.files[0].size / 1024) + "KB ";
-			} else size = fileRef.current.files[0].size / 1024 + "KB ";
+				postfix = "MB";
+				sizeNumber = fileRef.current.files[0].size / (1024 * 1024);
+			} else {
+				postfix = "KB ";
+				sizeNumber = fileRef.current.files[0].size / 1024;
+			}
 		}
 	}
 	const handleFileUpload = () => {
 		changeName(fileRef.current.files[0].name);
+		if (fileRef.current.files[0].size / (1024 * 1024) > 2) {
+			changeError({
+				isError: true,
+				errorMessage: "file size cannot be more than 2MB",
+			});
+			return;
+		} else {
+			changeError({ isError: false, errorMessage: "" });
+		}
+
+		console.log(fileRef.current.files[0]);
+
+		let uploadFileName = fileRef.current.files[0].name;
+
+		let extension = uploadFileName.substring(
+			uploadFileName.lastIndexOf(".") + 1,
+			uploadFileName.length
+		);
+		extension = extension.toLowerCase();
+
+		if (
+			extension !== "jpeg" &&
+			extension !== "jpg" &&
+			extension !== "pdf" &&
+			extension !== "png"
+		) {
+			changeError({
+				isError: true,
+				errorMessage: "Allowed attachment is : pdf, jpg, jpeg, png",
+			});
+		} else {
+			changeError({ isError: false, errorMessage: "" });
+		}
 	};
+
 	return (
 		<Wrapper>
 			<div className="w-full">
@@ -93,7 +135,7 @@ const Suggestions = () => {
 							<select
 								name=""
 								id=""
-								className="w-full border border-pink-primary p-1 rounded text-gray-600"
+								className="w-full border border-pink-primary p-1 rounded text-gray-600 text-sm"
 							>
 								{options.map(element => (
 									<option value={element.value} className="text-gray-600">
@@ -110,7 +152,7 @@ const Suggestions = () => {
 								required
 								name=""
 								id=""
-								className="w-full border  border-pink-primary focus-within:border-1 focus-within:border-blue-400 outline-none rounded min-h-[7rem] text-gray-600"
+								className="w-full border  border-pink-primary focus-within:border-1 focus-within:border-blue-400 outline-none rounded min-h-[7rem] text-gray-600 text-sm"
 								placeholder="Specify your query"
 							></textarea>
 						</div>
@@ -118,7 +160,7 @@ const Suggestions = () => {
 							className="text-gray-primary flex flex-col msg text-sm "
 							data-message=" "
 						>
-							Attachment file (Max 2MB) Only Pdf/Image
+							Attachment file (Max 2MB) Only PDF/Image (JPE/JPEG/PNG)
 							<div className="border border-pink-primary rounded flex items-center px-1">
 								<input
 									ref={fileRef}
@@ -130,7 +172,10 @@ const Suggestions = () => {
 									title="select a file"
 									onChange={handleFileUpload}
 								/>
-								{/* <span className="text-gray-600">Size:{size}</span> */}
+								<span className="text-gray-600">
+									Size:
+									{`${sizeNumber.toFixed(2)} ${postfix}`}
+								</span>
 								<span className="ml-auto mr-10 text-gray-600">{fileName}</span>
 								<label
 									htmlFor="file"
@@ -139,7 +184,15 @@ const Suggestions = () => {
 									Attach file
 								</label>
 							</div>
+							<div
+								className={`${
+									isFileError === true ? "hidden" : "inline-block"
+								} text-red-600`}
+							>
+								{isFileError.errorMessage}
+							</div>
 						</div>
+						<Button text="Submit" exClasses="self-end" />
 					</div>
 				</div>
 			</div>

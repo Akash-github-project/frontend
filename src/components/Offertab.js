@@ -55,7 +55,7 @@ export default ({ data }) => {
 									</p>
 								))
 							) : (
-								<div className="w-full p-2 text-pink-primary shadow-md text-center h-36 flex items-center justify-center">
+								<div className="w-full p-2 text-pink-primary text-center h-36 flex items-center justify-center shadow-default">
 									No offer available. Please check again tomorrow.
 								</div>
 							)}

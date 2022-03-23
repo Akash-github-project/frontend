@@ -10,7 +10,7 @@
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	grid-template-rows: 3rem;
-	grid-auto-rows: 3rem;
+	grid-auto-rows: 2.5rem;
 }
 
 @media screen and (max-width: 640px) {

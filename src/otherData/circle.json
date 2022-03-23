@@ -12,7 +12,7 @@
 		},
 		{
 			"id": 3,
-			"name": "Bihar and Jharkhand",
+			"name": "Bihar & Jharkhand",
 			"code": "BR"
 		},
 		{
@@ -42,7 +42,7 @@
 		},
 		{
 			"id": 9,
-			"name": "Jammu and Kashmir",
+			"name": "Jammu & Kashmir",
 			"code": "JK"
 		},
 		{
@@ -67,7 +67,7 @@
 		},
 		{
 			"id": 14,
-			"name": "Madhya Pradesh and Chhattisgarh",
+			"name": "Madhya Pradesh & Chhattisgarh",
 			"code": "MP"
 		},
 		{
@@ -107,7 +107,7 @@
 		},
 		{
 			"id": 22,
-			"name": "Uttar Pradesh (West) and Uttarakhand",
+			"name": "Uttar Pradesh (West) & Uttarakhand",
 			"code": "UW"
 		},
 		{

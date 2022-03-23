@@ -47,7 +47,7 @@ const TransactionList = ({ userId = 1 }) => {
 										{each.date}
 									</span>
 								</div>
-								<div className="text-gray-800 flex items-center justify-center text-sm lg:text-base ">
+								<div className="text-gray-800 flex items-center justify-left text-sm lg:text-base ">
 									<span className="text-gray-primary  text-xs lg:text-sm">
 										{each.activity}
 									</span>

@@ -27,6 +27,7 @@ const Tab = ({ children }) => {
 const PlansList = () => {
 	const dispatch = useDispatch();
 	const [state, setState] = useState(0);
+	const [size, setSize] = useWindowSize();
 
 	useEffect(() => {
 		setState(1);
@@ -52,14 +53,12 @@ const PlansList = () => {
 
 	return (
 		<Tabs state={[state, setState]}>
-			<div className="grid grid-cols-12 w-full gap-4 mt-2">
-				<div className="lg:hidden text-center w-full col-span-full">
-					Borwse Plans
-				</div>
+			<div className="hidden lg:grid grid-cols-12 w-full gap-1 mt-2 ">
 				<div className="lg:hidden w-full font-medium leading-5 capitalize col-span-full text-center">
 					some company plans
 				</div>
-				<div className=" flex flex-col col-span-full w-full lg:col-span-2 lg:w-40 xl:w-48 mr-auto pr-4  lg:pr-4 ">
+				{/* <div className="flex flex-col col-span-full w-full lg:col-span-2 lg:max-w-40 xl:w-48 mr-auto"> */}
+				<div className="flex flex-col w-full col-span-2 mr-auto">
 					{
 						<div className="flex justify-center lg:justify-start lg:flex-col border-b lg:border w-full lg:mx-0 bg-white lg:bg-gray-100">
 							{planTypes.map(planType => (
@@ -69,7 +68,6 @@ const PlansList = () => {
 					}
 				</div>
 				<div className=" col-span-full lg:col-span-10 pl-8 xl:pl-4">
-					<div className="hidden lg:block text-center w-full">Borwse Plans</div>
 					<h2 className="hidden lg:block w-full font-medium leading-5 capitalize">
 						some company plans
 					</h2>
@@ -89,22 +87,7 @@ const PlansList = () => {
 									onClick={handlePlanChoose}
 								>
 									{plan.map(eachPlan => (
-										<div className="flex col-span-full w-full border-b items-center justify-around text-inherit">
-											<div className="lg:hidden flex flex-col text-gray-primary mr-auto">
-												<div className="p-1 text-gray-primary  text-inherit text-left font-bold ">
-													Data: {eachPlan.data}
-												</div>
-												<div className="p-1 text-gray-primary leading-[13px] text-[13px] text-inherit des">
-													{eachPlan.benefit}
-												</div>
-												<div className="p-1 text-gray-500 leading-3 text-xs text-inherit text-left">
-													Validity:
-													{eachPlan.validity.toString().trim() == "na"
-														? "N/A"
-														: eachPlan.validity}
-												</div>
-											</div>
-
+										<div className="flex col-span-full w-full border-b border-gray-separator items-center justify-around text-inherit">
 											<div className="hidden lg:block p-1 text-gray-primary  text-inherit des">
 												{eachPlan.benefit}
 											</div>
@@ -127,9 +110,9 @@ const PlansList = () => {
 														Rs {eachPlan.amount}
 													</span>
 												</button>
-												<span className="text-center text-green-info">
+												<small className="text-center text-green-info text-[11px]">
 													Rs.{eachPlan.dailyCost}/day
-												</span>
+												</small>
 											</div>
 										</div>
 									))}

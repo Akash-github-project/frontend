@@ -22,10 +22,14 @@ module.exports = {
 				},
 				gray: {
 					primary: "#535b61",
+					separator: "#ccbebe",
 				},
 				green: {
 					info: "#009688",
 				},
+			},
+			boxShadow: {
+				default: "0 0 15px rgba(0, 0, 0, 0.3)",
 			},
 		},
 	},
