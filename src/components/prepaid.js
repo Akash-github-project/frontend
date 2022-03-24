@@ -1,12 +1,7 @@
 import React, { Children, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import classNames from "classnames";
-import {
-	FormControl,
-	Radio,
-	RadioGroup,
-	FormControlLabel,
-} from "@mui/material";
+import { Radio, RadioGroup, InputLabel } from "@mui/material";
 import "../css/radio.css";
 
 const Prepaid = ({ children }) => {
@@ -32,38 +27,33 @@ const Prepaid = ({ children }) => {
 	};
 
 	return (
-		<FormControl>
-			<div className="w-full">
-				<h2 className="font-medium leading-[19px]">
-					Mobile Recharge or Bill Payment
-				</h2>
-				<div className="flex gap-4 mb-2">
-					<div className="flex items-center gap-2">
-						<RadioGroup
-							aria-labelledby="demo-radio-buttons-group-label"
-							defaultValue="prepaid"
-							name="radio-buttons-group"
-							row={true}
-						>
-							<FormControlLabel
-								value="prepaid"
-								control={<Radio onClick={handleRadioChange} checked />}
-								id="prepaid"
-								label="Prepaid"
-								classes={{ fontSize: 14 }}
-							/>
-							<FormControlLabel
-								value="postpaid"
-								control={<Radio onClick={handleRadioChange} />}
-								id="postpaid"
-								label="Postpaid"
-							/>
-						</RadioGroup>
-					</div>
+		<div className="w-full">
+			<h2 className="font-medium leading-[19px]">
+				Mobile Recharge or Bill Payment
+			</h2>
+			<div className="flex gap-4 mb-2">
+				<div className="flex items-center gap-2">
+					<RadioGroup
+						aria-labelledby="demo-radio-buttons-group-label"
+						defaultValue="prepaid"
+						name="radio-buttons-group"
+						row={true}
+						style={{ display: "flex", alignItems: "center" }}
+					>
+						<Radio value="prepaid" id="prepaid" onClick={handleRadioChange} />
+						<InputLabel htmlFor="prepaid" style={{ fontSize: "14px" }}>
+							Prepaid
+						</InputLabel>
+
+						<Radio value="postpaid" id="postpaid" onClick={handleRadioChange} />
+						<InputLabel htmlFor="postpaid" style={{ fontSize: "14px" }}>
+							Postpaid
+						</InputLabel>
+					</RadioGroup>
 				</div>
-				{children}
 			</div>
-		</FormControl>
+			{children}
+		</div>
 	);
 };
 

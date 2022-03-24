@@ -60,7 +60,7 @@ export const Header = () => {
 						<div className="suggestion  text-sm">Suggestions</div>
 					</Link>
 					<button
-						className="flex border-box h-9 rounded bg-primary font-normal  p-[5px] items-center  relative  -top-[2px]"
+						className="flex border-box h-9 rounded bg-primary font-normal  px-[5px] py-[4px] items-center  relative  -top-[2px]"
 						title="Login / Sign Up"
 					>
 						<span className="text-tertiary leading-[13px] text-[13px]">

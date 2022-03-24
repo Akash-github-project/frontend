@@ -4,12 +4,7 @@ import SelectSearch, { fuzzySearch } from "react-select-search";
 import operator from "../../otherData/operator.json";
 import ConfirmDetails from "./confirmDetails";
 import circle from "../../otherData/circle.json";
-import {
-	FormControl,
-	Radio,
-	RadioGroup,
-	FormControlLabel,
-} from "@mui/material";
+import { Radio, RadioGroup, InputLabel } from "@mui/material";
 import { renderProvider, providers } from "../../otherData/inputWithImage";
 import "../../css/searchWithImages.css";
 import "../../css/selectSearch.css";
@@ -141,14 +136,14 @@ const PrepaidMobile = () => {
 					>
 						<input
 							type="tel"
-							className="border-0 w-full  m-0 outline-none p-[11px] rounded text-[13px] leading-[21px] h-[34px]"
+							className="border-0 w-full  m-0 outline-none p-[11px] rounded text-[13px] leading-[21px] h-[34px] text-gray-primary"
 							required
 							placeholder="View Plans"
 						/>
 
 						{/* this <span> will be visible inside the input box so be careful before editing it */}
 						<span
-							className="absolute  underline capitalize right-0 mt-2 text-xs cursor-pointer hover:text-black hover:no-underline"
+							className="absolute  underline capitalize right-1 mt-2 text-xs cursor-pointer hover:text-black hover:no-underline"
 							onClick={handlePlansRequest}
 						>
 							view plans
@@ -167,10 +162,33 @@ const PrepaidMobile = () => {
 				>
 					{planInfo.benefit} | Validity:{planInfo.validity}
 				</div>
+				{/* only visible in mobile mode  {useless radio button for bsnl}*/}
+				<div
+					className={`${
+						Operator.name !== "BSNL" ? "hidden" : "inline-block"
+					} lg:hidden`}
+				>
+					<RadioGroup
+						aria-labelledby="demo-radio-buttons-group-bsnl"
+						defaultValue="special"
+						name="radio-buttons-bsnl"
+						row={true}
+						style={{ display: "flex", alignItems: "center" }}
+					>
+						<Radio value="special" id="spc" onClick={handleFakeRadio} />
+						<InputLabel htmlFor="spc" style={{ fontSize: "14px" }}>
+							Special
+						</InputLabel>
+						<Radio value="topup" id="top" onClick={handleFakeRadio} />
+						<InputLabel htmlFor="top" style={{ fontSize: "14px" }}>
+							Topup
+						</InputLabel>
+					</RadioGroup>
+				</div>
 
 				{/* button of recharge */}
 				<button
-					className="p-3 lg:p-1 bg-pink-primary hover:bg-blue-600 text-white rounded text-[13px] leading-[13px] font-medium"
+					className="p-3 lg:p-1 bg-pink-primary hover:bg-blue-600 text-white rounded text-[13px] leading-[13px] font-medium lg:ml-4"
 					onClick={handleRechargeRequest}
 				>
 					Continue to Recharge
@@ -194,36 +212,43 @@ const PrepaidMobile = () => {
 
 			{/* row 3 for special case of bsnl to show topup and spacial offer options */}
 
-			<FormControl>
-				<div
-					className={`${
-						Operator.name !== "BSNL" ? "hidden " : " grid"
-					} grid-col-1 md:grid-cols-5 gap-3 w-full self-end`}
-				>
-					<div className="md:block md:col-span-3"></div>
-
+			{/* <FormControl> */}
+			<div
+				className={`hidden ${
+					Operator.name !== "BSNL" ? "hidden" : " lg:grid"
+				} grid-col-1 md:grid-cols-5 gap-3 w-full self-end `}
+			>
+				<div className="md:block md:col-span-3"></div>
+				<div className="md:col-span-2">
 					<RadioGroup
-						aria-labelledby="demo-radio-buttons-group-label"
+						aria-labelledby="demo-radio-buttons-group-big-bsnl"
 						defaultValue="special"
 						name="radio-buttons-group"
 						row={true}
+						style={{ display: "flex", alignItems: "center" }}
 					>
-						<FormControlLabel
+						<Radio
 							value="special"
-							control={<Radio onClick={handleFakeRadio} />}
-							id="special"
-							label="Special"
-							classes={{ fontSize: 14 }}
+							id="rspc"
+							name="bsnlRType"
+							onClick={handleFakeRadio}
 						/>
-						<FormControlLabel
+						<InputLabel htmlFor="rspc" style={{ fontSize: "14px" }}>
+							Special
+						</InputLabel>
+						<Radio
 							value="topup"
-							control={<Radio onClick={handleFakeRadio} />}
-							id="topup"
-							label="Topup"
+							id="rtop"
+							name="bsnlRType"
+							onClick={handleFakeRadio}
 						/>
+						<InputLabel htmlFor="rtop" style={{ fontSize: "14px" }}>
+							Topup
+						</InputLabel>
 					</RadioGroup>
 				</div>
-			</FormControl>
+			</div>
+			{/* </FormControl> */}
 
 			{/* confirm details section */}
 			<div

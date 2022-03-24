@@ -1,9 +1,7 @@
 import React, { useState, useRef } from "react";
 import InputSec from "./InputSec";
 import Wrapper from "./wrapper";
-import "../css/selectSearch.css";
 import Button from "./button";
-import SelectSearch from "react-select-search";
 
 const Suggestions = () => {
 	const [fileName, changeName] = useState("Select a File...");
@@ -38,6 +36,8 @@ const Suggestions = () => {
 			}
 		}
 	}
+	// file cheaking function
+
 	const handleFileUpload = () => {
 		changeName(fileRef.current.files[0].name);
 		if (fileRef.current.files[0].size / (1024 * 1024) > 2) {
@@ -99,8 +99,8 @@ const Suggestions = () => {
 								Name
 							</span>
 							<InputSec
-								wrapperClasses="rounded"
-								extraClasses="rounded text-gray-600"
+								wrapperClasses="rounded "
+								extraClasses="rounded text-gray-600 leading-[15px] h-[30px]"
 								req="true"
 								place="Name"
 							/>
@@ -112,7 +112,7 @@ const Suggestions = () => {
 							</span>
 							<InputSec
 								wrapperClasses="rounded"
-								extraClasses="rounded  text-gray-600"
+								extraClasses="rounded  text-gray-600 h-[30px]"
 								req="true"
 								place="Email"
 							/>
@@ -123,7 +123,7 @@ const Suggestions = () => {
 							</span>
 							<InputSec
 								wrapperClasses="rounded text-gray-600"
-								extraClasses="rounded text-gray-600"
+								extraClasses="rounded text-gray-600 h-[30px]"
 								req="true"
 								place="Mobile Number"
 							/>
@@ -135,7 +135,7 @@ const Suggestions = () => {
 							<select
 								name=""
 								id=""
-								className="w-full border border-pink-primary p-1 rounded text-gray-600 text-sm"
+								className="w-full border border-pink-primary p-1 rounded text-gray-600 text-sm "
 							>
 								{options.map(element => (
 									<option value={element.value} className="text-gray-600">
@@ -152,15 +152,17 @@ const Suggestions = () => {
 								required
 								name=""
 								id=""
-								className="w-full border  border-pink-primary focus-within:border-1 focus-within:border-blue-400 outline-none rounded min-h-[7rem] text-gray-600 text-sm"
+								className="w-full border  border-pink-primary focus-within:border-1 focus-within:border-blue-400 outline-none rounded min-h-[7rem] text-gray-600 text-sm p-[11px]"
 								placeholder="Specify your query"
 							></textarea>
+						</div>
+						<div className="col-span-full text-left text-gray-primary text-sm">
+							Attachment file (Max 2MB) Only PDF/Image (JPE/JPEG/PNG)
 						</div>
 						<div
 							className="text-gray-primary flex flex-col msg text-sm "
 							data-message=" "
 						>
-							Attachment file (Max 2MB) Only PDF/Image (JPE/JPEG/PNG)
 							<div className="border border-pink-primary rounded flex items-center px-1">
 								<input
 									ref={fileRef}
@@ -174,7 +176,9 @@ const Suggestions = () => {
 								/>
 								<span className="text-gray-600">
 									Size:
-									{`${sizeNumber.toFixed(2)} ${postfix}`}
+									{`${
+										sizeNumber.toFixed(2) == 0 ? "" : sizeNumber.toFixed(2)
+									} ${postfix}`}
 								</span>
 								<span className="ml-auto mr-10 text-gray-600">{fileName}</span>
 								<label
@@ -192,7 +196,12 @@ const Suggestions = () => {
 								{isFileError.errorMessage}
 							</div>
 						</div>
-						<Button text="Submit" exClasses="self-end" />
+						<div></div>
+						<Button
+							text="Submit"
+							exClasses="self-end mt-4 "
+							fClasses="text-[15px]"
+						/>
 					</div>
 				</div>
 			</div>

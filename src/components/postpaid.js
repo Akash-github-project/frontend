@@ -1,11 +1,6 @@
 import React, { Children, useState, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import {
-	FormControl,
-	Radio,
-	RadioGroup,
-	FormControlLabel,
-} from "@mui/material";
+import { Radio, RadioGroup, InputLabel } from "@mui/material";
 
 import classNames from "classnames";
 import "../css/radio.css";
@@ -33,37 +28,33 @@ const Postpaid = ({ children }) => {
 		}
 	};
 	return (
-		<FormControl>
-			<div className="w-full">
-				<h2 className="font-medium leading-[19px]">
-					Mobile Recharge or Bill Payment
-				</h2>
-				<div className="flex gap-4 mb-2">
-					<div className="flex items-center gap-2">
-						<RadioGroup
-							aria-labelledby="demo-radio-buttons-group-label"
-							defaultValue="postpaid"
-							name="radio-buttons-group"
-							row={true}
-						>
-							<FormControlLabel
-								value="prepaid"
-								control={<Radio onClick={handleRadioChange} />}
-								id="prepaid"
-								label="Prepaid"
-							/>
-							<FormControlLabel
-								value="postpaid"
-								control={<Radio onClick={handleRadioChange} />}
-								id="postpaid"
-								label="Postpaid"
-							/>
-						</RadioGroup>
-					</div>
+		<div className="w-full">
+			<h2 className="font-medium leading-[19px]">
+				Mobile Recharge or Bill Payment
+			</h2>
+			<div className="flex gap-4 mb-2">
+				<div className="flex items-center gap-2">
+					<RadioGroup
+						aria-labelledby="demo-radio-buttons-group-label"
+						defaultValue="postpaid"
+						name="radio-buttons-group"
+						row={true}
+						style={{ display: "flex", alignItems: "center" }}
+					>
+						<Radio value="prepaid" id="prepaid" onClick={handleRadioChange} />
+						<InputLabel htmlFor="prepaid" style={{ fontSize: "14px" }}>
+							Special
+						</InputLabel>
+
+						<Radio value="postpaid" id="postpaid" onClick={handleRadioChange} />
+						<InputLabel htmlFor="postpaid" style={{ fontSize: "14px" }}>
+							Special
+						</InputLabel>
+					</RadioGroup>
 				</div>
-				{children}
 			</div>
-		</FormControl>
+			{children}
+		</div>
 	);
 };
 
