@@ -3,10 +3,13 @@ import React, { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import DropMenu from "./dropMenu";
 import classNames from "classnames";
+import { useDispatch } from "react-redux";
+import { clearAll } from "../app/features/prepaidPlansSlice";
 
 export const Header = () => {
 	const logo = useRef();
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	return (
 		<header className="">
@@ -44,7 +47,10 @@ export const Header = () => {
 					className="pl-[2px] pr-4 logo mr-auto relative  mt-[1px] ml-2  small-logo shrink-[0.2] cursor-pointer"
 					tabIndex={0}
 					ref={logo}
-					onClick={() => navigate("/home")}
+					onClick={() => {
+						dispatch(clearAll());
+						navigate("/home");
+					}}
 					title="RechargeAXN"
 				></div>
 
