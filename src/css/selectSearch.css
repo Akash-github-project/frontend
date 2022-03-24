@@ -10,9 +10,6 @@
 .select-search:focus-within {
 	border-color: deepskyblue;
 }
-.select-search:hover {
-	/* color:white */
-}
 
 .select-search *,
 .select-search *::after,

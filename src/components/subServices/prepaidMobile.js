@@ -120,6 +120,8 @@ const PrepaidMobile = () => {
 					placeholder="Search Operator"
 					onChange={value => handleOperator(value)}
 				/>
+				{/* circle dropdown */}
+
 				<SelectSearch
 					options={outputCircle}
 					value="sv"
@@ -175,11 +177,26 @@ const PrepaidMobile = () => {
 						row={true}
 						style={{ display: "flex", alignItems: "center" }}
 					>
-						<Radio value="special" id="spc" onClick={handleFakeRadio} />
-						<InputLabel htmlFor="spc" style={{ fontSize: "14px" }}>
+						<Radio
+							value="special"
+							id="spc"
+							onClick={handleFakeRadio}
+							style={{ padding: "1px" }}
+							size="small"
+						/>
+						<InputLabel
+							htmlFor="spc"
+							style={{ fontSize: "14px", marginRight: "1rem" }}
+						>
 							Special
 						</InputLabel>
-						<Radio value="topup" id="top" onClick={handleFakeRadio} />
+						<Radio
+							value="topup"
+							id="top"
+							onClick={handleFakeRadio}
+							style={{ padding: "1px" }}
+							size="small"
+						/>
 						<InputLabel htmlFor="top" style={{ fontSize: "14px" }}>
 							Topup
 						</InputLabel>
@@ -232,8 +249,13 @@ const PrepaidMobile = () => {
 							id="rspc"
 							name="bsnlRType"
 							onClick={handleFakeRadio}
+							style={{ padding: "1px" }}
+							size="small"
 						/>
-						<InputLabel htmlFor="rspc" style={{ fontSize: "14px" }}>
+						<InputLabel
+							htmlFor="rspc"
+							style={{ fontSize: "14px", marginRight: "1rem" }}
+						>
 							Special
 						</InputLabel>
 						<Radio
@@ -241,6 +263,8 @@ const PrepaidMobile = () => {
 							id="rtop"
 							name="bsnlRType"
 							onClick={handleFakeRadio}
+							style={{ padding: "1px" }}
+							size="small"
 						/>
 						<InputLabel htmlFor="rtop" style={{ fontSize: "14px" }}>
 							Topup

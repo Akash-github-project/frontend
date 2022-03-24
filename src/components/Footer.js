@@ -1,8 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../css/footer.css";
+import { useDispatch } from "react-redux";
+import { clearAll } from "../app/features/prepaidPlansSlice";
 
 export const Footer = () => {
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+
 	return (
 		<footer className="w-full">
 			<div className="flex items-center justify-center  text-white   my-2 w-full">
@@ -62,7 +67,13 @@ export const Footer = () => {
 			<div className="flex items-center justify-center border-0 bg-white  px-[9px] text-[12px] w-full">
 				<p className="text-center small-copyright">
 					Copyright © 2022 &nbsp;
-					<Link to="/home" className="hover:text-black">
+					<Link
+						to="/home"
+						onClick={() => {
+							dispatch(clearAll());
+						}}
+						className="hover:text-black"
+					>
 						RechargeAXN
 					</Link>
 					. All Rights Reserved.

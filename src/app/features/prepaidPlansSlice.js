@@ -24,6 +24,7 @@ export const prepaidPlan = createSlice({
 			state.selectedPlan = "";
 			state.circle = "";
 			state.showPlan = false;
+			state.confirmBillState = false;
 		},
 		storeRenderType: function (state, action) {
 			state.renderType = action.payload;

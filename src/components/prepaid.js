@@ -2,10 +2,15 @@ import React, { Children, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import classNames from "classnames";
 import { Radio, RadioGroup, InputLabel } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { clearAll } from "../app/features/prepaidPlansSlice";
+
 import "../css/radio.css";
 
 const Prepaid = ({ children }) => {
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
+
 	const [rechargeType, setRechargeType] = useState("prepaid");
 
 	const handleRadioChange = e => {
@@ -14,6 +19,7 @@ const Prepaid = ({ children }) => {
 			navigate("/home/prepaid", { replace: true });
 		} else if (e.target.value === "postpaid") {
 			setRechargeType("postpaid");
+			dispatch(clearAll());
 			navigate("/home/postpaid", { replace: true });
 		}
 
@@ -40,12 +46,27 @@ const Prepaid = ({ children }) => {
 						row={true}
 						style={{ display: "flex", alignItems: "center" }}
 					>
-						<Radio value="prepaid" id="prepaid" onClick={handleRadioChange} />
-						<InputLabel htmlFor="prepaid" style={{ fontSize: "14px" }}>
+						<Radio
+							value="prepaid"
+							id="prepaid"
+							onClick={handleRadioChange}
+							style={{ padding: "1px" }}
+							size="small"
+						/>
+						<InputLabel
+							htmlFor="prepaid"
+							style={{ fontSize: "14px", marginRight: "1rem" }}
+						>
 							Prepaid
 						</InputLabel>
 
-						<Radio value="postpaid" id="postpaid" onClick={handleRadioChange} />
+						<Radio
+							value="postpaid"
+							id="postpaid"
+							onClick={handleRadioChange}
+							style={{ padding: "1px" }}
+							size="small"
+						/>
 						<InputLabel htmlFor="postpaid" style={{ fontSize: "14px" }}>
 							Postpaid
 						</InputLabel>

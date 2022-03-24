@@ -1,1 +1,2 @@
-onclick copy on offers section is required
+onclick copy on offers section is requires
+set 
