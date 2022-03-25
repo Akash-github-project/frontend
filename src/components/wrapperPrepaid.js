@@ -5,7 +5,8 @@ import Services from "./Services";
 import Prepaid from "./prepaid";
 import PrepaidMobile from "./subServices/prepaidMobile";
 import PlansList from "./subServices/plansList";
-import Overlay from "../components/overlay";
+// import Overlay from "../components/overlay";
+import SecondOverlay from "./secondOverlay";
 import { useDispatch, useSelector } from "react-redux";
 import { storeRenderType } from "../app/features/prepaidPlansSlice";
 import {
@@ -38,10 +39,9 @@ const WrapperPrepaid = () => {
 					renderType === "desktop" ? (
 						<PlansList />
 					) : (
-						<Overlay
+						<SecondOverlay
 							toUse="element"
 							side="left"
-							title="Plans of Some company"
 							icon="fa-solid fa-arrow-left"
 						/>
 					)

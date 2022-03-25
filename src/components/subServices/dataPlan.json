@@ -1,0 +1,29 @@
+{
+	"heading": "default heading",
+	"dataColumns": [
+		{
+			"type": "n",
+			"bold": false,
+			"title": "Mobile No",
+			"value": 123
+		},
+		{
+			"type": "n",
+			"bold": false,
+			"title": "Operator",
+			"value": 123
+		},
+		{
+			"type": "n",
+			"bold": false,
+			"title": "Circle",
+			"value": 123
+		},
+		{
+			"type": "p",
+			"bold": false,
+			"title": "Plan Description",
+			"value": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium, illum quas, consequuntur dicta tempore ad tenetur maiores voluptas et ipsum obcaecati iste ratione! Minus, fugit quaerat vero magnam aut repudiandae?"
+		}
+	]
+}

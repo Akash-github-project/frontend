@@ -1,52 +1,36 @@
 import React from "react";
 const data = {
-	heading: "some heading",
+	heading: "Confirm Recharge",
 	dataColumns: [
 		{
+			type: "n",
 			bold: false,
 			title: "Mobile No",
-			value: 123,
+			value: 1234567890,
 		},
 		{
+			type: "n",
 			bold: false,
 			title: "Operator",
-			value: 123,
+			value: "MTNL Mumbai",
 		},
 		{
+			type: "n",
 			bold: false,
 			title: "Circle",
-			value: 123,
+			value: "Uttar Pradesh (West) & Uttarakhand",
 		},
 		{
-			bold: false,
-			title: "Plan",
-			value: 123,
-		},
-		{
-			bold: false,
-			title: "Validity",
-			value: 123,
-		},
-		{
-			bold: false,
-			title: "Talktime",
-			value: 123,
-		},
-		{
+			type: "p",
 			bold: false,
 			title: "Plan Description",
-			value: 123,
-		},
-		,
-		{
-			bold: false,
-			title: "Ammount",
-			value: 123,
+			value:
+				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium, illum quas, consequuntur dicta tempore ad tenetur maiores voluptas et ipsum obcaecati iste ratione! Minus, fugit quaerat vero magnam aut repudiandae?",
 		},
 	],
 };
 
-const ConfirmDetails = () => {
+const ConfirmDetails = ({ dataPlan = "" }) => {
 	return (
 		<>
 			{
@@ -66,16 +50,29 @@ const ConfirmDetails = () => {
 							>
 								{el.title}
 							</div>
-							<div
-								className={
-									el.bold === true
-										? "bg-gray-100 "
-										: " text-gray-primary " +
-										  "  px-6 py-2 font-semibold text-gray-primary text-right text-[13px] leading-[14px]"
-								}
-							>
-								{el.value}
-							</div>
+							{el.type === "p" ? (
+								<p
+									className={
+										el.bold === true
+											? "bg-gray-100 "
+											: " text-gray-primary " +
+											  "  px-6 py-2  text-gray-primary leading-[15px] col-span-full text-left text-xs"
+									}
+								>
+									{el.value}
+								</p>
+							) : (
+								<div
+									className={
+										el.bold === true
+											? "bg-gray-100 "
+											: " text-gray-primary " +
+											  "  px-1 py-2 font-semibold text-gray-primary text-right text-[13px] leading-[14px]"
+									}
+								>
+									{el.value}
+								</div>
+							)}
 						</>
 					))}
 				</>

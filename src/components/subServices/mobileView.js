@@ -3,8 +3,9 @@ import { Tabs, useTabState, Panel } from "@bumaga/tabs";
 import apires from "../../otherData/api_finder_response.json";
 import "../../css/planList.css";
 import { toggleOverlay } from "../../app/features/overlaySlice";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { storetPlansInfo } from "../../app/features/prepaidPlansSlice";
+import circleList from "../../otherData/circle.json";
 
 const cn = (...args) => args.filter(Boolean).join(" ");
 const Tab = ({ children }) => {
@@ -13,7 +14,7 @@ const Tab = ({ children }) => {
 	return (
 		<button
 			className={cn(
-				"tab text-left border-b-2 border-white",
+				"tab text-left border-b-2 border-white font-medium",
 				isActive && "activePlan"
 			)}
 			onClick={onClick}
@@ -28,10 +29,14 @@ let planTypes = res.map(category => category.name);
 let plansList = res.map(category => category.plans);
 
 const MobileView = () => {
+	const [circleVal, setCircleVal] = useState("");
+
 	useEffect(() => {
 		setState(1);
 	}, []);
 
+	const circleItem = useSelector(state => state.prepaidPlan.circle);
+	const operator = useSelector(state => state.prepaidPlan.operator);
 	const dispatch = useDispatch();
 	const handlePlanChoose = e => {
 		let flatList;
@@ -52,7 +57,8 @@ const MobileView = () => {
 		<Tabs state={[state, setState]}>
 			<div className="grid grid-cols-12 w-full gap-2 mt-2">
 				<h2 className=" stickey top-6 col-span-full font-medium leading-5 capitalize text-center">
-					some company plans
+					Recharge Plans of {operator.name} -{" "}
+					{circleItem.length > 1 ? JSON.parse(circleItem).name : ""}
 				</h2>
 				<div className="col-span-full mx-auto">
 					{
@@ -100,7 +106,7 @@ const MobileView = () => {
 														</span>
 													</button>
 													<span className="text-center text-green-info text-xs">
-														Rs.{eachPlan.dailyCost}/day
+														Rs {eachPlan.dailyCost}/day
 													</span>
 												</div>
 											</div>

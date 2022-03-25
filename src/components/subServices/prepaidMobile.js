@@ -8,6 +8,8 @@ import { Radio, RadioGroup, InputLabel } from "@mui/material";
 import { renderProvider, providers } from "../../otherData/inputWithImage";
 import "../../css/searchWithImages.css";
 import "../../css/selectSearch.css";
+import dataPlan from "./dataPlan.json";
+import prepaidChangeJson from "./specialJsons/preapidChangeList.json";
 
 import classNames from "classnames";
 import { NumberInput } from "../numberInput";
@@ -24,12 +26,15 @@ import {
 	storeShowPlan,
 	storeRenderType,
 	showConfirmBill,
+	storeCouponVal,
+	toggleCouponState,
+	storeCouponLegal,
 } from "../../app/features/prepaidPlansSlice";
 import { addElement, toggleOverlay } from "../../app/features/overlaySlice";
 
 let circleList = circle.list.map(item => ({
 	name: item.name,
-	value: item.code,
+	value: JSON.stringify({ code: item.code, name: item.name }),
 }));
 
 let operatorList = operator.list.map(item => ({
@@ -51,6 +56,9 @@ const PrepaidMobile = () => {
 	const circle = useSelector(state => state.prepaidPlan.circle);
 	const planInfo = useSelector(state => state.prepaidPlan.plansInfo);
 	const billState = useSelector(state => state.prepaidPlan.confirmBillState);
+	const couponState = useSelector(state => state.prepaidPlan.couponState);
+	let changeLst = [...prepaidChangeJson.data];
+	let couponLegal = useSelector(state => state.prepaidPlan.couponLegal);
 
 	useEffect(() => {
 		if (Object.keys(Operator).length > 0 && circle.length > 1) {
@@ -95,6 +103,44 @@ const PrepaidMobile = () => {
 
 	const handleRechargeRequest = () => {
 		if (billState === false) dispatch(showConfirmBill(true));
+	};
+
+	// apply coupon work required
+	const handleApplyCoupon = () => {
+		dispatch(toggleCouponState(!couponState));
+	};
+
+	function replaceFields(json, heading, replaceWith) {
+		let cardData = { ...json };
+		let targetArray = cardData.dataColumns;
+
+		let toReplaceWith = 0;
+
+		let returnArray = targetArray.map(each => {
+			console.log("next row");
+			if (
+				each[`${replaceWith[toReplaceWith].with}`] ==
+				replaceWith[toReplaceWith].having
+			) {
+				each[`value`] = replaceWith[toReplaceWith].value;
+			}
+			toReplaceWith++;
+			return each;
+		});
+
+		let returnObj = {
+			heading,
+			dataColumns: [...returnArray],
+		};
+		console.log(returnObj);
+		return { ...returnObj };
+	}
+
+	// currenntly working here
+	const formatJson = (json, dataList, times, changeList) => {
+		let baseArr = [...changeList];
+		let newData = replaceFields(dataPlan, "test heading", baseArr);
+		return { ...newData };
 	};
 
 	return (
@@ -274,7 +320,7 @@ const PrepaidMobile = () => {
 			</div>
 			{/* </FormControl> */}
 
-			{/* confirm details section */}
+			{/* confirm details section start*/}
 			<div
 				className={
 					billState
@@ -282,36 +328,61 @@ const PrepaidMobile = () => {
 						: "hidden "
 				}
 			>
+				{/* card details section start*/}
 				<ConfirmDetails />
+				{/* card details section end*/}
+
+				{/* ammount showing section start */}
 				<div className="p-1 bg-gray-200 font-semibold text-black text-left px-6 py-2">
-					final details
+					Total Amount:
 				</div>
-				<div className="p-1 bg-gray-200 font-semibold text-black text-left px-6 py-2">
-					1000
+				<div className="p-1 bg-gray-200 font-semibold text-black text-right px-6 py-2">
+					Rs 1000
 				</div>
-				<div className="capitalize col-span-full text-xs">
+				{/* ammount showing section end*/}
+
+				{/* Apply coupon section start*/}
+				<div className="capitalize col-span-full text-xs mt-1">
 					<span
-						className="inline-block w-full text-center   cursor-pointer hover:text-black"
+						className="inline-block w-full text-center cursor-pointer hover:text-black text-sm"
 						onClick={() => setCouponState(!openCoupon)}
 					>
-						Apply A Coupon code
+						Apply Coupon code
 						<i
 							className={`fas fa-chevron-${
 								openCoupon ? "up" : "down"
 							} text-xs mx-1 hover:text-black`}
 						></i>
 					</span>
+					{/* Apply coupon input start */}
 					<span
 						className={` ${
 							openCoupon ? "" : "hidden"
-						} flex w-full gap-2 justify-center`}
+						} flex w-full gap-2 justify-center scale-75`}
 					>
-						<Input extraClasses="w-1/2 " />
-						<Button text="Apply" exClasses="w-1/3 " />
+						<Input extraClasses="w-1/2 " dis={!couponState} />
+						<Button
+							text="Apply"
+							exClasses="w-1/3"
+							click={handleApplyCoupon}
+							dis={!couponState}
+							disM="Remove"
+						/>
 					</span>
+					{/* Apply coupon input end*/}
 				</div>
-				<div className="col-span-full flex">
-					<div className="flex ml-6">
+				{/* Apply coupon section end*/}
+				<div
+					className={`${
+						openCoupon ? "" : "hidden"
+					} col-span-full text-xs mt-1 text-green-600 text-center`}
+				>
+					some demo message
+				</div>
+
+				<div className="col-span-full flex mt-1">
+					{/* wallet balance section start */}
+					<div className="flex ml-6 items-center">
 						<Checkbox
 							borderColor="#f5317c"
 							icon={<i class="fa-solid fa-square-check text-pink-600"></i>}
@@ -320,12 +391,20 @@ const PrepaidMobile = () => {
 							Wallet Balance
 						</span>
 					</div>
-					<span className="mx-auto text-gray-800 font-semibold">{3343}</span>
+					<span className="ml-auto mr-6 text-gray-800 font-semibold">
+						{3343}
+					</span>
 				</div>
-				<div className=" col-span-full px-2 py-4">
+				{/* wallet balance section start */}
+
+				{/* pay ammount button section start */}
+				<div className=" col-span-full px-2 py-2">
 					<Button text="Pay Rs 1000 " exClasses="w-full" />
 				</div>
+				{/* pay ammount button section end*/}
 			</div>
+
+			{/* confirm details section end*/}
 		</>
 	);
 };

@@ -12,8 +12,31 @@ const Offers = () => {
 				cashback: "Rs 599 (Website) of Rs 699 (App)",
 				title: "Add Rs 4999 into wallet, Get Rs 599 cashback",
 				frequency: "once per account",
-				details:
-					"Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum sed vitae rem quisquam officiis doloribus sint accusantium quas doloremque sunt aut nesciunt ex blanditiis quaerat ad, assumenda eos expedita voluptas.",
+				details: `
+<ul>
+	<li>Offer is applicable ONCE per account.</li>
+	<li>Use of Promocode RC3700&nbsp;is required to avail this offer.</li>
+	<li>This coupon is applicable on Web &amp; APP.</li>
+	<li>Cashback of Rs. 50&nbsp;will be credited after successful addition of Rs 4999 into user’s Wallet.</li>
+	<li>Remaining cashback will be distributed over 12 months time.</li>
+	<li>Minimum account balance should be Rs 4000 to get remaining cashback.</li>
+	<li>Remaining Cashback Distribution-</li>
+	<li>&nbsp;&nbsp; &nbsp;After 1 Month: Additional cashback of Rs 100</li>
+	<li>&nbsp;&nbsp; &nbsp;After 2 Month: Additional cashback of Rs 110</li>
+	<li>&nbsp;&nbsp; &nbsp;After 3 Month: Additional cashback of Rs 120</li>
+	<li>&nbsp;&nbsp; &nbsp;After 4 Month: Additional cashback of Rs 130</li>
+	<li>&nbsp;&nbsp; &nbsp;After 5 Month: Additional cashback of Rs 140</li>
+	<li>&nbsp;&nbsp; &nbsp;After 6 Month: Additional cashback of Rs 150</li>
+	<li>&nbsp;&nbsp; &nbsp;After 7 Month: Additional cashback of Rs 160</li>
+	<li>&nbsp;&nbsp; &nbsp;After 8 Month: Additional cashback of Rs 170</li>
+	<li>&nbsp;&nbsp; &nbsp;After 9 Month: Additional cashback of Rs 180</li>
+	<li>&nbsp;&nbsp; &nbsp;After 10 Month: Additional cashback of Rs 200</li>
+	<li>&nbsp;&nbsp; &nbsp;After 11 Month: Additional cashback of Rs 1000 (APP) or 800 (web)</li>
+	<li>&nbsp;&nbsp; &nbsp;After 12 Month: Additional cashback of Rs 1190&nbsp; (APP) or 990 (web)</li>
+	<li>Valid for all users</li>
+	<li>We reserve the right to end any or all offers at our discretion without any prior notice.</li>
+</ul>
+					`,
 			},
 		],
 

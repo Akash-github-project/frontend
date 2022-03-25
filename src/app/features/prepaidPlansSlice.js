@@ -10,6 +10,9 @@ const initialState = {
 	showPlan: false,
 	renderType: "desktop",
 	confirmBillState: false,
+	couponVal: "",
+	couponState: true,
+	couponLegal: false,
 };
 
 export const prepaidPlan = createSlice({
@@ -25,6 +28,19 @@ export const prepaidPlan = createSlice({
 			state.circle = "";
 			state.showPlan = false;
 			state.confirmBillState = false;
+			state.couponLegal = false;
+			state.couponState = true;
+			state.couponVal = "";
+		},
+		storeCouponVal: function (state, action) {
+			state.couponVal = action.payload;
+		},
+
+		toggleCouponState: function (state) {
+			state.couponState = !state.couponState;
+		},
+		storeCouponLegal: function (state, action) {
+			state.couponLegal = action.payload;
 		},
 		storeRenderType: function (state, action) {
 			state.renderType = action.payload;
@@ -68,5 +84,8 @@ export const {
 	storeSelectPlan,
 	storeCircle,
 	showConfirmBill,
+	storeCouponLegal,
+	storeCouponVal,
+	toggleCouponState,
 } = prepaidPlan.actions;
 export default prepaidPlan.reducer;

@@ -111,7 +111,7 @@ const PlansList = () => {
 													</span>
 												</button>
 												<small className="text-center text-green-info text-[11px]">
-													Rs.{eachPlan.dailyCost}/day
+													Rs {eachPlan.dailyCost}/day
 												</small>
 											</div>
 										</div>

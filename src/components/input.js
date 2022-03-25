@@ -7,6 +7,7 @@ export const Input = ({
 	iType = "text",
 	change,
 	val,
+	dis = "false",
 }) => {
 	let defaultClasses =
 		"border rounded-md text-black focus:text-red-500 field  ";
@@ -17,14 +18,28 @@ export const Input = ({
 	function changeHandle(e) {
 		change(e.target.value);
 	}
-	return (
-		<input
-			type={iType}
-			id={Id}
-			placeholder={holder}
-			value={val}
-			onChange={changeHandle}
-			className={defaultClasses}
-		/>
-	);
+	if (dis === true) {
+		return (
+			<input
+				type={iType}
+				id={Id}
+				placeholder={holder}
+				value={val}
+				onChange={changeHandle}
+				className={defaultClasses}
+				disabled
+			/>
+		);
+	} else {
+		return (
+			<input
+				type={iType}
+				id={Id}
+				placeholder={holder}
+				value={val}
+				onChange={changeHandle}
+				className={defaultClasses}
+			/>
+		);
+	}
 };
