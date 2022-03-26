@@ -66,19 +66,22 @@ const PrepaidMobile = () => {
 	}, [Operator, circle]);
 
 	const handleOperator = value => {
+		console.log(value);
 		let filterCircle = circleList.filter(element => {
+			let toCompare = JSON.parse(element.value);
+
 			if ("MM" === value) {
-				return element.value === "MU";
+				return toCompare.code === "MU";
 			} else if ("MD" === value) {
-				return element.value === "DL";
+				return toCompare.code === "DL";
 			} else if ("BS" === value) {
-				return !(element.value === "DL" || element.value === "MU");
+				return !(toCompare.code === "DL" || toCompare.code === "MU");
 			} else return true;
 		});
 
-		let currentOperator = operatorList.filter(
-			operator => operator.value === value
-		);
+		let currentOperator = operatorList.filter(operator => {
+			return operator.value === value;
+		});
 
 		console.log(currentOperator);
 		setCircle([...filterCircle]);
