@@ -8,6 +8,7 @@ export const Input = ({
 	change,
 	val,
 	dis = "false",
+	override = {},
 }) => {
 	let defaultClasses =
 		"border rounded-md text-black focus:text-red-500 field  ";
@@ -28,6 +29,7 @@ export const Input = ({
 				onChange={changeHandle}
 				className={defaultClasses}
 				disabled
+				style={{ ...override }}
 			/>
 		);
 	} else {
@@ -39,6 +41,7 @@ export const Input = ({
 				value={val}
 				onChange={changeHandle}
 				className={defaultClasses}
+				style={{ ...override }}
 			/>
 		);
 	}

@@ -13,7 +13,7 @@ const Button = ({
 	if (dis === true) {
 		return (
 			<button
-				className={`${exClasses} flex border-box h-9 rounded bg-primary font-normal items-center p-[5px] relative hover:bg-blue-600`}
+				className={` flex border-box h-9 rounded bg-primary font-normal items-center p-[5px] relative active:bg-pink-800 ${exClasses}`}
 				onClick={() => click()}
 			>
 				<span
@@ -26,7 +26,7 @@ const Button = ({
 	} else {
 		return (
 			<button
-				className={`${exClasses} flex border-box h-9 rounded bg-primary font-normal items-center p-[5px] relative hover:bg-blue-600`}
+				className={` flex border-box h-9 rounded bg-primary font-normal items-center p-[5px] relative active:bg-pink-800 ${exClasses}`}
 				onClick={() => click()}
 			>
 				<span

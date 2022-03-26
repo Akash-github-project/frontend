@@ -86,8 +86,9 @@ export const Header = () => {
 						<Link to="/suggestions">
 							<div className="suggestion  text-sm">Suggestions</div>
 						</Link>
+						{/* button for login/sign Up  shown when normal screen*/}
 						<button
-							className="flex border-box h-9 rounded bg-primary font-normal  px-[5px] py-[4px] items-center  relative  -top-[2px]"
+							className="flex border-box h-9 rounded bg-primary font-normal  px-[5px] py-[4px] items-center  relative  -top-[2px] active:bg-pink-800"
 							title="Login / Sign Up"
 							onClick={showLoginScreen}
 						>
@@ -95,9 +96,12 @@ export const Header = () => {
 								Login / Sign In
 							</span>
 						</button>
+						{/* button for login/sign Up  shown when normal screen end*/}
 					</div>
+
+					{/* button for login/sign Up  shown when normal screen*/}
 					<button
-						className="flex border-box h-9 rounded bg-primary font-normal  items-center p-[5px] relative top-[2px] show-small"
+						className="flex border-box h-9 rounded bg-primary font-normal  items-center p-[5px] relative top-[2px] show-small active:bg-pink-800"
 						title="Login / Sign Up"
 						onClick={showLoginScreen}
 					>
@@ -105,6 +109,7 @@ export const Header = () => {
 							Login / Sign In
 						</span>
 					</button>
+					{/* button for login/sign Up  shown when small screen end*/}
 				</div>
 			</header>
 		</>

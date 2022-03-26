@@ -14,7 +14,7 @@ const Tab = ({ children }) => {
 	return (
 		<button
 			className={cn(
-				"tab text-left border-b-2 border-white font-medium",
+				"tab text-left border-b-2 border-white font-medium plansTab",
 				isActive && "activePlan"
 			)}
 			onClick={onClick}
@@ -60,9 +60,9 @@ const MobileView = () => {
 					Recharge Plans of {operator.name} -{" "}
 					{circleItem.length > 1 ? JSON.parse(circleItem).name : ""}
 				</h2>
-				<div className="col-span-full mx-auto">
+				<div className="col-span-full mx-auto w-11/12">
 					{
-						<div className="flex w-full lg:bg-gray-100 bg-white">
+						<div className="flex w-full lg:bg-gray-100 bg-white overflow-x-auto mx-auto justify-start md:justify-center">
 							{planTypes.map(planType => (
 								<Tab>{planType}</Tab>
 							))}

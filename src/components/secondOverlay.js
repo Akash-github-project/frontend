@@ -66,13 +66,13 @@ const SecondOverlay = ({
 				id="overlay"
 				onClick={closeOverlay}
 			>
-				<div className="fixed  top-0 bottom-0 right-0 left-0 lg:right-1/2 lg:top-1/2 lg:bottom-1/2 lg:translate-x-1/2 lg:-translate-y-1/2 lg:max-w-[45rem] p-5 pt-1 border border-white h-auto lg:h-[40rem] bg-white">
+				<div className="fixed  top-0 bottom-0 right-0 left-0 lg:right-1/2 lg:top-1/2 lg:bottom-1/2 lg:translate-x-1/2 lg:-translate-y-1/2 lg:max-w-[45rem] p-4 pt-1 border border-white h-auto lg:h-[40rem] bg-white">
 					<div className="flex top-0 mb-1">
 						<button
 							className={
 								"flex  absolute justify-center items-center " +
 								side +
-								"-1 top-4 w-6 h-6 text-gray-primary hover:text-pink-primary p-1 bg-white"
+								"-1 top-2 w-4 h-4 text-gray-primary hover:text-pink-primary p-1 bg-white"
 							}
 							onClick={handleClick}
 						>

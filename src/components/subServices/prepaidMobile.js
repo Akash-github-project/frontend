@@ -145,7 +145,7 @@ const PrepaidMobile = () => {
 
 	return (
 		<>
-			<div className="grid grid-cols-1 lg:grid-cols-5 gap-1 lg:gap-2 xl:gap-3 w-full mx-auto">
+			<div className="grid grid-cols-1 lg:grid-cols-5 gap-4 lg:gap-2 xl:gap-3 w-full mx-auto">
 				<NumberInput
 					iType="tel"
 					val={phoneNo}
@@ -153,8 +153,8 @@ const PrepaidMobile = () => {
 					id="phoneNo"
 					holder="Mobile Number"
 					change={value => dispatch(storePhoneNo(value))}
-					extraClasses="focus:text-gray-primary "
-					fieldClasses="border-pink-600 focus:outline-none focus-within:border-blue-400 flex-1"
+					extraClasses="text-gray-primary "
+					fieldClasses="border-pink-600 focus:outline-none focus-within:border-blue-400 flex-1 h-[36px]"
 				/>
 
 				<SelectSearch
@@ -186,7 +186,7 @@ const PrepaidMobile = () => {
 							type="tel"
 							className="border-0 w-full  m-0 outline-none p-[11px] rounded text-[13px] leading-[21px] h-[34px] text-gray-primary"
 							required
-							placeholder="View Plans"
+							placeholder="Amount"
 						/>
 
 						{/* this <span> will be visible inside the input box so be careful before editing it */}
@@ -251,7 +251,7 @@ const PrepaidMobile = () => {
 
 				{/* button of recharge */}
 				<button
-					className="p-3 lg:p-1 bg-pink-primary hover:bg-blue-600 text-white rounded text-[13px] leading-[13px] font-medium lg:ml-4"
+					className="p-3 lg:p-1 bg-pink-primary active:bg-pink-800 text-white rounded text-[15px] lg:text-[13px] leading-[13px] font-medium lg:ml-4"
 					onClick={handleRechargeRequest}
 				>
 					Continue to Recharge
@@ -358,12 +358,16 @@ const PrepaidMobile = () => {
 					<span
 						className={` ${
 							openCoupon ? "" : "hidden"
-						} flex w-full gap-2 justify-center scale-75`}
+						} flex w-full gap-2 justify-center scale-90`}
 					>
-						<Input extraClasses="w-1/2 " dis={!couponState} />
+						<Input
+							extraClasses="w-1/2 px-1 py-0 "
+							override={{ fontSize: "15px" }}
+							dis={!couponState}
+						/>
 						<Button
 							text="Apply"
-							exClasses="w-1/3"
+							exClasses="w-1/3 "
 							click={handleApplyCoupon}
 							dis={!couponState}
 							disM="Remove"
@@ -399,7 +403,11 @@ const PrepaidMobile = () => {
 
 				{/* pay ammount button section start */}
 				<div className=" col-span-full px-2 py-2">
-					<Button text="Pay Rs 1000 " exClasses="w-full" />
+					<Button
+						text="Pay Rs 1000 "
+						exClasses="w-full"
+						fClasses="text-[15px]"
+					/>
 				</div>
 				{/* pay ammount button section end*/}
 			</div>
