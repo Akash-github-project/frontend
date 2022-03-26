@@ -8,6 +8,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import Button from "@mui/material/Button";
 
 export const SignUp = () => {
 	const [values, setValues] = React.useState({
@@ -44,12 +45,14 @@ export const SignUp = () => {
 	const dispatch = useDispatch();
 
 	return (
-		<div className="px-10 py-10 mx-4 mt-4 text-left">
-			<div className="mt-4 w-full ">
-				<div className="flex gap-4 items-center ">
-					<Label forItem="NameUser" message="Name" extraClasses="w-[35%]" />
+		<div className="px-1 py-1 mt-2 text-left">
+			<div className="mb-4 w-full ">
+				{/* name of registerer*/}
+				<div className="w-full text-center text-xs">error message</div>
+				<div className="mb-2 flex gap-4 items-center ">
+					<Label forItem="NameUser" message="Name" extraClasses="w-[30%]" />
 					<OutlinedInput
-						style={{ width: "65%" }}
+						style={{ width: "70%" }}
 						size="small"
 						id="NameUser"
 						type="text"
@@ -57,39 +60,60 @@ export const SignUp = () => {
 						onChange={handleChangeUsername}
 					/>
 				</div>
+				{/* name of registerer end*/}
 
-				<div className="flex gap-4 items-center mt-4">
-					<Label forItem="emailUser" message="E-mail" extraClasses="w-[35%]" />
-					<OutlinedInput
-						style={{ width: "65%" }}
-						size="small"
-						id="emailUser"
-						type="email"
-						value={values.text}
-						onChange={handleChangeUsername}
-					/>
+				{/* email of registerer */}
+				<div className="w-full text-center text-xs">error message</div>
+				<div className="flex gap-4 items-center mb-2">
+					<Label forItem="emailUser" message="E-mail" extraClasses="w-[30%]" />
+					<div style={{ width: "70%" }} className="flex">
+						<OutlinedInput
+							style={{ flex: "1" }}
+							size="small"
+							id="emailUser"
+							type="email"
+							value={values.text}
+							onChange={handleChangeUsername}
+						/>
+						<Button variant="contained" style={{ backgroundColor: "#f5317c" }}>
+							OTP
+						</Button>
+					</div>
 				</div>
-				<div className="flex gap-4 items-center mt-4">
-					<Label forItem="mobileUser" message="Mobile" extraClasses="w-[35%]" />
-					<OutlinedInput
-						style={{ width: "65%" }}
-						size="small"
-						id="mobileUser"
-						type="tel"
-						value={values.text}
-						onChange={handleChangeUsername}
-					/>
-				</div>
+				{/* email of registerer end*/}
 
-				<div className="mt-4 flex gap-4 items-center ">
+				{/* mobile no of registerer */}
+				<div className="w-full text-center text-xs">error message</div>
+				<div className="flex gap-4 items-center mb-2">
+					<Label forItem="mobileUser" message="Mobile" extraClasses="w-[30%]" />
+					<div style={{ width: "70%" }} className="flex">
+						<OutlinedInput
+							style={{ flex: "1" }}
+							size="small"
+							id="mobileUser"
+							type="tel"
+							value={values.text}
+							onChange={handleChangeUsername}
+						/>
+
+						<Button variant="contained" style={{ backgroundColor: "#f5317c" }}>
+							OTP
+						</Button>
+					</div>
+				</div>
+				{/* mobile no of registerer end*/}
+
+				{/* password of registerer */}
+				<div className="w-full text-center text-xs">error message</div>
+				<div className="mb-2 flex gap-4 items-center ">
 					<Label
 						forItem="signUpPass1"
 						message="Password"
-						extraClasses="w-[35%]"
+						extraClasses="w-[30%]"
 					/>
 
 					<OutlinedInput
-						style={{ width: "65%" }}
+						style={{ width: "70%" }}
 						size="small"
 						id="signUpPass1"
 						type={values.showPassword ? "text" : "password"}
@@ -109,16 +133,19 @@ export const SignUp = () => {
 						}
 					/>
 				</div>
+				{/* password of registerer end*/}
 
-				<div className="mt-4 flex gap-4 items-center ">
+				{/* password of re-registerer */}
+				<div className="w-full text-center text-xs">error message</div>
+				<div className=" flex gap-4 items-center ">
 					<Label
 						forItem="signUpPass2"
 						message="Re-Password"
-						extraClasses="w-[35%]"
+						extraClasses="w-[30%]"
 					/>
 
 					<OutlinedInput
-						style={{ width: "65%" }}
+						style={{ width: "70%" }}
 						size="small"
 						id="signUpPass2"
 						type={values.showPassword ? "text" : "password"}
@@ -138,14 +165,18 @@ export const SignUp = () => {
 						}
 					/>
 				</div>
+				{/* password of re-registerer end*/}
+
+				{/* accept terms ,conditions  and privacy policy*/}
 				<div className="flex items-center">
-					{/* conditional class application inline */}
+					{/* terms and conditions checkbox*/}
 					<Checkbox
 						borderColor="#f5317c"
 						icon={<i class="fa-solid fa-square-check text-pink-600"></i>}
 						onClick={() => dispatch(remember())}
 						id="username"
 					/>
+					{/* label for terms and conditions */}
 					<label htmlFor="username" className="mr-auto ml-2 text-gray-primary">
 						I agree to the
 						<a className="text-primary mx-2" href="#">
@@ -157,13 +188,18 @@ export const SignUp = () => {
 						</a>
 					</label>
 				</div>
+				{/* accept terms ,conditions  and privacy policy end*/}
 
+				{/* login button  */}
+				<div className="w-full text-center text-xs">error message</div>
 				<div className="flex">
 					<button className="w-full  p-2 mt-4 bg-primary text-white  rounded-lg  hover:shadow-pink-900 active:bg-pink-800">
 						Login
 					</button>
 				</div>
-				<div className="mt-6  text-black text-center">
+				{/* login button  end */}
+
+				<div className="mt-2  text-black text-center">
 					Already have an account
 					<a className="text-primary ml-2" href="#">
 						Log In

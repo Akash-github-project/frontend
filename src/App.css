@@ -4,6 +4,12 @@ body {
 	margin: 0;
 	--base-z: calc(1000000000 + 1);
 }
+#root.open-modal {
+	position: fixed;
+	height: 100vh;
+	overflow-y: hidden;
+}
+
 * {
 	color: #f5317c;
 }

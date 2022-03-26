@@ -15,11 +15,11 @@ import {
 	clearDetails,
 } from "../app/features/overlaySlice";
 import MobileView from "./subServices/mobileView";
+import LoginOverlay from "./loginOverlay";
 
 const WrapperPrepaid = () => {
-	const showPlan = useSelector(state => state.prepaidPlan.showPlan);
 	const renderType = useSelector(state => state.prepaidPlan.renderType);
-
+	const showPlan = useSelector(state => state.prepaidPlan.showPlan);
 	return (
 		<>
 			<Wrapper>
@@ -48,6 +48,7 @@ const WrapperPrepaid = () => {
 				) : (
 					<div></div>
 				)}
+				{}
 			</Wrapper>
 		</>
 	);

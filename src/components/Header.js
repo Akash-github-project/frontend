@@ -7,10 +7,18 @@ import classNames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 import { clearAll, storeShowPlan } from "../app/features/prepaidPlansSlice";
 import { toggleOverlay, addElement } from "../app/features/overlaySlice";
+import {
+	toggleLoginOverlay,
+	addLoginElement,
+	setToUse,
+	setSide,
+	setIcon,
+} from "../app/features/loginOverlaySlice";
 import { storeRenderType } from "../app/features/prepaidPlansSlice";
 import { Login } from "./Login";
 import { SignUp } from "./signup";
 import LoginWrapper from "./LoginWrapper";
+import { DisplaySettingsRounded } from "@mui/icons-material";
 
 export const Header = () => {
 	const logo = useRef();
@@ -21,14 +29,14 @@ export const Header = () => {
 	const dispatch = useDispatch();
 
 	const showLoginScreen = () => {
+		dispatch(setSide("right"));
+		dispatch(setToUse("element"));
 		dispatch(
-			addElement(
+			addLoginElement(
 				<LoginWrapper loginElement={<Login />} signUpElement={<SignUp />} />
 			)
 		);
-		dispatch(storeShowPlan(true));
-		dispatch(storeRenderType("mobile"));
-		dispatch(toggleOverlay());
+		dispatch(toggleLoginOverlay());
 	};
 
 	return (
