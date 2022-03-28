@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { ModalContext } from "../App";
 // import {useNavigate} from "react-router-dom"
 import "../css/footer.css";
 import { useDispatch } from "react-redux";
@@ -7,6 +9,7 @@ import { clearAll } from "../app/features/prepaidPlansSlice";
 
 export const Footer = () => {
 	// const navigate = useNavigate();
+	const menuSet = useContext(ModalContext);
 	const dispatch = useDispatch();
 
 	return (
@@ -79,6 +82,11 @@ export const Footer = () => {
 					</Link>
 					. All Rights Reserved.
 				</p>
+			</div>
+			<div>
+				<button onClick={() => menuSet.toggleMenu()} className="bg-green-400">
+					toggleMenu
+				</button>
 			</div>
 		</footer>
 	);

@@ -75,7 +75,11 @@ export const SignUp = () => {
 							value={values.text}
 							onChange={handleChangeUsername}
 						/>
-						<Button variant="contained" style={{ backgroundColor: "#f5317c" }}>
+						<Button
+							variant="contained"
+							disabled={true}
+							style={{ backgroundColor: "#f5317c" }}
+						>
 							OTP
 						</Button>
 					</div>
@@ -96,7 +100,11 @@ export const SignUp = () => {
 							onChange={handleChangeUsername}
 						/>
 
-						<Button variant="contained" style={{ backgroundColor: "#f5317c" }}>
+						<Button
+							variant="contained"
+							disabled={true}
+							style={{ backgroundColor: "#f5317c" }}
+						>
 							OTP
 						</Button>
 					</div>
@@ -127,7 +135,7 @@ export const SignUp = () => {
 									onMouseDown={handleMouseDownPassword}
 									edge="end"
 								>
-									{values.showPassword ? <VisibilityOff /> : <Visibility />}
+									{values.showPassword ? <Visibility /> : <VisibilityOff />}
 								</IconButton>
 							</InputAdornment>
 						}
@@ -159,7 +167,7 @@ export const SignUp = () => {
 									onMouseDown={handleMouseDownPassword}
 									edge="end"
 								>
-									{values.showPassword ? <VisibilityOff /> : <Visibility />}
+									{values.showPassword ? <Visibility /> : <VisibilityOff />}
 								</IconButton>
 							</InputAdornment>
 						}

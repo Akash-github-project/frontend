@@ -1,4 +1,4 @@
-// import { Header } from "./components/Header";
+import { Header } from "./components/Header";
 import React, { createContext } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -15,6 +15,7 @@ import LoginOverlay from "./components/loginOverlay";
 export const ModalContext = createContext();
 function App() {
 	const [modal, setModal] = useState(false);
+	const [toggleMenu, setMenu] = useState(false);
 	const showLogin = useSelector(state => state.loginOverlay.loginOverlayStatus);
 	// const [store, setStore] = useState("");
 	// let item = {
@@ -28,7 +29,12 @@ function App() {
 	// 	},
 	// };
 	return (
-		<ModalContext.Provider value={{ modalToggle: () => setModal(!modal) }}>
+		<ModalContext.Provider
+			value={{
+				modalToggle: () => setModal(!modal),
+				toggleMenu: () => setMenu(!toggleMenu),
+			}}
+		>
 			<div
 				className={`m-0 p-0 ${
 					modal === true ? "h-screen overflow-hidden" : ""
@@ -36,7 +42,7 @@ function App() {
 			>
 				{showLogin === true ? <LoginOverlay /> : <div></div>}
 				<MainWrapper>
-					<HeaderLogged />
+					{toggleMenu === true ? <HeaderLogged /> : <Header />}
 					{/* change */}
 					<Outlet />
 					{/* change here */}
