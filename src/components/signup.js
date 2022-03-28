@@ -1,6 +1,6 @@
 import React from "react";
 import Checkbox from "react-custom-checkbox";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { remember } from "../app/features/LoginSlice";
 import { Label } from "./label";
 import OutlinedInput from "@mui/material/OutlinedInput";

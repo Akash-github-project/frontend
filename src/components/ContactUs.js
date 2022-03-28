@@ -15,6 +15,7 @@ const ContactUs = () => {
 						<div className="mapouter ">
 							<div className="gmap_canvas  ">
 								<iframe
+									title="location"
 									id="gmap_canvas"
 									src="https://maps.google.com/maps?q=25.609185332850462,%2085.20234712809093&t=&z=13&ie=UTF8&iwloc=&output=embed"
 									frameBorder="0"

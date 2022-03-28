@@ -5,7 +5,7 @@ import "../../css/planList.css";
 import { toggleOverlay } from "../../app/features/overlaySlice";
 import { useSelector, useDispatch } from "react-redux";
 import { storetPlansInfo } from "../../app/features/prepaidPlansSlice";
-import circleList from "../../otherData/circle.json";
+// import circleList from "../../otherData/circle.json";
 
 const cn = (...args) => args.filter(Boolean).join(" ");
 const Tab = ({ children }) => {
@@ -29,7 +29,7 @@ let planTypes = res.map(category => category.name);
 let plansList = res.map(category => category.plans);
 
 const MobileView = () => {
-	const [circleVal, setCircleVal] = useState("");
+	// const [circleVal, setCircleVal] = useState(""),;
 
 	useEffect(() => {
 		setState(1);

@@ -1,29 +1,28 @@
 import "../App.css";
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import DropMenu from "./dropMenu";
-import SecondOverlay from "./secondOverlay";
-import classNames from "classnames";
-import { useDispatch, useSelector } from "react-redux";
-import { clearAll, storeShowPlan } from "../app/features/prepaidPlansSlice";
-import { toggleOverlay, addElement } from "../app/features/overlaySlice";
+// import SecondOverlay from "./secondOverlay";
+// import classNames from "classnames";
+import { useDispatch } from "react-redux";
+import { clearAll } from "../app/features/prepaidPlansSlice";
+// import { storeShowPlan } from "../app/features/prepaidPlansSlice";
 import {
 	toggleLoginOverlay,
 	addLoginElement,
 	setToUse,
 	setSide,
-	setIcon,
 } from "../app/features/loginOverlaySlice";
-import { storeRenderType } from "../app/features/prepaidPlansSlice";
+// import { storeRenderType } from "../app/features/prepaidPlansSlice";
 import { Login } from "./Login";
 import { SignUp } from "./signup";
 import LoginWrapper from "./LoginWrapper";
-import { DisplaySettingsRounded } from "@mui/icons-material";
+// import { DisplaySettingsRounded } from "@mui/icons-material";
 
 export const Header = () => {
 	const logo = useRef();
-	const loginState = useSelector(state => state.login.loginScreenShow);
-	const overlayState = useSelector(state => state.overlay.overlayStatus);
+	// const loginState = useSelector(state => state.login.loginScreenShow);
+	// const overlayState = useSelector(state => state.overlay.overlayStatus);
 
 	const navigate = useNavigate();
 	const dispatch = useDispatch();

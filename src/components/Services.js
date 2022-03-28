@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 import "../css/services.css";
 
 const listStyle = {
@@ -57,7 +56,7 @@ const Services = () => {
 			link: "/mobile",
 		},
 	};
-	let defalultBefore = "";
+	// let defalultBefore = "";
 	return (
 		<div className="min-h-[20px]">
 			<ul className="service-grid">

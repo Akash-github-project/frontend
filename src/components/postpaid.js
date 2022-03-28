@@ -1,10 +1,9 @@
-import React, { Children, useState, useEffect } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Radio, RadioGroup, InputLabel } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { clearAll } from "../app/features/prepaidPlansSlice";
 
-import classNames from "classnames";
 import "../css/radio.css";
 
 const Postpaid = ({ children }) => {
@@ -27,11 +26,11 @@ const Postpaid = ({ children }) => {
 		console.log(rechargeType);
 	};
 
-	const handleEnter = e => {
-		if (e.key === "Enter") {
-			handleRadioChange(e);
-		}
-	};
+	// const handleEnter = e => {
+	// 	if (e.key === "Enter") {
+	// 		handleRadioChange(e);
+	// 	}
+	// };
 	return (
 		<div className="w-full">
 			<h2 className="font-medium leading-[19px]">

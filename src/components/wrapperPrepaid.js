@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Wrapper from "./wrapper";
 import { Crosel } from "./Crosel";
 import Services from "./Services";
@@ -7,15 +7,15 @@ import PrepaidMobile from "./subServices/prepaidMobile";
 import PlansList from "./subServices/plansList";
 // import Overlay from "../components/overlay";
 import SecondOverlay from "./secondOverlay";
-import { useDispatch, useSelector } from "react-redux";
-import { storeRenderType } from "../app/features/prepaidPlansSlice";
-import {
-	addElement,
-	toggleOverlay,
-	clearDetails,
-} from "../app/features/overlaySlice";
-import MobileView from "./subServices/mobileView";
-import LoginOverlay from "./loginOverlay";
+import { useSelector } from "react-redux";
+// import { storeRenderType } from "../app/features/prepaidPlansSlice";
+// // import {
+// // 	addElement,
+// // 	toggleOverlay,
+// // 	clearDetails,
+// // } from "../app/features/overlaySlice";
+// import MobileView from "./subServices/mobileView";
+// import LoginOverlay from "./loginOverlay";
 
 const WrapperPrepaid = () => {
 	const renderType = useSelector(state => state.prepaidPlan.renderType);

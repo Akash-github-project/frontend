@@ -11,7 +11,6 @@ import "../../css/selectSearch.css";
 import dataPlan from "./dataPlan.json";
 import prepaidChangeJson from "./specialJsons/preapidChangeList.json";
 
-import classNames from "classnames";
 import { NumberInput } from "../numberInput";
 import MobileView from "./mobileView";
 import { Input } from "../input";
@@ -26,9 +25,7 @@ import {
 	storeShowPlan,
 	storeRenderType,
 	showConfirmBill,
-	storeCouponVal,
 	toggleCouponState,
-	storeCouponLegal,
 } from "../../app/features/prepaidPlansSlice";
 import { addElement, toggleOverlay } from "../../app/features/overlaySlice";
 

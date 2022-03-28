@@ -2,26 +2,14 @@ import React from "react";
 import LeftNav from "./leftNav";
 import RightNav from "./rightNav";
 import ImageGallery from "react-image-gallery";
-import { useEffect } from "react";
-import { useState } from "react";
+// import { useEffect } from "react";
+// import { useState } from "react";
 
 let called = e => {
 	console.log(e.target);
 };
 export const Crosel = () => {
-	//     const images = [
-	//   {
-	//     original: 'https://picsum.photos/id/1018/1000/600/',
-	//   },
-	//   {
-	//     original: 'https://picsum.photos/id/1015/1000/600/',
-	//   },
-	//   {
-	//     original: 'https://picsum.photos/id/1019/1000/600/',
-	//   },
-	// ];
-
-	let [images, setImages] = useState([]);
+	// let [images, setImages] = useState([]);
 	let imageList = [];
 	imageList[0] = { original: "/images/slider1.jpg" };
 	imageList[1] = { original: "/images/slider2.png" };
@@ -73,7 +61,3 @@ export const Crosel = () => {
 		/>
 	);
 };
-
-{
-	/* <i class="fa-solid fa-less-than"></i> */
-}

@@ -1,11 +1,12 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+// import {useNavigate} from "react-router-dom"
 import "../css/footer.css";
 import { useDispatch } from "react-redux";
 import { clearAll } from "../app/features/prepaidPlansSlice";
 
 export const Footer = () => {
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 	const dispatch = useDispatch();
 
 	return (
