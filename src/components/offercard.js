@@ -1,14 +1,17 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useContext } from "react";
+import { ModalContext } from "../App";
 import { useDispatch } from "react-redux";
 import { toggleOverlay, addContent } from "../app/features/overlaySlice";
 
 const Offercard = ({ promocode, cashback, title, frequency, details }) => {
 	const dispatch = useDispatch();
+	const mContext = useContext(ModalContext);
 	const detail = useRef();
 
 	const handleClick = () => {
 		dispatch(addContent(detail.current));
 		dispatch(toggleOverlay());
+		mContext.modalToggle();
 	};
 
 	useEffect(() => {

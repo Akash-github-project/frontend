@@ -1,6 +1,6 @@
-import { Header } from "./components/Header";
-import React from "react";
-// import { useState } from "react";
+// import { Header } from "./components/Header";
+import React, { createContext } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import "./App.css";
 import "./index.css";
@@ -8,12 +8,13 @@ import { Outlet } from "react-router-dom";
 import { Footer } from "./components/Footer";
 // import { Dropdown, NormalElement } from "./components/Dropdown";
 import Wrapper from "./components/wrapper";
-// import { HeaderLogged } from "./components/HeaderLogged";
+import { HeaderLogged } from "./components/HeaderLogged";
 import MainWrapper from "./components/MainWrapper";
 // import NotificationBar from "./components/NotificationBar";
 import LoginOverlay from "./components/loginOverlay";
-
+export const ModalContext = createContext();
 function App() {
+	const [modal, setModal] = useState(false);
 	const showLogin = useSelector(state => state.loginOverlay.loginOverlayStatus);
 	// const [store, setStore] = useState("");
 	// let item = {
@@ -27,18 +28,24 @@ function App() {
 	// 	},
 	// };
 	return (
-		<div className="m-0 p-0">
-			{showLogin === true ? <LoginOverlay /> : <div></div>}
-			<MainWrapper>
-				<Header />
-				{/* change */}
-				<Outlet />
-				{/* change here */}
-				<Wrapper>
-					<Footer />
-				</Wrapper>
-			</MainWrapper>
-		</div>
+		<ModalContext.Provider value={{ modalToggle: () => setModal(!modal) }}>
+			<div
+				className={`m-0 p-0 ${
+					modal === true ? "h-screen overflow-hidden" : ""
+				}`}
+			>
+				{showLogin === true ? <LoginOverlay /> : <div></div>}
+				<MainWrapper>
+					<HeaderLogged />
+					{/* change */}
+					<Outlet />
+					{/* change here */}
+					<Wrapper>
+						<Footer />
+					</Wrapper>
+				</MainWrapper>
+			</div>
+		</ModalContext.Provider>
 	);
 }
 

@@ -1,22 +1,26 @@
 import React, { useState, useRef } from "react";
-import classNames from "classnames";
+import { Menu, MenuItem } from "@mui/material";
+import { Link } from "react-router-dom";
 
-const DropMenu = ({ children, reference }) => {
-	const [menuState, setMenuState] = useState(false);
+const DropMenu = () => {
+	const [anchorEl, setAnchorEl] = useState(null);
+	const open = Boolean(anchorEl);
 
-	const handleMenuState = () => {
-		if (menuState === true) {
-			reference.current.focus();
-			setMenuState(!menuState);
-		} else setMenuState(!menuState);
+	const handleClick = e => {
+		setAnchorEl(e.currentTarget);
 	};
-	return (
-		<div className="menu relative" tabIndex={0}>
-			{/* <button className="btn flex px-1"> */}
+	const handleClose = () => {
+		setAnchorEl(null);
+	};
 
+	return (
+		<div
+			className={`${open === true ? "menu" : " "} relative dnoneLarge`}
+			tabIndex={0}
+		>
 			<button
 				className="relative btn px-1 w-3 h-3 bg-white"
-				onClick={handleMenuState}
+				onClick={handleClick}
 			>
 				<span className="border-b-gray-900 block mb-1 border-0 border-b-2 w-6"></span>
 				<span className="border-b-gray-900 block mb-1 border-0 border-b-2 w-6 "></span>
@@ -24,19 +28,19 @@ const DropMenu = ({ children, reference }) => {
 			</button>
 
 			{/* menu items */}
-			<div
-				className={classNames({
-					absolute: true,
-					"items-box": true,
-					flex: true,
-					"z-base": true,
-					"w-[50vw]": true,
-					"left-0": true,
-					"p-2": true,
-				})}
-			>
-				{children}
-			</div>
+			<Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
+				<Link to="/rewards" data-route="/rewards">
+					<MenuItem onClick={handleClose}>Rewards</MenuItem>
+				</Link>
+
+				<Link to="/offers" data-route="/offers">
+					<MenuItem onClick={handleClose}>Offers</MenuItem>
+				</Link>
+
+				<Link to="/suggestions" data-route="/suggestions">
+					<MenuItem onClick={handleClose}>Suggestions</MenuItem>
+				</Link>
+			</Menu>
 		</div>
 	);
 };

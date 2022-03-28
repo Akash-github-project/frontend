@@ -1,4 +1,6 @@
 import React from "react";
+import { useContext } from "react";
+import { ModalContext } from "../App";
 import { useSelector, useDispatch } from "react-redux";
 import {
 	clearLoginDetails,
@@ -6,7 +8,9 @@ import {
 } from "../app/features/loginOverlaySlice";
 import "../css/overlay.css";
 
-const LoginOverlay = ({}) => {
+const LoginOverlay = () => {
+	const mContext = useContext(ModalContext);
+
 	const dispatch = useDispatch();
 	const overlayState = useSelector(
 		state => state.loginOverlay.loginOverlayStatus
@@ -26,12 +30,14 @@ const LoginOverlay = ({}) => {
 		if (e.target.id === "loginOverlay") {
 			dispatch(toggleLoginOverlay());
 			dispatch(clearLoginDetails());
+			mContext.modalToggle();
 		}
 	};
 
 	const closeOverlay = e => {
 		dispatch(toggleLoginOverlay());
 		dispatch(clearLoginDetails());
+		mContext.modalToggle();
 	};
 
 	if (overlayState && toUse === "content") {

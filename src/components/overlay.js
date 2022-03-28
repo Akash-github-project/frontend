@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ModalContext } from "../App";
 import { useSelector, useDispatch } from "react-redux";
 import { clearDetails, toggleOverlay } from "../app/features/overlaySlice";
 import "../css/overlay.css";
@@ -9,7 +10,9 @@ const Overlay = ({
 	title = "",
 	toUse = "content",
 }) => {
+	const mContext = useContext(ModalContext);
 	const dispatch = useDispatch();
+
 	const overlayState = useSelector(state => state.overlay.overlayStatus);
 	const overlayContent = useSelector(state => state.overlay.overlayContent);
 	const overlayElement = useSelector(state => state.overlay.overlayElement);
@@ -17,12 +20,14 @@ const Overlay = ({
 	const handleClick = () => {
 		dispatch(toggleOverlay());
 		dispatch(clearDetails());
+		mContext.modalToggle();
 	};
 	const closeOverlay = e => {
 		if (e.target.id === "overlay") {
 			console.log("overlay clicked");
 			dispatch(toggleOverlay());
 			dispatch(clearDetails());
+			mContext.modalToggle();
 		}
 	};
 

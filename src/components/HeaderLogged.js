@@ -1,7 +1,8 @@
 //header for logged user
 import "../App.css";
 import "../css/loggedHeader.css";
-import React, { useRef } from "react";
+import React from "react";
+import UserMenu from "./userMenu";
 import { Link, useNavigate } from "react-router-dom";
 import DropMenu from "./dropMenu";
 import { useDispatch } from "react-redux";
@@ -10,37 +11,13 @@ import { clearAll } from "../app/features/prepaidPlansSlice";
 export const HeaderLogged = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	const logo = useRef();
 
 	return (
 		<header className="">
 			<div className=" width mx-auto flex items-center mt-[3px] pl-1 ">
-				{/* <div className="menu">
-					<button className="btn flex px-1">
-						<i
-							className="fa fa-bars items-center flex justify-center"
-							aria-hidden="true"
-						></i>
-					</button> */}
-
-				<DropMenu reference={logo}>
-					<Link to="/rewards">
-						<div className="item bg-white px-4 py-2 border text-sm">
-							Rewards
-						</div>
-					</Link>
-					<Link to="/offers">
-						<div className="item bg-white px-4 py-2 border text-sm">Offers</div>
-					</Link>
-					<Link to="/suggestions">
-						<div className="item bg-white px-4 py-2 border text-sm">
-							Suggestions
-						</div>
-					</Link>
-				</DropMenu>
+				<DropMenu />
 
 				{/*logo declaration   */}
-				{/* <Link to="/home" className="mr-auto relative flex"> */}
 				<div
 					className="pl-[2px] pr-4 logo mr-auto relative  mt-[1px] ml-2  small-logo shrink-[0.2] cursor-pointer"
 					onClick={() => {
@@ -48,7 +25,6 @@ export const HeaderLogged = () => {
 						navigate("/home");
 					}}
 					tabIndex={0}
-					ref={logo}
 					title="RechargeAXN"
 				></div>
 				{/* </Link> */}
@@ -94,11 +70,12 @@ export const HeaderLogged = () => {
 							<span className="text-sm">Add Money</span>
 						</span>
 					</Link>
-					<Link to="/user" title="User Menu">
+					<UserMenu showInSmall={true} />
+					{/* <Link to="/user" title="User Menu">
 						<button className="flex w-8 h-8 user bg-pink-primary items-center justify-center ">
 							<i className="fas fa-user text-white" area-hidden="true"></i>
 						</button>
-					</Link>
+					</Link> */}
 				</div>
 
 				<div className="notification show-in-small ml-[0.9rem]  mt-[6px] scale-small small-btn">
@@ -134,11 +111,12 @@ export const HeaderLogged = () => {
 					</span>
 				</Link>
 
-				<Link to="/user">
+				{/* <Link to="/user">
 					<button className="w-8 h-8 user bg-pink-primary   show-in-small ml-[0.9rem]  mt-[6px] small-margin  scale-small small-btn">
 						<i className="fas fa-user text-white" area-hidden="true"></i>
 					</button>
-				</Link>
+				</Link> */}
+				<UserMenu />
 			</div>
 		</header>
 	);
