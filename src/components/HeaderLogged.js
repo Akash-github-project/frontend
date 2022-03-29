@@ -111,11 +111,6 @@ export const HeaderLogged = () => {
 					</span>
 				</Link>
 
-				{/* <Link to="/user">
-					<button className="w-8 h-8 user bg-pink-primary   show-in-small ml-[0.9rem]  mt-[6px] small-margin  scale-small small-btn">
-						<i className="fas fa-user text-white" area-hidden="true"></i>
-					</button>
-				</Link> */}
 				<UserMenu />
 			</div>
 		</header>

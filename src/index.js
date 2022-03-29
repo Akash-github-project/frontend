@@ -23,6 +23,7 @@ import Rewards from "./components/Rewards";
 import Suggestions from "./components/Suggestions";
 import WrapperPrepaid from "./components/wrapperPrepaid";
 import WrapperPostpaid from "./components/wrapperPostpaid";
+import ConfirmPage from "./components/confirmPage";
 
 ReactDOM.render(
 	<React.StrictMode>
@@ -39,6 +40,7 @@ ReactDOM.render(
 						</Route>
 
 						<Route path="aboutus" element={<AboutUs />} />
+						<Route path="confirm" element={<ConfirmPage />} />
 						<Route path="faq" element={<FaqSection />} />
 						<Route path="contactus" element={<ContactUs />} />
 						<Route path="terms" element={<Terms />} />

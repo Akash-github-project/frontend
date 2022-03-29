@@ -75,6 +75,9 @@ function UserMenu({ showInSmall = "false" }) {
 				<Link to="/suggestions" className="w-full m-0 ">
 					<MenuItem onClick={handleClose}>Write Issue/Complain</MenuItem>
 				</Link>
+				<Link to="/confirm" className="w-full m-0 ">
+					<MenuItem onClick={handleClose}>Confirm Page</MenuItem>
+				</Link>
 				<Link to="/feedback" className="w-full m-0 ">
 					<MenuItem onClick={handleClose}>Logout</MenuItem>
 				</Link>
