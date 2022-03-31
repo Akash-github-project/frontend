@@ -9,6 +9,7 @@ import { ModalContext } from "../App";
 import { useDispatch } from "react-redux";
 import { clearAll } from "../app/features/prepaidPlansSlice";
 // import { storeShowPlan } from "../app/features/prepaidPlansSlice";
+import ForgotPass from "./forgotPass";
 import {
 	toggleLoginOverlay,
 	addLoginElement,
@@ -16,14 +17,10 @@ import {
 	setSide,
 } from "../app/features/loginOverlaySlice";
 // import { storeRenderType } from "../app/features/prepaidPlansSlice";
-import { Login } from "./Login";
-import { SignUp } from "./signup";
 import LoginWrapper from "./LoginWrapper";
 // import { DisplaySettingsRounded } from "@mui/icons-material";
 
 export const Header = () => {
-	// const loginState = useSelector(state => state.login.loginScreenShow);
-	// const overlayState = useSelector(state => state.overlay.overlayStatus);
 	const mContext = useContext(ModalContext);
 
 	const navigate = useNavigate();
@@ -32,11 +29,7 @@ export const Header = () => {
 	const showLoginScreen = () => {
 		dispatch(setSide("right"));
 		dispatch(setToUse("element"));
-		dispatch(
-			addLoginElement(
-				<LoginWrapper loginElement={<Login />} signUpElement={<SignUp />} />
-			)
-		);
+		dispatch(addLoginElement(<LoginWrapper />));
 		dispatch(toggleLoginOverlay());
 		mContext.modalToggle();
 	};

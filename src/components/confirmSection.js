@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 function ConfirmSection({ heading, data = [], type, submitLink = "/#" }) {
 	const navigate = useNavigate();
 	return (
-		<div className="w-[26rem] grid gap-1 p-1 bg-white mt-2">
-			<div className="p-4 flex w-full items-center justify-center">
+		<div className="w-[26rem] grid gap-1 p-px bg-white mt-1">
+			<div className="p-3 flex w-full items-center justify-center">
 				<img
 					src="images/animatedTick.png"
 					alt="SuccessMark"
@@ -21,7 +21,7 @@ function ConfirmSection({ heading, data = [], type, submitLink = "/#" }) {
 						key={index}
 						className={`${
 							each.skip === true ? "" : "border-b border-b-gray-separator"
-						} p-2 bg-white flex gap-1`}
+						} p-1 bg-white flex gap-1`}
 					>
 						<span className="  text-left flex-1 text-gray-primary">
 							{each.title}
@@ -69,7 +69,7 @@ function ConfirmSection({ heading, data = [], type, submitLink = "/#" }) {
 			</div>
 
 			<button
-				className="text-xs md:text-xl ml-auto mr-auto inline-block capitalize text-white bg-pink-primary px-4 py-2 rounded-sm max-w-fit hover:pink-700"
+				className="text-xs md:text-[13px] leading-xs md:leading-[13px]  ml-auto mr-auto h-[34px] font-medium inline-block capitalize text-white bg-pink-primary px-4  rounded-sm max-w-fit hover:pink-700"
 				onClick={() => navigate(submitLink)}
 			>
 				Make Another {type}

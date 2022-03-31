@@ -19,8 +19,15 @@ const data = [
 	},
 	{
 		title: "Date",
-		value: "06-Feb-2019",
+		value: "06-Feb-2019 12:23:40",
+		skip: true,
 	},
+
+	{
+		title: "Mode of Payment",
+		value: "Credit Card",
+	},
+
 	{
 		title: "Transaction Status",
 		value: "success",
