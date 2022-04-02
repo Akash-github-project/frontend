@@ -7,7 +7,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Button from "@mui/material/Button";
 import { Label } from "./label";
 import { Formik } from "formik";
-import Countdown from "react-countdown";
+import { useTimer } from "use-timer";
 
 const ForgotPass = ({ goto = () => console.log("hello world") }) => {
 	const [values, setValues] = React.useState({
@@ -20,34 +20,30 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
 		showPassword2: false,
 	});
 	const [otp, setOtp] = useState("unsent");
-	const [retry, setRetry] = useState(0);
+	const formRef = useRef("");
+	const [otpVal, setOtpVal] = useState(0);
 
-	// const handleChange = prop => event => {
-	// 	setValues({ ...values, [prop]: event.target.value });
-	// };
+	const { time, start, reset } = useTimer({
+		initialTime: 60,
+		endTime: 0,
+		timerType: "DECREMENTAL",
+	});
 
-	const retryOtpSend = () => {
-		setRetry(retry + 1);
+	const resendOtp = () => {
+		reset();
+		askOtp();
+		start();
 	};
-	const renderer = ({ minutes, seconds, completed }) => {
-		if (completed)
-			return (
-				<Button
-					variant="contained"
-					style={{ backgroundColor: "#f5317c" }}
-					onClick={retryOtpSend}
-				>
-					Resend Otp
-				</Button>
-			);
-		else {
-			return (
-				<span>
-					{minutes}:{seconds}
-				</span>
-			);
-		}
+
+	const askOtp = () => {
+		let otpGenerated =
+			Math.random() * 6 + Math.random() * 6 * 10 + Math.random() * 6 * 100;
+		otpGenerated = Math.floor(otpGenerated);
+
+		setOtpVal(() => otpGenerated);
+		console.log(otpVal);
 	};
+
 	const handleClickShowPassword = () => {
 		setValues({
 			...values,
@@ -77,11 +73,24 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
 		otpForgot: "",
 	};
 	const sendOtp = () => {
-		setOtp("sent");
+		let formikRef = formRef.current;
+		console.log(formikRef);
+		if (
+			formikRef.values.emailOrMobile === "" ||
+			formikRef.errors.emailOrMobile === ""
+		) {
+			formikRef.setFieldTouched("emailOrMobile");
+			formikRef.validateField("emailOrMobile");
+			console.log(formikRef);
+		} else {
+			askOtp();
+			setOtp("sent");
+			start();
+		}
 	};
 
 	const validateForm = values => {
-		const errors = {};
+		let errors = {};
 		let numberAsString;
 		const EMAIL_REGEX =
 			/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -111,6 +120,17 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
 		} else if (values.newPass !== values.reNewPass) {
 			errors.newPass = "passwords don't match";
 		}
+		if (!values.reNewPass) {
+			errors.reNewPass = "re password can't be empty";
+		}
+		if (typeof values.otpForgot !== "undefined") {
+			if (values.otpForgot == otpVal && values.otpForgot !== "") {
+				setOtp("verified");
+				reset();
+			} else {
+				errors.otpVal = "otp does not match";
+			}
+		}
 		return errors;
 	};
 
@@ -129,6 +149,7 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
 					setSubmitting(false);
 					console.log(values);
 				}}
+				innerRef={formRef}
 			>
 				{formik => (
 					<form
@@ -156,7 +177,9 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
 										sx={
 											otp === "verified"
 												? {
-														"div.MuiInput-root": { outline: "2px solid green" },
+														" input+fieldset": {
+															border: "2px solid green",
+														},
 												  }
 												: null
 										}
@@ -170,8 +193,13 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
 
 									<Button
 										variant="contained"
+										sx={{
+											"button:disabled": {
+												backgroundColor: "gray",
+												color: "black",
+											},
+										}}
 										disabled={otp === "sent" ? true : false}
-										type="submit"
 										style={{ backgroundColor: "#f5317c" }}
 										onClick={sendOtp}
 									>
@@ -190,9 +218,9 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
 										message="OTP"
 										extraClasses="w-[30%]"
 									/>
-									<div style={{ width: "70%" }} className="flex">
+									<div style={{ width: "70%" }} className="flex items-center">
 										<OutlinedInput
-											style={{ flex: "1" }}
+											style={{ width: "50%" }}
 											sx={
 												otp === "verified"
 													? {
@@ -209,12 +237,19 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
 											{...formik.getFieldProps("otpForgot")}
 										/>
 										{otp === "sent" ? (
-											<Countdown
-												key={retry}
-												date={Date.now() + 5000}
-												renderer={renderer}
-												// controlled={true}
-											></Countdown>
+											time !== 0 ? (
+												<span className="w-1/2 mx-auto ">
+													{`${Math.floor(time / 60)}:${time % 60}`}
+												</span>
+											) : (
+												<Button
+													variant="contained"
+													style={{ backgroundColor: "#f5317c" }}
+													onClick={resendOtp}
+												>
+													Resend Otp
+												</Button>
+											)
 										) : null}
 									</div>
 								</div>
@@ -229,6 +264,7 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
 							) : (
 								<div className="w-full text-center text-xs"></div>
 							)}
+							<div></div>
 							<div className="mb-2 flex gap-4 items-center ">
 								<Label
 									forItem="newPass"

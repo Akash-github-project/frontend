@@ -174,13 +174,13 @@ export const Login = ({ goto = () => console.log("forgotPass") }) => {
 										Remember Me
 									</label>
 									{/* forgot passwork link */}
-									<a
-										href="#"
-										className="text-primary"
+									<span
+										tabIndex={0}
+										className="inline-block text-primary cursor-pointer"
 										onClick={() => goto("forgotPass")}
 									>
 										Forgot Password
-									</a>
+									</span>
 								</div>
 								{/*forgot password and rememer me end */}
 
