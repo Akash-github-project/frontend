@@ -163,7 +163,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
 		if (typeof values.otpPhone !== "undefined") {
 			if (values.otpPhone == phoneOtp.value && values.otpPhone !== "") {
 				setEmailOtp({ status: "verified", value: emailOtp.value });
-				reset();
+				emailTimeReset();
 			} else {
 				errors.otpPhone = "otp does not match";
 			}
@@ -172,7 +172,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
 		if (typeof values.otpEmail !== "undefined") {
 			if (values.otpEmail == emailOtp.value && values.otpEmail !== "") {
 				setPhoneOtp({ status: "verified", value: emailOtp.value });
-				reset();
+				phoneTimeReset();
 			} else {
 				errors.otpEmail = "otp does not match";
 			}

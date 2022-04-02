@@ -20,7 +20,7 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
 		showPassword2: false,
 	});
 	const [otp, setOtp] = useState("unsent");
-	const formRef = useRef("");
+	// const formRef = useRef("");
 	const [otpVal, setOtpVal] = useState(0);
 
 	const { time, start, reset } = useTimer({
@@ -73,20 +73,18 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
 		otpForgot: "",
 	};
 	const sendOtp = () => {
-		let formikRef = formRef.current;
-		console.log(formikRef);
-		if (
-			formikRef.values.emailOrMobile === "" ||
-			formikRef.errors.emailOrMobile === ""
-		) {
-			formikRef.setFieldTouched("emailOrMobile");
-			formikRef.validateField("emailOrMobile");
-			console.log(formikRef);
-		} else {
-			askOtp();
-			setOtp("sent");
-			start();
-		}
+		// if (
+		// 	formRef.current.values.emailOrMobile === "" ||
+		// 	formRef.current.errors.emailOrMobile === ""
+		// ) {
+		// 	// formikRef.setFieldTouched("emailOrMobile");
+		// 	// formikRef.validateField("emailOrMobile");
+		// 	// console.log(formikRef);
+		// } else {
+		askOtp();
+		setOtp("sent");
+		start();
+		// }
 	};
 
 	const validateForm = values => {
@@ -149,7 +147,7 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
 					setSubmitting(false);
 					console.log(values);
 				}}
-				innerRef={formRef}
+				// innerRef={formRef}
 			>
 				{formik => (
 					<form
@@ -183,7 +181,9 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
 												  }
 												: null
 										}
-										disabled={otp === "sent" ? true : false}
+										disabled={
+											otp === "sent" || otp == "verified" ? true : false
+										}
 										size="small"
 										id="emailOrMobile"
 										name="emailOrMobile"
@@ -191,20 +191,30 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
 										{...formik.getFieldProps("emailOrMobile")}
 									/>
 
-									<Button
-										variant="contained"
-										sx={{
-											"button:disabled": {
-												backgroundColor: "gray",
-												color: "black",
-											},
-										}}
-										disabled={otp === "sent" ? true : false}
-										style={{ backgroundColor: "#f5317c" }}
-										onClick={sendOtp}
-									>
-										OTP
-									</Button>
+									{otp === "verified" ? (
+										<Button
+											variant="contained"
+											style={{ backgroundColor: "#f5317c" }}
+											onClick={() => setOtp("unsent")}
+										>
+											<i class="fa-regular fa-pen-to-square text-white w-5 "></i>
+										</Button>
+									) : (
+										<Button
+											variant="contained"
+											sx={{
+												"button::disabled": {
+													backgroundColor: "gray",
+													color: "black",
+												},
+											}}
+											disabled={otp === "sent" ? true : false}
+											style={{ backgroundColor: "#f5317c" }}
+											onClick={sendOtp}
+										>
+											OTP
+										</Button>
+									)}
 								</div>
 							</div>
 							{/* mobile no of registerer end*/}
