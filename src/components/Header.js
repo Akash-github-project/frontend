@@ -43,7 +43,7 @@ export const Header = () => {
 					<DropMenu />
 
 					<div
-						className="pl-[2px] pr-4 logo mr-auto relative  mt-[1px] ml-2  small-logo shrink-[0.2] cursor-pointer"
+						className="pl-[2px] pr-4 logo  sm:mr-auto relative  mt-[1px] ml-2  small-logo shrink-[0.2] cursor-pointer"
 						tabIndex={0}
 						onClick={() => {
 							dispatch(clearAll());
@@ -52,7 +52,7 @@ export const Header = () => {
 						title="RechargeAXN"
 					></div>
 
-					<div className="  nav flex  gap-[0.9rem] items-center flat-menu ">
+					<div className="nav flex  gap-[0.9rem] items-center flat-menu ">
 						<Link to="/rewards">
 							<div className="rewards  text-sm">Rewards</div>
 						</Link>
@@ -70,7 +70,7 @@ export const Header = () => {
 							onClick={showLoginScreen}
 						>
 							<span className="text-tertiary leading-[13px] text-[13px]">
-								Login / Sign In
+								Login / Sign Up 
 							</span>
 						</button>
 						{/* button for login/sign Up  shown when normal screen end*/}
@@ -78,12 +78,13 @@ export const Header = () => {
 
 					{/* button for login/sign Up  shown when normal screen*/}
 					<button
-						className="flex border-box h-9 rounded bg-primary font-normal  items-center p-[5px] relative top-[2px] show-small active:bg-pink-800"
+						className="flex border-box h-9 rounded bg-primary font-normal  items-center p-[5px] relative show-small active:bg-pink-800 -top-[1px]"
+						style={{top:"-1px"}}
 						title="Login / Sign Up"
 						onClick={showLoginScreen}
 					>
 						<span className="text-tertiary leading-[13px] text-[13px]">
-							Login / Sign In
+							Login / Sign Up 
 						</span>
 					</button>
 					{/* button for login/sign Up  shown when small screen end*/}
