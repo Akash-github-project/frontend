@@ -23,12 +23,12 @@ function ConfirmSection({ heading, data = [], type, submitLink = "/#" }) {
 							each.skip === true ? "" : "border-b border-b-gray-separator"
 						} p-1 bg-white flex gap-1`}
 					>
-						<span className="  text-left flex-1 text-gray-primary">
+						<span className="  text-left flex-1 text-gray-primary text-sm">
 							{each.title}
 						</span>
 						{
 							<span
-								className={` text-right flex-1 text-gray-primary text-sm md:text-md ${
+								className={` text-right flex-1 text-gray-primary text-xs ${
 									each.cls !== undefined ? each.cls : " "
 								} `}
 							>
@@ -70,7 +70,7 @@ function ConfirmSection({ heading, data = [], type, submitLink = "/#" }) {
 			</div>
 
 			<button
-				className="text-xs md:text-[13px] leading-xs md:leading-[13px]  ml-auto mr-auto h-[34px] font-medium inline-block capitalize text-white bg-pink-primary px-4  rounded-sm max-w-fit hover:pink-700"
+				className="  leading-xs  text-sm ml-auto mr-auto h-[34px] font-medium inline-block capitalize text-white bg-pink-primary px-4  rounded-sm max-w-fit hover:pink-700"
 				onClick={() => navigate(submitLink)}
 			>
 				Make Another {type}

@@ -42,7 +42,7 @@ const ConfirmPage = () => {
 	const renderer = ({ completed }) => {
 		if (completed) {
 			return (
-				<div className="flex justify-center items-center bg-gray-100 p-4">
+				<div className="flex justify-center items-center bg-gray-100 px-0 py-4">
 					<ConfirmSection
 						data={data}
 						heading="Recharge Successful"
