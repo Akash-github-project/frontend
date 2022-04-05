@@ -1,16 +1,6 @@
-import React from "react";
-import { useState, useRef } from "react";
-import { useDispatch } from "react-redux";
-import { remember } from "../app/features/LoginSlice";
-import { Label } from "./label";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputAdornment from "@mui/material/InputAdornment";
-import IconButton from "@mui/material/IconButton";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import Button from "@mui/material/Button";
+import React, { useState, useRef } from "react";
 import Checkbox from "@mui/material/Checkbox";
-import { Formik } from "formik";
+import { Formik,Form,Field,ErrorMessage } from "formik";
 import { useTimer } from "use-timer";
 
 export const SignUp = ({ goto = () => console.log("login") }) => {
@@ -21,24 +11,18 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
 
 	const formRef = useRef("");
 
-	const [emailOtp, setEmailOtp] = useState({ status: "unsent", value: 0 });
-	const [phoneOtp, setPhoneOtp] = useState({ status: "unsent", value: 0 });
+	const [emailOtp, setEmailOtp] = useState(0);
+	const [phoneOtp, setPhoneOtp] = useState(0);
+	const [emailOtpStatus, setEmailOtpStatus] = useState("unsent");
+	const [phoneOtpStatus, setPhoneOtpStatus] = useState("unsent");
 
-	const {
-		time: emailTime,
-		start: emailTimeStart,
-		reset: emailTimeReset,
-	} = useTimer({
+	const {time: emailTime,start: emailTimeStart,reset: emailTimeReset,} = useTimer({
 		initialTime: 60,
 		endTime: 0,
 		timerType: "DECREMENTAL",
 	});
 
-	const {
-		time: phoneTime,
-		start: phoneTimeStart,
-		reset: phoneTimeReset,
-	} = useTimer({
+	const {time: phoneTime,start: phoneTimeStart,reset: phoneTimeReset,} = useTimer({
 		initialTime: 60,
 		endTime: 0,
 		timerType: "DECREMENTAL",
@@ -54,55 +38,59 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
 		generatedOtpPhone = Math.floor(generatedOtpPhone);
 
 		if (type === "email") {
-			setEmailOtp({ status: emailOtp.status, value: generatedOtpEmail });
-		} else if (type === "phone") {
-			setPhoneOtp({ status: phoneOtp.status, value: generatedOtpPhone });
+			setEmailOtp(generatedOtpEmail);
+		} else if (type === "mobile") {
+			setPhoneOtp(generatedOtpPhone);
 		}
 	};
 
-	const resendMailOtp = () => {
+	const sendOtpEmail = () => {
+		let formikRef = formRef.current;
+		formikRef.setFieldTouched("emailUser");
+		formikRef.validateField("emailUser");
+
+		console.log(formikRef);
+		if ((formikRef.errors.emailUser === "" ||
+			formikRef.errors.emailUser === undefined)
+			&&formikRef.values.emailUser !== "" ) {
+
+			askOtp("email");
+			setEmailOtpStatus("sent");
+			emailTimeStart();
+
+		} 
+	};
+
+	const sendOtpPhone = () => {
+
+		let formikRef = formRef.current;
+		formikRef.setFieldTouched("mobileUser");
+		formikRef.validateField("mobileUser");
+
+		console.log(formikRef);
+		if ((formikRef.errors.mobileUser === "" ||
+			formikRef.errors.mobileUser === undefined)
+			&&formikRef.values.mobileUser !== "" ) {
+
+			askOtp("mobile");
+			setPhoneOtpStatus("sent");
+			phoneTimeStart();
+
+		} 
+};
+
+	const resendPhoneOtp = () => {
+		phoneTimeReset();
+		askOtp("mobile");
+		phoneTimeStart();
+	};
+
+	const resendEmailOtp = () => {
 		emailTimeReset();
 		askOtp("email");
 		emailTimeStart();
 	};
 
-	const sendOtpEmail = () => {
-		let formikRef = formRef.current;
-		console.log(formikRef);
-		if (
-			formikRef.values.emailUser === "" ||
-			formikRef.errors.emailUser === ""
-		) {
-			formikRef.setFieldTouched("emailUser");
-			formikRef.validateField("emailUser");
-		} else {
-			setEmailOtp({ status: "sent", value: emailOtp.value });
-			askOtp("email");
-			emailTimeStart();
-		}
-	};
-
-	const sendOtpPhone = () => {
-		let formikRef = formRef.current;
-		console.log(formikRef);
-		if (
-			formikRef.values.phoneUser === "" ||
-			formikRef.errors.phoneUser === ""
-		) {
-			formikRef.setFieldTouched("phoneUser");
-			formikRef.validateField("phoneUser");
-			console.log(formikRef);
-		} else {
-			setPhoneOtp({ status: "sent", value: phoneOtp.value });
-			askOtp("phone");
-			phoneTimeStart();
-		}
-	};
-	const resendPhoneOtp = () => {
-		askOtp("email");
-		phoneTimeReset();
-		phoneTimeStart();
-	};
 	const handleChange = prop => event => {
 		setValues({ ...values, [prop]: event.target.value });
 	};
@@ -120,6 +108,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
 	const validateFormSignUp = values => {
 		const errors = {};
 		let numberAsString;
+		let formikRef = formRef.current;
 		const EMAIL_REGEX =
 			/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -144,9 +133,9 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
 		if (!values.terms) {
 			errors.terms = "Please accept the terms and conditions";
 		}
-		if (isNaN(parseInt(values.mobileUser)) === false) {
-			numberAsString = new Number(values.mobileUser).toString();
 
+		if (isNaN(parseInt(values.mobileUser)) === false) {
+			numberAsString = Number(values.mobileUser).toString();
 			if (
 				numberAsString[0] !== "6" &&
 				numberAsString[0] !== "7" &&
@@ -154,27 +143,48 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
 				numberAsString[0] !== "9"
 			) {
 				errors.mobileUser = "invalid mobile no";
-			} else if (numberAsString.length < 10 || numberAsString.length > 10)
+			} else if (numberAsString.length < 10 || numberAsString.length > 10){
 				errors.mobileUser = "invalid mobile no length";
-		} else if (values.emailUser.match(EMAIL_REGEX) === null) {
+			}
+		}else {
+			errors.mobileUser = "invalid Mobile no"
+		}
+
+
+
+		if (values.emailUser.match(EMAIL_REGEX) === null) {
 			errors.emailUser = "enter a valid email";
 		}
 
 		if (typeof values.otpPhone !== "undefined") {
-			if (values.otpPhone == phoneOtp.value && values.otpPhone !== "") {
-				setEmailOtp({ status: "verified", value: emailOtp.value });
-				emailTimeReset();
+			if (values.otpPhone == phoneOtp && values.otpPhone !== "") {
+				setPhoneOtpStatus("verified");
+				formikRef.setFieldValue("otpEmail","");
+				phoneTimeReset();
 			} else {
-				errors.otpPhone = "otp does not match";
+				if(formikRef.touched.otpPhone === true){
+					errors.otpPhone = "otp does not match";
+				}
+			}
+		}else{
+			if(formikRef.errors.otpPhone!== ""){
+				formikRef.errors.otpPhone = ""
 			}
 		}
 
 		if (typeof values.otpEmail !== "undefined") {
-			if (values.otpEmail == emailOtp.value && values.otpEmail !== "") {
-				setPhoneOtp({ status: "verified", value: emailOtp.value });
-				phoneTimeReset();
+			if (values.otpEmail == emailOtp && values.otpEmail !== "") {
+				setEmailOtpStatus("verified");
+				formikRef.setFieldValue("otpPhone","");
+				emailTimeReset();
 			} else {
-				errors.otpEmail = "otp does not match";
+				if(formikRef.touched.otpEmail === true){
+					errors.otpEmail = "otp does not match";
+				}
+			}
+		}else{
+			if(formikRef.errors.otpEmail !== ""){
+				formikRef.errors.otpEmail = ""
 			}
 		}
 		return errors;
@@ -193,14 +203,6 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
 		});
 	};
 
-	const handleMouseDownPassword = event => {
-		event.preventDefault();
-	};
-
-	const handleMouseDownPassword2 = event => {
-		event.preventDefault();
-	};
-
 	return (
 		<Formik
 			initialValues={{ ...initialFormValues }}
@@ -211,294 +213,146 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
 			}}
 			innerRef={formRef}
 		>
-			{formik => (
-				<form onSubmit={formik.handleSubmit}>
-					<div className="px-1 py-1 mt-2 text-left">
-						<div className="mb-4 w-full ">
-							{/* name of registerer*/}
-							{formik.errors.NameUser && formik.touched.NameUser ? (
-								<div className="w-full text-center text-xs">
-									{formik.errors.NameUser}
-								</div>
-							) : (
-								<div className="w-full text-center text-xs"></div>
-							)}
-							{console.log(formik)}
-							<div className="mb-2 flex gap-4 items-center ">
-								<Label
-									forItem="NameUser"
-									message="Name"
-									extraClasses="w-[30%]"
-								/>
-								<OutlinedInput
-									style={{ width: "70%" }}
-									size="small"
-									id="NameUser"
-									name="NameUser"
-									type="text"
-									{...formik.getFieldProps("NameUser")}
-								/>
-							</div>
-							{/* name of registerer end*/}
+			<Form className="grid grid-cols-4 gap-1">
 
-							{/* email of registerer */}
+					<span className="col-span-full text-xs text-center">
+						<ErrorMessage name="NameUser"/>
+					</span>
+					<label htmlFor="NameUser" className="text-xs">Name</label>
+					<div className="flex relative col-span-3 h-[34px] rounded">
+						<Field name="NameUser" className="flex-1 border border-pink-primary h-full rounded" type="text"/>
+					</div>
 
-							{formik.errors.emailUser && formik.touched.emailUser ? (
-								<div className="w-full text-center text-xs">
-									{formik.errors.emailUser}
-								</div>
-							) : (
-								<div className="w-full text-center text-xs"></div>
-							)}
-							<div className="flex gap-4 items-center mb-2">
-								<Label
-									forItem="emailUser"
-									message="E-mail"
-									extraClasses="w-[30%]"
-								/>
-								<div style={{ width: "70%" }} className="flex">
-									<OutlinedInput
-										style={{ flex: "1" }}
-										size="small"
-										name="emailUser"
-										id="emailUser"
-										type="email"
-										{...formik.getFieldProps("emailUser")}
-									/>
-									<Button
-										variant="contained"
-										disabled={emailOtp.status === "sent" ? true : false}
-										style={{ backgroundColor: "#f5317c" }}
-										// workin
-										onClick={sendOtpEmail}
+					<span className="col-span-full text-xs text-center">
+						<ErrorMessage name="emailUser" />
+					</span>
+
+					<label htmlFor="emailUser" className="text-xs">Email </label>
+					<div className="flex col-span-3 rounded">
+						<Field name="emailUser" disabled={emailOtpStatus=== "verified"||emailOtpStatus=== "sent"?true:false} className="flex-1 border border-pink-primary rounded" type="text"/>
+
+						<button className="h-[34px] px-3 bg-pink-primary text-white disabled:bg-gray-600" 
+						 disabled={emailOtpStatus=== "sent"?true:false}
+						 onClick={emailOtpStatus=== "verified"?()=>setEmailOtpStatus("unsent"):()=>sendOtpEmail()} 
+						 type="button">
+							 {
+								 emailOtpStatus === "verified"?<i className="fa-regular fa-pen-to-square text-white w-5 "></i>:"OTP"
+							 }
+						 </button>
+					</div>
+
+				{
+					emailOtpStatus === "verified"||emailOtpStatus=== "unsent"?null:(
+						<>
+						<span className="col-span-full text-center text-xs">
+							<ErrorMessage name="otpEmail"/>
+						</span>
+					<div className="col-span-full flex h-[34px]">
+					<label htmlFor="otpEmail" className="text-xs w-1/4">Otp</label>
+					<Field name="otpEmail" className="border border-pink-primary rounded h-full w-1/4" type="tel"/>
+						<>
+							{emailOtpStatus === "sent" ? (
+								emailTime!== 0 ? (
+									<span className="mx-auto leading-[34px] ">
+										{`${Math.floor(emailTime/ 60)}:${emailTime% 60}`}
+									</span>
+								) : (
+									<button
+										className="hover:bg-pink-primary hover:text-white border border-pink-primary rounded text-xs px-1 mx-1"
+										onClick={resendEmailOtp}
 									>
-										OTP
-									</Button>
-								</div>
-							</div>
-							{/* email of registerer end*/}
+										Resend Otp
+									</button>
+								)
+							) : null}
+						</>
+					</div>
+					</>
+					)
+				}
 
-							{/* email otp section stats here */}
+					{/* phone user section starts */}
+					<span className="col-span-full text-xs text-center">
+						<ErrorMessage name="mobileUser" />
+					</span>
 
-							{emailOtp.status === "verified" ||
-							emailOtp.status === "unsent" ? null : (
-								<div className="flex gap-4 items-center mb-2">
-									<Label
-										forItem="otpEmail"
-										message="OTP"
-										extraClasses="w-[30%]"
-									/>
-									<div style={{ width: "70%" }} className="flex items-center">
-										<OutlinedInput
-											style={{ width: "50%" }}
-											sx={
-												emailOtp.status === "verified"
-													? {
-															"div.MuiInput-root": {
-																outline: "2px solid green",
-															},
-													  }
-													: null
-											}
-											size="small"
-											id="otpEmail"
-											name="otpEmail"
-											type="tel"
-											{...formik.getFieldProps("otpEmail")}
-										/>
-										{emailOtp.status === "sent" ? (
-											emailTime !== 0 ? (
-												<span className="w-1/2 mx-auto ">
-													{`${Math.floor(emailTime / 60)}:${emailTime % 60}`}
-												</span>
-											) : (
-												<Button
-													variant="contained"
-													style={{ backgroundColor: "#f5317c" }}
-													onClick={resendMailOtp}
-												>
-													Resend Otp
-												</Button>
-											)
-										) : null}
-									</div>
-								</div>
-							)}
-							{/* email otp section ends here */}
+					<label htmlFor="mobileUser" className="text-xs">Mobie No</label>
+					<div className="flex col-span-3 rounded">
+						<Field name="mobileUser" disabled={phoneOtpStatus=== "verified"||phoneOtpStatus=== "sent"?true:false} className="flex-1 border border-pink-primary rounded" type="tel"/>
 
-							{/* mobile no of registerer */}
-							{formik.errors.mobileUser && formik.touched.mobileUser ? (
-								<div className="w-full text-center text-xs">
-									{formik.errors.mobileUser}
-								</div>
-							) : (
-								<div className="w-full text-center text-xs"></div>
-							)}
-
-							<div className="flex gap-4 items-center mb-2">
-								<Label
-									forItem="mobileUser"
-									message="Mobile"
-									extraClasses="w-[30%]"
-								/>
-								<div style={{ width: "70%" }} className="flex">
-									<OutlinedInput
-										style={{ flex: "1" }}
-										size="small"
-										id="mobileUser"
-										name="mobileUser"
-										type="tel"
-										{...formik.getFieldProps("mobileUser")}
-									/>
-
-									<Button
-										variant="contained"
-										disabled={phoneOtp.status === "sent" ? true : false}
-										style={{ backgroundColor: "#f5317c" }}
-										onClick={sendOtpPhone}
+						<button className="h-[34px] px-3 bg-pink-primary text-white disabled:bg-gray-600" 
+						 disabled={phoneOtpStatus=== "sent"?true:false}
+						 onClick={phoneOtpStatus=== "verified"?()=>setPhoneOtpStatus("unsent"):()=>sendOtpPhone()} 
+						 type="button">
+							 {
+								 phoneOtpStatus === "verified"?<i className="fa-regular fa-pen-to-square text-white w-5 "></i>:"OTP"
+							 }
+						 </button>
+					</div>
+				{
+					phoneOtpStatus === "verified"||phoneOtpStatus=== "unsent"?null:(
+						<>
+						<span className="col-span-full text-center text-xs">
+							<ErrorMessage name="otpPhone"/>
+						</span>
+					<div className="col-span-full flex h-[34px]">
+					<label htmlFor="otpPhone" className="text-xs w-1/4">Otp</label>
+					<Field name="otpPhone" className="border border-pink-primary rounded h-full w-1/4" type="tel"/>
+						<>
+							{phoneOtpStatus === "sent" ? (
+								phoneTime!== 0 ? (
+									<span className="mx-auto leading-[34px] ">
+										{`${Math.floor(phoneTime/ 60)}:${phoneTime% 60}`}
+									</span>
+								) : (
+									<button
+										className="hover:bg-pink-primary hover:text-white border border-pink-primary rounded text-xs px-1 mx-1"
+										onClick={resendPhoneOtp}
 									>
-										OTP
-									</Button>
-								</div>
-							</div>
-							{/* mobile no of registerer end*/}
-							{/* phone otp section stats here */}
+										Resend Otp
+									</button>
+								)
+							) : null}
+						</>
+					</div>
+					</>
+					)
+				}
+{/* phone user section ends */}
 
-							{phoneOtp.status === "verified" ||
-							phoneOtp.status === "unsent" ? null : (
-								<div className="flex gap-4 items-center mb-2">
-									<Label
-										forItem="otpPhone"
-										message="OTP"
-										extraClasses="w-[30%]"
-									/>
-									<div style={{ width: "70%" }} className="flex items-center">
-										<OutlinedInput
-											style={{ width: "50%" }}
-											sx={
-												phoneOtp.status === "verified"
-													? {
-															"div.MuiInput-root": {
-																outline: "2px solid green",
-															},
-													  }
-													: null
-											}
-											size="small"
-											id="otpPhone"
-											name="otpPhone"
-											type="tel"
-											{...formik.getFieldProps("otpPhone")}
-										/>
-										{phoneOtp.status === "sent" ? (
-											phoneTime !== 0 ? (
-												<span className="w-1/2 mx-auto ">
-													{`${Math.floor(phoneTime / 60)}:${phoneTime % 60}`}
-												</span>
-											) : (
-												<Button
-													variant="contained"
-													style={{ backgroundColor: "#f5317c" }}
-													onClick={resendPhoneOtp}
-												>
-													Resend Otp
-												</Button>
-											)
-										) : null}
-									</div>
-								</div>
-							)}
-							{/* otp section ends here */}
-							{/* password of registerer */}
 
-							{formik.errors.signUpPass1 && formik.touched.signUpPass1 ? (
-								<div className="w-full text-center text-xs">
-									{formik.errors.signUpPass1}
-								</div>
-							) : (
-								<div className="w-full text-center text-xs"></div>
-							)}
-							<div className="mb-2 flex gap-4 items-center ">
-								<Label
-									forItem="signUpPass1"
-									message="Password"
-									extraClasses="w-[30%]"
-								/>
+					<span className="col-span-full text-xs text-center">
+						<ErrorMessage name="signUpPass1"/>
+					</span>
+					<label htmlFor="signUpPass1" className="text-xs">New Password</label>
+					<div className="flex relative col-span-3 h-[34px]">
+						<Field name="signUpPass1" className="flex-1 border border-pink-primary h-full rounded" type={values.showPassword === true?"text":"password"}/>
 
-								<OutlinedInput
-									style={{ width: "70%" }}
-									size="small"
-									id="signUpPass1"
-									name="signUpPass1"
-									{...formik.getFieldProps("signUpPass1")}
-									type={values.showPassword ? "text" : "password"}
-									endAdornment={
-										<InputAdornment position="end">
-											<IconButton
-												aria-label="toggle password visibility"
-												onClick={handleClickShowPassword}
-												onMouseDown={handleMouseDownPassword}
-												edge="end"
-											>
-												{values.showPassword ? (
-													<Visibility />
-												) : (
-													<VisibilityOff />
-												)}
-											</IconButton>
-										</InputAdornment>
-									}
-								/>
-							</div>
-							{/* password of registerer end*/}
+						<button className="w-8 absolute right-0 top-0 bottom-0  flex items-center justify-center rounded" type="button">
+						<i className={`fa-solid ${values.showPassword?"fa-eye":"fa-eye-slash "} `} onClick={handleClickShowPassword}></i>
+						</button>
+					</div>
 
-							{/* password of re-registerer */}
+					<span className="col-span-full text-xs text-center">
+						<ErrorMessage name="signUpPass2"/>
+					</span>
+					<label htmlFor="signUpPass2" className="text-xs">Re password</label>
+					<div className="flex relative col-span-3 h-[34px] rounded">
+						<Field name="signUpPass2" className="flex-1 border border-pink-primary h-full rounded" type={values.showPassword2 === true?"text":"password"}/>
+						<button className="w-8 absolute right-0 top-0 bottom-0  flex items-center justify-center rounded" type="button">
+						<i className={`fa-solid ${values.showPassword2?"fa-eye":"fa-eye-slash "} `} onClick={handleClickShowPassword2}></i>
+						</button>
+					</div>
 
-							{formik.errors.signUpPass2 && formik.touched.signUpPass2 ? (
-								<div className="w-full text-center text-xs">
-									{formik.errors.signUpPass2}
-								</div>
-							) : (
-								<div className="w-full text-center text-xs"></div>
-							)}
-							<div className=" flex gap-4 items-center ">
-								<Label
-									forItem="signUpPass2"
-									message="Re-Password"
-									extraClasses="w-[30%]"
-								/>
+						<button className="h-[34px] px-1 bg-pink-primary text-white col-span-full rounded" type="submit">Submit</button>
 
-								<OutlinedInput
-									style={{ width: "70%" }}
-									size="small"
-									name="signUpPass2"
-									id="signUpPass2"
-									{...formik.getFieldProps("singUpPass2")}
-									type={values.showPassword2 ? "text" : "password"}
-									endAdornment={
-										<InputAdornment position="end">
-											<IconButton
-												aria-label="toggle password visibility"
-												onClick={handleClickShowPassword2}
-												onMouseDown={handleMouseDownPassword2}
-												edge="end"
-											>
-												{values.showPassword2 ? (
-													<Visibility />
-												) : (
-													<VisibilityOff />
-												)}
-											</IconButton>
-										</InputAdornment>
-									}
-								/>
-							</div>
-							{/* password of re-registerer end*/}
+			</Form>
+		</Formik>)
 
 							{/* accept terms ,conditions  and privacy policy*/}
-							<div className="flex items-center">
+							{/* <div className="flex items-center"> */}
 								{/* terms and conditions checkbox*/}
-								<Checkbox
+								{/* <Checkbox
 									sx={{
 										color: "#f5317c",
 										"&.Mui-checked": {
@@ -512,7 +366,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
 								/>
 
 								{/* label for terms and conditions */}
-								<label
+								{/* <label
 									htmlFor="terms"
 									className="mr-auto ml-2 text-gray-primary"
 								>
@@ -525,11 +379,11 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
 										Privacy Policy
 									</a>
 								</label>
-							</div>
+							</div> */} 
 							{/* accept terms ,conditions  and privacy policy end*/}
 
 							{/* login button  */}
-							{formik.errors.emailOrMobile && formik.touched.emailOrMobile ? (
+							{/* {formik.errors.emailOrMobile && formik.touched.emailOrMobile ? (
 								<div className="w-full text-center text-xs">
 									{formik.errors.emailOrMobile}
 								</div>
@@ -543,10 +397,10 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
 								>
 									Login
 								</button>
-							</div>
+							</div> */}
 							{/* login button  end */}
 
-							<div className="mt-2  text-black text-center">
+							{/* <div className="mt-2  text-black text-center">
 								Already have an account
 								<a
 									className=" ml-2 cursor-pointer"
@@ -556,10 +410,8 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
 									Log In
 								</a>
 							</div>
-						</div>
-					</div>
-				</form>
-			)}
-		</Formik>
-	);
-};
+						</div> */}
+					{/* </div> */}
+				{/* </form>
+			)} */}
+}

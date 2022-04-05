@@ -40,8 +40,12 @@ function ConfirmSection({ heading, data = [], type, submitLink = "/#" }) {
 			</section>
 			<div className="flex gap-px md:gap-[2px] my-2 w-full items-center">
 				<button className="flex-1  md:px-2 py-1 text-gray-400 ">
-					<i class="fa-solid fa-print text-gray-primary"></i>
-					<span className="text-xs md:text-sm text-gray-primary ml-1">
+					<img
+						src="images/PdfSvg.svg"
+						alt=""
+						className="w-4 inline-block text-gray-primary "
+					/>
+					<span className="text-[10px] md:text-xs text-gray-primary ml-1">
 						Save As PDF
 					</span>
 				</button>
@@ -50,19 +54,16 @@ function ConfirmSection({ heading, data = [], type, submitLink = "/#" }) {
 					className="flex-1  md:px-2 py-1  text-gray-400 items-center"
 					onClick={() => window.print()}
 				>
-					<img
-						src="images/PdfSvg.svg"
-						alt=""
-						className="w-4 inline-block text-gray-primary "
-					/>
-					<span className="text-gray-primary text-xs md:text-sm ml-1">
+
+					<i class="fa-solid fa-print text-gray-primary"></i>
+					<span className="text-gray-primary text-[10px] md:text-xs  ml-1">
 						Print Receipt
 					</span>
 				</button>
 
 				<button className="flex-1  md:px-2 py-1 text-gray-400 items-center">
 					<i className="fa-solid fa-envelope text-gray-primary"></i>
-					<span className="text-xs md:text-sm text-gray-primary ml-1">
+					<span className="text-[10px] md:text-xs text-gray-primary ml-1">
 						Email Receipt
 					</span>
 				</button>

@@ -24,6 +24,7 @@ import Suggestions from "./components/Suggestions";
 import WrapperPrepaid from "./components/wrapperPrepaid";
 import WrapperPostpaid from "./components/wrapperPostpaid";
 import ConfirmPage from "./components/confirmPage";
+import {WalletPage} from "./components/userpages/walletPage" 
 
 ReactDOM.render(
 	<React.StrictMode>
@@ -49,6 +50,7 @@ ReactDOM.render(
 						<Route path="offers" element={<Offers />} />
 						<Route path="rewards" element={<Rewards />} />
 						<Route path="suggestions" element={<Suggestions />} />
+						<Route path="addBalance" element={<WalletPage />} />
 					</Route>
 				</Routes>
 			</Router>

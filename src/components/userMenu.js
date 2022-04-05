@@ -5,11 +5,11 @@ import { Link } from "react-router-dom";
 function UserMenu({ showInSmall = "false" }) {
 	const [anchorEl, setAnchorEl] = React.useState(null);
 
-	function handleClick(event) {
-		if (anchorEl !== event.currentTarget) {
-			setAnchorEl(event.currentTarget);
+	function handleClick(e) {
+		if (anchorEl !== e.target) {
+			setAnchorEl(()=>e.target);
 		}
-		console.log(event.target);
+		console.log(e.target);
 	}
 
 	function handleClose() {
@@ -17,7 +17,7 @@ function UserMenu({ showInSmall = "false" }) {
 	}
 
 	return (
-		<div tabIndex={0}>
+		<div>
 			<button
 				className={`w-8 h-8 user bg-pink-primary    ml-[0.9rem]  mt-[6px] small-margin  scale-small small-btn  ${
 					showInSmall === true ? "show-in-small" : " "
@@ -25,7 +25,7 @@ function UserMenu({ showInSmall = "false" }) {
 				onClick={handleClick}
 				onMouseOver={handleClick}
 			>
-				<i className="fas fa-user text-white" area-hidden="true"></i>
+				<i className="fas fa-user text-white pointer-events-none inline-block" area-hidden="true"></i>
 			</button>
 			<Menu
 				id="simple-menu"
@@ -33,14 +33,14 @@ function UserMenu({ showInSmall = "false" }) {
 				open={Boolean(anchorEl)}
 				onClose={handleClose}
 				MenuListProps={{ onMouseLeave: handleClose }}
-				anchorOrigin={{
-					vertical: "bottom",
-					horizontal: "right",
-				}}
-				transformOrigin={{
-					vertical: "top",
-					horizontal: "right",
-				}}
+				// anchorOrigin={{
+				// 	vertical: "bottom",
+				// 	horizontal: "right",
+				// }}
+				// transformOrigin={{
+				// 	vertical: "top",
+				// 	horizontal: "right",
+				// }}
 				sx={{
 					"& ul li": {
 						backgroundColor: "white",

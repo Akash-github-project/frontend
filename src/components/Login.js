@@ -197,7 +197,7 @@ export const Login = ({ goto = () => console.log("forgotPass") }) => {
 
 								{/* additional sign up prompt  */}
 								<div className="mt-6 text-black text-center">
-									Not having account, Please
+									Not having account, Please &nbsp;
 									<a
 										className="text-primary"
 										href="#"

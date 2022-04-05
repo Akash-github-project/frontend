@@ -11,7 +11,6 @@ const data = [
 	{
 		title: "Subject",
 		value: "Mobile Recharge",
-		skip: true,
 	},
 	{
 		title: "Transaction ID",
@@ -20,7 +19,6 @@ const data = [
 	{
 		title: "Date",
 		value: "06-Feb-2019 12:23:40",
-		skip: true,
 	},
 
 	{
