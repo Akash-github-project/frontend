@@ -70,7 +70,7 @@ function ConfirmSection({ heading, data = [], type, submitLink = "/#" }) {
 			</div>
 
 			<button
-				className="  leading-xs  text-sm ml-auto mr-auto h-[34px] font-medium inline-block capitalize text-white bg-pink-primary px-4  rounded-sm max-w-fit hover:pink-700"
+				className="  leading-xs text-sm ml-auto mr-auto h-[34px] font-medium inline-block capitalize text-white bg-pink-primary px-4  rounded-sm max-w-fit hover:pink-700"
 				onClick={() => navigate(submitLink)}
 			>
 				Make Another {type}
