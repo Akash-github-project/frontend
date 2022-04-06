@@ -179,7 +179,7 @@ export const Login = ({ goto = () => console.log("forgotPass") }) => {
 										className="inline-block text-primary cursor-pointer"
 										onClick={() => goto("forgotPass")}
 									>
-										Forgot Password
+										Forgot Password?
 									</span>
 								</div>
 								{/*forgot password and rememer me end */}
@@ -196,7 +196,7 @@ export const Login = ({ goto = () => console.log("forgotPass") }) => {
 								{/* login button end */}
 
 								{/* additional sign up prompt  */}
-								<div className="mt-6 text-black text-center">
+								<div className="mt-1 text-black text-center">
 									Not having account, Please &nbsp;
 									<a
 										className="text-primary"

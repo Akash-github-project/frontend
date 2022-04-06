@@ -1,0 +1,37 @@
+{
+	"heading": "Bill Details",
+	"dataColumns": [
+		{
+			"type": "n",
+			"bold": false,
+			"title": "Mobile No",
+			"value": 1234567890
+		},
+		{
+			"type": "n",
+			"bold": false,
+			"title": "Operator",
+			"value": "MTNL Mumbai"
+		},
+		{
+			"type": "n",
+			"bold": false,
+			"title": "Circle",
+			"value": "Uttar Pradesh (West) & Uttarakhand"
+		},
+
+		{
+			"type": "n",
+			"bold": false,
+			"title": "Due Date",
+			"value": "29 dec 2022"
+		},
+
+		{
+			"type": "n",
+			"bold": false,
+			"title": "Ammount",
+			"value": "Rs 2000"
+		}
+	]
+}

@@ -29,6 +29,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
 	});
 
 	const askOtp = type => {
+		console.log("called askOtp")
 		let generatedOtpEmail =
 			Math.random() * 6 + Math.random() * 6 * 10 + Math.random() * 6 * 100;
 		generatedOtpEmail = Math.floor(generatedOtpEmail);
@@ -62,7 +63,6 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
 	};
 
 	const sendOtpPhone = () => {
-
 		let formikRef = formRef.current;
 		formikRef.setFieldTouched("mobileUser");
 		formikRef.validateField("mobileUser");
@@ -75,7 +75,6 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
 			askOtp("mobile");
 			setPhoneOtpStatus("sent");
 			phoneTimeStart();
-
 		} 
 };
 
@@ -324,7 +323,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
 					<span className="col-span-full text-xs text-center">
 						<ErrorMessage name="signUpPass1"/>
 					</span>
-					<label htmlFor="signUpPass1" className="text-xs">New Password</label>
+					<label htmlFor="signUpPass1" className="text-xs">Password</label>
 					<div className="flex relative col-span-3 h-[34px]">
 						<Field name="signUpPass1" className="flex-1 border border-pink-primary h-full rounded" type={values.showPassword === true?"text":"password"}/>
 
@@ -348,70 +347,4 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
 
 			</Form>
 		</Formik>)
-
-							{/* accept terms ,conditions  and privacy policy*/}
-							{/* <div className="flex items-center"> */}
-								{/* terms and conditions checkbox*/}
-								{/* <Checkbox
-									sx={{
-										color: "#f5317c",
-										"&.Mui-checked": {
-											color: "#f5317c",
-										},
-									}}
-									onChange={formik.handleChange}
-									checked={formik.values.terms}
-									name="terms"
-									id="terms"
-								/>
-
-								{/* label for terms and conditions */}
-								{/* <label
-									htmlFor="terms"
-									className="mr-auto ml-2 text-gray-primary"
-								>
-									I agree to the
-									<a className="text-primary mx-2" href="#">
-										Terms
-									</a>
-									and
-									<a className="text-primary ml-2" href="#">
-										Privacy Policy
-									</a>
-								</label>
-							</div> */} 
-							{/* accept terms ,conditions  and privacy policy end*/}
-
-							{/* login button  */}
-							{/* {formik.errors.emailOrMobile && formik.touched.emailOrMobile ? (
-								<div className="w-full text-center text-xs">
-									{formik.errors.emailOrMobile}
-								</div>
-							) : (
-								<div className="w-full text-center text-xs"></div>
-							)}
-							<div className="flex">
-								<button
-									className="w-full  p-2 mt-4 bg-primary text-white  rounded-lg  hover:shadow-pink-900 active:bg-pink-800"
-									type="submit"
-								>
-									Login
-								</button>
-							</div> */}
-							{/* login button  end */}
-
-							{/* <div className="mt-2  text-black text-center">
-								Already have an account
-								<a
-									className=" ml-2 cursor-pointer"
-									href="#"
-									onClick={() => goto("login")}
-								>
-									Log In
-								</a>
-							</div>
-						</div> */}
-					{/* </div> */}
-				{/* </form>
-			)} */}
 }

@@ -9,3 +9,25 @@ ammount button
 
 add back to top button
 
+Confirmation Page:
+	1. No padding (around page)
+	2. Font size - 14px (content, button)
+					12/13px for link
+	3. Single line row
+	
+	
+Toggle Menu:
+	1. Menu not displaying in mobile mode.
+	2. Spaces between menu list to reduce.
+	3. "Hi <Username>" should be in middle & Bold on menu
+
+Login/Sign : 
+	1. Login / Forget Password/ SignUp should be same as rechargeaxn.com
+	(All formating, all spaces, label, functionality)
+	2. in mobile mode, login/signup button is small. Should be same as on rechargeaxn.com
+	
+	
+	https://rechargeaxn.com/new_project_rech/home/postpaid
+	https://rechargeaxn.com/new_project_rech/home/fasttag
+	https://rechargeaxn.com/new_project_rech/home/insurance	
+	https://rechargeaxn.com/new_project_rech/home/giftcard

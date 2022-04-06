@@ -30,15 +30,15 @@ const data = {
 	],
 };
 
-const ConfirmDetails = ({ dataPlan = "" }) => {
+const ConfirmDetails = ({ dataPlan = data }) => {
 	return (
 		<>
 			{
 				<>
 					<div className="col-span-full w-full py-2 px-6 bg-gray-100 text-pink-primary font-semibold capitalize leading-[19px]">
-						{data.heading}
+						{dataPlan.heading}
 					</div>
-					{data.dataColumns.map(el => (
+					{dataPlan.dataColumns.map(el => (
 						<>
 							<div
 								className={
