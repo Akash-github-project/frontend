@@ -1,7 +1,7 @@
 import React from "react";
 import Wrapper from "./wrapper";
 import { Crosel } from "./Crosel";
-import Services from "./Services";
+// import Services from "./Services";
 import Prepaid from "./prepaid";
 import PrepaidMobile from "./subServices/prepaidMobile";
 import PlansList from "./subServices/plansList";
@@ -22,13 +22,6 @@ const WrapperPrepaid = () => {
 	const showPlan = useSelector(state => state.prepaidPlan.showPlan);
 	return (
 		<>
-			<Wrapper>
-				<Crosel />
-			</Wrapper>
-
-			<Wrapper>
-				<Services />
-			</Wrapper>
 			<Wrapper>
 				<Prepaid>
 					<PrepaidMobile />
