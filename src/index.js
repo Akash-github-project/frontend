@@ -25,6 +25,7 @@ import WrapperPrepaid from "./components/wrapperPrepaid";
 import WrapperPostpaid from "./components/wrapperPostpaid";
 import ConfirmPage from "./components/confirmPage";
 import {WalletPage} from "./components/userpages/walletPage" 
+import Dth from "./components/subServices/dth"
 
 ReactDOM.render(
 	<React.StrictMode>
@@ -38,6 +39,7 @@ ReactDOM.render(
 							<Route index element={<Navigate replace to="/home/prepaid" />} />
 							<Route path="prepaid" element={<WrapperPrepaid />} />
 							<Route path="postpaid" element={<WrapperPostpaid />} />
+							<Route path="recharge_bill_dth" element={<Dth/>} />
 						</Route>
 
 						<Route path="aboutus" element={<AboutUs />} />

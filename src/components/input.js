@@ -7,6 +7,7 @@ export const Input = ({
 	iType = "text",
 	change,
 	val,
+	st,
 	dis = "false",
 	override = {},
 }) => {

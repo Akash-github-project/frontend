@@ -13,12 +13,12 @@ const Services = () => {
 		mobile: {
 			icon: "fas fa-mobile-alt",
 			heading: "Mobile",
-			link: "/mobile",
+			link: "/home/prepaid",
 		},
 		DTH: {
 			icon: "fas fa-satellite-dish",
 			heading: "DTH",
-			link: "/mobile",
+			link: "/home/recharge_bill_dth",
 		},
 		Electricity: {
 			icon: "far fa-lightbulb",
