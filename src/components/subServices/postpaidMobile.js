@@ -127,10 +127,11 @@ const PostpaidMobile = () => {
               <Checkbox
                 borderColor="#f5317c"
                 icon={<i class="fa-solid fa-square-check text-pink-600"></i>}
+                id="payFromWallet"
               />
-              <span className="ml-1 text-gray-primary text-sm">
+              <label htmlFor="payFromWallet" className="ml-1 text-gray-primary text-sm">
                 Wallet Balance
-              </span>
+              </label>
             </div>
             <span className="ml-auto mr-6 text-gray-800 font-semibold">
               {3343}
