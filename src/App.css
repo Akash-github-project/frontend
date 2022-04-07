@@ -51,6 +51,7 @@ li {
 .width-80 {
 	width: 80%;
 }
+
 input.field {
 	max-width: 65%;
 	padding: 0.375rem 0.75rem;
@@ -62,6 +63,9 @@ input.field {
 input.field:focus-within {
 	border: 1px solid steelblue;
 	outline: 1px solid steelblue;
+}
+.roboto{
+	font-family: "Roboto", sans-serif;
 }
 .blankCheckbox {
 	width: 0.25rem;
@@ -91,11 +95,6 @@ input.field:focus-within {
 	background-color: #f5317c;
 	color: white;
 }
-/* button, [type="button"], [type="reset"], [type="submit"]{
-  padding: 1rem 2rem;;
-  color:white;
-  background-color: #f5317c;
-} */
 
 * {
 	box-sizing: border-box;

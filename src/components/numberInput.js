@@ -9,6 +9,7 @@ export const NumberInput = ({
 	change,
 	val,
 	onleft = " ",
+	color="gray"
 }) => {
 	let defaultClasses =
 		"border rounded-md text-black focus:text-red-400 border-0 w-full outline-none text-[13px] leading-[21px]";
@@ -27,7 +28,7 @@ export const NumberInput = ({
 	}
 	return (
 		<div className={defaultField} tabIndex={0}>
-			<span className="text-gray-primary mr-1 inline-block w-[max-content] text-sm leading-[21px]">
+			<span className={`text-${color}-primary mr-1 inline-block w-[max-content] text-md text-bold leading-[21px] roboto`}>
 				{onleft}
 			</span>
 			<input
