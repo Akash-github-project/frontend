@@ -100,7 +100,7 @@ input.field:focus-within {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
-	list-style: none;
+	/* list-style: none; */
 }
 .services {
 	/* display: grid; */
