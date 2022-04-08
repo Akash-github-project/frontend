@@ -78,13 +78,13 @@ const Dth = () => {
                 <NumberInput
                   extraClasses="h-full rounded-r rounded-l-none w-full"
                   fieldClasses="border border-pink-primary w-full"
-                  holder="Ammount"
+                  holder="Amount"
                   onleft="₹"
                   color="pink"
                 />
               </div>
               <button
-                className="lg:p-1 h-[36px] w-full bg-pink-primary active:bg-pink-800 text-white rounded text-[15px] lg:text-[13px] leading-[13px] font-medium text-sm"
+                className="lg:p-1 h-[36px] w-full bg-pink-primary active:bg-pink-800 text-white rounded text-[15px] lg:text-[15px] leading-[15px] font-medium text-sm"
                 placeholder="Ammount"
                 // onClick={handleRechargeRequest}
               >
@@ -179,7 +179,7 @@ const Dth = () => {
                 <Button
                   text="Pay Rs 1000 "
                   exClasses="w-full "
-                  fClasses="text-[15px]"
+                  fClasses="text-[15px] leading-[15px]"
                 />
               </div>
               {/* pay ammount button section end*/}

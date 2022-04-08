@@ -178,7 +178,7 @@ const PostpaidMobile = () => {
           {/* wallet balance section start */}
 
           {/* pay ammount button section start */}
-          <div className=" col-span-full px-2 py-2">
+          <div className=" col-span-full py-3">
             <Button
               text="Pay Rs 1000 "
               exClasses="w-full"
