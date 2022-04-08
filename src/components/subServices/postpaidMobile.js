@@ -7,8 +7,9 @@ import { Input } from "../input"
 import Checkbox from "react-custom-checkbox"
 import { NumberInput } from "../numberInput"
 import circle from "../../otherData/circle.json"
-import operator from "../../otherData/operator.json"
+import operator from "../../otherData/postpaidOperator.json"
 import postpaidConfirm from "./specialJsons/postpaidConfirm.json"
+import "../../css/grids.css"
 
 let operatorList = operator.list.map((item) => ({
   name: item.op_name,
@@ -34,6 +35,25 @@ const PostpaidMobile = () => {
   }
   const handleOperatorChange = (value) => {
     console.log(value)
+
+    let filterCircle = circleList.filter((element) => {
+      let toCompare = JSON.parse(element.value)
+
+      if ("MM" === value) {
+        return toCompare.code === "MU"
+      } else if ("MD" === value) {
+        return toCompare.code === "DL"
+      } else if ("BS" === value) {
+        return !(toCompare.code === "DL" || toCompare.code === "MU")
+      } else return true
+    })
+
+    let currentOperator = operatorList.filter((operator) => {
+      return operator.value === value
+    })
+
+    console.log(currentOperator)
+    setCircle([...filterCircle])
   }
   const handleCircleChange = (value) => {
     console.log(value)
@@ -41,7 +61,7 @@ const PostpaidMobile = () => {
 
   return (
     <div>
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 lg:gap-2 xl:gap-3 w-full mx-auto">
+      <div className="grid grid-cols-1 gap-4 lg:gap-2 xl:gap-3 w-full mx-auto input-width-grid">
         <NumberInput
           iType="tel"
           val={phoneNo}
@@ -71,25 +91,6 @@ const PostpaidMobile = () => {
           placeholder="Circle"
           onChange={(value) => handleCircleChange(value)}
         />
-        {/* <select
-          name=""
-          id=""
-          className="border border-pink-600 h-[36px] text-gray-primary rounded text-sm">
-          <option value="" className="text-gray-primary">
-            Select your Operator
-          </option>
-          <option value="" className="text-gray-primary">
-            Select your Operator
-          </option>
-        </select>
-
-        <select
-          name=""
-          id=""
-          className="border border-pink-600 h-[36px] text-gray-primary rounded text-sm">
-          <option value="">Select Circle(State)</option>
-        </select> */}
-
         <button
           className="p-3 lg:p-1 bg-pink-primary active:bg-pink-800 text-white rounded text-[15px] lg:text-[13px] leading-[13px] font-medium lg:ml-4 text-sm"
           // onClick={handleRechargeRequest}
@@ -108,10 +109,10 @@ const PostpaidMobile = () => {
           {/* card details section end*/}
 
           {/* ammount showing section start */}
-          <div className="p-1 bg-gray-200 font-semibold text-black text-left px-1 py-2">
+          <div className="p-1 bg-gray-200 font-medium text-black text-left px-1 py-2">
             Total Amount:
           </div>
-          <div className="p-1 bg-gray-200 font-semibold text-black text-right px-1 py-2">
+          <div className="p-1 bg-gray-200 font-medium text-black text-right px-1 py-2">
             Rs 1000
           </div>
           {/* ammount showing section end*/}

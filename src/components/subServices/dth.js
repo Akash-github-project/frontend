@@ -2,51 +2,75 @@ import ConfirmDetails from "./confirmDetails"
 import Button from "../button"
 import { Input } from "../input"
 import Checkbox from "react-custom-checkbox"
+import { renderProvider } from "../../otherData/inputWithImage"
+import SelectSearch, { fuzzySearch } from "react-select-search"
+import operator from "../../otherData/dthOperator.json"
 import { NumberInput } from "../numberInput"
 import { useState } from "react"
 import Wrapper from "../wrapper"
 //to change
 import dthConfirm from "./specialJsons/dthConfirm.json"
 
+let operatorList = operator.list.map((item) => ({
+  name: item.op_name,
+  value: item.op_key,
+  photo: item.image,
+  code: item.op_code,
+  msg: item.msg,
+}))
+
 const Dth = () => {
   const [phoneNo, setPhoneNo] = useState("")
   const [openCoupon, setCouponState] = useState(false)
   const [couponState, toggleCouponState] = useState(true)
+  const [outputOperator, setOperator] = useState(operatorList)
+  const [currentMsg, setCurrentMsg] = useState("")
 
   const handleApplyCoupon = () => {
     toggleCouponState(!couponState)
   }
+
+  const handleOperatorChange = (value) => {
+    console.log(value)
+
+    let currentOperator = operatorList.filter((operator) => {
+      return operator.value === value
+    })
+
+    console.log(currentOperator)
+    setCurrentMsg(currentOperator[0].msg)
+  }
   return (
     <Wrapper>
       <div className="w-full">
-        <div className="w-full grid grid-cols-1 lg:grid-cols-7 gap-6 ">
-          <div className="col-span-2">
-            <div className="grid grid-cols-1 gap-4 w-full mx-auto">
+        <div className="w-full grid grid-cols-1 lg:grid-cols-11 gap-6 justify-center items-center">
+          <div className="col-span-1 md:col-span-5">
+            <div className="grid grid-cols-1 gap-4 w-full mx-auto lg:ml-auto lg:mr-8 lg:max-w-[218px]">
               <div className="w-full col-span-full font-medium leading-[19px]">
                 DTH Recharge
               </div>
               {/* select operator*/}
-              <select
-                name=""
-                id="dthOperator"
-                className="border border-pink-600 h-[36px] text-gray-primary rounded text-sm">
-                <option value="" className="text-gray-primary">
-                  Select your Operator
-                </option>
-                <option value="" className="text-gray-primary">
-                  Select your Operator
-                </option>
-              </select>
+
+              <SelectSearch
+                className="select-search "
+                options={outputOperator}
+                renderOption={renderProvider}
+                search
+                filterOptions={fuzzySearch}
+                placeholder="Search Operator"
+                onChange={(value) => handleOperatorChange(value)}
+              />
               {/*  select operator ends*/}
-              <div className="flex flex-col w-full min-h-[60px]">
+              <div className="flex flex-col w-full ">
                 <Input
-                  extraClasses="h-[36px] rounded-r rounded-l-none"
+                  extraClasses="min-h-[36px] rounded-r rounded-l-none"
                   override={{ maxWidth: "100%", flex: 1 }}
-                  holder="Registered Mobile No"
+                  holder="Mobile No/ Subscriber No"
                 />
                 <span className="text-green-600 text-xs leading-3">
-                  (Subscriber ID starts with 1 and is 10 digits long. To locate
-                  it, press the home button on remote.)
+                  {currentMsg}
+                  {/* (Subscriber ID starts with 1 and is 10 digits long. To locate
+                  it, press the home button on remote.) */}
                 </span>
               </div>
 
@@ -72,18 +96,18 @@ const Dth = () => {
           {/* <div className="hidden md:block lg:col-span-1"></div> */}
           {/* bill display section */}
 
-          <div className="grid md:col-span-4 ">
+          <div className="grid col-span-1 md:col-span-5 ">
             <div
-              className={`grid grid-cols-2 w-full lg:w-[348px] border mx-auto mt-4 md:mt-0`}>
+              className={`grid grid-cols-2 w-full lg:w-[348px] border mx-auto lg:ml-0 mt-4 md:mt-0 `}>
               {/* card details section start*/}
               <ConfirmDetails dataPlan={dthConfirm} />
               {/* card details section end*/}
 
               {/* ammount showing section start */}
-              <div className="p-1 bg-gray-200 font-semibold text-black text-left px-1 py-2">
+              <div className="p-1 bg-gray-200 font-medium text-black text-left px-1 py-2">
                 Total Amount:
               </div>
-              <div className="p-1 bg-gray-200 font-semibold text-black text-right px-1 py-2">
+              <div className="p-1 bg-gray-200 font-medium text-black text-right px-1 py-2">
                 Rs 1000
               </div>
               {/* ammount showing section end*/}

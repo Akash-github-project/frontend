@@ -35,7 +35,7 @@ const ConfirmDetails = ({ dataPlan = data }) => {
     <>
       {
         <>
-          <div className="col-span-full w-full py-2 px-1 bg-gray-100 text-pink-primary font-semibold capitalize leading-[19px]">
+          <div className="col-span-full w-full py-2 px-1 bg-gray-100 text-pink-primary font-medium capitalize leading-[19px]">
             {dataPlan.heading}
           </div>
 

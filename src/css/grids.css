@@ -1,0 +1,5 @@
+@media screen and (min-width: 820px) {
+  .input-width-grid {
+    grid-template-columns: repeat(4, minmax(50px, 218px));
+  }
+}

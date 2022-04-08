@@ -1,0 +1,52 @@
+{
+	"list": [
+		{
+			"op_key": "AR",
+			"op_name": "Airtel Postpaid",
+			"bill_fetch_api": "",
+			"pay_api": "payoneapi",
+			"op_image": "",
+			"code_ambika": "3",
+			"code_payoneapi": "AR",
+			"status": 1,
+			"op_code": "AT",
+			"image": "/images/airtel.svg"
+		},
+		{
+			"op_key": "BS",
+			"op_name": "BSNL Postpaid",
+			"bill_fetch_api": "",
+			"pay_api": "payoneapi",
+			"op_image": "",
+			"code_ambika": "5",
+			"code_payoneapi": "BS",
+			"status": 1,
+			"op_code": "CG",
+			"image": "/images/bsnl-logo(1).svg"
+		},
+		{
+			"op_key": "RJ",
+			"op_name": "Reliance JIO Postpaid",
+			"bill_fetch_api": "",
+			"pay_api": "payoneapi",
+			"op_image": "",
+			"code_ambika": "116",
+			"code_payoneapi": "RJ",
+			"status": 1,
+			"op_code": "RJ",
+			"image": "/images/jio.svg"
+		},
+		{
+			"op_key": "MM",
+			"op_name": "MTNL Mumbai Dolphin",
+			"bill_fetch_api": "",
+			"pay_api": "payoneapi",
+			"op_image": "",
+			"code_ambika": "68",
+			"code_payoneapi": "MM",
+			"status": 1,
+			"op_code": "DP",
+			"image": "/images/mtnl.svg"
+		}
+	]
+}
