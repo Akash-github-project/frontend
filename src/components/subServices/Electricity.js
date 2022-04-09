@@ -62,7 +62,7 @@ const Electricity = () => {
                 name=""
                 id=""
                 onChange={handleStateChange}
-                className="lg:w-full text-[13px] h-[36px] border border-pink-600 rounded text-gray-primary">
+                className="lg:w-full text-[13px] h-[36px] border border-pink-600 rounded text-gray-primary bg-white">
                 {boardList.Names.map((stateObj) => (
                   <option
                     value={stateObj.stateName}
@@ -77,7 +77,7 @@ const Electricity = () => {
                 <select
                   name=""
                   id=""
-                  className="lg:w-full text-[13px] h-[36px] border border-pink-600 rounded text-gray-primary">
+                  className="lg:w-full text-[13px] h-[36px] border border-pink-600 rounded text-gray-primary bg-white">
                   {currentBoard.map((boards) => (
                     <option
                       value={boards}
@@ -99,7 +99,7 @@ const Electricity = () => {
                 placeholder="Amount"
                 // onClick={handleRechargeRequest}
               >
-                Get Consumer Details
+                Get Bill Details
               </button>
             </div>
 
