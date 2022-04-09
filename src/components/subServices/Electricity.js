@@ -8,7 +8,9 @@ import Wrapper from "../wrapper"
 import WithTextInput from "../withTextInput"
 import electricityConfirm from "./specialJsons/ElectricityConfirm.json"
 import electricityState from "./specialJsons/ElectricityStateList.json"
+import recents from "./specialJsons/recents.json"
 import { Radio, InputLabel } from "@mui/material"
+import { RecentActorsSharp } from "@mui/icons-material"
 
 const Electricity = () => {
   const [openCoupon, setCouponState] = useState(false)
@@ -99,6 +101,11 @@ const Electricity = () => {
               >
                 Get Consumer Details
               </button>
+            </div>
+
+            <div className="w-full lg:max-w-[218px]  rounded bg-blue-200 text-xs leading-3 text-blue-800 p-2 mx-auto mt-2 lg:mr-8 lg:ml-auto">
+              Your service provider will take two working days to consider bill
+              paid in their accounts.
             </div>
           </div>
 
@@ -195,6 +202,35 @@ const Electricity = () => {
             </div>
 
             {/* confirm details section end*/}
+          </div>
+        </div>
+
+        <div className="bg-white border mt-4 grid grid-cols-1 lg:grid-cols-5 lg:p-2">
+          <div className=" hidden lg:block lg:col-span-2"></div>
+          <div className="col-span-full lg:col-span-3 grid gap-1 border   bg-white p-1">
+            <div className="w-full col-span-full">Recents</div>
+            <div className="shadow-default grid gap-1 p-2">
+              {recents.list.map((item) => (
+                <div className="flex w-full h-[36px]">
+                  <span className="p-2 flex-1 text-xs md:text-sm lg:text-md text-gray-primary">
+                    {item.heading}
+                  </span>
+                  <span className="p-2 flex-1 text-xs md:text-sm lg:text-md text-gray-primary">
+                    {item.number}
+                  </span>
+
+                  <button
+                    className=" border border-pink-primary w-[75px] hover:bg-pink-primary hover:text-white rounded text-inherit  "
+                    data-val={item.id}>
+                    <span
+                      className="mx-auto text-inherit hover:text-white"
+                      data-val={item.id}>
+                      Pay Bill
+                    </span>
+                  </button>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
