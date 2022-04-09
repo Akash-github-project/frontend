@@ -1,0 +1,227 @@
+{
+  "Names": [
+    {
+      "stateName": "Select State",
+      "boards": []
+    },
+    {
+      "stateName": "ANDHRA PRADESH",
+      "boards": [
+        "Central Power Distribution Company of A.P Ltd (APCPDCL)",
+        "Eastern Power Distribution Company of A.P Ltd (APEPDCL)",
+        "Southern Power Distribution Company of A.P Ltd (APSPDCL)"
+      ]
+    },
+    {
+      "stateName": "ARUNACHAL PRADESH",
+      "boards": ["Department of Power Government of Arunachal Pradesh"]
+    },
+
+    {
+      "stateName": "ASSAM",
+      "boards": [
+        "Assam Power Distribution Company Ltd (NON-RAPDR)",
+        "Assam Power Distribution Company Ltd (RAPDR)"
+      ]
+    },
+
+    {
+      "stateName": "BIHAR",
+      "boards": [
+        "North Bihar Power Distribution",
+        "South Bihar Power Distribution (SBPDCL)"
+      ]
+    },
+    {
+      "stateName": "CHANDIGARH",
+      "boards": ["Electricity Department Chandigarh"]
+    },
+
+    {
+      "stateName": "CHATTISGARH",
+      "boards": ["Chhattisgarh State Power Distribution Company Ltd. (CSPDCL)"]
+    },
+    {
+      "stateName": "DADRA AND NAGAR HAVELI",
+      "boards": ["DNH POWER Distribution Company limited"]
+    },
+    {
+      "stateName": "DAMAN AND DIU",
+      "boards": ["Daman and Diu Electricity"]
+    },
+    {
+      "stateName": "GOA",
+      "boards": ["Goa Electricity"]
+    },
+    {
+      "stateName": "GUJARAT",
+      "boards": [
+        "Dakshin Gujarat Vij Company",
+        "Gift power company limited",
+        "Madhya Gujarat Vij Company Limited",
+        "Paschim Gujarat Vij Company Limited",
+        "Torrent Power - Ahmedabad</option>",
+        "Uttar Gujarat Vij Company Limited"
+      ]
+    },
+    {
+      "stateName": "HARYANA",
+      "boards": [
+        "Dakshin Haryana Bijli Vitran Nigam (DHBVN)",
+        "Uttar Haryana Bijli Vitran Nigam (UHBVN)"
+      ]
+    },
+    {
+      "stateName": "HIMACHAL PRADESH",
+      "boards": ["Himachal Pradesh State Electricity Board Ltd (HPSEBL)"]
+    },
+    {
+      "stateName": "JAMMU AND KASHMIR",
+      "boards": ["Jammu and Kashmir Power Development Department"]
+    },
+    {
+      "stateName": "JHARKHAND",
+      "boards": [
+        "Jamshedpur Utilities & Services Company Ltd (JUSCO)",
+        "Jharkhand Bijli Vitran Nigam Limited (JBVNL)"
+      ]
+    },
+    {
+      "stateName": "KARNATAKA",
+      "boards": [
+        "Bangalore Electricity Supply Company Ltd. (BESCOM)",
+        "Chamundeshwari Electricity Supply Corporation Ltd. (Cesc, Mysore)",
+        "Gulbarga Electricity Supply Company Ltd. (GESCOM)",
+        "Hubli Electricity Supply Company Ltd. (HESCOM)",
+        "Mangalore Electricity Supply Company LTD (Non RAPDR) (Electricity)",
+        "Mangalore Electricity Supply Company Ltd. (MESCOM)"
+      ]
+    },
+    {
+      "stateName": "KERALA",
+      "boards": [
+        "Kannan Devan Hills Plantations Company Private Limited",
+        "Kerala State Electricity Board Ltd. (KSEB)"
+      ]
+    },
+    {
+      "stateName": "LAKSHADWEEP",
+      "boards": ["Lakshadweep Electricity Department"]
+    },
+    {
+      "stateName": "MADHYA PRADESH",
+      "boards": [
+        "M.P. Madhya Kshetra Vidyut Vitaran - RURAL",
+        "M.P. Madhya Kshetra Vidyut Vitaran - URBAN",
+        "M.P. Paschim Kshetra Vidyut Vitaran - Indore",
+        "M.P. Poorv Kshetra Vidyut Vitaran Jabalpur - NGB",
+        "MP Poorv Kshetra Vidyut Vitaran - Rural"
+      ]
+    },
+    {
+      "stateName": "MAHARASHTRA",
+      "boards": [
+        "Adani Electricity Mumbai Limited",
+        "Brihan mumbai electric supply and transport undertaking",
+        "Maharashtra State Electricity Distribution Company Limited (MSEDCL)",
+        "Tata Power - Mumbai",
+        "Torrent Power Shil Mumbra"
+      ]
+    },
+    {
+      "stateName": "MANIPUR",
+      "boards": ["Select Board"]
+    },
+    {
+      "stateName": "MEGHALAYA",
+      "boards": ["Meghalaya Power Dist Corp Ltd"]
+    },
+    {
+      "stateName": "MIZORAM",
+      "boards": ["Power & Electricity Department - Mizoram"]
+    },
+    {
+      "stateName": "NAGALAND",
+      "boards": ["Department of Power, Nagaland"]
+    },
+    {
+      "stateName": "NEW DELHI",
+      "boards": [
+        "BSES Rajdhani Power Limited",
+        "BSES Rajdhani Prepaid Meter Recharge",
+        "BSES Yamuna Power Limited",
+        "New Delhi Municipal Council (NDMC) - Electricity",
+        "Tata Power - Delhi (Electricity)"
+      ]
+    },
+    {
+      "stateName": "ODISHA",
+      "boards": [
+        "NESCO UTILITY",
+        "SOUTHCO Utility",
+        "TP Central Odisha Distribution Limited",
+        "WESCO Utility Odisha"
+      ]
+    },
+    {
+      "stateName": "PONDICHERRY",
+      "boards": ["Government of puducherry Electricity Department"]
+    },
+    {
+      "stateName": "PUNJAB",
+      "boards": ["Punjab State Power Corporation Ltd. (PSPCL)"]
+    },
+    {
+      "stateName": "RAJASTHAN",
+      "boards": [
+        "Ajmer Vidyut Vitran Nigam Ltd. (AVVNL)",
+        "Bharatpur Electricity Services Ltd. (BESL)",
+        "Bikaner Electricity Supply Limited",
+        "Jaipur Vidyut Vitran Nigam Ltd. (JVVNL)",
+        "Jodhpur Vidyut Vitran Nigam Ltd. (JDVVNL)",
+        "Kota Electricity Distribution Ltd. (KEDL)",
+        "TP Ajmer Distribution Ltd. (TPADL)"
+      ]
+    },
+    {
+      "stateName": "SIKKIM",
+      "boards": ["Sikkim Power - RURAL", "Sikkim Power - URBAN"]
+    },
+    {
+      "stateName": "TAMIL NADU",
+      "boards": ["Tamil Nadu Electricity Board (TNEB)"]
+    },
+    {
+      "stateName": "TELANGANA",
+      "boards": [
+        "Northern Power Distribution Company Of Telangana Limited (TSNPDCL)",
+        "Telangana State Southern Power Distribution Company Ltd. (TSSPDCL)"
+      ]
+    },
+    {
+      "stateName": "TRIPURA",
+      "boards": ["Tripura Electricity Corp Ltd"]
+    },
+    {
+      "stateName": "UTTAR PRADESH",
+      "boards": [
+        "Kanpur Electricity Supply company",
+        "Noida Power Company (Electricity)",
+        "Uttar Pradesh Power Corporation Ltd. (UPPCL) RURAL",
+        "Uttar Pradesh Power Corporation Ltd. (UPPCL) URBAN"
+      ]
+    },
+    {
+      "stateName": "UTTARAKHAND",
+      "boards": ["Uttarakhand Power Corporation Limited"]
+    },
+    {
+      "stateName": "WEST BENGAL",
+      "boards": [
+        "Calcutta Electric Supply Corporation",
+        "India Power Corporation (Asansol)",
+        "West Bengal State Electricity Distribution Company Limited"
+      ]
+    }
+  ]
+}

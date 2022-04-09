@@ -6,7 +6,7 @@ export const NumberInput = ({
   fieldClasses = " ",
   holder = " ",
   iType = "text",
-  change,
+  change = () => console.log("hello"),
   val,
   onleft = " ",
   color = "gray",

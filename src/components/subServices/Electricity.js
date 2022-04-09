@@ -2,93 +2,102 @@ import ConfirmDetails from "./confirmDetails"
 import Button from "../button"
 import { Input } from "../input"
 import Checkbox from "react-custom-checkbox"
-import { renderProvider } from "../../otherData/inputWithImage"
-import SelectSearch, { fuzzySearch } from "react-select-search"
-import operator from "../../otherData/dthOperator.json"
-import { NumberInput } from "../numberInput"
-import { useState } from "react"
+import React, { useState } from "react"
 import Wrapper from "../wrapper"
 //to change
-import dthConfirm from "./specialJsons/dthConfirm.json"
+import WithTextInput from "../withTextInput"
+import electricityConfirm from "./specialJsons/ElectricityConfirm.json"
+import electricityState from "./specialJsons/ElectricityStateList.json"
+import { Radio, InputLabel } from "@mui/material"
 
-let operatorList = operator.list.map((item) => ({
-  name: item.op_name,
-  value: item.op_key,
-  photo: item.image,
-  code: item.op_code,
-  msg: item.msg,
-}))
-
-const Dth = () => {
-  const [phoneNo, setPhoneNo] = useState("")
+const Electricity = () => {
   const [openCoupon, setCouponState] = useState(false)
   const [couponState, toggleCouponState] = useState(true)
-  const [outputOperator, setOperator] = useState(operatorList)
-  const [currentMsg, setCurrentMsg] = useState("")
+  const [boardList, setBoardList] = useState(electricityState)
+  const [currentBoard, setCurrentBoard] = useState([])
 
   const handleApplyCoupon = () => {
     toggleCouponState(!couponState)
   }
 
-  const handleOperatorChange = (value) => {
-    console.log(value)
-
-    let currentOperator = operatorList.filter((operator) => {
-      return operator.value === value
+  const handleStateChange = (e) => {
+    console.log(e.target.value)
+    //work req
+    let currentBoard = boardList.Names.filter((operator) => {
+      return operator.stateName === e.target.value
     })
 
-    console.log(currentOperator)
-    setCurrentMsg(currentOperator[0].msg)
+    console.log(currentBoard[0].boards)
+    setCurrentBoard(currentBoard[0].boards)
   }
   return (
     <Wrapper>
       <div className="w-full">
-        <div className="w-full grid grid-cols-1 lg:grid-cols-11 gap-6 justify-center ">
+        <div className="w-full grid grid-cols-1 lg:grid-cols-11 gap-6 justify-center">
           <div className="col-span-1 md:col-span-5">
             <div className="grid grid-cols-1 gap-4 w-full mx-auto lg:ml-auto lg:mr-8 lg:max-w-[218px] lg:mt-3">
               <div className="w-full col-span-full font-medium leading-[19px]">
-                DTH Recharge
+                Pay For Electriciry
               </div>
               {/* select operator*/}
 
-              <SelectSearch
-                className="select-search "
-                options={outputOperator}
-                renderOption={renderProvider}
-                search
-                filterOptions={fuzzySearch}
-                placeholder="Search Operator"
-                onChange={(value) => handleOperatorChange(value)}
-              />
-              {/*  select operator ends*/}
-              <div className="flex flex-col w-full ">
-                <Input
-                  extraClasses="min-h-[36px] rounded-r rounded-l-none"
-                  override={{ maxWidth: "100%", flex: 1 }}
-                  holder="Mobile No/ Subscriber No"
+              <div className="flex gap-1">
+                <Radio
+                  value="special"
+                  id="spc"
+                  onClick={() => console.log("clicked")}
+                  checked={true}
+                  style={{ padding: "1px" }}
+                  size="small"
                 />
-                <span className="text-green-600 text-xs leading-3">
-                  {currentMsg}
-                  {/* (Subscriber ID starts with 1 and is 10 digits long. To locate
-                  it, press the home button on remote.) */}
-                </span>
+                <InputLabel
+                  htmlFor="spc"
+                  style={{ fontSize: "14px", marginRight: "1rem" }}>
+                  Electricity Boards
+                </InputLabel>
               </div>
+              <select
+                name=""
+                id=""
+                onChange={handleStateChange}
+                className="lg:w-full text-[13px] h-[36px] border border-pink-600 rounded text-gray-primary">
+                {boardList.Names.map((stateObj) => (
+                  <option
+                    value={stateObj.stateName}
+                    className="lg:max-w-[218px] text-inherit">
+                    {stateObj.stateName}
+                  </option>
+                ))}
+              </select>
+              {/*  select operator ends*/}
+
+              {currentBoard.length === 0 ? null : (
+                <select
+                  name=""
+                  id=""
+                  className="lg:w-full text-[13px] h-[36px] border border-pink-600 rounded text-gray-primary">
+                  {currentBoard.map((boards) => (
+                    <option
+                      value={boards}
+                      className="lg:max-w-[218px] text-inherit">
+                      {boards}
+                    </option>
+                  ))}
+                </select>
+              )}
 
               <div className="flex gap-2 w-full h-[36px]">
-                <NumberInput
-                  extraClasses="h-full rounded-r rounded-l-none w-full"
-                  fieldClasses="border border-pink-primary w-full"
-                  holder="Amount"
-                  onleft="₹"
-                  color="pink"
+                <WithTextInput
+                  placeholder="Consumer No"
+                  text="View Sample Bill"
                 />
               </div>
               <button
                 className="lg:p-1 h-[36px] w-full bg-pink-primary active:bg-pink-800 text-white rounded text-[15px] lg:text-[15px] leading-[15px] font-medium text-sm"
-                placeholder="Ammount"
+                placeholder="Amount"
                 // onClick={handleRechargeRequest}
               >
-                Fetch Bill
+                Get Consumer Details
               </button>
             </div>
           </div>
@@ -100,7 +109,7 @@ const Dth = () => {
             <div
               className={`grid grid-cols-2 w-full lg:w-[348px] border mx-auto lg:ml-0 mt-4 md:mt-0 `}>
               {/* card details section start*/}
-              <ConfirmDetails dataPlan={dthConfirm} />
+              <ConfirmDetails dataPlan={electricityConfirm} />
               {/* card details section end*/}
 
               {/* ammount showing section start */}
@@ -193,4 +202,4 @@ const Dth = () => {
   )
 }
 
-export default Dth
+export default Electricity
