@@ -1,0 +1,17 @@
+{
+  "heading": "Recharge Details",
+  "dataColumns": [
+    {
+      "type": "n",
+      "bold": false,
+      "title": "Operator",
+      "value": "Google Pay Gift card"
+    },
+    {
+      "type": "n",
+      "bold": false,
+      "title": "Amount",
+      "value": "2000"
+    }
+  ]
+}

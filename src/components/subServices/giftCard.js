@@ -5,31 +5,21 @@ import Checkbox from "react-custom-checkbox"
 import React, { useState } from "react"
 import Wrapper from "../wrapper"
 //to change
-import electricityConfirm from "./specialJsons/gasConfirm.json"
-import gasProvider from "./specialJsons/GasProivder.json"
+import giftCardConfirm from "./specialJsons/giftCardConfirm.json"
 import recents from "./specialJsons/recents.json"
 
-const GasLpg = () => {
+const GiftCard = () => {
   const [openCoupon, setCouponState] = useState(false)
   const [couponState, toggleCouponState] = useState(true)
-  const [providerList, setProviderList] = useState([])
+  const [giftCardProvider, setGiftCardProvider] = useState("googlePay")
 
   const handleApplyCoupon = () => {
     toggleCouponState(!couponState)
   }
 
-  const handleServiceSelect = (e) => {
-    console.log(e.target.value)
-  }
-
   const handleServiceChange = (e) => {
     console.log(e.target.value)
-    // setServiceType(e.target.value)
-    const pipe = [...gasProvider.pipe]
-    const cylinder = [...gasProvider.cylinder]
-
-    if (e.target.value === "cylinder") setProviderList([...cylinder])
-    else setProviderList([...pipe])
+    setGiftCardProvider(e.target.value)
   }
   return (
     <Wrapper>
@@ -38,9 +28,9 @@ const GasLpg = () => {
           <div className="col-span-1 md:col-span-5">
             <div className="grid grid-cols-1 gap-4 w-full mx-auto lg:ml-auto lg:mr-8 lg:max-w-[218px] lg:mt-3">
               <div className="w-full col-span-full font-medium leading-[19px]">
-                Pay for Gas &amp; LPG
+                Pay for Gift Cards
               </div>
-              {/* select gas service type*/}
+              {/* select giftcard service type*/}
 
               <select
                 name=""
@@ -49,42 +39,21 @@ const GasLpg = () => {
                 onChange={handleServiceChange}
                 className="lg:w-full text-[13px] h-[36px] border border-pink-600 rounded text-gray-primary bg-white">
                 <option value="none" className="text-inherit">
-                  Select A Service Type
+                  Select A Gift Card Provider
                 </option>
-                <option value="cylinder" className="text-inherit">
-                  Gas Cylinder
+                <option value="googlePay" className="text-inherit">
+                  Google Pay
                 </option>
-                <option value="pipe" className="text-inherit">
-                  Gas Pipe
+                <option value="amazonPay" className="text-inherit">
+                  Amazon Pay
                 </option>
               </select>
-              {/*  select gas service type ends*/}
-
-              {/* select operator starts  */}
-              <select
-                name=""
-                id=""
-                onChange={handleServiceSelect}
-                placeholder="Gas Cylinder/Gas Pipes"
-                className="lg:w-full text-[13px] h-[36px] border border-pink-600 rounded text-gray-primary bg-white">
-                <option value="none" className="text-inherit">
-                  Selct Operator
-                </option>
-                {providerList.map((type) => (
-                  <option
-                    key={type.value}
-                    value={type.value}
-                    className="text-inherit">
-                    {type.name}
-                  </option>
-                ))}
-              </select>
-              {/* select operator ends  */}
+              {/*  select gift card service type ends*/}
 
               <div className="flex gap-2 w-full h-[36px]">
                 <Input
                   iType="tel"
-                  holder="Consumer No"
+                  holder="Amount"
                   extraClasses="text-gray-primary"
                   override={{ maxWidth: "100%", flex: 1 }}
                 />
@@ -94,14 +63,14 @@ const GasLpg = () => {
                 placeholder="Amount"
                 // onClick={handleRechargeRequest}
               >
-                Get Bill Details
+                Proceed
               </button>
             </div>
 
-            <div className="w-full lg:max-w-[218px]  rounded bg-blue-200 text-xs leading-3 text-blue-800 p-2 mx-auto mt-2 lg:mr-8 lg:ml-auto">
+            {/* <div className="w-full lg:max-w-[218px]  rounded bg-blue-200 text-xs leading-3 text-blue-800 p-2 mx-auto mt-2 lg:mr-8 lg:ml-auto">
               Your service provider will take two working days to consider bill
               paid in their accounts.
-            </div>
+            </div> */}
           </div>
 
           {/* <div className="hidden md:block lg:col-span-1"></div> */}
@@ -111,7 +80,7 @@ const GasLpg = () => {
             <div
               className={`grid grid-cols-2 w-full lg:w-[348px] border mx-auto lg:ml-0 mt-4 md:mt-0 `}>
               {/* card details section start*/}
-              <ConfirmDetails dataPlan={electricityConfirm} />
+              <ConfirmDetails dataPlan={giftCardConfirm} />
               {/* card details section end*/}
 
               {/* ammount showing section start */}
@@ -233,4 +202,4 @@ const GasLpg = () => {
   )
 }
 
-export default GasLpg
+export default GiftCard

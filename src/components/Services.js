@@ -53,7 +53,7 @@ const Services = () => {
     gifts: {
       icon: "fa fa-gift",
       heading: "GiftCard",
-      link: "/mobile",
+      link: "/home/giftcard",
     },
   }
   // let defalultBefore = "";

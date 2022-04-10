@@ -28,6 +28,7 @@ import { WalletPage } from "./components/userpages/walletPage"
 import Dth from "./components/subServices/dth"
 import Electricity from "./components/subServices/Electricity"
 import GasLpg from "./components/subServices/gasLpg"
+import GiftCard from "./components/subServices/giftCard"
 
 ReactDOM.render(
   <React.StrictMode>
@@ -47,6 +48,7 @@ ReactDOM.render(
                 element={<Electricity />}
               />
               <Route path="recharge_bill_gas" element={<GasLpg />} />
+              <Route path="giftcard" element={<GiftCard />} />
             </Route>
 
             <Route path="aboutus" element={<AboutUs />} />
