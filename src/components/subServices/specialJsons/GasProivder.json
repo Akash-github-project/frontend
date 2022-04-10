@@ -1,0 +1,126 @@
+{
+  "cylinder": [
+    {
+      "name": "Bharatgas",
+      "value": "bg"
+    },
+    {
+      "name": "HP Gas",
+      "value": "hg"
+    },
+    {
+      "name": "Indane",
+      "value": "in"
+    }
+  ],
+  "pipe": [
+    {
+      "name": "Aavantika Gas Ltd",
+      "value": "Aavantika Gas Ltd"
+    },
+    {
+      "name": "Adani Total Gas Limited",
+      "value": "Adani Total Gas Limited"
+    },
+    {
+      "name": "Assam Gas Company Limited",
+      "value": "Assam Gas Company Limited"
+    },
+    {
+      "name": "Bhagyanagar Gas Limited",
+      "value": "Bhagyanagar Gas Limited"
+    },
+    {
+      "name": "Central U.P. Gas Limited",
+      "value": "Central U.P. Gas Limited"
+    },
+    {
+      "name": "Charotar Gas Sahakari Mandali Ltd",
+      "value": "Charotar Gas Sahakari Mandali Ltd"
+    },
+    {
+      "name": "GAIL Gas Limited",
+      "value": "GAIL Gas Limited"
+    },
+    {
+      "name": "GAIL India Limited",
+      "value": "GAIL India Limited"
+    },
+    {
+      "name": "Green Gas Limited(GGL)",
+      "value": "Green Gas Limited(GGL)"
+    },
+    {
+      "name": "Gujarat Gas Limited",
+      "value": "Gujarat Gas Limited"
+    },
+    {
+      "name": "Gujarat State Petronet Limited",
+      "value": "Gujarat State Petronet Limited"
+    },
+    {
+      "name": "Haryana City Gas - Kapil Chopra Enterprise",
+      "value": "Haryana City Gas - Kapil Chopra Enterprise"
+    },
+    {
+      "name": "IRM Energy Private Limited",
+      "value": "IRM Energy Private Limited"
+    },
+    {
+      "name": "Indian Oil Corporation Ltd-Piped Gas",
+      "value": "Indian Oil Corporation Ltd-Piped Gas"
+    },
+    {
+      "name": "Indian Oil-Adani Gas Private Limited",
+      "value": "Indian Oil-Adani Gas Private Limited"
+    },
+    {
+      "name": "Indraprastha Gas Limited",
+      "value": "Indraprastha Gas Limited"
+    },
+    {
+      "name": "Mahanagar Gas- Mumbai",
+      "value": "Mahanagar Gas- Mumbai"
+    },
+    {
+      "name": "Maharashtra Natural Gas Limited (MNGL)",
+      "value": "Maharashtra Natural Gas Limited (MNGL)"
+    },
+    {
+      "name": "Megha Gas",
+      "value": "Megha Gas"
+    },
+    {
+      "name": "Naveriya Gas Pvt Ltd",
+      "value": "Naveriya Gas Pvt Ltd"
+    },
+    {
+      "name": "Sabarmati Gas Limited (SGL)",
+      "value": "Sabarmati Gas Limited (SGL)"
+    },
+    {
+      "name": "Sanwariya Gas Limited",
+      "value": "Sanwariya Gas Limited"
+    },
+    {
+      "name": "THINK GAS PVT. LTD.",
+      "value": "THINK GAS PVT. LTD."
+    },
+    {
+      "name": "Torrent Gas",
+      "value": "Torrent Gas"
+    },
+    {
+      "name": "Tripura Natural Gas",
+      "value": "Tripura Natural Gas"
+    },
+    {
+      "name": "Unique Central Piped Gases Pvt Ltd (UCPGPL)",
+      "value": "Unique Central Piped Gases Pvt Ltd (UCPGPL)"
+    },
+    {
+      "name": "Vadodara Gas Limited (VGL)",
+      "value": "Vadodara Gas Limited (VGL)"
+    }
+  ]
+}

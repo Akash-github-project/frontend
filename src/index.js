@@ -27,6 +27,7 @@ import ConfirmPage from "./components/confirmPage"
 import { WalletPage } from "./components/userpages/walletPage"
 import Dth from "./components/subServices/dth"
 import Electricity from "./components/subServices/Electricity"
+import GasLpg from "./components/subServices/gasLpg"
 
 ReactDOM.render(
   <React.StrictMode>
@@ -45,6 +46,7 @@ ReactDOM.render(
                 path="recharge_bill_electricity"
                 element={<Electricity />}
               />
+              <Route path="recharge_bill_gas" element={<GasLpg />} />
             </Route>
 
             <Route path="aboutus" element={<AboutUs />} />

@@ -33,7 +33,7 @@ const Services = () => {
     GasLpg: {
       icon: "fab fa-free-code-camp",
       heading: "Gas & LPG",
-      link: "/mobile",
+      link: "/home/recharge_bill_gas",
     },
     Water: {
       icon: "fas fa-tint",
