@@ -21,6 +21,7 @@ const GiftCard = () => {
   const handleServiceChange = (e) => {
     console.log(e.target.value)
     setGiftCardProvider(e.target.value)
+    console.log("test")
   }
   return (
     <Wrapper>
