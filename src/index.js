@@ -30,6 +30,7 @@ import Electricity from "./components/subServices/Electricity"
 import GasLpg from "./components/subServices/gasLpg"
 import GiftCard from "./components/subServices/giftCard"
 import Water from "./components/subServices/water"
+import BroadbandLandline from "./components/subServices/broadbandLandline"
 
 ReactDOM.render(
   <React.StrictMode>
@@ -51,6 +52,7 @@ ReactDOM.render(
               <Route path="recharge_bill_gas" element={<GasLpg />} />
               <Route path="giftcard" element={<GiftCard />} />
               <Route path="water" element={<Water />} />
+              <Route path="broadbandlandline" element={<BroadbandLandline />} />
             </Route>
 
             <Route path="aboutus" element={<AboutUs />} />

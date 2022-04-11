@@ -28,7 +28,7 @@ const Services = () => {
     BroadbandLandline: {
       icon: "fa fa-wifi",
       heading: "Broadband /Landline",
-      link: "/mobile",
+      link: "/home/broadbandLandline",
     },
     GasLpg: {
       icon: "fab fa-free-code-camp",

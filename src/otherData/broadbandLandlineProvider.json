@@ -1,0 +1,96 @@
+{
+  "broadbandList": [
+    { "name": "ACT Broadband", "value": "ACT Broadband" },
+    { "name": "ANI Network", "value": "ANI Network" },
+    { "name": "Activline", "value": "Activline" },
+    { "name": "Air Connect", "value": "Air Connect" },
+    {
+      "name": "AirJaldi - Rural Broadband",
+      "value": "AirJaldi - Rural Broadband"
+    },
+    { "name": "Airnet Networks", "value": "Airnet Networks" },
+    { "name": "Airtel", "value": "Airtel" },
+    { "name": "Alliance Broadband", "value": "Alliance Broadband" },
+    { "name": "Apple Fibernet", "value": "Apple Fibernet" },
+    { "name": "Asianet Broadband", "value": "Asianet Broadband" },
+    { "name": "BSNL", "value": "BSNL" },
+    { "name": "BSNL Landline Corporate", "value": "BSNL Landline Corporate" },
+    { "name": "Clicknet Communication", "value": "Clicknet Communication" },
+    { "name": "Comway Broadband", "value": "Comway Broadband" },
+    { "name": "Connect Broadband", "value": "Connect Broadband" },
+    { "name": "DVR Broadband Services", "value": "DVR Broadband Services" },
+    {
+      "name": "DWAN Supports Private Ltd",
+      "value": "DWAN Supports Private Ltd"
+    }
+  ],
+  "landlineList": [
+    {
+      "name": "Deenet Services Private Limited",
+      "value": "Deenet Services Private Limited"
+    },
+    { "name": "Den Broadband", "value": "Den Broadband" },
+    { "name": "Digiway Net", "value": "Digiway Net" },
+    { "name": "Dreamtel Broadband", "value": "Dreamtel Broadband" },
+    { "name": "EthernetXpress", "value": "EthernetXpress" },
+    { "name": "Excell Broadband", "value": "Excell Broadband" },
+    { "name": "Ficus Telecom Pvt Ltd", "value": "Ficus Telecom Pvt Ltd" },
+    { "name": "Flash Fibernet", "value": "Flash Fibernet" },
+    { "name": "Foxtel Broadband", "value": "Foxtel Broadband" },
+    {
+      "name": "Fusionnet Web Services Private Limited",
+      "value": "Fusionnet Web Services Private Limited"
+    },
+    { "name": "GIGANTIC Broadband", "value": "GIGANTIC Broadband" },
+    { "name": "GTPL Broadband", "value": "GTPL Broadband" },
+    {
+      "name": "GTPL KCBPL Broadband Pvt Ltd",
+      "value": "GTPL KCBPL Broadband Pvt Ltd"
+    },
+    { "name": "Hathway Broadband", "value": "Hathway Broadband" },
+    { "name": "Hi Reach Broadband", "value": "Hi Reach Broadband" },
+    { "name": "INSTALINKS", "value": "INSTALINKS" },
+    { "name": "ION", "value": "ION" },
+    { "name": "Ishan Netsol", "value": "Ishan Netsol" },
+    {
+      "name": "Kerala Vision Broadband Pvt Ltd",
+      "value": "Kerala Vision Broadband Pvt Ltd"
+    },
+    { "name": "Kings Broadband", "value": "Kings Broadband" },
+    { "name": "Limras Eronet", "value": "Limras Eronet" },
+    { "name": "Linkio", "value": "Linkio" },
+    { "name": "Lotus Broadband", "value": "Lotus Broadband" },
+    { "name": "MTNL Delhi", "value": "MTNL Delhi" },
+    { "name": "MTNL Mumbai", "value": "MTNL Mumbai" },
+    { "name": "Mach1 Broadband", "value": "Mach1 Broadband" },
+    { "name": "Meghbela", "value": "Meghbela" },
+    { "name": "Microscan", "value": "Microscan" },
+    { "name": "Mnet Broadband", "value": "Mnet Broadband" },
+    { "name": "NSB Networks Broadband", "value": "NSB Networks Broadband" },
+    { "name": "Netplus Broadband", "value": "Netplus Broadband" },
+    { "name": "Nextra Broadband", "value": "Nextra Broadband" },
+    { "name": "ONE Broadband", "value": "ONE Broadband" },
+    {
+      "name": "Paynet Digital Network Private Limited",
+      "value": "Paynet Digital Network Private Limited"
+    },
+    { "name": "Pink Broadband", "value": "Pink Broadband" },
+    { "name": "Pioneer Elabs Limited", "value": "Pioneer Elabs Limited" },
+    { "name": "Praction Network", "value": "Praction Network" },
+    {
+      "name": "Quest Consultancy Pvt Ltd",
+      "value": "Quest Consultancy Pvt Ltd"
+    },
+    {
+      "name": "Reisnet Broadband Pvt ltd",
+      "value": "Reisnet Broadband Pvt ltd"
+    },
+    { "name": "SPECTRA", "value": "SPECTRA" },
+    { "name": "Sikka Broadband", "value": "Sikka Broadband" },
+    { "name": "Siti Broadband", "value": "Siti Broadband" },
+    {
+      "name": "Spiderlink Networks Pvt Ltd",
+      "value": "Spiderlink Networks Pvt Ltd"
+    }
+  ]
+}
