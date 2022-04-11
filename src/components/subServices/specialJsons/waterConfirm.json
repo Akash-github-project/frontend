@@ -1,0 +1,30 @@
+{
+  "heading": "Consumer Details",
+  "dataColumns": [
+    {
+      "type": "n",
+      "bold": false,
+      "title": "Consumer No",
+      "value": 1234567890
+    },
+    {
+      "type": "n",
+      "bold": false,
+      "title": "Water Board",
+      "value": "Cidco Bill Payment"
+    },
+    {
+      "type": "n",
+      "bold": false,
+      "title": "Due Date",
+      "value": "12 May 2022"
+    },
+
+    {
+      "type": "n",
+      "bold": false,
+      "title": "Amount",
+      "value": "1000"
+    }
+  ]
+}

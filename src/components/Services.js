@@ -38,7 +38,7 @@ const Services = () => {
     Water: {
       icon: "fas fa-tint",
       heading: "Water",
-      link: "/mobile",
+      link: "/home/water",
     },
     FASTag: {
       icon: "fas fa-tags",

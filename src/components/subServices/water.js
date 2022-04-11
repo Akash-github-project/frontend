@@ -2,42 +2,24 @@ import ConfirmDetails from "./confirmDetails"
 import Button from "../button"
 import { Input } from "../input"
 import Checkbox from "react-custom-checkbox"
-import { renderProvider } from "../../otherData/inputWithImage"
-import SelectSearch, { fuzzySearch } from "react-select-search"
-import operator from "../../otherData/dthOperator.json"
-import { NumberInput } from "../numberInput"
+import provider from "../../otherData/waterPorvider.json"
 import { useState } from "react"
 import Wrapper from "../wrapper"
 //to change
-import dthConfirm from "./specialJsons/dthConfirm.json"
+import dthConfirm from "./specialJsons/waterConfirm.json"
 
-let operatorList = operator.list.map((item) => ({
-  name: item.op_name,
-  value: item.op_key,
-  photo: item.image,
-  code: item.op_code,
-  msg: item.msg,
-}))
-
-const Dth = () => {
+const Water = () => {
   const [openCoupon, setCouponState] = useState(false)
   const [couponState, toggleCouponState] = useState(true)
-  const [outputOperator, setOperator] = useState(operatorList)
+  const [waterProvider, setWaterProvider] = useState(provider)
   const [currentMsg, setCurrentMsg] = useState("")
 
   const handleApplyCoupon = () => {
     toggleCouponState(!couponState)
   }
 
-  const handleOperatorChange = (value) => {
+  const handleProviderChange = (value) => {
     console.log(value)
-
-    let currentOperator = operatorList.filter((operator) => {
-      return operator.value === value
-    })
-
-    console.log(currentOperator)
-    setCurrentMsg(currentOperator[0].msg)
   }
   return (
     <Wrapper>
@@ -46,42 +28,51 @@ const Dth = () => {
           <div className="col-span-1 md:col-span-5">
             <div className="grid grid-cols-1 gap-4 w-full mx-auto lg:ml-auto lg:mr-8 lg:max-w-[218px] lg:mt-3">
               <div className="w-full col-span-full font-medium leading-[19px]">
-                DTH Recharge
+                Pay for Water
               </div>
               {/* select operator*/}
 
-              <SelectSearch
-                className="select-search "
-                options={outputOperator}
-                renderOption={renderProvider}
-                search
-                filterOptions={fuzzySearch}
-                placeholder="Search Operator"
-                onChange={(value) => handleOperatorChange(value)}
-              />
+              <select
+                name=""
+                id=""
+                onChange={handleProviderChange}
+                className="lg:w-full text-[13px] h-[36px] border border-pink-600 rounded text-gray-primary bg-white">
+                {waterProvider.waterList.map((providerList) => (
+                  <option
+                    value={providerList.value}
+                    className="lg:max-w-[218px] text-inherit">
+                    {providerList.name}
+                  </option>
+                ))}
+              </select>
+
+              <div className="flex flex-col w-full ">
+                <Input
+                  extraClasses="min-h-[36px] rounded-r rounded-l-none"
+                  override={{ maxWidth: "100%", flex: 1 }}
+                  holder="Subscriber No"
+                />
+              </div>
+
+              <div className="flex flex-col w-full ">
+                <Input
+                  extraClasses="min-h-[36px] rounded-r rounded-l-none"
+                  override={{ maxWidth: "100%", flex: 1 }}
+                  holder="Subscriber No"
+                />
+              </div>
               {/*  select operator ends*/}
               <div className="flex flex-col w-full ">
                 <Input
                   extraClasses="min-h-[36px] rounded-r rounded-l-none"
                   override={{ maxWidth: "100%", flex: 1 }}
-                  holder="Mobile No/ Subscriber No"
+                  holder="Subscriber No"
                 />
                 <span className="text-green-600 text-xs leading-3">
                   {currentMsg}
-                  {/* (Subscriber ID starts with 1 and is 10 digits long. To locate
-                  it, press the home button on remote.) */}
                 </span>
               </div>
 
-              <div className="flex gap-2 w-full h-[36px]">
-                <NumberInput
-                  extraClasses="h-full rounded-r rounded-l-none w-full"
-                  fieldClasses="border border-pink-primary w-full"
-                  holder="Amount"
-                  onleft="₹"
-                  color="pink"
-                />
-              </div>
               <button
                 className="lg:p-1 h-[36px] w-full bg-pink-primary active:bg-pink-800 text-white rounded text-[15px] lg:text-[15px] leading-[15px] font-medium text-sm"
                 placeholder="Ammount"
@@ -89,6 +80,11 @@ const Dth = () => {
               >
                 Fetch Bill
               </button>
+            </div>
+
+            <div className="w-full lg:max-w-[218px]  rounded bg-blue-200 text-xs leading-3 text-blue-800 p-2 mx-auto mt-2 lg:mr-8 lg:ml-auto">
+              Your service provider will take two working days to consider bill
+              paid in their accounts.
             </div>
           </div>
 
@@ -192,4 +188,4 @@ const Dth = () => {
   )
 }
 
-export default Dth
+export default Water

@@ -1,20 +1,19 @@
 .overlay {
-	--base-z: 1000000000;
-	z-index: calc(var(--base-z) + 2);
+  --base-z: 1000000000;
+  z-index: calc(var(--base-z) + 2);
 }
 
 .circle > ul {
-	color: darkslategray;
+  color: darkslategray;
 }
 
 div[data-cms] {
-	font-size: 14px;
+  font-size: 14px;
 }
 div[data-cms] * {
-	font-size: 14px;
-	list-style-type: circle;
-	display: block;
-	line-height: normal;
-	color: darkslategray;
-	margin-left: 1.2rem;
+  font-size: 14px;
+  display: block;
+  line-height: normal;
+  color: darkslategray;
+  margin-left: 1.2rem;
 }
