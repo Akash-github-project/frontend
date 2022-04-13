@@ -31,6 +31,8 @@ import GasLpg from "./components/subServices/gasLpg"
 import GiftCard from "./components/subServices/giftCard"
 import Water from "./components/subServices/water"
 import BroadbandLandline from "./components/subServices/broadbandLandline"
+import Insurance from "./components/subServices/insurance"
+import Fastag from "./components/subServices/fastag"
 
 ReactDOM.render(
   <React.StrictMode>
@@ -53,6 +55,8 @@ ReactDOM.render(
               <Route path="giftcard" element={<GiftCard />} />
               <Route path="water" element={<Water />} />
               <Route path="broadbandlandline" element={<BroadbandLandline />} />
+              <Route path="insurance" element={<Insurance />} />
+              <Route path="fastag" element={<Fastag />} />
             </Route>
 
             <Route path="aboutus" element={<AboutUs />} />

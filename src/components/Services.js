@@ -43,12 +43,12 @@ const Services = () => {
     FASTag: {
       icon: "fas fa-tags",
       heading: "FASTag",
-      link: "/mobile",
+      link: "/home/fastag",
     },
     Insurance: {
       icon: "fas fa-file-medical",
       heading: "Insurance",
-      link: "/mobile",
+      link: "/home/insurance",
     },
     gifts: {
       icon: "fa fa-gift",

@@ -1,0 +1,135 @@
+{
+  "insuranceList": [
+    { "name": "LIC of India ", "value": "LIC of India " },
+    {
+      "name": "Aditya Birla Health Insurance ",
+      "value": "Aditya Birla Health Insurance "
+    },
+    {
+      "name": "Aditya Birla Sun Life Insurance ",
+      "value": "Aditya Birla Sun Life Insurance "
+    },
+    { "name": "Aegon Life Insurance ", "value": "Aegon Life Insurance " },
+    {
+      "name": "Ageas Federal Life Insurance Company Limited ",
+      "value": "Ageas Federal Life Insurance Company Limited "
+    },
+    { "name": "Aviva Life Insurance ", "value": "Aviva Life Insurance " },
+    {
+      "name": "Bajaj Allianz General Insurance Company ",
+      "value": "Bajaj Allianz General Insurance Company "
+    },
+    {
+      "name": "Bajaj Allianz Life Insurance ",
+      "value": "Bajaj Allianz Life Insurance "
+    },
+    {
+      "name": "Bajaj Finance Ltd(Corporate Agent) ",
+      "value": "Bajaj Finance Ltd(Corporate Agent) "
+    },
+    {
+      "name": "Bharti AXA Life Insurance ",
+      "value": "Bharti AXA Life Insurance "
+    },
+    {
+      "name": "Canara HSBC OBC Life Insurance ",
+      "value": "Canara HSBC OBC Life Insurance "
+    },
+    { "name": "Care Health Insurance ", "value": "Care Health Insurance " },
+    {
+      "name": "Edelweiss Tokio Life Insurance ",
+      "value": "Edelweiss Tokio Life Insurance "
+    },
+    { "name": "Exide Life Insurance ", "value": "Exide Life Insurance " },
+    {
+      "name": "Future Generali India General Insurance ",
+      "value": "Future Generali India General Insurance "
+    },
+    {
+      "name": "Future Generali India Life Insurance ",
+      "value": "Future Generali India Life Insurance "
+    },
+    { "name": "Go Digit Insurance ", "value": "Go Digit Insurance " },
+    {
+      "name": "HDFC Ergo General Insurance ",
+      "value": "HDFC Ergo General Insurance "
+    },
+    { "name": "HDFC Life Insurance ", "value": "HDFC Life Insurance " },
+    {
+      "name": "ICICI Lombard General Insurance (Health) ",
+      "value": "ICICI Lombard General Insurance (Health) "
+    },
+    {
+      "name": "ICICI Lombard General Insurance (Motor) ",
+      "value": "ICICI Lombard General Insurance (Motor) "
+    },
+    {
+      "name": "ICICI Prudential Life Insurance ",
+      "value": "ICICI Prudential Life Insurance "
+    },
+    {
+      "name": "Iffco Tokio General Insurance ",
+      "value": "Iffco Tokio General Insurance "
+    },
+    {
+      "name": "IndiaFirst Life Insurance ",
+      "value": "IndiaFirst Life Insurance "
+    },
+    {
+      "name": "Magma HDI General Insurance ",
+      "value": "Magma HDI General Insurance "
+    },
+    {
+      "name": "ManipalCigna Health Insurance ",
+      "value": "ManipalCigna Health Insurance "
+    },
+    {
+      "name": "Max Bupa Health Insurance ",
+      "value": "Max Bupa Health Insurance "
+    },
+    { "name": "MAX Life Insurance ", "value": "MAX Life Insurance " },
+    { "name": "PNB Metlife Insurance ", "value": "PNB Metlife Insurance " },
+    {
+      "name": "Pramerica Life Insurance Limited ",
+      "value": "Pramerica Life Insurance Limited "
+    },
+    {
+      "name": "Reliance General Insurance ",
+      "value": "Reliance General Insurance "
+    },
+    {
+      "name": "Reliance Nippon Life Insurance ",
+      "value": "Reliance Nippon Life Insurance "
+    },
+    {
+      "name": "Royal Sundaram General Insurance ",
+      "value": "Royal Sundaram General Insurance "
+    },
+    { "name": "SBI Life Insurance ", "value": "SBI Life Insurance " },
+    {
+      "name": "Shriram General Insurance ",
+      "value": "Shriram General Insurance "
+    },
+    {
+      "name": "Shriram Life Insurance Co Ltd ",
+      "value": "Shriram Life Insurance Co Ltd "
+    },
+    {
+      "name": "Star Health and Allied Insurance ",
+      "value": "Star Health and Allied Insurance "
+    },
+    {
+      "name": "Star Union Dai- Ichi Life Insurance ",
+      "value": "Star Union Dai- Ichi Life Insurance "
+    },
+    { "name": "TATA AIA Life Insurance ", "value": "TATA AIA Life Insurance " },
+    {
+      "name": "The Oriental Insurance Company ",
+      "value": "The Oriental Insurance Company "
+    },
+    {
+      "name": "Universal Sompo General Insurance ",
+      "value": "Universal Sompo General Insurance "
+    }
+  ]
+}

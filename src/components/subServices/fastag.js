@@ -5,24 +5,18 @@ import Checkbox from "react-custom-checkbox"
 import React, { useState } from "react"
 import Wrapper from "../wrapper"
 //to change
-import giftCardConfirm from "./specialJsons/giftCardConfirm.json"
+import fastagConfirm from "./specialJsons/fastagConfirm.json"
 import recents from "./specialJsons/recents.json"
 import "../../css/grids.css"
 
-const GiftCard = () => {
+const Fastag = () => {
   const [openCoupon, setCouponState] = useState(false)
   const [couponState, toggleCouponState] = useState(true)
-  const [giftCardProvider, setGiftCardProvider] = useState("googlePay")
 
   const handleApplyCoupon = () => {
     toggleCouponState(!couponState)
   }
 
-  const handleServiceChange = (e) => {
-    console.log(e.target.value)
-    setGiftCardProvider(e.target.value)
-    console.log("test")
-  }
   return (
     <Wrapper>
       <div className="w-full">
@@ -30,32 +24,23 @@ const GiftCard = () => {
           <div className="col-span-1 md:col-span-4 ">
             <div className="grid grid-cols-1 gap-4 w-full mx-auto justiry-center">
               <div className="w-full col-span-full font-medium leading-[19px]">
-                Pay for Gift Cards
+                Pay for Fastag
               </div>
-              {/* select giftcard service type*/}
+              {/* select fastag service type*/}
               <div className="col-span-full grid input-width-grid3 lg:justify-center gap-4 lg:gap-8">
-                <select
-                  name=""
-                  id=""
-                  placeholder="Gas Cylinder/Gas Pipes"
-                  onChange={handleServiceChange}
-                  className="lg:w-full text-[13px] h-[36px] border border-pink-600 rounded text-gray-primary bg-white lg:max-w-[218px]">
-                  <option value="none" className="text-inherit">
-                    Select A Gift Card Provider
-                  </option>
-                  <option value="googlePay" className="text-inherit">
-                    Google Pay
-                  </option>
-                  <option value="amazonPay" className="text-inherit">
-                    Amazon Pay
-                  </option>
-                </select>
-                {/*  select gift card service type ends*/}
+                <div className="flex w-full h-[36px]">
+                  <Input
+                    iType="tel"
+                    holder="Vechile No"
+                    extraClasses="text-gray-primary"
+                    override={{ maxWidth: "100%", flex: 1 }}
+                  />
+                </div>
 
                 <div className="flex w-full h-[36px]">
                   <Input
                     iType="tel"
-                    holder="Amount"
+                    holder="Amount of fastag"
                     extraClasses="text-gray-primary"
                     override={{ maxWidth: "100%", flex: 1 }}
                   />
@@ -63,7 +48,7 @@ const GiftCard = () => {
                 <button
                   className="lg:p-1 h-[36px] w-full bg-pink-primary active:bg-pink-800 text-white rounded text-[15px] lg:text-[15px] leading-[15px] font-medium text-sm"
                   placeholder="Amount">
-                  Proceed
+                  Bye FASTag
                 </button>
               </div>
             </div>
@@ -77,7 +62,7 @@ const GiftCard = () => {
             <div
               className={`grid grid-cols-2 w-full lg:w-[348px] border mx-auto mt-4 md:mt-0 `}>
               {/* card details section start*/}
-              <ConfirmDetails dataPlan={giftCardConfirm} />
+              <ConfirmDetails dataPlan={fastagConfirm} />
               {/* card details section end*/}
 
               {/* ammount showing section start */}
@@ -170,4 +155,4 @@ const GiftCard = () => {
   )
 }
 
-export default GiftCard
+export default Fastag

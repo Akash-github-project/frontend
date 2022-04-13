@@ -1,0 +1,17 @@
+{
+  "heading": "Fastag Details",
+  "dataColumns": [
+    {
+      "type": "n",
+      "bold": false,
+      "title": "Vechile NO",
+      "value": "BR01BR2332"
+    },
+    {
+      "type": "n",
+      "bold": false,
+      "title": "Fastag value",
+      "value": 400
+    }
+  ]
+}

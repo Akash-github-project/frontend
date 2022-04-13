@@ -2,82 +2,105 @@ import ConfirmDetails from "./confirmDetails"
 import Button from "../button"
 import { Input } from "../input"
 import Checkbox from "react-custom-checkbox"
-import React, { useState } from "react"
+import provider from "../../otherData/insuranceProvider.json"
+import { useState } from "react"
 import Wrapper from "../wrapper"
 //to change
-import giftCardConfirm from "./specialJsons/giftCardConfirm.json"
-import recents from "./specialJsons/recents.json"
-import "../../css/grids.css"
+import dthConfirm from "./specialJsons/insuranceConfirm.json"
 
-const GiftCard = () => {
+const Insurance = () => {
   const [openCoupon, setCouponState] = useState(false)
   const [couponState, toggleCouponState] = useState(true)
-  const [giftCardProvider, setGiftCardProvider] = useState("googlePay")
+  const [insuranceProvider, setinsuranceProvider] = useState(provider)
+  const [currentMsg, setCurrentMsg] = useState("")
+  const [inputType, setInputType] = useState("text")
 
   const handleApplyCoupon = () => {
     toggleCouponState(!couponState)
   }
 
-  const handleServiceChange = (e) => {
-    console.log(e.target.value)
-    setGiftCardProvider(e.target.value)
-    console.log("test")
+  const handleProviderChange = (value) => {
+    console.log(value)
   }
   return (
     <Wrapper>
       <div className="w-full">
-        <div className="w-full grid grid-cols-1 lg:grid-cols-4 gap-6 justify-center">
-          <div className="col-span-1 md:col-span-4 ">
-            <div className="grid grid-cols-1 gap-4 w-full mx-auto justiry-center">
+        <div className="w-full grid grid-cols-1 lg:grid-cols-11 gap-6 justify-center ">
+          <div className="col-span-1 md:col-span-5">
+            <div className="grid grid-cols-1 gap-4 w-full mx-auto lg:ml-auto lg:mr-8 lg:max-w-[218px] lg:mt-3">
               <div className="w-full col-span-full font-medium leading-[19px]">
-                Pay for Gift Cards
+                Pay for insurance
               </div>
-              {/* select giftcard service type*/}
-              <div className="col-span-full grid input-width-grid3 lg:justify-center gap-4 lg:gap-8">
-                <select
-                  name=""
-                  id=""
-                  placeholder="Gas Cylinder/Gas Pipes"
-                  onChange={handleServiceChange}
-                  className="lg:w-full text-[13px] h-[36px] border border-pink-600 rounded text-gray-primary bg-white lg:max-w-[218px]">
-                  <option value="none" className="text-inherit">
-                    Select A Gift Card Provider
-                  </option>
-                  <option value="googlePay" className="text-inherit">
-                    Google Pay
-                  </option>
-                  <option value="amazonPay" className="text-inherit">
-                    Amazon Pay
-                  </option>
-                </select>
-                {/*  select gift card service type ends*/}
+              {/* select operator*/}
 
-                <div className="flex w-full h-[36px]">
-                  <Input
-                    iType="tel"
-                    holder="Amount"
-                    extraClasses="text-gray-primary"
-                    override={{ maxWidth: "100%", flex: 1 }}
-                  />
-                </div>
-                <button
-                  className="lg:p-1 h-[36px] w-full bg-pink-primary active:bg-pink-800 text-white rounded text-[15px] lg:text-[15px] leading-[15px] font-medium text-sm"
-                  placeholder="Amount">
-                  Proceed
-                </button>
+              <select
+                name=""
+                id=""
+                onChange={handleProviderChange}
+                className="lg:w-full text-[13px] h-[36px] border border-pink-600 rounded text-gray-primary bg-white">
+                {insuranceProvider.insuranceList.map((providerList) => (
+                  <option
+                    value={providerList.value}
+                    className="lg:max-w-[218px] text-inherit">
+                    {providerList.name}
+                  </option>
+                ))}
+              </select>
+
+              <div className="flex flex-col w-full ">
+                <Input
+                  extraClasses="min-h-[36px] rounded-r rounded-l-none"
+                  override={{ maxWidth: "100%", flex: 1 }}
+                  holder="policy no"
+                />
               </div>
+
+              <div className="flex flex-col w-full ">
+                <Input
+                  extraClasses="min-h-[36px] rounded-r rounded-l-none"
+                  override={{ maxWidth: "100%", flex: 1 }}
+                  holder="Date Of Birth"
+                  iType={inputType}
+                  focusFunction={() => setInputType("date")}
+                  blurFunction={() => setInputType("text")}
+                />
+              </div>
+              {/*  select operator ends*/}
+              <div className="flex flex-col w-full ">
+                <Input
+                  extraClasses="min-h-[36px] rounded-r rounded-l-none"
+                  override={{ maxWidth: "100%", flex: 1 }}
+                  holder="Mobile No"
+                  iType="tel"
+                />
+                <span className="text-green-600 text-xs leading-3">
+                  {currentMsg}
+                </span>
+              </div>
+
+              <button
+                className="lg:p-1 h-[36px] w-full bg-pink-primary active:bg-pink-800 text-white rounded text-[15px] lg:text-[15px] leading-[15px] font-medium text-sm"
+                placeholder="Ammount"
+                // onClick={handleRechargeRequest}
+              >
+                Get Premium Details
+              </button>
+            </div>
+
+            <div className="w-full lg:max-w-[218px]  rounded bg-blue-200 text-xs leading-3 text-blue-800 p-2 mx-auto mt-2 lg:mr-8 lg:ml-auto">
+              Your service provider will take two working days to consider bill
+              paid in their accounts.
             </div>
           </div>
-        </div>
 
-        <div>
+          {/* <div className="hidden md:block lg:col-span-1"></div> */}
           {/* bill display section */}
 
-          <div className="grid col-span-1 md:col-span-5 lg:mt-4 lg:mx-auto">
+          <div className="grid col-span-1 md:col-span-5 ">
             <div
-              className={`grid grid-cols-2 w-full lg:w-[348px] border mx-auto mt-4 md:mt-0 `}>
+              className={`grid grid-cols-2 w-full lg:w-[348px] border mx-auto lg:ml-0 mt-4 md:mt-0 `}>
               {/* card details section start*/}
-              <ConfirmDetails dataPlan={giftCardConfirm} />
+              <ConfirmDetails dataPlan={dthConfirm} />
               {/* card details section end*/}
 
               {/* ammount showing section start */}
@@ -170,4 +193,4 @@ const GiftCard = () => {
   )
 }
 
-export default GiftCard
+export default Insurance

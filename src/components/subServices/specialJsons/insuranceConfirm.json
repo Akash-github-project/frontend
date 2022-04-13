@@ -1,0 +1,29 @@
+{
+  "heading": "Insurance Details",
+  "dataColumns": [
+    {
+      "type": "n",
+      "bold": false,
+      "title": "Inserance No",
+      "value": 4748927498234
+    },
+    {
+      "type": "n",
+      "bold": false,
+      "title": "Policy Name",
+      "value": "some policy name"
+    },
+    {
+      "type": "n",
+      "bold": false,
+      "title": "Due Date",
+      "value": "29 Dec 2022"
+    },
+    {
+      "type": "n",
+      "bold": false,
+      "title": "Policy Premium Ammount",
+      "value": "1500"
+    }
+  ]
+}
