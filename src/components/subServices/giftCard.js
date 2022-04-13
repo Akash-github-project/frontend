@@ -33,7 +33,7 @@ const GiftCard = () => {
                 Pay for Gift Cards
               </div>
               {/* select giftcard service type*/}
-              <div className="col-span-full grid input-width-grid gap-4">
+              <div className="col-span-full grid input-width-grid3 lg:justify-center gap-4">
                 <select
                   name=""
                   id=""
@@ -163,34 +163,6 @@ const GiftCard = () => {
             </div>
 
             {/* confirm details section end*/}
-          </div>
-        </div>
-        <div className="bg-white border mt-4 grid grid-cols-1 lg:grid-cols-5 lg:p-2">
-          <div className=" hidden lg:block lg:col-span-2"></div>
-          <div className="col-span-full lg:col-span-3 grid gap-1 border   bg-white p-1">
-            <div className="w-full col-span-full">Recents</div>
-            <div className="shadow-default grid gap-1 p-2">
-              {recents.list.map((item) => (
-                <div className="flex w-full h-[36px]">
-                  <span className="p-2 flex-1 text-xs md:text-sm lg:text-md text-gray-primary">
-                    {item.heading}
-                  </span>
-                  <span className="p-2 flex-1 text-xs md:text-sm lg:text-md text-gray-primary">
-                    {item.number}
-                  </span>
-
-                  <button
-                    className=" border border-pink-primary w-[75px] hover:bg-pink-primary hover:text-white rounded text-inherit  "
-                    data-val={item.id}>
-                    <span
-                      className="mx-auto text-inherit hover:text-white"
-                      data-val={item.id}>
-                      Pay Bill
-                    </span>
-                  </button>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </div>

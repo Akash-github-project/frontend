@@ -2,4 +2,8 @@
   .input-width-grid {
     grid-template-columns: repeat(4, minmax(50px, 218px));
   }
+
+  .input-width-grid3 {
+    grid-template-columns: repeat(3, minmax(50px, 218px));
+  }
 }

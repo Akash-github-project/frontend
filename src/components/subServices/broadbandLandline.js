@@ -26,7 +26,11 @@ const BroadbandLandline = () => {
     //work req
     if (e.target.value == "broadband")
       service = [...landlineProvider.broadbandList]
-    else service = [...landlineProvider.landlineList]
+    else if (e.target.value == "landline")
+      service = [...landlineProvider.landlineList]
+    else {
+      service = []
+    }
 
     setCurrentProvider(service)
   }
@@ -46,13 +50,15 @@ const BroadbandLandline = () => {
                 id=""
                 onChange={handleServiceChange}
                 className="lg:w-full text-[13px] h-[36px] border border-pink-600 rounded text-gray-primary bg-white">
-                {["broadband", "landline"].map((optionType) => (
-                  <option
-                    value={optionType}
-                    className="lg:max-w-[218px] text-inherit capitalize">
-                    {optionType}
-                  </option>
-                ))}
+                {["Select A Provider", "broadband", "landline"].map(
+                  (optionType) => (
+                    <option
+                      value={optionType}
+                      className="lg:max-w-[218px] text-inherit capitalize">
+                      {optionType}
+                    </option>
+                  )
+                )}
               </select>
               {/*  select operator ends*/}
 
