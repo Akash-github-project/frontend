@@ -6,7 +6,6 @@ import React, { useState } from "react"
 import Wrapper from "../wrapper"
 //to change
 import fastagConfirm from "./specialJsons/fastagConfirm.json"
-import recents from "./specialJsons/recents.json"
 import "../../css/grids.css"
 
 const Fastag = () => {
@@ -23,11 +22,14 @@ const Fastag = () => {
         <div className="w-full grid grid-cols-1 lg:grid-cols-4 gap-6 justify-center">
           <div className="col-span-1 md:col-span-4 ">
             <div className="grid grid-cols-1 gap-4 w-full mx-auto justiry-center">
-              <div className="w-full col-span-full font-medium leading-[19px]">
-                Pay for Fastag
+              {/* <div className="w-full col-span-full font-medium leading-[19px]"> */}
+              <div className="col-span-full grid input-width-grid3 lg:justify-center gap-4 ">
+                <span>Pay for Fastag</span>
+                <span className="hidden lg:block"></span>
+                <span className="hidden lg:block"></span>
               </div>
               {/* select fastag service type*/}
-              <div className="col-span-full grid input-width-grid3 lg:justify-center gap-4 lg:gap-8">
+              <div className="col-span-full grid input-width-grid3 lg:justify-center gap-4 ">
                 <div className="flex w-full h-[36px]">
                   <Input
                     iType="tel"

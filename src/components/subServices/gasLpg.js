@@ -4,6 +4,7 @@ import { Input } from "../input"
 import Checkbox from "react-custom-checkbox"
 import React, { useState } from "react"
 import Wrapper from "../wrapper"
+import SelectSearch from "react-select-search"
 //to change
 import electricityConfirm from "./specialJsons/gasConfirm.json"
 import gasProvider from "./specialJsons/GasProivder.json"
@@ -34,9 +35,9 @@ const GasLpg = () => {
   return (
     <Wrapper>
       <div className="w-full">
-        <div className="w-full grid grid-cols-1 lg:grid-cols-11 gap-6 justify-center">
-          <div className="col-span-1 md:col-span-5">
-            <div className="grid grid-cols-1 gap-4 w-full mx-auto lg:ml-auto lg:mr-8 lg:max-w-[218px] lg:mt-3">
+        <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-6 justify-center">
+          <div className="col-span-1 md:col-span-6">
+            <div className="grid grid-cols-1 gap-4 w-full mx-auto lg:ml-auto lg:mr-4 lg:max-w-[335px] lg:mt-3">
               <div className="w-full col-span-full font-medium leading-[19px]">
                 Pay for Gas &amp; LPG
               </div>
@@ -61,24 +62,15 @@ const GasLpg = () => {
               {/*  select gas service type ends*/}
 
               {/* select operator starts  */}
-              <select
-                name=""
-                id=""
-                onChange={handleServiceSelect}
-                placeholder="Gas Cylinder/Gas Pipes"
-                className="lg:w-full text-[13px] h-[36px] border border-pink-600 rounded text-gray-primary bg-white">
-                <option value="none" className="text-inherit">
-                  Selct Operator
-                </option>
-                {providerList.map((type) => (
-                  <option
-                    key={type.value}
-                    value={type.value}
-                    className="text-inherit">
-                    {type.name}
-                  </option>
-                ))}
-              </select>
+
+              <SelectSearch
+                options={providerList}
+                value="sv"
+                name="circle"
+                placeholder="Select A Gas Provider"
+                onChange={(value) => console.log(value)}
+              />
+
               {/* select operator ends  */}
 
               <div className="flex gap-2 w-full h-[36px]">
@@ -98,7 +90,7 @@ const GasLpg = () => {
               </button>
             </div>
 
-            <div className="w-full lg:max-w-[218px]  rounded bg-blue-200 text-xs leading-3 text-blue-800 p-2 mx-auto mt-2 lg:mr-8 lg:ml-auto">
+            <div className="w-full lg:max-w-[335px]  rounded bg-blue-200 text-xs leading-3 text-blue-800 p-2 mx-auto mt-2 lg:mr-4 lg:ml-auto">
               Your service provider will take two working days to consider bill
               paid in their accounts.
             </div>

@@ -28,18 +28,22 @@ const GiftCard = () => {
       <div className="w-full">
         <div className="w-full grid grid-cols-1 lg:grid-cols-4 gap-6 justify-center">
           <div className="col-span-1 md:col-span-4 ">
-            <div className="grid grid-cols-1 gap-4 w-full mx-auto justiry-center">
-              <div className="w-full col-span-full font-medium leading-[19px]">
-                Pay for Gift Cards
+            <div className="grid grid-cols-1 gap-4 w-full mx-auto justify-center">
+              {/* <div className="w-full col-span-full font-medium leading-[19px]"> */}
+
+              <div className="col-span-full grid input-width-grid3 lg:justify-center gap-4">
+                <span>Pay for Gift Card</span>
+                <span className="hidden lg:block"></span>
+                <span className="hidden lg:block"></span>
               </div>
               {/* select giftcard service type*/}
-              <div className="col-span-full grid input-width-grid3 lg:justify-center gap-4 lg:gap-8">
+              <div className="col-span-full grid input-width-grid3 lg:justify-center gap-4 ">
                 <select
                   name=""
                   id=""
                   placeholder="Gas Cylinder/Gas Pipes"
                   onChange={handleServiceChange}
-                  className="lg:w-full text-[13px] h-[36px] border border-pink-600 rounded text-gray-primary bg-white lg:max-w-[218px]">
+                  className="lg:w-full text-[13px] h-[36px] border border-pink-600 rounded text-gray-primary bg-white lg:max-w-[335px]">
                   <option value="none" className="text-inherit">
                     Select A Gift Card Provider
                   </option>

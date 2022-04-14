@@ -341,10 +341,6 @@ lh-14 {
     translate: scale(0.8);
   }
 
-  .show-small.show-small {
-    /* transform: scale(0.8); */
-  }
-
   .mainWrapper {
     padding-inline: 15px;
   }

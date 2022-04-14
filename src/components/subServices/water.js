@@ -5,6 +5,7 @@ import Checkbox from "react-custom-checkbox"
 import provider from "../../otherData/waterPorvider.json"
 import { useState } from "react"
 import Wrapper from "../wrapper"
+import SelectSearch from "react-select-search"
 //to change
 import dthConfirm from "./specialJsons/waterConfirm.json"
 
@@ -24,27 +25,21 @@ const Water = () => {
   return (
     <Wrapper>
       <div className="w-full">
-        <div className="w-full grid grid-cols-1 lg:grid-cols-11 gap-6 justify-center ">
-          <div className="col-span-1 md:col-span-5">
-            <div className="grid grid-cols-1 gap-4 w-full mx-auto lg:ml-auto lg:mr-8 lg:max-w-[218px] lg:mt-3">
+        <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-6 justify-center ">
+          <div className="col-span-1 md:col-span-6">
+            <div className="grid grid-cols-1 gap-4 w-full mx-auto lg:ml-auto lg:mr-4 lg:max-w-[335px] lg:mt-3">
               <div className="w-full col-span-full font-medium leading-[19px]">
                 Pay for Water
               </div>
               {/* select operator*/}
 
-              <select
-                name=""
-                id=""
-                onChange={handleProviderChange}
-                className="lg:w-full text-[13px] h-[36px] border border-pink-600 rounded text-gray-primary bg-white">
-                {waterProvider.waterList.map((providerList) => (
-                  <option
-                    value={providerList.value}
-                    className="lg:max-w-[218px] text-inherit">
-                    {providerList.name}
-                  </option>
-                ))}
-              </select>
+              <SelectSearch
+                options={waterProvider.waterList}
+                value="sv"
+                name="circle"
+                placeholder="Select A Water Provider"
+                onChange={(value) => console.log(value)}
+              />
 
               <div className="flex flex-col w-full ">
                 <Input
@@ -82,7 +77,7 @@ const Water = () => {
               </button>
             </div>
 
-            <div className="w-full lg:max-w-[218px]  rounded bg-blue-200 text-xs leading-3 text-blue-800 p-2 mx-auto mt-2 lg:mr-8 lg:ml-auto">
+            <div className="w-full lg:max-w-[335px]  rounded bg-blue-200 text-xs leading-3 text-blue-800 p-2 mx-auto mt-2 lg:mr-4 lg:ml-auto">
               Your service provider will take two working days to consider bill
               paid in their accounts.
             </div>
