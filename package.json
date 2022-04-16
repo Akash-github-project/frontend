@@ -30,6 +30,7 @@
 		"react-router-dom": "^6.2.1",
 		"react-scripts": "5.0.0",
 		"react-select-search": "^3.0.9",
+		"react-use": "^17.3.2",
 		"redux": "^4.1.2",
 		"styled-components": "^5.3.3",
 		"use-timer": "^2.0.1",

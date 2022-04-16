@@ -1,68 +1,50 @@
-import React from "react";
-import { useState } from "react";
-import "../css/all.css";
-export const Password = ({
-	Id = " ",
-	extraClasses = " ",
-	holder = " ",
-	change,
-	val,
+import React, { useState } from "react"
+
+const Password = ({
+  focusFunction = () => console.log("focused"),
+  blurFunction = () => console.log("blured"),
+  Id = " ",
+  extraClasses = " ",
+  holder = " ",
+  change,
+  val,
+  dis = "false",
+  override = {},
+  fClasses = "",
 }) => {
-	let testEye = (
-		<i
-			class="absolute right-0 bottom-0 top-0 fa-solid fa-eye toogle-password eye"
-			onClick={changePass}
-		></i>
-	);
-	let testSlashEye = (
-		<i
-			class=" absolute right-0 bottom-0 top-0 fa-solid fa-eye-slash toogle-password eye"
-			onClick={changePass}
-		></i>
-	);
-	let [showPass, tooglePass] = useState(false);
-	let defaultClasses =
-		"flex-1 border rounded-md  field w-full text-black focus:text-red-500";
+  const [show, setShow] = useState(false)
 
-	if (extraClasses !== " ") {
-		defaultClasses += `${defaultClasses}`;
-	}
+  let defaultClasses =
+    "border rounded-md text-black focus:text-red-500 border-pink-primary focus-within:border-blue-400 h-[36px] w-full"
+  if (extraClasses !== " ") {
+    defaultClasses += extraClasses
+  }
 
-	//   let icon = (showPass)?<FontAwesomeIcon icon={faEye} />:<FontAwesomeIcon icon={faEyeSlash} />;
+  function changeHandle(e) {
+    change(e.target.value)
+  }
 
-	function changePass(e) {
-		if (showPass) {
-			tooglePass(false);
-		} else tooglePass(true);
-	}
-	function changeHandle(e) {
-		change(e.target.value);
-	}
+  return (
+    <span className={`relative w-full ${fClasses}`}>
+      <input
+        type={show === true ? "text" : "password"}
+        id={Id}
+        placeholder={holder}
+        value={val}
+        onChange={changeHandle}
+        className={defaultClasses}
+        disabled={dis}
+        style={{ ...override }}
+        onFocus={focusFunction}
+        onBlur={blurFunction}
+      />
+      <button className="flex items-center justify-center absolute right-3 bottom-0 top-0 w-4">
+        <i
+          onClick={() => setShow(!show)}
+          className={`fa-solid fa-${show === true ? "eye" : "eye-slash"}`}></i>
+      </button>
+    </span>
+  )
+}
 
-	//  function toogleChange(e){
-	//      if(showPass){
-	//         tooglePass(false);
-	//      }
-	//      else{
-	//         tooglePass(true);
-	//      }
-	//   }
-	// let toShow = (showPass)?openEye:crossEye;
-	let toShow = showPass ? testEye : testSlashEye;
-	let passType = showPass ? "text" : "password";
-
-	return (
-		//work required
-		<div className="flex relative p-0 m-0 flex-1">
-			<input
-				type={passType}
-				id={Id}
-				placeholder={holder}
-				value={val}
-				onChange={changeHandle}
-				className={defaultClasses}
-			/>
-			{toShow}
-		</div>
-	);
-};
+export default Password

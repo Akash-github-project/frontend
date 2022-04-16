@@ -36,7 +36,7 @@ const Insurance = () => {
 
               <SelectSearch
                 options={insuranceProvider.insuranceList}
-                value="sv"
+                value="none"
                 name="circle"
                 placeholder="Select An Insurance Provider"
                 onChange={(value) => console.log(value)}

@@ -33,6 +33,7 @@ import Water from "./components/subServices/water"
 import BroadbandLandline from "./components/subServices/broadbandLandline"
 import Insurance from "./components/subServices/insurance"
 import Fastag from "./components/subServices/fastag"
+import UserProfile from "./components/userpages/userProfile"
 
 ReactDOM.render(
   <React.StrictMode>
@@ -70,6 +71,7 @@ ReactDOM.render(
             <Route path="rewards" element={<Rewards />} />
             <Route path="suggestions" element={<Suggestions />} />
             <Route path="addBalance" element={<WalletPage />} />
+            <Route path="profile" element={<UserProfile />} />
           </Route>
         </Routes>
       </Router>

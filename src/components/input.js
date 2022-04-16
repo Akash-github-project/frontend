@@ -9,11 +9,11 @@ export const Input = ({
   iType = "text",
   change,
   val,
-  st,
   dis = "false",
   override = {},
 }) => {
-  let defaultClasses = "border rounded-md text-black focus:text-red-500 field  "
+  let defaultClasses =
+    "border rounded-md text-black focus:text-red-500 field  h-[36px]"
   if (extraClasses !== " ") {
     defaultClasses += extraClasses
   }

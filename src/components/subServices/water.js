@@ -35,7 +35,7 @@ const Water = () => {
 
               <SelectSearch
                 options={waterProvider.waterList}
-                value="sv"
+                value="none"
                 name="circle"
                 placeholder="Select A Water Provider"
                 onChange={(value) => console.log(value)}
