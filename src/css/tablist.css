@@ -1,36 +1,48 @@
 .rewards-tab-list {
-	width: 100%;
-	display: flex;
+  width: 100%;
+  display: flex;
 }
 
 .rewardsTab {
-	padding: 1rem 2rem;
-	min-width: fit-content;
-	flex-basis: 33%;
-	text-align: center;
-	cursor: pointer;
-	color: darkslategray;
-	font-weight: 700;
+  padding: 1rem 2rem;
+  min-width: fit-content;
+  flex-basis: 33%;
+  text-align: center;
+  cursor: pointer;
+  color: darkslategray;
+  font-weight: 700;
 }
 .rewardsTab.active {
-	background-color: white;
-	color: #f5317c;
-	border-bottom: 2px solid #f5317c;
+  background-color: white;
+  color: #f5317c;
+  border-bottom: 2px solid #f5317c;
 }
+
+.tabStyle2 {
+  padding: 1rem 2rem;
+  min-width: fit-content;
+  text-align: center;
+  cursor: pointer;
+  font-weight: 700;
+}
+
 li.rewardsTab {
-	font-size: medium;
+  font-size: medium;
 }
 
 @media screen and (max-width: 680px) {
-	li.rewardsTab {
-		font-size: 11px;
-	}
+  li.rewardsTab {
+    font-size: 11px;
+  }
+  .tabStyle2 {
+    font-size: 11px;
+  }
 }
 
 .rewardsTab:first-of-type {
-	margin-left: auto;
+  margin-left: auto;
 }
 
 .rewardsTab:last-of-type {
-	margin-right: auto;
+  margin-right: auto;
 }

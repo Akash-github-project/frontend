@@ -23,7 +23,7 @@ const TransactionModal = ({ closeModal, open, children }) => {
         </div>
         <div className="w-full h-auto overflow-y-auto relative">
           <div className="flex flex-col sticky top-0">
-            <div className="w-full flex-1 text-center font-bold">
+            <div className="w-full flex-1 text-center font-bold bg-white">
               Cashback Earned
             </div>
             <div className="flex flex-1">

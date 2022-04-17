@@ -3,6 +3,7 @@ import PersonalInfo from "./profile/personalInfo"
 import Wrapper from "../wrapper"
 import ChangePassword from "./profile/changePassword"
 import { Tabs, useTabState, Panel } from "@bumaga/tabs"
+import TransactionHistory from "./profile/TransactionHistory"
 
 const cn = (...args) => args.filter(Boolean).join(" ")
 
@@ -34,6 +35,7 @@ const UserProfile = () => {
             <div className="col-span-full lg:col-span-3 flex lg:flex-col">
               <Tab>Personal Information</Tab>
               <Tab>Change Passowrd</Tab>
+              <Tab>Transaction History</Tab>
             </div>
             <div className="col-span-full lg:col-span-9">
               <Panel>
@@ -41,6 +43,9 @@ const UserProfile = () => {
               </Panel>
               <Panel>
                 <ChangePassword />
+              </Panel>
+              <Panel>
+                <TransactionHistory />
               </Panel>
             </div>
           </div>
