@@ -22,11 +22,11 @@ const AddMoneyToWallet = () => {
         </div>
         {/* input section  */}
         <div className="grid grid-cols-12 gap-2 xl:gap-1">
-          <div className="flex flex-1 flex-col lg:flex-row items-start lg:items-center gap-1 col-span-full lg:col-span-6">
+          <div className="flex flex-1 lg:flex-row items-center gap-1 col-span-full lg:col-span-6">
             <span className="text-sm xl:text-md xl:mr-4 w-max">
               Enter Amount
             </span>
-            <div className="flex gap-2 w-full  lg:max-w-[218px] h-[36px] self-start lg:self-auto">
+            <div className="flex gap-2 w-full  lg:max-w-[218px] h-[36px] self-start lg:self-auto flex-1">
               <NumberInput
                 extraClasses="h-full rounded-r rounded-l-none w-full"
                 fieldClasses="border border-pink-primary w-full"
@@ -37,9 +37,9 @@ const AddMoneyToWallet = () => {
             </div>
           </div>
           {/* button */}
-          <div className="flex flex-1 flex-col lg:flex-row items-start w-full lg:items-center gap-1 col-span-full lg:col-span-6">
+          <div className="flex flex-1 lg:flex-row  w-full items-center gap-1 col-span-full lg:col-span-6">
             <span className="text-sm xl:block mr-0 xl:mr-4">Promocode</span>
-            <div className="flex gap-2 h-[36px] w-full lg:max-w-[218px]">
+            <div className="flex gap-2 h-[36px] w-full ml-3 lg:ml-0  lg:max-w-[218px] flex-1">
               <NumberInput
                 extraClasses="h-full rounded-r rounded-l-none w-full"
                 fieldClasses="border border-pink-primary w-full"
@@ -48,7 +48,7 @@ const AddMoneyToWallet = () => {
                 color="pink"
               />
             </div>
-            <Button text="Apply" exClasses="w-full lg:w-fit" />
+            <Button text="Apply" exClasses="lg:w-fit" />
           </div>
 
           <div className="col-span-full w-full mt-8">
