@@ -32,7 +32,7 @@ const UserProfile = () => {
 
         <Tabs state={[state, setState]}>
           <div className="grid grid-cols-1 lg:grid-cols-12">
-            <div className="col-span-full lg:col-span-3 flex lg:flex-col">
+            <div className="col-span-full mx-auto lg:mx-0 lg:col-span-3 flex lg:flex-col">
               <Tab>Personal Information</Tab>
               <Tab>Change Passowrd</Tab>
               <Tab>Transaction History</Tab>

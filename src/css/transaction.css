@@ -1,25 +1,25 @@
 .tableGrid {
-	display: grid;
-	grid-template-columns:
-		minmax(4rem, 10%) minmax(6rem, 15%) minmax(7rem, 1fr) minmax(5rem, 10%)
-		minmax(5rem, 10%) minmax(10rem, 15%);
-	grid-auto-rows: minmax(3rem, auto);
+  display: grid;
+  grid-template-columns:
+    minmax(4rem, 10%) minmax(6rem, 15%) minmax(12rem, 1fr) minmax(5rem, 10%)
+    minmax(5rem, 10%) minmax(10rem, 15%);
+  grid-auto-rows: minmax(3rem, auto);
 }
 
 .tableRewardsPoint {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	grid-template-rows: 3rem;
-	grid-auto-rows: 2.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 3rem;
+  grid-auto-rows: 2.5rem;
 }
 
 @media screen and (max-width: 640px) {
-	.tableRewardsPoint * {
-		font-size: 11px;
-	}
-	.tableRewardsPoint {
-		grid-template-columns: minmax(max-content, 1fr) minmax(max-content, 1fr);
-		grid-template-rows: 3rem;
-		grid-auto-rows: 3rem;
-	}
+  .tableRewardsPoint * {
+    font-size: 11px;
+  }
+  .tableRewardsPoint {
+    grid-template-columns: minmax(max-content, 1fr) minmax(max-content, 1fr);
+    grid-template-rows: 3rem;
+    grid-auto-rows: 3rem;
+  }
 }

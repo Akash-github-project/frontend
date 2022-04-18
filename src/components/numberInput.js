@@ -12,7 +12,7 @@ export const NumberInput = ({
   color = "gray",
 }) => {
   let defaultClasses =
-    "border rounded-md text-black focus:text-red-400 border-0 w-full outline-none text-[16px] leading-[21px]"
+    "border rounded-md text-black focus:text-red-400 border-0 w-full outline-none text-[16px] leading-[21px] "
   let defaultField = "flex border rounded items-center p-1 "
 
   if (extraClasses !== " ") {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import Button from "../../button"
 import Password from "../../password"
+import TransactionList from "../../TransactionList"
 import { Tabs, useTabState, Panel } from "@bumaga/tabs"
 
 const cn = (...args) => args.filter(Boolean).join(" ")
@@ -39,43 +40,15 @@ const TransactionHistory = () => {
         </div>
         {/* password 1 section */}
         <Panel>
-          <>
-            <div className="flex flex-col lg:flex-row col-span-full xl:col-span-9 gap-2 lg:pl-6">
-              <span className="text-gray-primary w-40">Existing Password</span>
-              <Password
-                change={(value) => console.log(value)}
-                dis={false}
-                fClasses="flex-1"
-              />
-            </div>
-            {/* passowrd 2 secion */}
-            <div className="flex flex-col lg:flex-row col-span-full xl:col-span-9 gap-2 lg:pl-6">
-              <span className="text-gray-primary w-40">New Password</span>
-              <Password
-                change={(value) => console.log(value)}
-                dis={false}
-                fClasses="flex-1"
-              />
-            </div>
-
-            {/* confirm password section */}
-            <div className="flex flex-col lg:flex-row col-span-full xl:col-span-9 gap-2 lg:pl-6">
-              <span className="text-gray-primary w-40">Confirm Password</span>
-              <Password
-                change={(value) => console.log(value)}
-                dis={false}
-                fClasses="flex-1"
-              />
-            </div>
-            {/* submit secion */}
-            <div className="col-span-full flex gap-2 lg:pl-6">
-              <span className="lg:w-40"></span>
-              <Button text="Update Passowrd" fClasses="flex-1" />
-            </div>
-          </>
+          <div className="w-full col-span-full">
+            <TransactionList />
+          </div>
         </Panel>
+
         <Panel>
-          <></>
+          <div className="w-full col-span-full">
+            <TransactionList />
+          </div>
         </Panel>
       </div>
     </Tabs>
