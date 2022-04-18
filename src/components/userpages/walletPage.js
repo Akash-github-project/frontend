@@ -19,7 +19,10 @@ const Tab = ({ children }) => {
 
   return (
     <button
-      className={cn("tab border-b border-white", isActive && "active")}
+      className={cn(
+        "tab border-b border-white min-w-max",
+        isActive && "active"
+      )}
       onClick={onClick}>
       {children}
     </button>
@@ -63,7 +66,7 @@ export const WalletPage = () => {
             {/* tab defining section */}
             <div className="col-span-full grid grid-cols-4  md:px-16 lg:px-24 mt-2  mb-2">
               <div></div>
-              <Tab>Wallet Balance</Tab>
+              <Tab>Add Money</Tab>
               <Tab>Cashback Info</Tab>
               <div></div>
             </div>

@@ -1,6 +1,6 @@
 import React, { useState } from "react"
-import TransactionList from "../../TransactionList"
 import "../../../css/transaction.css"
+import TransactionListUser from "../../TransactionList2"
 
 const CashbackInfo = () => {
   const [walletBalance, setWalletBalance] = useState(100)
@@ -20,7 +20,7 @@ const CashbackInfo = () => {
           <span className="text-lg">{walletBalance}</span>
         </div>
       </div>
-      <TransactionList />
+      <TransactionListUser />
     </div>
   )
 }

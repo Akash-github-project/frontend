@@ -6,6 +6,15 @@
   grid-auto-rows: minmax(3rem, auto);
 }
 
+.tableGrid2 {
+  display: grid;
+  grid-template-columns: minmax(4rem, 10%) minmax(6rem, 15%) minmax(12rem, 1fr) minmax(
+      10rem,
+      15%
+    );
+  grid-auto-rows: minmax(3rem, auto);
+}
+
 .tableRewardsPoint {
   display: grid;
   grid-template-columns: 1fr 1fr;

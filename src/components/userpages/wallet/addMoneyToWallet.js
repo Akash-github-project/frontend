@@ -5,9 +5,9 @@ import Button from "../../button"
 const AddMoneyToWallet = () => {
   const [walletBalance, setWalletBalance] = useState(100)
   return (
-    <div className="w-full p-2 text-pink-primary text-center grid gap-1 items-center shadow-default col-span-full">
+    <div className="p-2 text-pink-primary text-center grid gap-1 items-center col-span-full">
       {/* image and heading section */}
-      <div className="w-full lg:w-8/12 mx-auto">
+      <div className="w-full lg:w-8/12 mx-auto shadow-default p-2">
         <div className="flex flex-1 flex-row w-full col-span-full gap-1 mb-3 justify-center">
           <img src="images/wallet.svg" alt="" className="w-8 h-7" />
           <span className="inline-block font-bold text-gray-primary">
@@ -52,7 +52,7 @@ const AddMoneyToWallet = () => {
           </div>
 
           <div className="col-span-full w-full mt-8">
-            <Button text="Add Money" exClasses="w-full" />
+            <Button text="Add Money" exClasses="w-full text-center" />
           </div>
         </div>
       </div>
