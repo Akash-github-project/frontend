@@ -6,7 +6,6 @@ import React, { useState } from "react"
 import Wrapper from "../wrapper"
 //to change
 import giftCardConfirm from "./specialJsons/giftCardConfirm.json"
-import recents from "./specialJsons/recents.json"
 import "../../css/grids.css"
 
 const GiftCard = () => {
@@ -67,7 +66,7 @@ const GiftCard = () => {
                 <button
                   className="lg:p-1 h-[36px] w-full bg-pink-primary active:bg-pink-800 text-white rounded text-[15px] lg:text-[15px] leading-[15px] font-medium text-sm"
                   placeholder="Amount">
-                  Proceed
+                  Continue to Recharge
                 </button>
               </div>
             </div>

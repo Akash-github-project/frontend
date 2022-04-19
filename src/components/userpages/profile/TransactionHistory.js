@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react"
-import Button from "../../button"
-import Password from "../../password"
 import TransactionList from "../../TransactionList"
 import { Tabs, useTabState, Panel } from "@bumaga/tabs"
+import WalletBill from "./userTransactions/walletBill"
 
 const cn = (...args) => args.filter(Boolean).join(" ")
 
@@ -12,8 +11,8 @@ const Tab = ({ children }) => {
   return (
     <button
       className={cn(
-        "tabStyle2 border-b border-b-white",
-        isActive && "bg-white border-b-2 border-b-pink-600 "
+        "tabStyle2 border-b-2 bg-white text-sm md:text-md border-b-gray-separator text-gray-primary",
+        isActive && " border-b-2 border-b-pink-600 text-pink-primary "
       )}
       onClick={onClick}>
       {children}
@@ -30,21 +29,23 @@ const TransactionHistory = () => {
   return (
     <Tabs state={[state, setState]}>
       <div className="grid grid-cols-12 w-full bg-gray-100 gap-4">
-        <h2 className="col-span-full text-left text-2xl font-medium border-b border-b-gray-separator lg:pl-6">
-          Personal Information
-        </h2>
-
-        <div className="col-span-full grid grid-cols-2">
-          <Tab>Recharge &amp; Bill Paid</Tab>
+        <div className="col-span-full grid grid-cols-3 overflow-x-hidden">
+          <Tab>Recharge &amp; Bill</Tab>
           <Tab>Wallet</Tab>
+          <Tab>Giftcard</Tab>
         </div>
         {/* password 1 section */}
+        <Panel>
+          <div className="w-full col-span-full">
+            <WalletBill />
+          </div>
+        </Panel>
+
         <Panel>
           <div className="w-full col-span-full">
             <TransactionList />
           </div>
         </Panel>
-
         <Panel>
           <div className="w-full col-span-full">
             <TransactionList />

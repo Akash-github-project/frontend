@@ -19,7 +19,7 @@ const UserMenu = ({ showInSmall = false }) => {
   return (
     <div className="relative bg-white" ref={ref}>
       <button
-        className={`w-8 h-8 user bg-pink-primary mt-[6px] small-margin scale-small small-btn  ${
+        className={`w-[33px] h-[33px] user bg-pink-primary mt-[6px] small-margin scale-small small-btn  ${
           showInSmall === true ? "show-in-small" : " "
         }`}
         onClick={() => setOpen(!open)}
@@ -29,7 +29,7 @@ const UserMenu = ({ showInSmall = false }) => {
           area-hidden="true"></i>
       </button>
       <div
-        className={`absolute  right-2 w-[200px] top-12 z-base rounded border border-pink-primary bg-white ${
+        className={`absolute  right-0  w-[200px] top-8 lg:top-10 z-base rounded border border-pink-primary bg-white ${
           open === true ? "block" : "hidden"
         }`}>
         <MenuBtn value="Hi User" click={closeMenu} link="#" />

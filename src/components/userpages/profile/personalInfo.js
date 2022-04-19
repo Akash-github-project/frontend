@@ -6,10 +6,7 @@ import WithTextInput from "../../withTextInput"
 const PersonalInfo = () => {
   return (
     <div className="grid grid-cols-1 w-full bg-gray-100">
-      <h2 className="col-span-full text-left text-2xl font-medium pl-6">
-        Personal Information
-      </h2>
-      <div className="col-span-full grid grid-cols-1 lg:grid-cols-2 gap-2 p-1 pl-6">
+      <div className="col-span-full grid grid-cols-1 lg:grid-cols-2 gap-4 p-1 pl-6">
         <div className="flex flex-col">
           <span className="text-gray-primary">Full Name</span>
           <Input

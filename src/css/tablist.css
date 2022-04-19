@@ -4,14 +4,27 @@
 }
 
 .rewardsTab {
-  padding: 1rem 2rem;
+  /* padding: 1rem 2rem; */
+  padding: 0.5rem 0.6rem;
   min-width: fit-content;
-  flex-basis: 33%;
   text-align: center;
   cursor: pointer;
   color: darkslategray;
   font-weight: 700;
 }
+@media screen and (min-width: 820px) {
+  .rewardsTab {
+    padding: 0.8rem 1.6rem;
+    flex-basis: 33%;
+  }
+}
+
+@media screen and (min-width: 922px) {
+  .rewardsTab {
+    padding: 1rem 2rem;
+  }
+}
+
 .rewardsTab.active {
   background-color: white;
   color: #f5317c;

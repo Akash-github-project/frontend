@@ -8,8 +8,8 @@
 
 .tableGrid2 {
   display: grid;
-  grid-template-columns: minmax(4rem, 10%) minmax(6rem, 15%) minmax(12rem, 1fr) minmax(
-      10rem,
+  grid-template-columns: minmax(2rem, 10%) minmax(4rem, 15%) minmax(4rem, 1fr) minmax(
+      4rem,
       15%
     );
   grid-auto-rows: minmax(3rem, auto);

@@ -17,7 +17,7 @@ const Tab = ({ children }) => {
 }
 
 export default ({ data }) => {
-  const [state, setState] = useState(1)
+  const [state, setState] = useState(0)
   useEffect(() => {
     setState(1)
   }, [])
@@ -25,7 +25,7 @@ export default ({ data }) => {
   return (
     <Tabs state={[state, setState]}>
       <div className="tabs">
-        <div className="tab-list flex gap-1 md:gap-2  p-[10px]">
+        <div className="tab-list flex gap-1 md:gap-2 p-[10px]">
           {Object.keys(data).map((ele) => (
             <Tab>{ele}</Tab>
           ))}

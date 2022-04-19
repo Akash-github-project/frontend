@@ -1,0 +1,10 @@
+{
+  "fastag": [
+    { "name": "Select A Fastag Provider", "value": "none" },
+    { "name": "some name", "value": "some value" },
+    { "name": "some name", "value": "some value" },
+    { "name": "some name", "value": "some value" },
+    { "name": "some name", "value": "some value" },
+    { "name": "some name", "value": "some value" }
+  ]
+}

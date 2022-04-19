@@ -1,8 +1,9 @@
 import React, { useEffect, useRef } from "react"
 import transaction from "../otherData/transactionUser.json"
 import "../css/transaction.css"
+
 const TransactionListUser = ({ userId = 1 }) => {
-  let headers = ["Sr No", "Date", "Activity", "Amount"]
+  let headers = ["Sr No", "Date", "Code", "Amount"]
 
   let dataRef = useRef()
   useEffect(() => {
@@ -13,7 +14,7 @@ const TransactionListUser = ({ userId = 1 }) => {
     <div className="tableGrid2 overflow-x-auto mt-1 ">
       {/* mapping over all header items */}
       {headers.map((header) => (
-        <div className="text-gray-800 flex items-center justify-center text-sm lg:text-base bg-gray-400/30 sticky top-0">
+        <div className="text-gray-800 flex items-center justify-center text-sm lg:text-base bg-gray-header sticky top-0">
           <span className="text-gray-primary font-bold text-sm">{header}</span>
         </div>
       ))}
@@ -42,7 +43,7 @@ const TransactionListUser = ({ userId = 1 }) => {
                 </div>
                 <div className="text-gray-800 flex mx-4 items-center justify-left text-sm lg:text-base ">
                   <span className="text-gray-primary  w-full text-xs lg:text-sm">
-                    {each.activity}
+                    {each.Code}
                   </span>
                 </div>
                 <div className="text-gray-800 flex items-center justify-center text-sm lg:text-base ">

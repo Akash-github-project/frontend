@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react"
+import React, { useState } from "react"
 import { Menu, MenuItem } from "@mui/material"
 import { Link } from "react-router-dom"
 
@@ -32,8 +32,12 @@ const DropMenu = () => {
         onClose={handleClose}
         sx={{
           li: {
-            minHeight: "1.2rem",
+            minHeight: "2.1rem",
             width: "50vw",
+            paddingBlock: "0",
+          },
+          ul: {
+            paddingBlock: "0",
           },
         }}>
         <Link to="/rewards" data-route="/rewards">

@@ -23,6 +23,7 @@ module.exports = {
         },
         gray: {
           primary: "#535b61",
+          header: "rgb(225, 231, 240)",
           separator: "#ccbebe",
         },
         green: {

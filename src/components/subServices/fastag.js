@@ -4,8 +4,10 @@ import { Input } from "../input"
 import Checkbox from "react-custom-checkbox"
 import React, { useState } from "react"
 import Wrapper from "../wrapper"
+import SelectSearch from "react-select-search"
 //to change
 import fastagConfirm from "./specialJsons/fastagConfirm.json"
+import fastagProvider from "../../otherData/fastagProvider.json"
 import "../../css/grids.css"
 
 const Fastag = () => {
@@ -23,13 +25,22 @@ const Fastag = () => {
           <div className="col-span-1 md:col-span-4 ">
             <div className="grid grid-cols-1 gap-4 w-full mx-auto justiry-center">
               {/* <div className="w-full col-span-full font-medium leading-[19px]"> */}
-              <div className="col-span-full grid input-width-grid3 lg:justify-center gap-4 ">
+              <div className="col-span-full grid input-width-grid4 lg:justify-center gap-4 ">
                 <span>Pay for Fastag</span>
                 <span className="hidden lg:block"></span>
                 <span className="hidden lg:block"></span>
               </div>
               {/* select fastag service type*/}
-              <div className="col-span-full grid input-width-grid3 lg:justify-center gap-4 ">
+              <div className="col-span-full grid input-width-grid4 lg:justify-center gap-4 ">
+                <div className="flex w-full h-[36px]">
+                  <SelectSearch
+                    options={fastagProvider.fastag}
+                    value="none"
+                    name="fastag"
+                    placeholder="Select A Fastag Provider"
+                    onChange={(value) => console.log(value)}
+                  />
+                </div>
                 <div className="flex w-full h-[36px]">
                   <Input
                     iType="tel"
@@ -50,7 +61,7 @@ const Fastag = () => {
                 <button
                   className="lg:p-1 h-[36px] w-full bg-pink-primary active:bg-pink-800 text-white rounded text-[15px] lg:text-[15px] leading-[15px] font-medium text-sm"
                   placeholder="Amount">
-                  Bye FASTag
+                  Continue to Recharge
                 </button>
               </div>
             </div>

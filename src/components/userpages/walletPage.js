@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from "react"
 import Wrapper from "../wrapper"
-import dthConfirm from "../subServices/specialJsons/dthConfirm.json"
-import Button from "../button"
-import ConfirmDetails from "../subServices/confirmDetails"
-import { Input } from "../input"
-import Checkbox from "react-custom-checkbox"
-import { NumberInput } from "../numberInput"
-import TransactionModal from "./transtactionModal"
 import { Tabs, useTabState, Panel } from "@bumaga/tabs"
 import CashbackInfo from "./wallet/cashbackInfo"
 import AddMoneyToWallet from "./wallet/addMoneyToWallet"
@@ -57,9 +50,7 @@ export const WalletPage = () => {
       <Wrapper>
         <div className="w-full">
           <div className="flex items-center justify-right bg-primary  h-[40px] px-[15px] w-order box-border">
-            <h1 className="text-white text-[18px] py-[10px] px-1">
-              Add Wallet
-            </h1>
+            <h1 className="text-white text-[18px] py-[10px] px-1">My Wallet</h1>
           </div>
 
           <div className="w-full grid grid-cols-1 lg:grid-cols-4 relative py-1 ">

@@ -1,24 +1,31 @@
-.notificaton{
-    position: relative;
+.notificaton {
+  position: relative;
 }
-.notificaton-box{
-    display: none;
+.notificaton-box {
+  display: none;
 }
 
-.notificaton > button#notify:hover + .notificaton-box{
-    display: block;
-    z-index:4;
+.notificaton > button#notify:hover + .notificaton-box {
+  display: block;
+  z-index: 4;
 }
-.user{
-    font-size: clamp(.7rem,1rem,1rem);
-    flex-basis:2rem;
-    min-width:2rem; 
-    /* min-height: .7rem; */
-    border-radius: 50%;
+.user {
+  font-size: clamp(0.7rem, 1rem, 1rem);
+  flex-basis: 2rem;
+  min-width: 2rem;
+  /* min-height: .7rem; */
+  border-radius: 50%;
 }
-.add-money{
-    cursor: pointer;
-    background-image: url(../components/images/300-3003183_money-icon-png.png);
-    background-size: contain;
-    background-repeat: no-repeat;
+.add-money {
+  cursor: pointer;
+  background-image: url(../components/images/300-3003183_money-icon-png.png);
+  background-size: contain;
+  scale: 1.25;
+  background-repeat: no-repeat;
+}
+
+@media screen and (min-width: 488px) {
+  .add-money {
+    scale: 1.1;
+  }
 }

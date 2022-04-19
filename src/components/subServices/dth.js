@@ -87,7 +87,7 @@ const Dth = () => {
                 placeholder="Ammount"
                 // onClick={handleRechargeRequest}
               >
-                Fetch Bill
+                Continue to Recharge
               </button>
             </div>
           </div>

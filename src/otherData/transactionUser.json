@@ -2,32 +2,32 @@
   "transaction": [
     {
       "sno": "1",
-      "date": "22/04/2004:12:34:34",
-      "activity": "transfered 1000 rupees to wallet lorem lore m ifsjkf jfjslkjflk jflksjfks jfls fjlksf klsjfks kkf",
+      "date": "22/04/2004",
+      "Code": "232ljl",
       "Amount": "200"
     },
     {
       "sno": "2",
-      "date": "22/04/2004:12:34:34",
-      "activity": "transfered 1000 rupees to wallet",
+      "date": "22/04/2004",
+      "Code": "heleje",
       "Amount": "200"
     },
     {
       "sno": "3",
-      "date": "22/04/2004:12:34:34",
-      "activity": "transfered 1000 rupees to wallet",
+      "date": "22/04/2004",
+      "Code": "jdkjsk",
       "Amount": "200"
     },
     {
       "sno": "4",
-      "date": "22/04/2004:12:34:34",
-      "activity": "transfered 1000 rupees to wallet",
+      "date": "22/04/2004",
+      "Code": "jdkkdkd",
       "Amount": "200"
     },
     {
       "sno": "5",
-      "date": "22/04/2004:12:34:34",
-      "activity": "transfered 1000 rupees to wallet",
+      "date": "22/04/2004",
+      "Code": "jsklssl",
       "Amount": "200"
     }
   ]
