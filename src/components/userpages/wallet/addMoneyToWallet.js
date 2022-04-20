@@ -1,9 +1,19 @@
 import React, { useState } from "react"
 import { NumberInput } from "../../numberInput"
+import { Input } from "../../input"
 import Button from "../../button"
+import WithTextInput from "../../withTextInput"
 
 const AddMoneyToWallet = () => {
-  const [walletBalance, setWalletBalance] = useState(100)
+  const [otp, setOtp] = useState(false)
+  const [promo, setPromo] = useState(" ")
+  const [have, setHave] = useState(false)
+
+  const setCls = () => {
+    let x = " "
+    setPromo(x)
+    setOtp(false)
+  }
   return (
     <div className="p-2 text-pink-primary  shadow-default text-center grid gap-2 items-center col-span-full">
       {/* image and heading section */}
@@ -18,7 +28,7 @@ const AddMoneyToWallet = () => {
             alt=""
             className="w-3 h-7 text-pink-primary"
           />
-          <span className="text-lg">{walletBalance}</span>
+          <span className="text-lg">100</span>
         </div>
         <div className="w-full text-pink-primary">
           <img
@@ -46,8 +56,28 @@ const AddMoneyToWallet = () => {
           <div className="flex col-span-full w-full mt-8 justify-center">
             <Button text="Add Money" exClasses="w-[500px] text-center" />
           </div>
-          <div className="flex col-span-full w-full mt-1 text-xs justify-center text-pink-primary text-right">
-            <span className="ml-auto text-inherit">Have a promocode?</span>
+          <div className="flex col-span-full w-full  mt-1 text-xs justify-center text-pink-primary text-right self-center">
+            <div className="mx-auto flex items-center">
+              {have ? (
+                <>
+                  <WithTextInput
+                    change={(e) => setPromo(e.target.value)}
+                    value={promo}
+                    disable={otp ? true : false}
+                    text={otp ? <i className="fa-solid fa-trash-can"></i> : " "}
+                    textClick={setCls}
+                  />
+                  {otp ? null : (
+                    <Button click={() => setOtp(true)} text="Apply" />
+                  )}
+                </>
+              ) : null}
+              <span
+                className="text-inherit min-w-fit ml-auto m-1 cursor-pointer"
+                onClick={() => setHave(!have)}>
+                Have a promocode?
+              </span>
+            </div>
           </div>
         </div>
       </div>
