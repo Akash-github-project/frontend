@@ -21,9 +21,9 @@ const Tab = ({ children }) => {
 }
 
 const TransactionHistory = () => {
-  const [state, setState] = useState(1)
+  const [state, setState] = useState(0)
   useEffect(() => {
-    setState(1)
+    setState(0)
   }, [])
 
   return (

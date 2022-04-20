@@ -22,7 +22,7 @@ const Tab = ({ children }) => {
 export default ({ data }) => {
   const [state, setState] = useState(0)
   useEffect(() => {
-    setState(1)
+    setState(0)
   }, [])
 
   return (

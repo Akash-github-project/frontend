@@ -30,9 +30,9 @@ export const WalletPage = () => {
   const [isOpen, setIsOpen] = useState(false)
 
   //state for tab section don't change it unless  you now  what you are doing
-  const [state, setState] = useState(1)
+  const [state, setState] = useState(0)
   useEffect(() => {
-    setState(1)
+    setState(0)
   }, [])
 
   let walletBalance = 100

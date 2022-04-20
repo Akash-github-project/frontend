@@ -20,7 +20,7 @@ const Tab = ({ children }) => {
 const UserProfile = () => {
   const [state, setState] = useState(0)
   useEffect(() => {
-    setState(1)
+    setState(0)
   }, [])
 
   return (
