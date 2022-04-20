@@ -5,9 +5,9 @@ import Button from "../../button"
 const AddMoneyToWallet = () => {
   const [walletBalance, setWalletBalance] = useState(100)
   return (
-    <div className="p-2 text-pink-primary text-center grid gap-1 items-center col-span-full">
+    <div className="p-2 text-pink-primary  shadow-default text-center grid gap-2 items-center col-span-full">
       {/* image and heading section */}
-      <div className="w-full lg:w-8/12 mx-auto shadow-default p-2">
+      <div className="w-full mx-auto  p-2">
         <div className="flex flex-1 flex-row w-full col-span-full gap-1 mb-3 justify-center">
           <img src="images/wallet.svg" alt="" className="w-8 h-7" />
           <span className="inline-block font-bold text-gray-primary">
@@ -20,13 +20,19 @@ const AddMoneyToWallet = () => {
           />
           <span className="text-lg">{walletBalance}</span>
         </div>
+        <div className="w-full text-pink-primary">
+          <img
+            src="/walletImage.png"
+            className="w-24 h-24 text-pink-primary mx-auto"
+          />
+        </div>
         {/* input section  */}
-        <div className="grid grid-cols-12 gap-2 xl:gap-1">
-          <div className="flex flex-1 lg:flex-row items-center gap-1 col-span-full lg:col-span-6">
+        <div className="grid grid-cols-12 gap-2 xl:gap-1 mt-2">
+          <div className="mx-auto flex flex-1 lg:flex-row items-center justify-center gap-2 col-span-full lg:col-span-full md:max-w-[500px]">
             <span className="text-sm xl:text-md xl:mr-4 w-max">
               Enter Amount
             </span>
-            <div className="flex gap-2 w-full  lg:max-w-[218px] h-[36px] self-start lg:self-auto flex-1">
+            <div className="flex gap-2 w-full  lg:max-w-[218px] h-[36px] lg:self-auto flex-1">
               <NumberInput
                 extraClasses="h-full rounded-r rounded-l-none w-full"
                 fieldClasses="border border-pink-primary w-full"
@@ -37,6 +43,22 @@ const AddMoneyToWallet = () => {
             </div>
           </div>
           {/* button */}
+          <div className="flex col-span-full w-full mt-8 justify-center">
+            <Button text="Add Money" exClasses="w-[500px] text-center" />
+          </div>
+          <div className="flex col-span-full w-full mt-1 text-xs justify-center text-pink-primary text-right">
+            <span className="ml-auto text-inherit">Have a promocode?</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default AddMoneyToWallet
+
+/**
+ * 
           <div className="flex flex-1 lg:flex-row  w-full items-center gap-1 col-span-full lg:col-span-6">
             <span className="text-sm xl:block mr-0 xl:mr-4">Promocode</span>
             <div className="flex gap-2 h-[36px] w-full ml-3 lg:ml-0  lg:max-w-[218px] flex-1">
@@ -50,14 +72,4 @@ const AddMoneyToWallet = () => {
             </div>
             <Button text="Apply" exClasses="lg:w-fit" />
           </div>
-
-          <div className="col-span-full w-full mt-8">
-            <Button text="Add Money" exClasses="w-full text-center" />
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-export default AddMoneyToWallet
+ */

@@ -24,7 +24,7 @@ const WithTextInput = ({
         {/* this <span> will be visible inside the input box so be careful before editing it */}
         <span
           className="absolute  underline capitalize right-1 mt-2 text-xs cursor-pointer hover:text-black hover:no-underline"
-          onClick={textClick}>
+          onClick={() => textClick()}>
           {text}
         </span>
       </span>

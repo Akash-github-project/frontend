@@ -43,12 +43,12 @@ const TransactionHistory = () => {
 
         <Panel>
           <div className="w-full col-span-full">
-            <TransactionList />
+            <WalletBill />
           </div>
         </Panel>
         <Panel>
           <div className="w-full col-span-full">
-            <TransactionList />
+            <WalletBill />
           </div>
         </Panel>
       </div>
