@@ -9,11 +9,11 @@ export const Input = ({
   iType = "text",
   change,
   val,
-  dis = "false",
+  dis = false,
   override = {},
 }) => {
   let defaultClasses =
-    "border rounded-md text-black focus:text-red-500 field  h-[36px]"
+    "border rounded-md text-black focus:text-red-500 field  h-[36px] disabled:bg-gray-100 "
   if (extraClasses !== " ") {
     defaultClasses += extraClasses
   }
@@ -30,7 +30,7 @@ export const Input = ({
         value={val}
         onChange={changeHandle}
         className={defaultClasses}
-        disabled
+        disabled={dis}
         style={{ ...override }}
         onFocus={focusFunction}
         onBlur={blurFunction}

@@ -13,11 +13,12 @@ const Button = ({
   if (dis === true) {
     return (
       <button
-        className={` flex border-box h-9 rounded bg-pink-primary font-normal items-center p-[5px] relative active:bg-pink-800 ${exClasses}`}
+        className={` flex border-box h-9 rounded bg-pink-primary font-normal items-center p-[5px] relative active:bg-pink-800 disabled:bg-gray-separator ${exClasses} `}
+        disabled={dis}
         onClick={() => click()}>
         <span
           className={`text-tertiary leading-[13px] text-center text-[13px] w-full ${fClasses}`}>
-          {disM}
+          {text}
         </span>
       </button>
     )

@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import { NumberInput } from "../../numberInput"
-import { Input } from "../../input"
 import Button from "../../button"
 import WithTextInput from "../../withTextInput"
 
