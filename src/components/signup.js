@@ -3,7 +3,6 @@ import Checkbox from "react-custom-checkbox"
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import { Link } from "react-router-dom"
 import { useTimer } from "use-timer"
-import { OneKkOutlined } from "@mui/icons-material"
 
 export const SignUp = ({ goto = () => console.log("login") }) => {
   const [values, setValues] = useState({
@@ -34,6 +33,24 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
   const [emailOtpStatus, setEmailOtpStatus] = useState("unsent")
   const [phoneOtpStatus, setPhoneOtpStatus] = useState("unsent")
 
+  const checkPassword = (password) => {
+    if (password.length < 8) {
+      return "Password must be at least 8 characters"
+    } else if (password.search(/[a-z]/i) < 0) {
+      return "Password must contain at least one letter"
+    } else if (password.search(/(?=.*[A-Z])/) < 0) {
+      return "Password must contain at least one uppercase"
+    } else if (password.search(/[0-9]/) < 0) {
+      return "Password must contain at least one digit"
+    } else if (password.search(/(?=.*[!@#$%^&*])/) < 0) {
+      return "Password must contain at least one special character"
+    } else {
+      return "none"
+    }
+  }
+  const help = (value) => {
+    console.error(value)
+  }
   const setCheckboxFunction = () => {
     checkboxRef.current = true
     setCheckbox(!checkbox)
@@ -157,11 +174,17 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
     if (!values.signUpPass2) {
       errors.signUpPass2 = "passwords cannot be empty"
     }
+    if (checkPassword(values.signUpPass1) !== "none") {
+      errors.signUpPass1 = checkPassword(values.signUpPass1)
+    }
+
+    if (checkPassword(values.signUpPass2) !== "none") {
+      errors.signUpPass2 = checkPassword(values.signUpPass2)
+    }
 
     if (values.signUpPass1 !== values.signUpPass2) {
       errors.signUpPass2 = "passwords don't match"
     }
-
     if (isNaN(parseInt(values.mobileUser)) === false) {
       numberAsString = Number(values.mobileUser).toString()
       if (
@@ -178,36 +201,42 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
       errors.mobileUser = "invalid Mobile no"
     }
 
-    if (values.emailUser.match(EMAIL_REGEX) === null) {
-      errors.emailUser = "enter a valid email"
-    }
-
+    //otp moobile section
     if (
       typeof values.otpPhone !== "undefined" &&
       phoneOtpStatus !== "verified"
     ) {
       if (values.otpPhone == phoneOtp && values.otpPhone !== "") {
         setPhoneOtpStatus("verified")
-        formikRef.setFieldValue("otpEmail", "")
+        formikRef.setFieldValue("otpPhone", "")
         phoneTimeReset()
       } else {
-        if (formikRef.touched.otpPhone === true) {
+        if (
+          formikRef.touched.otpPhone === true &&
+          phoneOtpStatus != "verified"
+        ) {
           errors.otpPhone = "otp does not match"
         }
       }
     } else {
       if (formikRef.errors.otpPhone !== "") {
-        formikRef.errors.otpPhone = ""
+        errors.otpPhone = ""
       }
     }
 
+    //errors related to email
+    if (values.emailUser.match(EMAIL_REGEX) === null) {
+      errors.emailUser = "enter a valid email"
+    }
+
+    //otp email section
     if (
       typeof values.otpEmail !== "undefined" &&
       emailOtpStatus !== "verified"
     ) {
       if (values.otpEmail == emailOtp && values.otpEmail !== "") {
         setEmailOtpStatus("verified")
-        formikRef.setFieldValue("otpPhone", "")
+        formikRef.setFieldValue("otpEmail", "")
         emailTimeReset()
       } else {
         if (formikRef.touched.otpEmail === true) {
@@ -216,7 +245,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
       }
     } else {
       if (formikRef.errors.otpEmail !== "") {
-        formikRef.errors.otpEmail = ""
+        errors.otpEmail = ""
       }
     }
     return errors
@@ -240,13 +269,17 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
       initialValues={{ ...initialFormValues }}
       validate={validateFormSignUp}
       onSubmit={(values, { setSubmitting }) => {
-        setSubmitting(false)
+        setSubmitting(true)
         console.log(checkbox === false)
         if (checkbox === false) {
           checkboxRef.current = true
           setCheckboxError("Please Agree to terms and conditions")
+        } else if (phoneOtpStatus !== "verified") {
+          formRef.current.setFieldError("mobileUser", "Please Verify Mobile")
+        } else if (emailOtpStatus !== "verified") {
+          formRef.current.setFieldError("emailUser", "Please Verify Mobile")
         } else {
-          console.log(values)
+          help(values)
         }
       }}
       innerRef={formRef}>
