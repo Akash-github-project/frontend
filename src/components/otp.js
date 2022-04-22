@@ -11,6 +11,7 @@ const OtpInput = ({
   error = "",
   defLabel = "",
   statusOtp = (value) => console.log(value),
+  valid = false,
 }) => {
   const [state, dispatcher, timer] = useOtp((value) => fun(value))
 
@@ -42,6 +43,7 @@ const OtpInput = ({
               : () => dispatcher({ type: "unsent" })
           }
           dis={
+            valid === false ||
             state.status === "sent" ||
             state.status === "resent" ||
             state.status === "incorrect"
