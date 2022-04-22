@@ -283,11 +283,11 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
         }
       }}
       innerRef={formRef}>
-      <Form className="grid grid-cols-4 gap-1">
+      <Form className="grid grid-cols-4 gap-2 items-center p-2 md:p-3 lg:p-4">
         <span className="col-span-full text-xs text-center">
           <ErrorMessage name="NameUser" />
         </span>
-        <label htmlFor="NameUser" className="text-xs">
+        <label htmlFor="NameUser" className="text-xs  ">
           Name
         </label>
         <div className="flex relative col-span-3 h-[34px] rounded">
@@ -302,8 +302,8 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
           <ErrorMessage name="emailUser" />
         </span>
 
-        <label htmlFor="emailUser" className="text-xs">
-          Email{" "}
+        <label htmlFor="emailUser" className="text-xs  ">
+          Email
         </label>
         <div className="flex col-span-3 rounded">
           <Field
@@ -313,7 +313,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
                 ? true
                 : false
             }
-            className="flex-1 border border-pink-primary rounded"
+            className="max-w-[85%] border border-pink-primary rounded"
             type="text"
           />
 
@@ -372,8 +372,8 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
           <ErrorMessage name="mobileUser" />
         </span>
 
-        <label htmlFor="mobileUser" className="text-xs">
-          Mobie No
+        <label htmlFor="mobileUser" className="text-xs  ">
+          Mobile No
         </label>
         <div className="flex col-span-3 rounded">
           <Field
@@ -383,7 +383,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
                 ? true
                 : false
             }
-            className="flex-1 border border-pink-primary rounded"
+            className="max-w-[85%] border border-pink-primary rounded"
             type="tel"
           />
 
@@ -440,7 +440,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
         <span className="col-span-full text-xs text-center">
           <ErrorMessage name="signUpPass1" />
         </span>
-        <label htmlFor="signUpPass1" className="text-xs">
+        <label htmlFor="signUpPass1" className="text-xs  ">
           Password
         </label>
         <div className="flex relative col-span-3 h-[34px]">
@@ -464,7 +464,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
         <span className="col-span-full text-xs text-center">
           <ErrorMessage name="signUpPass2" />
         </span>
-        <label htmlFor="signUpPass2" className="text-xs">
+        <label htmlFor="signUpPass2" className="text-xs ">
           Re password
         </label>
         <div className="flex relative col-span-3 h-[34px] rounded">
