@@ -36,18 +36,18 @@ const TransactionHistory = () => {
         </div>
         {/* password 1 section */}
         <Panel>
-          <div className="w-full col-span-full">
+          <div className="w-full col-span-full shadow-default ">
             <WalletBill />
           </div>
         </Panel>
 
         <Panel>
-          <div className="w-full col-span-full">
+          <div className="w-full col-span-full shadow-default">
             <WalletBill />
           </div>
         </Panel>
         <Panel>
-          <div className="w-full col-span-full">
+          <div className="w-full col-span-full shadow-default">
             <WalletBill />
           </div>
         </Panel>

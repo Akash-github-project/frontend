@@ -96,7 +96,7 @@ input.field:focus-within {
   color: white;
 }
 
-.show li::before {
+/* .show li::before {
   content: "";
   display: inline-block;
   background-color: black;
@@ -106,7 +106,7 @@ input.field:focus-within {
   margin-left: auto;
   margin-right: 0.2rem;
   margin-bottom: 0.2rem;
-}
+} */
 .show li {
   margin-inline: 0.2rem;
 }

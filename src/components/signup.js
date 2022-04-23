@@ -283,29 +283,37 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
         }
       }}
       innerRef={formRef}>
-      <Form className="grid grid-cols-4 gap-2 items-center p-2 md:p-3 lg:p-4">
-        <span className="col-span-full text-xs text-center">
+      <Form className="grid grid-cols-6 gap-2 items-center p-0 md:p-3 lg:p-4">
+        <span className="col-span-full text-base text-center text-gray-600">
+          Looks like you're new here!
+        </span>
+
+        <span className="col-span-full text-xs text-center h-3">
           <ErrorMessage name="NameUser" />
         </span>
-        <label htmlFor="NameUser" className="text-xs  ">
+        <label
+          htmlFor="NameUser"
+          className="text-xs min-w-max col-span-2 text-gray-primary">
           Name
         </label>
-        <div className="flex relative col-span-3 h-[34px] rounded">
+        <div className="flex relative col-span-4 h-[34px] rounded">
           <Field
             name="NameUser"
-            className="flex-1 border border-pink-primary h-full rounded"
+            className="flex-1 border border-pink-primary h-full rounded px-2 w-full"
             type="text"
           />
         </div>
 
-        <span className="col-span-full text-xs text-center">
+        <span className="col-span-full text-xs text-center h-3">
           <ErrorMessage name="emailUser" />
         </span>
 
-        <label htmlFor="emailUser" className="text-xs  ">
+        <label
+          htmlFor="emailUser"
+          className="text-xs col-span-2 text-gray-primary ">
           Email
         </label>
-        <div className="flex col-span-3 rounded">
+        <div className="flex col-span-4 rounded">
           <Field
             name="emailUser"
             disabled={
@@ -313,12 +321,12 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
                 ? true
                 : false
             }
-            className="max-w-[85%] border border-pink-primary rounded"
+            className="w-full border border-pink-primary rounded px-2  disabled:bg-gray-100"
             type="text"
           />
 
           <button
-            className="h-[34px] px-3 bg-pink-primary text-white disabled:bg-gray-600"
+            className="h-[34px] px-1 bg-pink-primary text-white disabled:bg-gray-600 rounded text-[13px]"
             disabled={emailOtpStatus === "sent" ? true : false}
             onClick={
               emailOtpStatus === "verified"
@@ -336,16 +344,18 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
 
         {emailOtpStatus === "verified" || emailOtpStatus === "unsent" ? null : (
           <>
-            <span className="col-span-full text-center text-xs">
+            <span className="col-span-full text-center text-xs h-3">
               <ErrorMessage name="otpEmail" />
             </span>
             <div className="col-span-full flex h-[34px]">
-              <label htmlFor="otpEmail" className="text-xs w-1/4">
+              <label
+                htmlFor="otpEmail"
+                className="text-xs w-1/3 text-gray-primary">
                 Otp
               </label>
               <Field
                 name="otpEmail"
-                className="border border-pink-primary rounded h-full w-1/4"
+                className="border border-pink-primary rounded h-full w-1/4 px-2 "
                 type="tel"
               />
               <>
@@ -368,14 +378,16 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
         )}
 
         {/* phone user section starts */}
-        <span className="col-span-full text-xs text-center">
+        <span className="col-span-full text-xs text-center h-3">
           <ErrorMessage name="mobileUser" />
         </span>
 
-        <label htmlFor="mobileUser" className="text-xs  ">
-          Mobile No
+        <label
+          htmlFor="mobileUser"
+          className="text-xs  col-span-2 text-gray-primary">
+          Mobile
         </label>
-        <div className="flex col-span-3 rounded">
+        <div className="flex col-span-4 rounded">
           <Field
             name="mobileUser"
             disabled={
@@ -383,12 +395,12 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
                 ? true
                 : false
             }
-            className="max-w-[85%] border border-pink-primary rounded"
+            className="w-full border border-pink-primary rounded px-2 disabled:bg-gray-100"
             type="tel"
           />
 
           <button
-            className="h-[34px] px-3 bg-pink-primary text-white disabled:bg-gray-600"
+            className="h-[34px] px-1 bg-pink-primary text-white  rounded text-[13px]"
             disabled={phoneOtpStatus === "sent" ? true : false}
             onClick={
               phoneOtpStatus === "verified"
@@ -405,16 +417,18 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
         </div>
         {phoneOtpStatus === "verified" || phoneOtpStatus === "unsent" ? null : (
           <>
-            <span className="col-span-full text-center text-xs">
+            <span className="col-span-full text-center text-xs h-3">
               <ErrorMessage name="otpPhone" />
             </span>
             <div className="col-span-full flex h-[34px]">
-              <label htmlFor="otpPhone" className="text-xs w-1/4">
+              <label
+                htmlFor="otpPhone"
+                className="text-xs w-1/3 text-gray-primary">
                 Otp
               </label>
               <Field
                 name="otpPhone"
-                className="border border-pink-primary rounded h-full w-1/4"
+                className="border border-pink-primary rounded h-full w-1/4 px-2"
                 type="tel"
               />
               <>
@@ -437,16 +451,18 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
         )}
         {/* phone user section ends */}
 
-        <span className="col-span-full text-xs text-center">
+        <span className="col-span-full text-xs text-center h-3">
           <ErrorMessage name="signUpPass1" />
         </span>
-        <label htmlFor="signUpPass1" className="text-xs  ">
+        <label
+          htmlFor="signUpPass1"
+          className="text-xs  col-span-2 text-gray-primary">
           Password
         </label>
-        <div className="flex relative col-span-3 h-[34px]">
+        <div className="flex relative col-span-4 h-[34px]">
           <Field
             name="signUpPass1"
-            className="flex-1 border border-pink-primary h-full rounded"
+            className="flex-1 border border-pink-primary h-full rounded px-2 w-full"
             type={values.showPassword === true ? "text" : "password"}
           />
 
@@ -454,30 +470,32 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
             className="w-8 absolute right-0 top-0 bottom-0  flex items-center justify-center rounded"
             type="button">
             <i
-              className={`fa-solid ${
+              className={`fa-solid  text-sm ${
                 values.showPassword ? "fa-eye" : "fa-eye-slash "
               } `}
               onClick={handleClickShowPassword}></i>
           </button>
         </div>
 
-        <span className="col-span-full text-xs text-center">
+        <span className="col-span-full text-xs text-center h-3">
           <ErrorMessage name="signUpPass2" />
         </span>
-        <label htmlFor="signUpPass2" className="text-xs ">
+        <label
+          htmlFor="signUpPass2"
+          className="text-xs min-w-max col-span-2 text-gray-primary">
           Re password
         </label>
-        <div className="flex relative col-span-3 h-[34px] rounded">
+        <div className="flex relative col-span-4 h-[34px] rounded">
           <Field
             name="signUpPass2"
-            className="flex-1 border border-pink-primary h-full rounded"
+            className="flex-1 border border-pink-primary h-full rounded px-2 w-full"
             type={values.showPassword2 === true ? "text" : "password"}
           />
           <button
             className="w-8 absolute right-0 top-0 bottom-0  flex items-center justify-center rounded"
             type="button">
             <i
-              className={`fa-solid ${
+              className={`fa-solid text-sm ${
                 values.showPassword2 ? "fa-eye" : "fa-eye-slash "
               } `}
               onClick={handleClickShowPassword2}></i>
@@ -485,10 +503,10 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
         </div>
 
         <div className="flex flex-col col-span-full text-center py-2 ">
-          <span className="col-span-full text-xs text-center">
+          <span className="col-span-full text-xs text-center h-3">
             {checkboxError === "none" ? null : checkboxError}
           </span>
-          <div className="min-w-max mx-auto text-gray-primary flex">
+          <div className="mx-auto flex">
             <Checkbox
               borderColor="#f5317c"
               icon={<i className="fa-solid fa-square-check text-pink-600"></i>}
@@ -498,14 +516,16 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
               checked={checkbox}
               onChange={() => setCheckboxFunction()}
             />
-            &nbsp; I agree to the &nbsp;
-            <Link to="/terms" className="text-pink-primary">
-              Terms
-            </Link>
-            &nbsp; and
-            <Link to="/privacypolicy" className="text-pink-primary">
-              &nbsp; Privacy Policy &nbsp;
-            </Link>
+            <p className="text-gray-primary text-sm">
+              &nbsp; I agree to the &nbsp;
+              <Link to="/terms" className="text-pink-primary">
+                Terms
+              </Link>
+              &nbsp; and
+              <Link to="/privacypolicy" className="text-pink-primary">
+                &nbsp; Privacy Policy
+              </Link>
+            </p>
           </div>
         </div>
         <button
@@ -515,12 +535,14 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
         </button>
 
         <div className="flex col-span-full text-center py-2 ">
-          <span className="flex mx-auto text-gray-primary">
+          <p className="mx-auto text-gray-primary text-center text-sm">
             Already have an account&nbsp;
-            <span className="text-pink-primary" onClick={() => goto("login")}>
+            <span
+              className="text-pink-primary text-center text-sm cursor-pointer"
+              onClick={() => goto("login")}>
               Log in
             </span>
-          </span>
+          </p>
         </div>
       </Form>
     </Formik>

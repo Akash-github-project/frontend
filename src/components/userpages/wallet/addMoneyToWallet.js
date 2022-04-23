@@ -17,8 +17,13 @@ const AddMoneyToWallet = () => {
     <div className="p-2 text-pink-primary  shadow-default text-center grid gap-2 items-center col-span-full">
       {/* image and heading section */}
       <div className="w-full mx-auto  p-2">
-        <div className="flex flex-1 flex-row w-full col-span-full gap-1 mb-3 justify-center">
-          <img src="images/wallet.svg" alt="" className="w-8 h-7" />
+        <div className="w-full text-pink-primary">
+          <img
+            src="/walletImage.png"
+            className="w-24 h-24 text-pink-primary mx-auto"
+          />
+        </div>
+        <div className="flex flex-1 flex-row w-full col-span-full gap-1 mb-1 mt-2 justify-center">
           <span className="inline-block font-bold text-gray-primary">
             Available Balance
           </span>
@@ -28,12 +33,6 @@ const AddMoneyToWallet = () => {
             className="w-3 h-7 text-pink-primary"
           />
           <span className="text-lg">100</span>
-        </div>
-        <div className="w-full text-pink-primary">
-          <img
-            src="/walletImage.png"
-            className="w-24 h-24 text-pink-primary mx-auto"
-          />
         </div>
         {/* input section  */}
         <div className="grid grid-cols-12 gap-2 xl:gap-1 mt-2">
@@ -52,16 +51,25 @@ const AddMoneyToWallet = () => {
             </div>
           </div>
           {/* button */}
-          <div className="flex col-span-full w-full mt-8 justify-center">
+          <div className="flex col-span-full w-full mt-3 justify-center">
             <Button text="Add Money" exClasses="w-[500px] text-center" />
           </div>
-          <div className="flex col-span-full w-full  mt-1 text-xs justify-center text-pink-primary text-right self-center">
+          <div className="flex col-span-full w-full text-xs justify-center text-pink-primary text-right self-center">
+            <div className="mx-auto flex items-center">
+              <span
+                className="text-inherit min-w-fit ml-auto m-1 cursor-pointer w-full"
+                onClick={() => setHave(!have)}>
+                Have a promocode?
+              </span>
+            </div>
+          </div>
+          <div className="flex col-span-full w-full text-xs justify-center text-right self-center">
             <div className="mx-auto flex items-center">
               {have ? (
                 <>
                   <WithTextInput
                     change={(e) => setPromo(e.target.value)}
-                    value={promo}
+                    val={promo}
                     disable={otp ? true : false}
                     text={otp ? <i className="fa-solid fa-trash-can"></i> : " "}
                     textClick={setCls}
@@ -71,11 +79,6 @@ const AddMoneyToWallet = () => {
                   )}
                 </>
               ) : null}
-              <span
-                className="text-inherit min-w-fit ml-auto m-1 cursor-pointer"
-                onClick={() => setHave(!have)}>
-                Have a promocode?
-              </span>
             </div>
           </div>
         </div>

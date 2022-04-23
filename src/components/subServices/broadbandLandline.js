@@ -1,6 +1,7 @@
 import ConfirmDetails from "./confirmDetails"
 import Button from "../button"
 import { Input } from "../input"
+import WithTextInput from "../withTextInput"
 import Checkbox from "react-custom-checkbox"
 import React, { useState } from "react"
 import Wrapper from "../wrapper"
@@ -16,6 +17,15 @@ const BroadbandLandline = () => {
   const [couponState, toggleCouponState] = useState(true)
   const [currentProvider, setCurrentProvider] = useState([])
 
+  const [otp, setOtp] = useState(false)
+  const [promo, setPromo] = useState(" ")
+  const [have, setHave] = useState(false)
+
+  const setCls = () => {
+    let x = " "
+    setPromo(x)
+    setOtp(false)
+  }
   const handleApplyCoupon = () => {
     toggleCouponState(!couponState)
   }
@@ -120,7 +130,7 @@ const BroadbandLandline = () => {
               <div className="capitalize col-span-full text-xs mt-1">
                 <span
                   className="inline-block w-full text-center cursor-pointer hover:text-black text-sm"
-                  onClick={() => setCouponState(!openCoupon)}>
+                  onClick={() => setHave(!have)}>
                   Apply Coupon code
                   <i
                     className={`fas fa-chevron-${
@@ -129,23 +139,25 @@ const BroadbandLandline = () => {
                 </span>
                 {/* Apply coupon input start */}
 
-                <span
-                  className={` ${
-                    openCoupon ? "" : "hidden"
-                  } flex w-full gap-2 justify-center scale-90`}>
-                  <Input
-                    extraClasses="w-1/2 px-1 py-0 "
-                    override={{ fontSize: "15px" }}
-                    dis={!couponState}
-                  />
-                  <Button
-                    text="Apply"
-                    exClasses="w-1/3 "
-                    click={handleApplyCoupon}
-                    dis={!couponState}
-                    disM="Remove"
-                  />
-                </span>
+                <div className="mx-auto flex items-center scale-90 w-3/5">
+                  {have ? (
+                    <>
+                      <WithTextInput
+                        change={(e) => setPromo(e.target.value)}
+                        val={promo}
+                        disable={otp ? true : false}
+                        text={
+                          otp ? <i className="fa-solid fa-trash-can"></i> : " "
+                        }
+                        textClick={setCls}
+                        exClasses={`${otp ? "" : " mx-auto "} `}
+                      />
+                      {otp ? null : (
+                        <Button click={() => setOtp(true)} text="Apply" />
+                      )}
+                    </>
+                  ) : null}
+                </div>
                 {/* Apply coupon input end*/}
               </div>
               {/* Apply coupon section end*/}

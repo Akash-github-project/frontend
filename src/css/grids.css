@@ -11,3 +11,8 @@
     grid-template-columns: repeat(4, minmax(50px, 218px));
   }
 }
+
+.signup-grid {
+  display: grid;
+  grid-auto-columns: 35% 65%;
+}

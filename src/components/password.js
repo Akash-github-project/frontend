@@ -15,7 +15,7 @@ const Password = ({
   const [show, setShow] = useState(false)
 
   let defaultClasses =
-    "border rounded-md text-black focus:text-red-500 border-pink-primary focus-within:border-blue-400 h-[36px] w-full"
+    "border rounded-md text-black focus:text-red-500 border-pink-primary focus-within:border-blue-400 h-[36px] w-full p-2"
   if (extraClasses !== " ") {
     defaultClasses += extraClasses
   }
@@ -41,7 +41,9 @@ const Password = ({
       <button className="flex items-center justify-center absolute right-3 bottom-0 top-0 w-4">
         <i
           onClick={() => setShow(!show)}
-          className={`fa-solid fa-${show === true ? "eye" : "eye-slash"}`}></i>
+          className={`fa-solid text-sm fa-${
+            show === true ? "eye" : "eye-slash"
+          }`}></i>
       </button>
     </span>
   )

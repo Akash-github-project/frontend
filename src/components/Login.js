@@ -1,17 +1,9 @@
 import React from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { loginId, password, remember } from "../app/features/LoginSlice"
-import { Input } from "./input"
-import { Password } from "./password"
+import { Formik, Form, Field, ErrorMessage } from "formik"
 import Checkbox from "react-custom-checkbox"
-import { Label } from "./label"
-import OutlinedInput from "@mui/material/OutlinedInput"
-import InputAdornment from "@mui/material/InputAdornment"
-import IconButton from "@mui/material/IconButton"
-import Visibility from "@mui/icons-material/Visibility"
-import VisibilityOff from "@mui/icons-material/VisibilityOff"
 import { useMediaQuery } from "@mui/material"
-import { Formik } from "formik"
 
 export const Login = ({ goto = () => console.log("forgotPass") }) => {
   const screen = useMediaQuery("(min-width:)")
@@ -81,12 +73,100 @@ export const Login = ({ goto = () => console.log("forgotPass") }) => {
           console.log(values)
           return
         }}>
-        {(formik) => (
+        <Form className="grid grid-cols-6 gap-2 items-center p-0 md:p-3 lg:p-4">
+          <span className="col-span-full text-base text-center text-gray-600">
+            We are glad to see you again!
+          </span>
+          <span className="col-span-full text-xs text-center h-3">
+            <ErrorMessage name="username" />
+          </span>
+          <label
+            htmlFor="username"
+            className="text-xs min-w-max col-span-2 text-gray-primary">
+            Mobile/Email
+          </label>
+          <div className="flex relative col-span-4 h-[34px] rounded">
+            <Field
+              name="username"
+              className="flex-1 border border-pink-primary h-full rounded px-2 w-full"
+              type="text"
+            />
+          </div>
+
+          <span className="col-span-full text-xs text-center h-3">
+            <ErrorMessage name="passwd" />
+          </span>
+          <label
+            htmlFor="passwd"
+            className="text-xs  col-span-2 text-gray-primary">
+            Password
+          </label>
+          <div className="flex relative col-span-4 h-[34px]">
+            <Field
+              name="passwd"
+              className="flex-1 border border-pink-primary h-full rounded px-2 w-full"
+              type={value.showPassword === true ? "text" : "password"}
+            />
+
+            <button
+              className="w-8 absolute right-0 top-0 bottom-0  flex items-center justify-center rounded"
+              type="button">
+              <i
+                className={`fa-solid  text-sm ${
+                  value.showPassword ? "fa-eye" : "fa-eye-slash "
+                } `}
+                onClick={handleClickShowPassword}></i>
+            </button>
+          </div>
+
+          <div className="flex items-center col-span-full">
+            {/* remember me chackbox */}
+            <Checkbox
+              borderColor="#f5316c"
+              icon={<i className="fa-solid fa-square-check text-pink-601"></i>}
+              onClick={() => dispatch(remember())}
+              // {...formik.getFieldProps("rememberMe")}
+              id="rememberMe"
+              name="rememberMe"
+            />
+            {/* remember me label */}
+            <label
+              htmlFor="rememberMe"
+              className="mr-auto ml-3 text-gray-primary text-sm">
+              Remember Me
+            </label>
+            {/* forgot passwork link */}
+            <span
+              tabIndex={-1}
+              className="inline-block text-primary cursor-pointer text-sm"
+              onClick={() => goto("forgotPass")}>
+              Forgot Password?
+            </span>
+          </div>
+          {/*forgot password and rememer me end */}
+
+          {/* login button */}
+          <button
+            className="h-[34px] px-1 bg-pink-primary text-white col-span-full rounded"
+            type="submit">
+            Login
+          </button>
+          {/* login button end */}
+
+          {/* additional sign up prompt  */}
+          <div className="mt-2 text-black text-center col-span-full text-sm py-2">
+            Not having account, Please &nbsp;
+            <a className="text-primary" href="#" onClick={() => goto("signUp")}>
+              Sign Up
+            </a>
+          </div>
+        </Form>
+        {/* {(formik) => (
           <form onSubmit={formik.handleSubmit}>
             <div className="px-1 py-1 mx-1 mt-4 text-left">
-              <div className="mt-4 w-full ">
-                {/* username */}
-                {formik.errors.username && formik.touched.username ? (
+              <div className="mt-4 w-full "> */}
+        {/* username */}
+        {/* {formik.errors.username && formik.touched.username ? (
                   <div className="w-full text-center text-xs">
                     {formik.errors.username}
                   </div>
@@ -108,11 +188,11 @@ export const Login = ({ goto = () => console.log("forgotPass") }) => {
                     type="text"
                     {...formik.getFieldProps("username")}
                   />
-                </div>
-                {/* username end*/}
-                {/* password */}
+                </div> */}
+        {/* username end*/}
+        {/* password */}
 
-                {formik.errors.passwd && formik.touched.passwd ? (
+        {/* {formik.errors.passwd && formik.touched.passwd ? (
                   <div className="w-full text-center text-xs">
                     {formik.errors.passwd}
                   </div>
@@ -149,63 +229,11 @@ export const Login = ({ goto = () => console.log("forgotPass") }) => {
                       </InputAdornment>
                     }
                   />
-                </div>
-                {/* password end */}
+                </div> */}
+        {/* password end */}
 
-                {/*forgot password and rememer me  */}
-                <div className="flex items-center">
-                  {/* remember me chackbox */}
-                  <Checkbox
-                    borderColor="#f5317c"
-                    icon={
-                      <i className="fa-solid fa-square-check text-pink-600"></i>
-                    }
-                    onClick={() => dispatch(remember())}
-                    // {...formik.getFieldProps("rememberMe")}
-                    id="rememberMe"
-                    name="rememberMe"
-                  />
-                  {/* remember me label */}
-                  <label
-                    htmlFor="rememberMe"
-                    className="mr-auto ml-2 text-gray-primary">
-                    Remember Me
-                  </label>
-                  {/* forgot passwork link */}
-                  <span
-                    tabIndex={0}
-                    className="inline-block text-primary cursor-pointer"
-                    onClick={() => goto("forgotPass")}>
-                    Forgot Password?
-                  </span>
-                </div>
-                {/*forgot password and rememer me end */}
-
-                {/* login button */}
-                <div className="flex">
-                  <button
-                    className="w-full  p-2 mt-4 bg-primary text-white  rounded-lg active:bg-pink-800 hover:shadow-pink-900 "
-                    type="submit">
-                    Login
-                  </button>
-                </div>
-                {/* login button end */}
-
-                {/* additional sign up prompt  */}
-                <div className="mt-1 text-black text-center">
-                  Not having account, Please &nbsp;
-                  <a
-                    className="text-primary"
-                    href="#"
-                    onClick={() => goto("signUp")}>
-                    Sign Up
-                  </a>
-                </div>
-                {/* additional sign up prompt  end*/}
-              </div>
-            </div>
-          </form>
-        )}
+        {/*forgot password and rememer me  */}
+        {/* additional sign up prompt  end*/}
       </Formik>
     </>
   )

@@ -12,8 +12,7 @@ div[data-cms] {
 }
 div[data-cms] * {
   font-size: 14px;
-  display: block;
   line-height: normal;
   color: darkslategray;
-  margin-left: 1.2rem;
+  margin-left: 0.6rem;
 }

@@ -11,8 +11,8 @@ const PersonalInfo = () => {
   }
 
   return (
-    <div className="grid grid-cols-1 w-full bg-gray-100">
-      <div className="col-span-full grid grid-cols-1 lg:grid-cols-2 gap-4 p-1 pl-6">
+    <div className="grid grid-cols-1 w-full p-2 shadow-default mt-2">
+      <div className="col-span-full grid grid-cols-1 lg:grid-cols-2 gap-4 p-2">
         <div className="flex flex-col">
           <span className="text-gray-primary">Full Name</span>
           <Input

@@ -64,7 +64,7 @@ const list = [
 ]
 const WalletBill = () => {
   return (
-    <div className="grid gap-2 max-h-[400px] overflow-y-auto">
+    <div className="grid  lg:grid-cols-2 gap-2 max-h-[400px] overflow-y-auto">
       {list.map((each) => (
         <EachTransaction {...each} />
       ))}
