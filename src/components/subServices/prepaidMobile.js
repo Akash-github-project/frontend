@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useReducer } from "react"
+import LoginWrapper from "../LoginWrapper"
+import LoginModal from "../userpages/loginModal"
 import WithTextInput from "../withTextInput"
 import Checkbox from "react-custom-checkbox"
 import SelectSearch, { fuzzySearch } from "react-select-search"
@@ -29,6 +31,7 @@ import {
   showConfirmBill,
   toggleCouponState,
 } from "../../app/features/prepaidPlansSlice"
+import { toggleUserLogged } from "../../app/features/LoginSlice"
 import { addElement, toggleOverlay } from "../../app/features/overlaySlice"
 
 let circleList = circle.list.map((item) => ({
@@ -61,6 +64,8 @@ const PrepaidMobile = () => {
   const [openCoupon, setCouponState] = useState(false)
   const [outputOperator, setOperator] = useState(operatorList)
   const dispatch = useDispatch()
+  const [openModal, setOpenModal] = useState(false)
+  const userLogged = useSelector((state) => state.login.isUserLogged)
   const phoneNo = useSelector((state) => state.prepaidPlan.phoneNo)
   const Operator = useSelector((state) => state.prepaidPlan.operator)
   const circle = useSelector((state) => state.prepaidPlan.circle)
@@ -109,6 +114,11 @@ const PrepaidMobile = () => {
         }
         break
       case "validateContinueToRecharge":
+        if (planInfo.amount === undefined) {
+          temp.amount = "Please Select A Plan"
+        } else {
+          temp.amount = ""
+        }
     }
     return { ...temp }
   }
@@ -177,7 +187,21 @@ const PrepaidMobile = () => {
   const handleFakeRadio = (e) => {}
 
   const handleRechargeRequest = () => {
-    if (billState === false) dispatch(showConfirmBill(true))
+    dispatcher({ type: "validateViewPlan" })
+    dispatcher({ type: "validateContinueToRecharge" })
+    if (
+      isValid.mobileNo === "" &&
+      isValid.operator === "" &&
+      isValid.circle === "" &&
+      isValid.amount === ""
+    ) {
+      if (userLogged) {
+        dispatch(showConfirmBill(true))
+      } else {
+        setOpenModal(true)
+      }
+    }
+    // if (billState === false) {
   }
 
   // apply coupon work required
@@ -275,11 +299,13 @@ const PrepaidMobile = () => {
           <WithTextInput
             placeholder="Amount"
             text="View Plans"
+            val={planInfo.amount}
             textClick={() => handlePlansRequest()}
           />
-          <span className="h-3 text-red-600 text-xs">
-            this is an error message
-          </span>
+
+          {isValid.amount === "none" || isValid.amount === "" ? null : (
+            <span className="h-3 text-red-600 text-xs">isValid.amount</span>
+          )}
         </div>
 
         {/* this div should only be visible in mobile mode */}
@@ -334,6 +360,9 @@ const PrepaidMobile = () => {
           onClick={handleRechargeRequest}>
           Continue to Recharge
         </button>
+        <LoginModal closeModal={() => setOpenModal(false)} open={openModal}>
+          <LoginWrapper />
+        </LoginModal>
       </div>
 
       {/* row 2 for information display */}
