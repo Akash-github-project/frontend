@@ -35,11 +35,12 @@ const PersonalInfo = () => {
               <div className="w-full h-full flex flex-col">
                 <span>Existing Mobile No</span>
                 <Input override={{ maxWidth: "100%" }} />
+                <span className="inline-block h-3"></span>
                 <span className="mt-2">New Mobile No</span>
-                <div className="flex">
+                <div className="flex w-full">
+                  <Input override={{ maxWidth: "100%", width: "100%" }} />
                   <Button text="OTP" exClasses="ml-auto" />
                 </div>
-                <Input override={{ maxWidth: "100%" }} />
                 <span className="text-xs text-red-600">
                   Note: Please enter unique mobile number
                 </span>

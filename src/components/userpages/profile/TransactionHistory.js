@@ -29,12 +29,19 @@ const TransactionHistory = () => {
   return (
     <Tabs state={[state, setState]}>
       <div className="grid grid-cols-12 w-full bg-gray-100 gap-4">
-        <div className="col-span-full grid grid-cols-3 overflow-x-hidden">
-          <Tab>Recharge &amp; Bill</Tab>
+        <div className="col-span-full grid grid-cols-4 overflow-x-scroll">
+          <Tab>Recharge</Tab>
+          <Tab>Bill</Tab>
           <Tab>Wallet</Tab>
           <Tab>Giftcard</Tab>
         </div>
         {/* password 1 section */}
+        <Panel>
+          <div className="w-full col-span-full shadow-default ">
+            <WalletBill />
+          </div>
+        </Panel>
+
         <Panel>
           <div className="w-full col-span-full shadow-default ">
             <WalletBill />

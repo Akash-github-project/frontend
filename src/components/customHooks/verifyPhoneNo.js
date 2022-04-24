@@ -1,24 +1,23 @@
-import { useState,useEffect} from "react";
+import { useState, useEffect } from "react"
 
-export const usePhoneVerify = (phoneNo) =>{
-    const [phoneNoError, setPhoneNoError] = useState("")
-    
-    useEffect(()=>{
-			if (isNaN(parseInt(phoneNo)) === false) {
-				numberAsString = new Number(phoneNo).toString();
+export const usePhoneVerify = (phoneNo) => {
+  const [phoneNoError, setPhoneNoError] = useState("")
 
-				if (
-					numberAsString[0] !== "6" &&
-					numberAsString[0] !== "7" &&
-					numberAsString[0] !== "8" &&
-					numberAsString[0] !== "9"
-				) {
-					setPhoneNoError("invalid mobile no") 
-				} else if (numberAsString.length < 10 || numberAsString.length > 10)
-					setPhoneNoError( "invalid mobile no length") 
-			}
-            else setPhoneNoError("Not a phone No");
-    },[phoneNo]);
+  useEffect(() => {
+    if (isNaN(parseInt(phoneNo)) === false) {
+      let numberAsString = new Number(phoneNo).toString()
 
-    return [phoneNoError]
+      if (
+        numberAsString[0] !== "6" &&
+        numberAsString[0] !== "7" &&
+        numberAsString[0] !== "8" &&
+        numberAsString[0] !== "9"
+      ) {
+        setPhoneNoError("invalid mobile no")
+      } else if (numberAsString.length < 10 || numberAsString.length > 10)
+        setPhoneNoError("invalid mobile no length")
+    } else setPhoneNoError("Not a phone No")
+  }, [phoneNo])
+
+  return [phoneNoError, setPhoneNoError]
 }

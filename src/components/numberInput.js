@@ -7,6 +7,7 @@ export const NumberInput = ({
   holder = " ",
   iType = "text",
   change = () => console.log("hello"),
+  blur = () => console.log("blur"),
   val,
   onleft = " ",
   color = "gray",
@@ -26,6 +27,10 @@ export const NumberInput = ({
   function changeHandle(e) {
     change(e.target.value)
   }
+
+  function blurHandle(e) {
+    blur(e.target.value)
+  }
   return (
     <div className={defaultField} tabIndex={0}>
       <span
@@ -37,6 +42,7 @@ export const NumberInput = ({
         id={Id}
         placeholder={holder}
         value={val}
+        onBlur={blurHandle}
         onChange={changeHandle}
         className={defaultClasses}
       />

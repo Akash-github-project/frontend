@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useReducer } from "react"
 import WithTextInput from "../withTextInput"
 import Checkbox from "react-custom-checkbox"
 import SelectSearch, { fuzzySearch } from "react-select-search"
 import operator from "../../otherData/operator.json"
 import ConfirmDetails from "./confirmDetails"
+import { usePhoneVerify } from "../customHooks/verifyPhoneNo"
 import circle from "../../otherData/circle.json"
 import { Radio, RadioGroup, InputLabel } from "@mui/material"
 import { renderProvider } from "../../otherData/inputWithImage"
@@ -42,6 +43,13 @@ let operatorList = operator.list.map((item) => ({
   code: item.op_code,
 }))
 
+const initialState = {
+  mobileNo: "none",
+  operator: "none",
+  circle: "none",
+  amount: "none",
+}
+
 const PrepaidMobile = () => {
   const [outputCircle, setCircle] = useState(circleList)
   const [fakeRadio, setFakeRadio] = useState(true)
@@ -59,6 +67,53 @@ const PrepaidMobile = () => {
   const planInfo = useSelector((state) => state.prepaidPlan.plansInfo)
   const billState = useSelector((state) => state.prepaidPlan.confirmBillState)
   const couponState = useSelector((state) => state.prepaidPlan.couponState)
+
+  const isValidMobileNo = (no) => {
+    let numberAsString
+    if (isNaN(parseInt(no)) === false) {
+      numberAsString = Number(no).toString()
+      if (
+        numberAsString[0] !== "6" &&
+        numberAsString[0] !== "7" &&
+        numberAsString[0] !== "8" &&
+        numberAsString[0] !== "9"
+      ) {
+        return "invalid mobile no"
+      } else if (numberAsString.length < 10 || numberAsString.length > 10) {
+        return "invalid mobile no length"
+      }
+    } else {
+      return "invalid Mobile no"
+    }
+    return "none"
+  }
+
+  const errorReducer = (state, action) => {
+    const temp = { ...state }
+    switch (action.type) {
+      case "validateViewPlan":
+        if (circle.length === 0) {
+          temp.circle = "Please Select A Circle"
+        } else {
+          temp.circle = ""
+        }
+        if (Object.keys(Operator).length === 0) {
+          temp.operator = "Please Select An Operator"
+        } else {
+          temp.operator = ""
+        }
+        if (isValidMobileNo(phoneNo) !== "none") {
+          temp.mobileNo = isValidMobileNo(phoneNo)
+        } else {
+          temp.mobileNo = ""
+        }
+        break
+      case "validateContinueToRecharge":
+    }
+    return { ...temp }
+  }
+
+  const [isValid, dispatcher] = useReducer(errorReducer, initialState)
   let changeLst = [...prepaidChangeJson.data]
   let couponLegal = useSelector((state) => state.prepaidPlan.couponLegal)
 
@@ -97,13 +152,22 @@ const PrepaidMobile = () => {
   }
 
   const handlePlansRequest = () => {
-    dispatch(storeShowPlan(true))
-
-    if (window.innerWidth > 820) dispatch(storeRenderType("desktop"))
-    else {
-      dispatch(addElement(<MobileView />))
-      dispatch(storeRenderType("mobile"))
-      dispatch(toggleOverlay())
+    dispatcher({ type: "validateViewPlan" })
+    console.log(isValid.mobileNo === "")
+    console.log(isValid.circle === "")
+    console.log(isValid.operator === "")
+    if (
+      isValid.mobileNo === "" &&
+      isValid.circle === "" &&
+      isValid.operator === ""
+    ) {
+      dispatch(storeShowPlan(true))
+      if (window.innerWidth > 820) dispatch(storeRenderType("desktop"))
+      else {
+        dispatch(addElement(<MobileView />))
+        dispatch(storeRenderType("mobile"))
+        dispatch(toggleOverlay())
+      }
     }
   }
 
@@ -157,54 +221,64 @@ const PrepaidMobile = () => {
   return (
     <>
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 lg:gap-2 xl:gap-3 w-full mx-auto">
-        <NumberInput
-          iType="tel"
-          val={phoneNo}
-          onleft="+91-"
-          id="phoneNo"
-          holder="Mobile Number"
-          change={(value) => dispatch(storePhoneNo(value))}
-          extraClasses="text-gray-primary "
-          fieldClasses="border-pink-600 focus:outline-none focus-within:border-blue-400 flex-1 h-[36px]"
-        />
+        <div className="flex flex-col h-auto ">
+          <NumberInput
+            iType="tel"
+            val={phoneNo}
+            onleft="+91-"
+            id="phoneNo"
+            holder="Mobile Number"
+            change={(value) => dispatch(storePhoneNo(value))}
+            extraClasses="text-gray-primary "
+            fieldClasses="border-pink-600 focus:outline-none focus-within:border-blue-400 flex-1 min-h-[36px] w-full"
+          />
+          <span className="h-3 text-red-600 text-xs">
+            {isValid.mobileNo === "" || isValid.mobileNo === "none"
+              ? null
+              : isValid.mobileNo}
+          </span>
+        </div>
 
-        <SelectSearch
-          className="select-search "
-          options={outputOperator}
-          renderOption={renderProvider}
-          search
-          filterOptions={fuzzySearch}
-          placeholder="Search Operator"
-          onChange={(value) => handleOperator(value)}
-        />
+        <div className="flex flex-col h-auto">
+          <SelectSearch
+            className="select-search"
+            options={outputOperator}
+            renderOption={renderProvider}
+            placeholder="Search Operator"
+            onChange={(value) => handleOperator(value)}
+          />
+          <span className="h-3 text-red-600 text-xs">
+            {isValid.operator === "none" || isValid.operator === ""
+              ? null
+              : isValid.operator}
+          </span>
+        </div>
         {/* circle dropdown */}
 
-        <SelectSearch
-          options={outputCircle}
-          value="sv"
-          name="circle"
-          placeholder="Circle"
-          onChange={(value) => dispatch(storeCircle(value))}
-        />
+        <div className="flex flex-col h-auto">
+          <SelectSearch
+            options={outputCircle}
+            value="sv"
+            name="circle"
+            placeholder="Circle"
+            onChange={(value) => dispatch(storeCircle(value))}
+          />
 
+          <span className="h-3 text-red-600 text-xs">
+            {isValid.circle === "none" || isValid.circle === ""
+              ? null
+              : isValid.circle}
+          </span>
+        </div>
         {/* spacially made custom input box just for this page to show view plans */}
-        <div className="rounded">
-          <span
-            className="flex border border-pink-600 focus-within:border-blue-400  m-0 w-full relative rounded"
-            tabIndex={0}>
-            <input
-              type="tel"
-              className="border-0 w-full  m-0 outline-none p-[11px] rounded text-[13px] leading-[21px] h-[34px] text-gray-primary"
-              required
-              placeholder="Amount"
-            />
-
-            {/* this <span> will be visible inside the input box so be careful before editing it */}
-            <span
-              className="absolute  underline capitalize right-1 mt-2 text-xs cursor-pointer hover:text-black hover:no-underline"
-              onClick={handlePlansRequest}>
-              view plans
-            </span>
+        <div className="rounded flex flex-col">
+          <WithTextInput
+            placeholder="Amount"
+            text="View Plans"
+            textClick={() => handlePlansRequest()}
+          />
+          <span className="h-3 text-red-600 text-xs">
+            this is an error message
           </span>
         </div>
 
@@ -256,7 +330,7 @@ const PrepaidMobile = () => {
 
         {/* button of recharge */}
         <button
-          className="p-3 lg:p-1 bg-pink-primary active:bg-pink-800 text-white rounded text-[15px] lg:text-[13px] leading-[13px] font-medium lg:ml-4"
+          className="p-3 lg:p-1 bg-pink-primary active:bg-pink-800 text-white rounded text-[15px] lg:text-[13px] leading-[13px] font-medium lg:ml-4 max-h-[36px]"
           onClick={handleRechargeRequest}>
           Continue to Recharge
         </button>
