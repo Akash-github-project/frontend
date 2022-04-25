@@ -1,10 +1,10 @@
 {
   "fastag": [
     { "name": "Select A Fastag Provider", "value": "none" },
-    { "name": "some name", "value": "some value" },
-    { "name": "some name", "value": "some value" },
-    { "name": "some name", "value": "some value" },
-    { "name": "some name", "value": "some value" },
-    { "name": "some name", "value": "some value" }
+    { "name": "some 1", "value": "some 22" },
+    { "name": "some 2", "value": "some 33" },
+    { "name": "some 3", "value": "some 44" },
+    { "name": "some 4", "value": "some 55" },
+    { "name": "some 5", "value": "some 66" }
   ]
 }

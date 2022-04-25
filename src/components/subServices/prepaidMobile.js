@@ -203,6 +203,9 @@ const PrepaidMobile = () => {
     }
     // if (billState === false) {
   }
+  // const setProps = (field, value) => {
+  //   formik.setFieldValue(field, value)
+  // }
 
   // apply coupon work required
   const handleApplyCoupon = () => {

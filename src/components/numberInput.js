@@ -2,6 +2,7 @@ import React from "react"
 
 export const NumberInput = ({
   Id = " ",
+  name = "",
   extraClasses = " ",
   fieldClasses = " ",
   holder = " ",
@@ -9,6 +10,8 @@ export const NumberInput = ({
   change = () => console.log("hello"),
   blur = () => console.log("blur"),
   val,
+  maxlen = -1,
+  numbersOnly = true,
   onleft = " ",
   color = "gray",
 }) => {
@@ -25,7 +28,22 @@ export const NumberInput = ({
   }
 
   function changeHandle(e) {
-    change(e.target.value)
+    let len = e.target.value.length
+    if (numbersOnly) {
+      if (maxlen != -1) {
+        if (maxlen > 0 && len <= maxlen) {
+          change(
+            e.target.value.replace(/[^0-9]/g, "").replace(/(\..*?)\..*/g, "$1")
+          )
+        }
+      } else {
+        change(
+          e.target.value.replace(/[^0-9]/g, "").replace(/(\..*?)\..*/g, "$1")
+        )
+      }
+    } else {
+      change(e.target.value)
+    }
   }
 
   function blurHandle(e) {
@@ -39,6 +57,7 @@ export const NumberInput = ({
       </span>
       <input
         type={iType}
+        name={name}
         id={Id}
         placeholder={holder}
         value={val}
