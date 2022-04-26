@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from "react"
+import React, { useState, useEffect, useReducer, useRef } from "react"
 import LoginWrapper from "../LoginWrapper"
 import LoginModal from "../userpages/loginModal"
 import WithTextInput from "../withTextInput"
@@ -6,6 +6,7 @@ import Checkbox from "react-custom-checkbox"
 import SelectSearch, { fuzzySearch } from "react-select-search"
 import operator from "../../otherData/operator.json"
 import ConfirmDetails from "./confirmDetails"
+import { getRenderFormValue } from "./renderFormValue"
 import { usePhoneVerify } from "../customHooks/verifyPhoneNo"
 import circle from "../../otherData/circle.json"
 import { Radio, RadioGroup, InputLabel } from "@mui/material"
@@ -14,7 +15,7 @@ import "../../css/searchWithImages.css"
 import "../../css/selectSearch.css"
 import dataPlan from "./dataPlan.json"
 import prepaidChangeJson from "./specialJsons/preapidChangeList.json"
-
+import { useFormik } from "formik"
 import { NumberInput } from "../numberInput"
 import MobileView from "./mobileView"
 import { Input } from "../input"
@@ -33,7 +34,10 @@ import {
 } from "../../app/features/prepaidPlansSlice"
 import { toggleUserLogged } from "../../app/features/LoginSlice"
 import { addElement, toggleOverlay } from "../../app/features/overlaySlice"
+import { CallToActionSharp } from "@mui/icons-material"
+import axios from "axios"
 
+//converts circle list from default
 let circleList = circle.list.map((item) => ({
   name: item.name,
   value: JSON.stringify({ code: item.code, name: item.name }),
@@ -55,6 +59,8 @@ const initialState = {
 
 const PrepaidMobile = () => {
   const [outputCircle, setCircle] = useState(circleList)
+  const cir = useRef(circle)
+  const ref = useRef({ circle: "", phoneNo: "", operator: "" })
   const [fakeRadio, setFakeRadio] = useState(true)
 
   const [otp, setOtp] = useState(false)
@@ -68,10 +74,12 @@ const PrepaidMobile = () => {
   const userLogged = useSelector((state) => state.login.isUserLogged)
   const phoneNo = useSelector((state) => state.prepaidPlan.phoneNo)
   const Operator = useSelector((state) => state.prepaidPlan.operator)
-  const circle = useSelector((state) => state.prepaidPlan.circle)
+  const circle2 = useSelector((state) => state.prepaidPlan.circle)
   const planInfo = useSelector((state) => state.prepaidPlan.plansInfo)
   const billState = useSelector((state) => state.prepaidPlan.confirmBillState)
   const couponState = useSelector((state) => state.prepaidPlan.couponState)
+  const renderCircle = getRenderFormValue("circle")
+  const render = getRenderFormValue("operator")
 
   const isValidMobileNo = (no) => {
     let numberAsString
@@ -92,6 +100,79 @@ const PrepaidMobile = () => {
     }
     return "none"
   }
+
+  const giveCircleValue = (code) => {
+    console.log(code)
+    let list = cir.current.list.map((item) => ({
+      name: item.code,
+      value: JSON.stringify({ code: item.code, name: item.name }),
+    }))
+    let list2 = list.filter((each) => each.name === code)
+    console.log(list2)
+
+    return list2[0]
+  }
+
+  //validate function of formik
+  const validate = (values) => {
+    const errors = {}
+    let validationRef = ref.current
+
+    if (validationRef.phoneNo != values.phoneNo) {
+      formik.setFieldValue("circle", "", false)
+      formik.setFieldValue("operator", "", false)
+      formik.setFieldValue("amount", "", false)
+      if (isValidMobileNo(values.phoneNo) == "none") {
+        axios
+          .get(
+            `https://open-api.plansinfo.com/mobile/operator-circle?number=${values.phoneNo}`
+          )
+          .then(function (response) {
+            console.log(response)
+            let c = giveCircleValue(response.data.data.circle)
+            console.log(c)
+            if (response.data.status === "OK") {
+              validationRef.phoneNo = values.phoneNo
+              formik.setFieldValue("circle", c.value, false)
+              console.log(response.data.data.circle)
+
+              formik.setFieldValue(
+                "operator",
+                response.data.data.operator,
+                false
+              )
+              console.log(response.data.data.operator)
+            } else {
+              formik.setFieldError("phoneNo", "invalid MobileNo")
+            }
+          })
+          .catch(function (error) {
+            console.log(error)
+            return { status: "ErrorHappened" }
+          })
+      } else {
+        errors.phoneNo = "Invalid Mobile No"
+      }
+    }
+    return { ...errors }
+  }
+  const formik = useFormik({
+    initialValues: {
+      phoneNo: "",
+      circle: "",
+      operator: "",
+      amount: "",
+    },
+    validate,
+    onSubmit: (value) => console.log(value),
+  })
+
+  const setProps = (field, value) => {
+    formik.setFieldValue(field, value)
+  }
+
+  let circleProvider = getRenderFormValue("circle")
+  let operatorProvider = getRenderFormValue("operator")
 
   const errorReducer = (state, action) => {
     const temp = { ...state }
@@ -132,6 +213,7 @@ const PrepaidMobile = () => {
     }
   }, [Operator, circle])
 
+  /*changes circle accorging to selected operator*/
   const handleOperator = (value) => {
     console.log(value)
     let filterCircle = circleList.filter((element) => {
@@ -247,62 +329,93 @@ const PrepaidMobile = () => {
 
   return (
     <>
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 lg:gap-2 xl:gap-3 w-full mx-auto">
+      <form
+        onSubmit={formik.handleSubmit}
+        className="grid grid-cols-1 lg:grid-cols-5 gap-4 lg:gap-2 xl:gap-3 w-full mx-auto">
+        {/* change={(value) => dispatch(storePhoneNo(value))} */}
         <div className="flex flex-col h-auto ">
           <NumberInput
             iType="tel"
-            val={phoneNo}
+            val={formik.values.phoneNo}
+            blur={() => formik.setFieldTouched("phoneNo")}
+            change={(value) => setProps("phoneNo", value)}
             onleft="+91-"
             id="phoneNo"
             holder="Mobile Number"
-            change={(value) => dispatch(storePhoneNo(value))}
+            name="phoneNo"
+            maxlen={10}
+            numbersOnly={true}
             extraClasses="text-gray-primary "
             fieldClasses="border-pink-600 focus:outline-none focus-within:border-blue-400 flex-1 min-h-[36px] w-full"
           />
           <span className="h-3 text-red-600 text-xs">
-            {isValid.mobileNo === "" || isValid.mobileNo === "none"
+            {/* {isValid.mobileNo === "" || isValid.mobileNo === "none"
               ? null
-              : isValid.mobileNo}
+              : isValid.mobileNo} */}
+            {formik.errors.phoneNo && formik.touched.phoneNo
+              ? formik.errors.phoneNo
+              : null}
           </span>
         </div>
 
+        {/* onChange={(value) => handleOperator(value)} */}
         <div className="flex flex-col h-auto">
           <SelectSearch
+            value={formik.values.operator}
             className="select-search"
             options={outputOperator}
             renderOption={renderProvider}
             placeholder="Search Operator"
-            onChange={(value) => handleOperator(value)}
+            onChange={(value) => {
+              formik.setFieldTouched("operator")
+              return formik.setFieldValue("operator", value, true)
+            }}
+            renderValue={operatorProvider}
           />
           <span className="h-3 text-red-600 text-xs">
-            {isValid.operator === "none" || isValid.operator === ""
+            {/* {isValid.operator === "none" || isValid.operator === ""
               ? null
-              : isValid.operator}
+              : isValid.operator} */}
+            {formik.errors.operator && formik.touched.operator
+              ? formik.errors.operator
+              : null}
           </span>
         </div>
         {/* circle dropdown */}
 
+        {/* onChange={(value) => dispatch(storeCircle(value))} */}
         <div className="flex flex-col h-auto">
           <SelectSearch
             options={outputCircle}
-            value="sv"
+            value={formik.values.circle}
             name="circle"
             placeholder="Circle"
-            onChange={(value) => dispatch(storeCircle(value))}
+            onChange={(value) => {
+              formik.setFieldTouched("circle")
+              return formik.setFieldValue("circle", value, true)
+            }}
+            renderValue={circleProvider}
           />
 
           <span className="h-3 text-red-600 text-xs">
-            {isValid.circle === "none" || isValid.circle === ""
+            {formik.errors.operator && formik.touched.operator
+              ? formik.errors.operator
+              : null}
+            {/* {isValid.circle === "none" || isValid.circle === ""
               ? null
-              : isValid.circle}
+              : isValid.circle} */}
           </span>
         </div>
         {/* spacially made custom input box just for this page to show view plans */}
         <div className="rounded flex flex-col">
           <WithTextInput
+            maxlen={5}
+            numbersOnly={true}
             placeholder="Amount"
             text="View Plans"
-            val={planInfo.amount}
+            val={formik.values.amount}
+            blur={() => formik.setFieldTouched("amount")}
+            change={(value) => setProps("amount", value)}
             textClick={() => handlePlansRequest()}
           />
 
@@ -366,7 +479,7 @@ const PrepaidMobile = () => {
         <LoginModal closeModal={() => setOpenModal(false)} open={openModal}>
           <LoginWrapper />
         </LoginModal>
-      </div>
+      </form>
 
       {/* row 2 for information display */}
       <div className="hidden lg:grid grid-col-1 md:grid-cols-5 gap-3 w-full">

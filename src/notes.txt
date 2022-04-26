@@ -1,2 +1,50 @@
-onclick copy on offers section is requires
-set 
+
+define validate function
+cosnt validate = ()=>{
+const errors = {}
+
+//some conditions
+
+return {...errors}
+}
+
+//import useFormi() hook like this with initial value ,validate and onSubmit  defined
+
+  const formik = useFormik({
+    initialValues: {
+      fastagProvider: "none",
+      vechileNo: "",
+      amount: "",
+    },
+    validate,
+    onSubmit: (values) => {
+      alert(JSON.stringify(values, null, 2))
+    },
+  })
+
+
+//to add formik in prepaid mobile 
+call setProps funtion as follows on change handle of custom component
+change={(value) => setProps("vechileNo", value)}
+
+//add to selectSearch
+renderValue={renderFontValue}
+
+
+//use onChange on Select  as follows
+onChange={(value) => {
+			formik.setFieldTouched("naneOfField")
+			return formik.setFieldValue("nameOfField", value, true)
+}}
+
+//add errors as follows
+	<span className="text-red-600 h-3 text-xs">
+	{formik.errors.fastagProvider &&
+	formik.touched.fastagProvider
+		? formik.errors.fastagProvider
+		: null}
+	{formik.touched.fastagProvider}
+	</span>
+
+//
+

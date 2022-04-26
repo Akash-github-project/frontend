@@ -8,8 +8,28 @@ const WithTextInput = ({
   disable = false,
   blur = (e) => console.log(e.target.value),
   val,
+  numbersOnly = false,
+  maxlen = -1,
   exClasses = " ",
 }) => {
+  const handleChange = (e) => {
+    let len = e.target.value.length
+    if (numbersOnly) {
+      if (maxlen != -1) {
+        if (maxlen > 0 && len <= maxlen) {
+          change(
+            e.target.value.replace(/[^0-9]/g, "").replace(/(\..*?)\..*/g, "$1")
+          )
+        }
+      } else {
+        change(
+          e.target.value.replace(/[^0-9]/g, "").replace(/(\..*?)\..*/g, "$1")
+        )
+      }
+    } else {
+      change(e.target.value)
+    }
+  }
   return (
     <div className="rounded w-full">
       <span
@@ -21,7 +41,7 @@ const WithTextInput = ({
           disabled={disable}
           required
           placeholder={placeholder}
-          onChange={change}
+          onChange={handleChange}
           onBlur={blur}
           value={val}
         />
