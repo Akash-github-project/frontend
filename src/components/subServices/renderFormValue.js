@@ -12,6 +12,7 @@ export function getRenderFormValue(Name) {
         className={className}
         style={style}
         name={Name}
+        id={Name}
         value={inputVal}
       />
     )

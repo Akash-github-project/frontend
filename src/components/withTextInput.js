@@ -13,6 +13,7 @@ const WithTextInput = ({
   exClasses = " ",
 }) => {
   const handleChange = (e) => {
+    console.log(e.target.value)
     let len = e.target.value.length
     if (numbersOnly) {
       if (maxlen != -1) {

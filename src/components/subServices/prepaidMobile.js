@@ -45,7 +45,7 @@ let circleList = circle.list.map((item) => ({
 
 let operatorList = operator.list.map((item) => ({
   name: item.op_name,
-  value: item.op_key,
+  value: item.op_code,
   photo: item.image,
   code: item.op_code,
 }))
@@ -119,6 +119,7 @@ const PrepaidMobile = () => {
     let validationRef = ref.current
 
     if (validationRef.phoneNo != values.phoneNo) {
+      validationRef.phoneNo = values.phoneNo
       formik.setFieldValue("circle", "", false)
       formik.setFieldValue("operator", "", false)
       formik.setFieldValue("amount", "", false)
@@ -132,7 +133,6 @@ const PrepaidMobile = () => {
             let c = giveCircleValue(response.data.data.circle)
             console.log(c)
             if (response.data.status === "OK") {
-              validationRef.phoneNo = values.phoneNo
               formik.setFieldValue("circle", c.value, false)
               console.log(response.data.data.circle)
 
@@ -154,6 +154,11 @@ const PrepaidMobile = () => {
         errors.phoneNo = "Invalid Mobile No"
       }
     }
+
+    if (validationRef.operator != values.operator) {
+      formik.setFieldValue("circle", "", false)
+      formik.setFieldValue("amount", "", false)
+    }
     return { ...errors }
   }
   const formik = useFormik({
@@ -173,7 +178,6 @@ const PrepaidMobile = () => {
 
   let circleProvider = getRenderFormValue("circle")
   let operatorProvider = getRenderFormValue("operator")
-
   const errorReducer = (state, action) => {
     const temp = { ...state }
     switch (action.type) {
@@ -437,7 +441,7 @@ const PrepaidMobile = () => {
         {/* only visible in mobile mode  {useless radio button for bsnl}*/}
         <div
           className={`${
-            Operator.name !== "BSNL" ? "hidden" : "inline-block"
+            formik.values.operator !== "CG" ? "hidden" : "inline-block"
           } lg:hidden`}>
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-bsnl"
@@ -500,7 +504,7 @@ const PrepaidMobile = () => {
       {/* <FormControl> */}
       <div
         className={`hidden ${
-          Operator.name !== "BSNL" ? "hidden" : " lg:grid"
+          formik.values.operator !== "CG" ? "hidden" : " lg:grid"
         } grid-col-1 md:grid-cols-5 gap-3 w-full self-end `}>
         <div className="md:block md:col-span-3"></div>
         <div className="md:col-span-2">
