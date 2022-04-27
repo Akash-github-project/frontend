@@ -34,8 +34,9 @@ import {
 } from "../../app/features/prepaidPlansSlice"
 import { toggleUserLogged } from "../../app/features/LoginSlice"
 import { addElement, toggleOverlay } from "../../app/features/overlaySlice"
-import { CallToActionSharp } from "@mui/icons-material"
+import { CallToActionSharp, ConstructionOutlined } from "@mui/icons-material"
 import axios from "axios"
+import { faFilterCircleXmark } from "@fortawesome/free-solid-svg-icons"
 
 //converts circle list from default
 let circleList = circle.list.map((item) => ({
@@ -45,7 +46,7 @@ let circleList = circle.list.map((item) => ({
 
 let operatorList = operator.list.map((item) => ({
   name: item.op_name,
-  value: item.op_code,
+  value: item.op_key,
   photo: item.image,
   code: item.op_code,
 }))
@@ -103,6 +104,7 @@ const PrepaidMobile = () => {
 
   const giveCircleValue = (code) => {
     console.log(code)
+
     let list = cir.current.list.map((item) => ({
       name: item.code,
       value: JSON.stringify({ code: item.code, name: item.name }),
@@ -113,13 +115,42 @@ const PrepaidMobile = () => {
     return list2[0]
   }
 
+  const giveOperatorValue = (code, circleCode) => {
+    let x = operator.list2
+    // md of dl
+    let keys = Object.keys(x)
+    let ret = keys.filter((val) => x[`${val}`].includes(code) === true)
+    console.log("operator ----", ret[0])
+
+    if (circleCode === "MU" && code === "DP") {
+      return "MM"
+    } else if (circleCode === "DL" && code === "DP") {
+      return "MD"
+    } else {
+      return ret[0]
+    }
+  }
+
+  const clearErrors = (errorsFields) => {
+    errorsFields.forEach((element) => {
+      formik.setFieldError(element, "")
+    })
+    console.log(errorsFields)
+  }
   //validate function of formik
   const validate = (values) => {
     const errors = {}
     let validationRef = ref.current
 
+    if (values.phoneNo === "") {
+      errors.phoneNo = "please enter a mobile no"
+    }
+    if (isValidMobileNo(values.phoneNo) !== "none") {
+      errors.phoneNo = isValidMobileNo(values.phoneNo)
+    }
     if (validationRef.phoneNo != values.phoneNo) {
       validationRef.phoneNo = values.phoneNo
+      clearErrors(["hello", "bolle", "hello"])
       formik.setFieldValue("circle", "", false)
       formik.setFieldValue("operator", "", false)
       formik.setFieldValue("amount", "", false)
@@ -134,13 +165,31 @@ const PrepaidMobile = () => {
             console.log(c)
             if (response.data.status === "OK") {
               formik.setFieldValue("circle", c.value, false)
+              formik.setFieldError("circle", "")
+              formik.setFieldError("operator", "")
               console.log(response.data.data.circle)
 
               formik.setFieldValue(
                 "operator",
-                response.data.data.operator,
+                giveOperatorValue(
+                  response.data.data.operator,
+                  response.data.data.circle
+                ),
                 false
               )
+              handleOperator(
+                giveOperatorValue(
+                  response.data.data.operator,
+                  response.data.data.circle
+                )
+              )
+              // validationRef.circle = response.data.data.circle
+              validationRef.operator = giveOperatorValue(
+                response.data.data.operator,
+                response.data.data.circle
+              )
+              validationRef.circle = response.data.data.circle
+
               console.log(response.data.data.operator)
             } else {
               formik.setFieldError("phoneNo", "invalid MobileNo")
@@ -154,13 +203,44 @@ const PrepaidMobile = () => {
         errors.phoneNo = "Invalid Mobile No"
       }
     }
+    console.log(validationRef.operator !== values.operator)
 
-    if (validationRef.operator != values.operator) {
+    if (validationRef.operator !== values.operator) {
+      console.log(validationRef.operator !== values.operator, "texting")
       formik.setFieldValue("circle", "", false)
       formik.setFieldValue("amount", "", false)
+
+      validationRef.operator = values.operator
+      validationRef.circle = ""
+      validationRef.amount = ""
+
+      handleOperator(values.operator)
+    } else if (validationRef.operator === "") {
+      errors.operator = "select an operator"
+    }
+    if (values.circle === "") {
+      errors.circle = "select a circle"
+    }
+
+    console.log(validationRef.circle != values.circle)
+    if (validationRef.circle != values.circle) {
+      console.log("circle changed")
+      formik.setFieldValue("amount", "", false)
+      validationRef.circle = values.circle
+      validationRef.amount = ""
+    } else if (values.circle === "") {
+      errors.circle = "Please select a circle"
+    }
+    if (values.amount === "") {
+      errors.amount = "please enter a valid amount"
     }
     return { ...errors }
   }
+
+  function HandleSubmit() {
+    showModal()
+  }
+  //useFromik hook
   const formik = useFormik({
     initialValues: {
       phoneNo: "",
@@ -169,7 +249,7 @@ const PrepaidMobile = () => {
       amount: "",
     },
     validate,
-    onSubmit: (value) => console.log(value),
+    onSubmit: (value) => HandleSubmit(value),
   })
 
   const setProps = (field, value) => {
@@ -218,7 +298,7 @@ const PrepaidMobile = () => {
   }, [Operator, circle])
 
   /*changes circle accorging to selected operator*/
-  const handleOperator = (value) => {
+  function handleOperator(value) {
     console.log(value)
     let filterCircle = circleList.filter((element) => {
       let toCompare = JSON.parse(element.value)
@@ -237,8 +317,9 @@ const PrepaidMobile = () => {
     })
 
     console.log(currentOperator)
+    console.log([...filterCircle], "filter circle")
     setCircle([...filterCircle])
-    dispatch(storeOperator(currentOperator[0]))
+    // dispatch(storeOperator(currentOperator[0]))
   }
 
   const setCls = () => {
@@ -248,14 +329,29 @@ const PrepaidMobile = () => {
   }
 
   const handlePlansRequest = () => {
-    dispatcher({ type: "validateViewPlan" })
-    console.log(isValid.mobileNo === "")
-    console.log(isValid.circle === "")
-    console.log(isValid.operator === "")
+    formik.setTouched({
+      phoneNo: true,
+      operator: true,
+      circle: true,
+    })
+    formik.validateForm()
+    if (Object.keys(formik.touched).length != 0) {
+      let x = formik.values
+      if (
+        x.phoneNo.length != 0 &&
+        x.operator.length != 0 &&
+        x.circle.length != 0
+      ) {
+        setTimeout(show, 400)
+      }
+    }
+  }
+
+  const show = () => {
     if (
-      isValid.mobileNo === "" &&
-      isValid.circle === "" &&
-      isValid.operator === ""
+      formik.errors.mobileNo === undefined &&
+      formik.errors.operator === undefined &&
+      formik.errors.circle === undefined
     ) {
       dispatch(storeShowPlan(true))
       if (window.innerWidth > 820) dispatch(storeRenderType("desktop"))
@@ -267,36 +363,36 @@ const PrepaidMobile = () => {
     }
   }
 
-  const handleCircle = (value) => {
-    console.log(value)
-  }
   const handleFakeRadio = (e) => {}
 
   const handleRechargeRequest = () => {
-    dispatcher({ type: "validateViewPlan" })
-    dispatcher({ type: "validateContinueToRecharge" })
-    if (
-      isValid.mobileNo === "" &&
-      isValid.operator === "" &&
-      isValid.circle === "" &&
-      isValid.amount === ""
-    ) {
-      if (userLogged) {
-        dispatch(showConfirmBill(true))
-      } else {
-        setOpenModal(true)
-      }
-    }
+    let err = formik.errors.touched
+
+    formik.setTouched({
+      phoneNo: true,
+      operator: true,
+      circle: true,
+      amount: true,
+    })
+    formik.validateForm()
+
+    // if(err.amount === undefined || err.phoneNo === undefined || err.circle === undefined || err.operator === undefined)
+    // return
+
+    // setTimeout(showModal, 400)
+    // dispatcher({ type: "validateViewPlan" })
+    // dispatcher({ type: "validateContinueToRecharge" })
     // if (billState === false) {
   }
-  // const setProps = (field, value) => {
-  //   formik.setFieldValue(field, value)
-  // }
 
-  // apply coupon work required
-  const handleApplyCoupon = () => {
-    dispatch(toggleCouponState(!couponState))
+  function showModal() {
+    if (userLogged) {
+      dispatch(showConfirmBill(true))
+    } else {
+      setOpenModal(true)
+    }
   }
+  // apply coupon work required
 
   function replaceFields(json, heading, replaceWith) {
     let cardData = { ...json }
@@ -402,8 +498,8 @@ const PrepaidMobile = () => {
           />
 
           <span className="h-3 text-red-600 text-xs">
-            {formik.errors.operator && formik.touched.operator
-              ? formik.errors.operator
+            {formik.errors.circle && formik.touched.circle
+              ? formik.errors.circle
               : null}
             {/* {isValid.circle === "none" || isValid.circle === ""
               ? null
@@ -423,9 +519,11 @@ const PrepaidMobile = () => {
             textClick={() => handlePlansRequest()}
           />
 
-          {isValid.amount === "none" || isValid.amount === "" ? null : (
-            <span className="h-3 text-red-600 text-xs">isValid.amount</span>
-          )}
+          {formik.errors.amount && formik.touched.amount ? (
+            <span className="h-3 text-red-600 text-xs">
+              {formik.errors.amount}
+            </span>
+          ) : null}
         </div>
 
         {/* this div should only be visible in mobile mode */}
@@ -477,6 +575,7 @@ const PrepaidMobile = () => {
         {/* button of recharge */}
         <button
           className="p-3 lg:p-1 bg-pink-primary active:bg-pink-800 text-white rounded text-[15px] lg:text-[13px] leading-[13px] font-medium lg:ml-4 max-h-[36px]"
+          type="submit"
           onClick={handleRechargeRequest}>
           Continue to Recharge
         </button>

@@ -3,86 +3,46 @@
     {
       "op_key": "AR",
       "op_name": "Airtel",
-      "bill_fetch_api": "",
-      "pay_api": "payoneapi",
-      "op_image": "",
-      "code_ambika": "3",
-      "code_payoneapi": "AR",
-      "status": 1,
       "op_code": "AT",
       "image": "/images/airtel.svg"
     },
     {
       "op_key": "BS",
       "op_name": "BSNL",
-      "bill_fetch_api": "",
-      "pay_api": "payoneapi",
-      "op_image": "",
-      "code_ambika": "5",
-      "code_payoneapi": "BS",
-      "status": 1,
       "op_code": "CG",
       "image": "/images/bsnl-logo(1).svg"
     },
     {
       "op_key": "MD",
       "op_name": "MTNL Delhi",
-      "bill_fetch_api": "",
-      "pay_api": "payoneapi",
-      "op_image": "",
-      "code_ambika": "13",
-      "code_payoneapi": "MD",
-      "status": 1,
       "op_code": "DP",
       "image": "/images/mtnl.svg"
     },
     {
       "op_key": "MM",
       "op_name": "MTNL Mumbai",
-      "bill_fetch_api": "",
-      "pay_api": "payoneapi",
-      "op_image": "",
-      "code_ambika": "68",
-      "code_payoneapi": "MM",
-      "status": 1,
       "op_code": "DP",
       "image": "/images/mtnl.svg"
     },
     {
       "op_key": "RJ",
       "op_name": "Reliance JIO",
-      "bill_fetch_api": "",
-      "pay_api": "payoneapi",
-      "op_image": "",
-      "code_ambika": "116",
-      "code_payoneapi": "RJ",
-      "status": 1,
       "op_code": "RJ",
-      "image": "/images/jio.svg"
-    },
-    {
-      "op_key": "RJ",
-      "op_name": "Reliance JIO",
-      "bill_fetch_api": "",
-      "pay_api": "payoneapi",
-      "op_image": "",
-      "code_ambika": "116",
-      "code_payoneapi": "RJ",
-      "status": 1,
-      "op_code": "RG",
       "image": "/images/jio.svg"
     },
     {
       "op_key": "VF",
       "op_name": "Vodafone",
-      "bill_fetch_api": "",
-      "pay_api": "ambika",
-      "op_image": "",
-      "code_ambika": "VIL",
-      "code_payoneapi": "VF",
-      "status": 1,
       "op_code": "VF",
       "image": "/images/vi.svg"
     }
-  ]
+  ],
+  "list2": {
+    "RJ": ["RJ", "RG"],
+    "VF": ["VF"],
+    "BS": ["CG"],
+    "MD": ["DP"],
+    "MM": ["DP"],
+    "AR": ["AT"]
+  }
 }

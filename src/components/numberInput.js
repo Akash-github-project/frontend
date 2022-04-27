@@ -7,6 +7,7 @@ export const NumberInput = ({
   fieldClasses = " ",
   holder = " ",
   iType = "text",
+  req = true,
   change = () => console.log("hello"),
   blur = () => console.log("blur"),
   val,
@@ -60,6 +61,7 @@ export const NumberInput = ({
         name={name}
         id={Id}
         placeholder={holder}
+        required={req}
         value={val}
         onBlur={blurHandle}
         onChange={changeHandle}

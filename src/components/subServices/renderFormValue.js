@@ -1,4 +1,4 @@
-export function getRenderFormValue(Name) {
+export function getRenderFormValue(Name, req = true) {
   return function renderFontValue(valueProps, snapshot, className) {
     const { option } = snapshot
     const style = {
@@ -10,6 +10,7 @@ export function getRenderFormValue(Name) {
       <input
         {...valueProps}
         className={className}
+        required={req}
         style={style}
         name={Name}
         id={Name}
