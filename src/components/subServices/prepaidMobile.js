@@ -252,6 +252,12 @@ const PrepaidMobile = () => {
     onSubmit: (value) => HandleSubmit(value),
   })
 
+  useEffect(() => {
+    if (planInfo.amount !== undefined) {
+      formik.setFieldValue("amount", planInfo.amount, false)
+    }
+  }, [planInfo.amount])
+
   const setProps = (field, value) => {
     formik.setFieldValue(field, value)
   }
@@ -353,7 +359,11 @@ const PrepaidMobile = () => {
       formik.errors.operator === undefined &&
       formik.errors.circle === undefined
     ) {
+      dispatch(storeCircle(formik.values.circle))
+      dispatch(storeOperator(formik.values.operator))
       dispatch(storeShowPlan(true))
+      console.log(formik.values.circle, "cirlce")
+      console.log(formik.values.operator, "operator")
       if (window.innerWidth > 820) dispatch(storeRenderType("desktop"))
       else {
         dispatch(addElement(<MobileView />))
@@ -724,7 +734,7 @@ const PrepaidMobile = () => {
           <Button
             text="Pay Rs 1000 "
             exClasses="w-full"
-            fClasses="text-[15px]"
+            fClasses="text-[13px]"
           />
         </div>
         {/* pay ammount button section end*/}

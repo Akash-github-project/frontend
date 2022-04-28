@@ -39,10 +39,19 @@
   ],
   "list2": {
     "RJ": ["RJ", "RG"],
-    "VF": ["VF"],
+    "VF": ["VF", "ID"],
     "BS": ["CG"],
     "MD": ["DP"],
     "MM": ["DP"],
-    "AR": ["AT"]
+    "AR": ["AT", "TD", "UN"]
+  },
+
+  "list3": {
+    "RJ": "RJ",
+    "VF": "VF",
+    "BS": "CG",
+    "MD": "DP",
+    "MM": "DP",
+    "AR": "AT"
   }
 }
