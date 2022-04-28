@@ -1,4 +1,5 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
+import SimpleModal from "../components/userpages/simpleModal"
 import Wrapper from "./wrapper"
 import { Crosel } from "./Crosel"
 // import Services from "./Services";
@@ -8,6 +9,7 @@ import PlansList from "./subServices/plansList"
 // import Overlay from "../components/overlay";
 import SecondOverlay from "./secondOverlay"
 import { useSelector } from "react-redux"
+import MobileView from "./subServices/mobileView"
 // import { storeRenderType } from "../app/features/prepaidPlansSlice";
 // // import {
 // // 	addElement,
@@ -20,11 +22,13 @@ import { useSelector } from "react-redux"
 const WrapperPrepaid = () => {
   const renderType = useSelector((state) => state.prepaidPlan.renderType)
   const showPlan = useSelector((state) => state.prepaidPlan.showPlan)
+  const [openModal, setOpenModal] = useState(true)
+
   return (
     <>
       <Wrapper>
         <Prepaid>
-          <PrepaidMobile />
+          <PrepaidMobile open={() => setOpenModal(true)} />
         </Prepaid>
       </Wrapper>
       <Wrapper>
@@ -32,11 +36,11 @@ const WrapperPrepaid = () => {
           renderType === "desktop" ? (
             <PlansList />
           ) : (
-            <SecondOverlay
-              toUse="element"
-              side="left"
-              icon="fa-solid fa-arrow-left"
-            />
+            <SimpleModal
+              open={openModal}
+              closeModal={() => setOpenModal(false)}>
+              <MobileView close={() => setOpenModal(false)} />
+            </SimpleModal>
           )
         ) : null}
         {}

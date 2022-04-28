@@ -58,7 +58,7 @@ const initialState = {
   amount: "none",
 }
 
-const PrepaidMobile = () => {
+const PrepaidMobile = ({ open }) => {
   const [outputCircle, setCircle] = useState(circleList)
   const cir = useRef(circle)
   const ref = useRef({ circle: "", phoneNo: "", operator: "" })
@@ -366,9 +366,10 @@ const PrepaidMobile = () => {
       console.log(formik.values.operator, "operator")
       if (window.innerWidth > 820) dispatch(storeRenderType("desktop"))
       else {
-        dispatch(addElement(<MobileView />))
+        // dispatch(addElement(<MobileView />))
         dispatch(storeRenderType("mobile"))
-        dispatch(toggleOverlay())
+        open()
+        // dispatch(toggleOverlay())
       }
     }
   }

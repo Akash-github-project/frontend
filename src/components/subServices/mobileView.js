@@ -31,7 +31,7 @@ const Tab = ({ children }) => {
 // let planTypes = res.map(category => category.name);
 // let plansList = res.map(category => category.plans);
 
-const MobileView = () => {
+const MobileView = ({ close }) => {
   const [planTypes, setPlanType] = useState([])
   const [plansList, setList] = useState([])
   // const [circleVal, setCircleVal] = useState(""),;
@@ -69,7 +69,8 @@ const MobileView = () => {
       console.log(flatList)
       plan = flatList.filter((plan) => plan.id == receivedId)
       dispatch(storetPlansInfo({ ...plan[0] }))
-      dispatch(toggleOverlay())
+      close()
+      // dispatch(toggleOverlay())
     }
   }
   if (isLoading) return <div>Loading...</div>
