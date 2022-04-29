@@ -82,10 +82,12 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
     let generatedOtpEmail =
       Math.random() * 6 + Math.random() * 6 * 10 + Math.random() * 6 * 100
     generatedOtpEmail = Math.floor(generatedOtpEmail)
+    console.log(generatedOtpEmail)
 
     let generatedOtpPhone =
       Math.random() * 6 + Math.random() * 6 * 10 + Math.random() * 6 * 100
     generatedOtpPhone = Math.floor(generatedOtpPhone)
+    console.log(generatedOtpEmail)
 
     if (type === "email") {
       setEmailOtp(generatedOtpEmail)
@@ -393,16 +395,6 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
             Mobile
           </label>
           <div className="flex col-span-4 rounded">
-            {/* <Field
-              name="mobileUser"
-              disabled={
-                phoneOtpStatus === "verified" || phoneOtpStatus === "sent"
-                  ? true
-                  : false
-              }
-              className="w-full border border-pink-primary rounded px-2 disabled:bg-gray-100"
-              type="tel"
-            /> */}
             <NumberInput
               name="emailUser"
               val={formik.values.mobileUser}

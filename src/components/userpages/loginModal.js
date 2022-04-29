@@ -5,7 +5,7 @@ const LoginModal = ({ closeModal, open, children }) => {
   if (!open) return null
 
   return ReactDOM.createPortal(
-    <div className="z-base">
+    <div className="z-base max-h-[80vh]">
       <div
         className="fixed inset-0 bg-gray-900/70 z-base"
         onClick={() => closeModal()}></div>
