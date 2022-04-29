@@ -7,7 +7,6 @@ import SelectSearch, { fuzzySearch } from "react-select-search"
 import operator from "../../otherData/operator.json"
 import ConfirmDetails from "./confirmDetails"
 import { getRenderFormValue } from "./renderFormValue"
-import { usePhoneVerify } from "../customHooks/verifyPhoneNo"
 import circle from "../../otherData/circle.json"
 import { Radio, RadioGroup, InputLabel } from "@mui/material"
 import { renderProvider } from "../../otherData/inputWithImage"
@@ -17,6 +16,7 @@ import dataPlan from "./dataPlan.json"
 import prepaidChangeJson from "./specialJsons/preapidChangeList.json"
 import { useFormik } from "formik"
 import { NumberInput } from "../numberInput"
+import { isValidMobileNo } from "../usefullFunctions"
 import MobileView from "./mobileView"
 import { Input } from "../input"
 import Button from "../button"
@@ -82,25 +82,25 @@ const PrepaidMobile = ({ open }) => {
   const renderCircle = getRenderFormValue("circle")
   const render = getRenderFormValue("operator")
 
-  const isValidMobileNo = (no) => {
-    let numberAsString
-    if (isNaN(parseInt(no)) === false) {
-      numberAsString = Number(no).toString()
-      if (
-        numberAsString[0] !== "6" &&
-        numberAsString[0] !== "7" &&
-        numberAsString[0] !== "8" &&
-        numberAsString[0] !== "9"
-      ) {
-        return "invalid mobile no"
-      } else if (numberAsString.length < 10 || numberAsString.length > 10) {
-        return "invalid mobile no length"
-      }
-    } else {
-      return "invalid Mobile no"
-    }
-    return "none"
-  }
+  // const isValidMobileNo = (no) => {
+  //   let numberAsString
+  //   if (isNaN(parseInt(no)) === false) {
+  //     numberAsString = Number(no).toString()
+  //     if (
+  //       numberAsString[0] !== "6" &&
+  //       numberAsString[0] !== "7" &&
+  //       numberAsString[0] !== "8" &&
+  //       numberAsString[0] !== "9"
+  //     ) {
+  //       return "invalid mobile no"
+  //     } else if (numberAsString.length < 10 || numberAsString.length > 10) {
+  //       return "invalid mobile no length"
+  //     }
+  //   } else {
+  //     return "invalid Mobile no"
+  //   }
+  //   return "none"
+  // }
 
   const giveCircleValue = (code) => {
     console.log(code)
@@ -150,7 +150,7 @@ const PrepaidMobile = ({ open }) => {
     }
     if (validationRef.phoneNo != values.phoneNo) {
       validationRef.phoneNo = values.phoneNo
-      clearErrors(["hello", "bolle", "hello"])
+      // clearErrors(["hello", "bolle", "hello"])
       formik.setFieldValue("circle", "", false)
       formik.setFieldValue("operator", "", false)
       formik.setFieldValue("amount", "", false)
@@ -264,37 +264,7 @@ const PrepaidMobile = ({ open }) => {
 
   let circleProvider = getRenderFormValue("circle")
   let operatorProvider = getRenderFormValue("operator")
-  const errorReducer = (state, action) => {
-    const temp = { ...state }
-    switch (action.type) {
-      case "validateViewPlan":
-        if (circle.length === 0) {
-          temp.circle = "Please Select A Circle"
-        } else {
-          temp.circle = ""
-        }
-        if (Object.keys(Operator).length === 0) {
-          temp.operator = "Please Select An Operator"
-        } else {
-          temp.operator = ""
-        }
-        if (isValidMobileNo(phoneNo) !== "none") {
-          temp.mobileNo = isValidMobileNo(phoneNo)
-        } else {
-          temp.mobileNo = ""
-        }
-        break
-      case "validateContinueToRecharge":
-        if (planInfo.amount === undefined) {
-          temp.amount = "Please Select A Plan"
-        } else {
-          temp.amount = ""
-        }
-    }
-    return { ...temp }
-  }
 
-  const [isValid, dispatcher] = useReducer(errorReducer, initialState)
   let changeLst = [...prepaidChangeJson.data]
   let couponLegal = useSelector((state) => state.prepaidPlan.couponLegal)
 
@@ -386,14 +356,6 @@ const PrepaidMobile = ({ open }) => {
       amount: true,
     })
     formik.validateForm()
-
-    // if(err.amount === undefined || err.phoneNo === undefined || err.circle === undefined || err.operator === undefined)
-    // return
-
-    // setTimeout(showModal, 400)
-    // dispatcher({ type: "validateViewPlan" })
-    // dispatcher({ type: "validateContinueToRecharge" })
-    // if (billState === false) {
   }
 
   function showModal() {
@@ -405,38 +367,38 @@ const PrepaidMobile = ({ open }) => {
   }
   // apply coupon work required
 
-  function replaceFields(json, heading, replaceWith) {
-    let cardData = { ...json }
-    let targetArray = cardData.dataColumns
+  // function replaceFields(json, heading, replaceWith) {
+  //   let cardData = { ...json }
+  //   let targetArray = cardData.dataColumns
 
-    let toReplaceWith = 0
+  //   let toReplaceWith = 0
 
-    let returnArray = targetArray.map((each) => {
-      console.log("next row")
-      if (
-        each[`${replaceWith[toReplaceWith].with}`] ==
-        replaceWith[toReplaceWith].having
-      ) {
-        each[`value`] = replaceWith[toReplaceWith].value
-      }
-      toReplaceWith++
-      return each
-    })
+  //   let returnArray = targetArray.map((each) => {
+  //     console.log("next row")
+  //     if (
+  //       each[`${replaceWith[toReplaceWith].with}`] ==
+  //       replaceWith[toReplaceWith].having
+  //     ) {
+  //       each[`value`] = replaceWith[toReplaceWith].value
+  //     }
+  //     toReplaceWith++
+  //     return each
+  //   })
 
-    let returnObj = {
-      heading,
-      dataColumns: [...returnArray],
-    }
-    console.log(returnObj)
-    return { ...returnObj }
-  }
+  //   let returnObj = {
+  //     heading,
+  //     dataColumns: [...returnArray],
+  //   }
+  //   console.log(returnObj)
+  //   return { ...returnObj }
+  // }
 
-  // currenntly working here
-  const formatJson = (json, dataList, times, changeList) => {
-    let baseArr = [...changeList]
-    let newData = replaceFields(dataPlan, "test heading", baseArr)
-    return { ...newData }
-  }
+  // // currenntly working here
+  // const formatJson = (json, dataList, times, changeList) => {
+  //   let baseArr = [...changeList]
+  //   let newData = replaceFields(dataPlan, "test heading", baseArr)
+  //   return { ...newData }
+  // }
 
   return (
     <>

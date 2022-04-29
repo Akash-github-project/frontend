@@ -10,14 +10,6 @@ import PlansList from "./subServices/plansList"
 import SecondOverlay from "./secondOverlay"
 import { useSelector } from "react-redux"
 import MobileView from "./subServices/mobileView"
-// import { storeRenderType } from "../app/features/prepaidPlansSlice";
-// // import {
-// // 	addElement,
-// // 	toggleOverlay,
-// // 	clearDetails,
-// // } from "../app/features/overlaySlice";
-// import MobileView from "./subServices/mobileView";
-// import LoginOverlay from "./loginOverlay";
 
 const WrapperPrepaid = () => {
   const renderType = useSelector((state) => state.prepaidPlan.renderType)
