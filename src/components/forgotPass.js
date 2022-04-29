@@ -32,6 +32,7 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
     let otpGenerated =
       Math.random() * 6 + Math.random() * 6 * 10 + Math.random() * 6 * 100
     otpGenerated = Math.floor(otpGenerated)
+    console.log("otprepass", otpGenerated)
 
     setOtpVal(() => otpGenerated)
     console.log(otpVal)
@@ -174,11 +175,13 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
           console.log(values)
         }}
         innerRef={formRef}>
-        <Form className="grid grid-cols-6 gap-1 p-0 md:p-3 lg:p-4">
-          <span className="col-span-full text-xs text-center h-3">
+        <Form className="grid grid-cols-6 gap-1 p-0 md:p-3 lg:p-4 items-center">
+          <span className="col-span-full text-xs text-center h-3 ">
             <ErrorMessage name="emailOrMobile" />
           </span>
-          <label htmlFor="emailOrMobile" className="text-xs col-span-2">
+          <label
+            htmlFor="emailOrMobile"
+            className="text-xs col-span-2 text-gray-primary">
             Mobie No
           </label>
           <div className="flex col-span-4 rounded">
@@ -239,7 +242,9 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
           <span className="col-span-full text-xs text-center h-3">
             <ErrorMessage name="newPass" />
           </span>
-          <label htmlFor="newPass " className="text-xs col-span-2">
+          <label
+            htmlFor="newPass "
+            className="text-xs col-span-2 text-gray-primary">
             New Password
           </label>
           <div className="flex relative col-span-4 h-[34px]">
@@ -263,7 +268,9 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
           <span className="col-span-full text-xs text-center h-3">
             <ErrorMessage name="reNewPass" />
           </span>
-          <label htmlFor="reNewPass" className="text-xs col-span-2">
+          <label
+            htmlFor="reNewPass"
+            className="text-xs col-span-2 text-gray-primary">
             Re password
           </label>
           <div className="flex relative col-span-4 h-[34px] rounded">

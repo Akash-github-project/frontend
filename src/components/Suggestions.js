@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react"
-import InputSec from "./InputSec"
 import Wrapper from "./wrapper"
 import Button from "./button"
+import { NumberInput } from "./numberInput"
 import { Input } from "./input"
 
 const Suggestions = () => {
@@ -113,7 +113,11 @@ const Suggestions = () => {
               <span className="text-gray-primary req  text-sm leading-[14px]">
                 Mobile
               </span>
-              <Input holder="Mobile Number" override={{ maxWidth: "100%" }} />
+              <NumberInput
+                holder="Mobile Number"
+                fieldClasses="border border-pink-primary focus-within:border-blue-500 focus-within:border-2"
+                override={{ maxWidth: "100%" }}
+              />
             </div>
 
             <div className="flex flex-col gap-2">

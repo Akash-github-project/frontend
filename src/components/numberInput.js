@@ -15,11 +15,13 @@ export const NumberInput = ({
   numbersOnly = true,
   onleft = " ",
   color = "gray",
-  dis = true,
+  dis = false,
 }) => {
   let defaultClasses =
-    "border rounded-md text-black focus:text-red-400 border-0 w-full outline-none text-[16px] leading-[21px] "
-  let defaultField = "flex border rounded items-center p-1 "
+    "border rounded-md text-black focus:text-red-400 border-0 w-full outline-none text-[16px] leading-[21px] disabled:bg-gray-200"
+  let defaultField = `flex border rounded items-center p-1 ${
+    dis ? "bg-gray-200 " : ""
+  }`
 
   if (extraClasses !== " ") {
     defaultClasses += extraClasses
@@ -54,7 +56,7 @@ export const NumberInput = ({
   return (
     <div className={defaultField} tabIndex={0}>
       <span
-        className={`text-${color}-primary mr-1 inline-block w-[max-content] text-md text-bold leading-[21px] roboto`}>
+        className={`text-${color}-primary mr-1 inline-block w-[max-content] text-md text-bold leading-[21px] roboto `}>
         {onleft}
       </span>
       <input

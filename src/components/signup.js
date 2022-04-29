@@ -79,19 +79,24 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
 
   const askOtp = (type) => {
     console.log("called askOtp")
-    let generatedOtpEmail =
-      Math.random() * 6 + Math.random() * 6 * 10 + Math.random() * 6 * 100
-    generatedOtpEmail = Math.floor(generatedOtpEmail)
-    console.log(generatedOtpEmail)
+    let generatedOtpEmail = 0
 
-    let generatedOtpPhone =
-      Math.random() * 6 + Math.random() * 6 * 10 + Math.random() * 6 * 100
-    generatedOtpPhone = Math.floor(generatedOtpPhone)
-    console.log(generatedOtpEmail)
+    let generatedOtpPhone = 0
 
     if (type === "email") {
+      generatedOtpEmail =
+        Math.random() * 6 + Math.random() * 6 * 10 + Math.random() * 6 * 100
+      generatedOtpEmail = Math.floor(generatedOtpEmail)
+      console.dir("otpEmail", generatedOtpEmail)
+      //setting otp email
       setEmailOtp(generatedOtpEmail)
     } else if (type === "mobile") {
+      generatedOtpPhone =
+        Math.random() * 6 + Math.random() * 6 * 10 + Math.random() * 6 * 100
+      generatedOtpPhone = Math.floor(generatedOtpPhone)
+
+      //setting otp mobile
+      console.log("otpMobile", generatedOtpPhone)
       setPhoneOtp(generatedOtpPhone)
     }
   }
@@ -210,6 +215,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
       phoneOtpStatus !== "verified"
     ) {
       if (values.otpPhone == phoneOtp && values.otpPhone !== "") {
+        console.log("ran ")
         setPhoneOtpStatus("verified")
         formikRef.setFieldValue("otpPhone", "")
         phoneTimeReset()
@@ -318,7 +324,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
             Email
           </label>
           <div className="flex col-span-4 rounded">
-            {console.log(formik)}
+            {/* {console.log(formik)} */}
 
             <Field
               name="emailUser"
@@ -327,7 +333,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
                   ? true
                   : false
               }
-              className="w-full border border-pink-primary rounded px-2  disabled:bg-gray-100"
+              className="w-full border border-pink-primary rounded px-2  disabled:bg-gray-100 disabled:text-black"
               type="text"
             />
 

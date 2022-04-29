@@ -1,6 +1,7 @@
 import React, { useEffect } from "react"
 import Button from "./button"
 import { Input } from "./input"
+import { NumberInput } from "./numberInput"
 import useOtp from "./customHooks/useOtp"
 
 const OtpInput = ({
@@ -20,9 +21,8 @@ const OtpInput = ({
   }, [state.status])
 
   //   onblur function for validation
-  const setBlur = (e) => {
-    console.log(e)
-    let x = e.target.value
+  const setBlur = (value) => {
+    var x = value
     dispatcher({ type: "validate", payload: (x) => fun(x) })
   }
 
@@ -30,8 +30,11 @@ const OtpInput = ({
     <div className="flex flex-col">
       <div className="flex gap-1 flex-1">
         <span className="p-1">{defLabel}</span>
-        <Input
+        <NumberInput
+          numbersOnly={true}
+          maxlen={10}
           iType={type}
+          fieldClasses="border border-pink-primary focus-within:border-blue-500 focus-within:border-2"
           dis={state.status !== "unsent"}
           val={val}
           change={(value) => change(value)}
@@ -64,11 +67,14 @@ const OtpInput = ({
       {state.status === "unsent" || state.status === "verified" ? null : (
         <div className=" flex gap-3 m-1">
           <span className="">Otp</span>
-          <Input
+          <NumberInput
             iType="text"
+            maxlen={4}
+            numbersOnly={true}
             change={(value) => dispatcher({ type: "edit", payload: value })}
             extraClasses="w-28"
             blurFunction={setBlur}
+            blur={(value) => setBlur(value)}
             val={state.value}
           />
 
