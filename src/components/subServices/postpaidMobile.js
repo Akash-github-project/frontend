@@ -1,5 +1,7 @@
 import React, { useState, useRef } from "react"
 import ConfirmDetails from "./confirmDetails"
+import LoginModal from "../userpages/loginModal"
+import LoginWrapper from "../LoginWrapper"
 import { renderProvider } from "../../otherData/inputWithImage"
 import SelectSearch, { fuzzySearch } from "react-select-search"
 import { useFormik } from "formik"
@@ -8,6 +10,7 @@ import WithTextInput from "../withTextInput"
 import Checkbox from "react-custom-checkbox"
 import { NumberInput } from "../numberInput"
 import circle from "../../otherData/circle.json"
+import { useSelector } from "react-redux"
 import { getRenderFormValue } from "./renderFormValue"
 import operator from "../../otherData/postpaidOperator.json"
 import { isValidMobileNo } from "../usefullFunctions"
@@ -33,7 +36,7 @@ const PostpaidMobile = () => {
     operator: "",
   })
 
-  const [phoneNo, setPhoneNo] = useState("")
+  const [valid, setValid] = useState(false)
   const [outputOperator, setOperator] = useState(operatorList)
   const [outputCircle, setCircle] = useState(circleList)
   const [openCoupon, setCouponState] = useState(false)
@@ -44,6 +47,8 @@ const PostpaidMobile = () => {
   const ref = useRef({ circle: "", phoneNo: "", operator: "" })
   let circleRender = getRenderFormValue("circle")
   let operatorRender = getRenderFormValue("operator")
+  const [openModal, setOpenModal] = useState(false)
+  const userLogged = useSelector((state) => state.login.isUserLogged)
 
   const setCls = () => {
     let x = " "
@@ -78,6 +83,11 @@ const PostpaidMobile = () => {
   }
 
   function handleSubmit(value) {
+    if (userLogged) {
+      setValid(true)
+    } else {
+      setOpenModal(true)
+    }
     console.log(value)
   }
 
@@ -121,11 +131,10 @@ const PostpaidMobile = () => {
       formik.setFieldValue("circle", "", false)
       formik.setFieldValue("operator", "", false)
       formik.setFieldValue("amount", "", false)
-
-      if (isValidMobileNo(values.phoneNo) == "none") {
-      } else {
-        errors.phoneNo = "Invalid Mobile No"
-      }
+      formik.setFieldError("circle", "")
+      formik.setFieldError("operator", "")
+      formik.setFieldError("amount", "")
+      return {...errors}
     }
     console.log(validationRef.operator !== values.operator)
 
@@ -262,6 +271,9 @@ const PostpaidMobile = () => {
         </button>
       </form>
 
+      <LoginModal closeModal={() => setOpenModal(false)} open={openModal}>
+        <LoginWrapper />
+      </LoginModal>
       {/* bill display section */}
 
       <div className="grid items-center justify-center">

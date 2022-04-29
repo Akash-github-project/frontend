@@ -1,19 +1,26 @@
 import ConfirmDetails from "./confirmDetails"
 import Button from "../button"
+import LoginWrapper from "../LoginWrapper"
+import LoginModal from "../userpages/loginModal"
+import { useSelector } from "react-redux"
 import { Input } from "../input"
 import Checkbox from "react-custom-checkbox"
 import React, { useState } from "react"
 import WithTextInput from "../withTextInput"
 import Wrapper from "../wrapper"
+import { useFormik } from "formik"
 //to change
 import giftCardConfirm from "./specialJsons/giftCardConfirm.json"
 import "../../css/grids.css"
+import { NumberInput } from "../numberInput"
 
 const GiftCard = () => {
   const [openCoupon, setCouponState] = useState(false)
   const [couponState, toggleCouponState] = useState(true)
   const [giftCardProvider, setGiftCardProvider] = useState("googlePay")
-
+  const userLogged = useSelector((state) => state.login.isUserLogged)
+  const [valid, setValid] = useState(false)
+  const [openModal, setOpenModal] = useState(false)
   const [otp, setOtp] = useState(false)
   const [promo, setPromo] = useState(" ")
   const [have, setHave] = useState(false)
@@ -22,6 +29,42 @@ const GiftCard = () => {
     let x = " "
     setPromo(x)
     setOtp(false)
+  }
+
+  const handleSubmit = (values) => {
+    if (userLogged) {
+      setValid(true)
+    } else {
+      setOpenModal(true)
+    }
+    console.log(values)
+  }
+
+  const validate = (values) => {
+    const errors = {}
+    if (values.provider === "none") {
+      errors.provider = "Select a Giftcard Provider"
+    }
+    if (values.amount === "") {
+      errors.amount = "please enter a amount"
+    }
+    console.log(errors)
+    return { ...errors }
+  }
+
+  const formik = useFormik({
+    initialValues: {
+      amount: "",
+      provider: "none",
+    },
+    validate,
+    onSubmit: (value) => handleSubmit(value),
+  })
+
+  const setTouched = () => {
+    formik.setFieldTouched("amount", true)
+    formik.setFieldTouched("provider", true, true)
+    formik.validateForm()
   }
   const handleApplyCoupon = () => {
     toggleCouponState(!couponState)
@@ -36,7 +79,9 @@ const GiftCard = () => {
     <Wrapper>
       <div className="w-full">
         <div className="w-full grid grid-cols-1 lg:grid-cols-4 gap-6 justify-center">
-          <div className="col-span-1 md:col-span-4 ">
+          <form
+            className="col-span-1 md:col-span-4 "
+            onSubmit={formik.handleSubmit}>
             <div className="grid grid-cols-1 gap-4 w-full mx-auto justify-center">
               {/* <div className="w-full col-span-full font-medium leading-[19px]"> */}
 
@@ -47,41 +92,66 @@ const GiftCard = () => {
               </div>
               {/* select giftcard service type*/}
               <div className="col-span-full grid input-width-grid3 lg:justify-center gap-4 ">
-                <select
-                  name=""
-                  id=""
-                  placeholder="Gas Cylinder/Gas Pipes"
-                  onChange={handleServiceChange}
-                  className="lg:w-full h-[36px] border border-pink-600 rounded text-gray-primary bg-white lg:max-w-[335px]">
-                  <option value="none" className="text-inherit">
-                    Select A Gift Card Provider
-                  </option>
-                  <option value="googlePay" className="text-inherit">
-                    Google Pay
-                  </option>
-                  <option value="amazonPay" className="text-inherit">
-                    Amazon Pay
-                  </option>
-                </select>
+                <div className="flex flex-col">
+                  <select
+                    required={true}
+                    name="provider"
+                    id="provider"
+                    value={formik.values.provider}
+                    placeholder="Gas Cylinder/Gas Pipes"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    className="lg:w-full h-[36px] border border-pink-600 rounded text-gray-primary bg-white lg:max-w-[335px]">
+                    <option value="none" className="text-inherit">
+                      Select A Gift Card Provider
+                    </option>
+                    <option value="googlePay" className="text-inherit">
+                      Google Pay
+                    </option>
+                    <option value="amazonPay" className="text-inherit">
+                      Amazon Pay
+                    </option>
+                  </select>
+                  <span className="h-3 text-red-600 text-xs">
+                    {formik.errors.provider && formik.touched.provider
+                      ? formik.errors.provider
+                      : null}
+                  </span>
+                </div>
                 {/*  select gift card service type ends*/}
 
-                <div className="flex w-full h-[36px]">
-                  <Input
+                <div className="flex w-full flex-col ">
+                  <NumberInput
+                    numbersOnly={true}
+                    Id="amount"
+                    fieldClasses="border border-pink-primary focus-within:border-2 focus-within:border-blue-500"
+                    name="amount"
+                    blur={() => formik.setFieldTouched("amount")}
+                    change={(value) => formik.setFieldValue("amount", value)}
                     iType="tel"
                     holder="Amount"
                     extraClasses="text-gray-primary"
                     override={{ maxWidth: "100%", flex: 1 }}
                   />
+                  <span className="h-3 text-red-600 text-xs">
+                    {formik.errors.amount && formik.touched.amount
+                      ? formik.errors.amount
+                      : null}
+                  </span>
                 </div>
-                <Button text="Continue to Recharge" />
-                {/* <button
-                  className="lg:p-1 h-[36px] w-full bg-pink-primary active:bg-pink-800 text-white rounded text-[15px] lg:text-[15px] leading-[15px] font-medium text-sm"
-                  placeholder="Amount">
-                  
-                </button> */}
+                <Button
+                  text="Continue to Recharge"
+                  type="submit"
+                  onClick={() => setTouched()}
+                />
               </div>
+              <LoginModal
+                closeModal={() => setOpenModal(false)}
+                open={openModal}>
+                <LoginWrapper />
+              </LoginModal>
             </div>
-          </div>
+          </form>
         </div>
 
         <div>
