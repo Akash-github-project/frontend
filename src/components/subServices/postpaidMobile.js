@@ -193,7 +193,7 @@ const PostpaidMobile = () => {
             id="phoneNo"
             holder="Mobile Number"
             // change={value => dispatch(storePhoneNo(value))}
-            extraClasses=" text-sm focus:text-gray-primary"
+            extraClasses=" text-sm focus:text-gray-primary text-base"
             fieldClasses="border-pink-600 focus:outline-none focus-within:border-blue-400 flex-1 h-[36px] "
           />
           <span className="h-3 text-red-600 text-xs">
@@ -345,7 +345,7 @@ const PostpaidMobile = () => {
             <Button
               text="Pay Rs 1000 "
               exClasses="w-full"
-              fClasses="text-[15px]"
+              fClasses="text-[13px]"
             />
           </div>
           {/* pay ammount button section end*/}

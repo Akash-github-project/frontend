@@ -159,6 +159,8 @@
 
 .select-search:not(.is-disabled) .select-search__input {
   cursor: pointer;
+  font-size: 16px;
+  line-height: 21px;
 }
 
 /**

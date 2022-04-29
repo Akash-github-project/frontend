@@ -365,40 +365,6 @@ const PrepaidMobile = ({ open }) => {
       setOpenModal(true)
     }
   }
-  // apply coupon work required
-
-  // function replaceFields(json, heading, replaceWith) {
-  //   let cardData = { ...json }
-  //   let targetArray = cardData.dataColumns
-
-  //   let toReplaceWith = 0
-
-  //   let returnArray = targetArray.map((each) => {
-  //     console.log("next row")
-  //     if (
-  //       each[`${replaceWith[toReplaceWith].with}`] ==
-  //       replaceWith[toReplaceWith].having
-  //     ) {
-  //       each[`value`] = replaceWith[toReplaceWith].value
-  //     }
-  //     toReplaceWith++
-  //     return each
-  //   })
-
-  //   let returnObj = {
-  //     heading,
-  //     dataColumns: [...returnArray],
-  //   }
-  //   console.log(returnObj)
-  //   return { ...returnObj }
-  // }
-
-  // // currenntly working here
-  // const formatJson = (json, dataList, times, changeList) => {
-  //   let baseArr = [...changeList]
-  //   let newData = replaceFields(dataPlan, "test heading", baseArr)
-  //   return { ...newData }
-  // }
 
   return (
     <>

@@ -33,27 +33,58 @@ const UserMenu = ({ showInSmall = false }) => {
           open === true ? "block" : "hidden"
         }`}>
         <MenuBtn value="Hi User" click={closeMenu} link="#" />
-        <MenuBtn value="My Profile" click={closeMenu} link="/profile" />
-        <MenuBtn value="My wallet" click={closeMenu} link="/addBalance" />
-        <MenuBtn value="Offers" click={closeMenu} link="/offers" />
-        <MenuBtn value="Refer &amp; Earn" click={closeMenu} link="/offers" />
+        <MenuBtn
+          value="My Profile"
+          click={closeMenu}
+          link="/profile"
+          cls="text-left"
+        />
+        <MenuBtn
+          value="My wallet"
+          click={closeMenu}
+          link="/addBalance"
+          cls="text-left"
+        />
+        <MenuBtn
+          value="Offers"
+          click={closeMenu}
+          link="/offers"
+          cls="text-left"
+        />
+        <MenuBtn
+          value="Refer &amp; Earn"
+          click={closeMenu}
+          link="/offers"
+          cls="text-left"
+        />
         <MenuBtn
           value="Write Issue/Complain"
           click={closeMenu}
           link="/suggestions"
+          cls="text-left"
         />
-        <MenuBtn value="Confirm Page" click={closeMenu} link="/confirm" />
-        <MenuBtn value="Logout" click={closeMenu} link="/feedback" />
+        <MenuBtn
+          value="Confirm Page"
+          click={closeMenu}
+          link="/confirm"
+          cls="text-left"
+        />
+        <MenuBtn
+          value="Logout"
+          click={closeMenu}
+          link="/feedback"
+          cls="text-left"
+        />
       </div>
     </div>
   )
 }
 
-const MenuBtn = ({ value, click, link }) => {
+const MenuBtn = ({ value, click, link, cls }) => {
   return (
     <Link to={link} className="w-full m-0 ">
       <button
-        className="w-full p-1 text-sm bg-white text-pink-primary hover:text-white border border-gray-separator hover:bg-pink-primary rounded active:bg-pink-primary active:text-white"
+        className={`w-full p-1 text-sm bg-white text-pink-primary hover:text-white border border-gray-separator hover:bg-pink-primary rounded active:bg-pink-primary active:text-white  ${cls}`}
         onClick={() => click()}>
         {value}
       </button>

@@ -11,7 +11,9 @@ const Tab = ({ children }) => {
   const { isActive, onClick } = useTabState()
 
   return (
-    <button className={cn("tab", isActive && "active")} onClick={onClick}>
+    <button
+      className={cn("tab text-left", isActive && "active")}
+      onClick={onClick}>
       {children}
     </button>
   )

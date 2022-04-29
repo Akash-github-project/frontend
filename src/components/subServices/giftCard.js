@@ -52,7 +52,7 @@ const GiftCard = () => {
                   id=""
                   placeholder="Gas Cylinder/Gas Pipes"
                   onChange={handleServiceChange}
-                  className="lg:w-full text-[13px] h-[36px] border border-pink-600 rounded text-gray-primary bg-white lg:max-w-[335px]">
+                  className="lg:w-full h-[36px] border border-pink-600 rounded text-gray-primary bg-white lg:max-w-[335px]">
                   <option value="none" className="text-inherit">
                     Select A Gift Card Provider
                   </option>
@@ -73,11 +73,12 @@ const GiftCard = () => {
                     override={{ maxWidth: "100%", flex: 1 }}
                   />
                 </div>
-                <button
+                <Button text="Continue to Recharge" />
+                {/* <button
                   className="lg:p-1 h-[36px] w-full bg-pink-primary active:bg-pink-800 text-white rounded text-[15px] lg:text-[15px] leading-[15px] font-medium text-sm"
                   placeholder="Amount">
-                  Continue to Recharge
-                </button>
+                  
+                </button> */}
               </div>
             </div>
           </div>
@@ -171,7 +172,7 @@ const GiftCard = () => {
                 <Button
                   text="Pay Rs 1000 "
                   exClasses="w-full "
-                  fClasses="text-[15px] leading-[15px]"
+                  fClasses="text-[13px] leading-[13px]"
                 />
               </div>
               {/* pay ammount button section end*/}

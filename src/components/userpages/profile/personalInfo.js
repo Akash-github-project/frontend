@@ -33,10 +33,13 @@ const PersonalInfo = () => {
               closeModal={() => setModalState(false)}
               open={modalState}>
               <div className="w-full h-full flex flex-col">
-                <span>Existing Mobile No</span>
-                <Input override={{ maxWidth: "100%" }} />
-                <span className="inline-block h-3"></span>
-                <span className="mt-2">New Mobile No</span>
+                <span className="text-gray-primary">Existing Mobile No</span>
+                <Input
+                  override={{ maxWidth: "100%" }}
+                  extraClasses="text-gray-primary"
+                />
+                <span className="inline-block h-3  "></span>
+                <span className="mt-2 text-gray-primary">New Mobile No</span>
                 <div className="flex w-full">
                   <Input override={{ maxWidth: "100%", width: "100%" }} />
                   <Button text="OTP" exClasses="ml-auto" />

@@ -38,7 +38,7 @@ const WithTextInput = ({
         tabIndex={0}>
         <input
           type="tel"
-          className="border-0 w-full  m-0 outline-none p-[11px] rounded text-[13px] leading-[21px] h-[34px] text-gray-primary disabled:bg-gray-200"
+          className="border-0 w-full  m-0 outline-none p-[11px] rounded text-[13px] leading-[21px] h-[34px] text-gray-primary disabled:bg-gray-200 text-base"
           disabled={disable}
           required
           placeholder={placeholder}

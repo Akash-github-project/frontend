@@ -1,9 +1,10 @@
-import React from "react"
+import React, { useRef } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { loginId, password, remember } from "../app/features/LoginSlice"
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import Checkbox from "react-custom-checkbox"
 import { useMediaQuery } from "@mui/material"
+import { NumberInput } from "./numberInput"
 
 export const Login = ({ goto = () => console.log("forgotPass") }) => {
   const screen = useMediaQuery("(min-width:)")
@@ -11,6 +12,7 @@ export const Login = ({ goto = () => console.log("forgotPass") }) => {
     showPassword: false,
   })
 
+  const ref = useRef("")
   let initialFormValues = {
     username: "",
     passwd: "",
@@ -68,6 +70,7 @@ export const Login = ({ goto = () => console.log("forgotPass") }) => {
       <Formik
         initialValues={{ ...initialFormValues }}
         validate={validateForm}
+        innerRef={ref}
         onSubmit={(values, { setSubmitting }) => {
           setSubmitting(false)
           console.log(values)

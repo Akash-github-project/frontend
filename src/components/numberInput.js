@@ -15,6 +15,7 @@ export const NumberInput = ({
   numbersOnly = true,
   onleft = " ",
   color = "gray",
+  dis = true,
 }) => {
   let defaultClasses =
     "border rounded-md text-black focus:text-red-400 border-0 w-full outline-none text-[16px] leading-[21px] "
@@ -57,6 +58,7 @@ export const NumberInput = ({
         {onleft}
       </span>
       <input
+        disabled={dis}
         type={iType}
         name={name}
         id={Id}

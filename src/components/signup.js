@@ -3,6 +3,7 @@ import Checkbox from "react-custom-checkbox"
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import { Link } from "react-router-dom"
 import { useTimer } from "use-timer"
+import { NumberInput } from "./numberInput"
 
 export const SignUp = ({ goto = () => console.log("login") }) => {
   const [values, setValues] = useState({
@@ -283,268 +284,292 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
         }
       }}
       innerRef={formRef}>
-      <Form className="grid grid-cols-6 gap-2 items-center p-0 md:p-3 lg:p-4">
-        <span className="col-span-full text-base text-center text-gray-600">
-          Looks like you're new here!
-        </span>
-
-        <span className="col-span-full text-xs text-center h-3">
-          <ErrorMessage name="NameUser" />
-        </span>
-        <label
-          htmlFor="NameUser"
-          className="text-xs min-w-max col-span-2 text-gray-primary">
-          Name
-        </label>
-        <div className="flex relative col-span-4 h-[34px] rounded">
-          <Field
-            name="NameUser"
-            className="flex-1 border border-pink-primary h-full rounded px-2 w-full"
-            type="text"
-          />
-        </div>
-
-        <span className="col-span-full text-xs text-center h-3">
-          <ErrorMessage name="emailUser" />
-        </span>
-
-        <label
-          htmlFor="emailUser"
-          className="text-xs col-span-2 text-gray-primary ">
-          Email
-        </label>
-        <div className="flex col-span-4 rounded">
-          <Field
-            name="emailUser"
-            disabled={
-              emailOtpStatus === "verified" || emailOtpStatus === "sent"
-                ? true
-                : false
-            }
-            className="w-full border border-pink-primary rounded px-2  disabled:bg-gray-100"
-            type="text"
-          />
-
-          <button
-            className="h-[34px] px-1 bg-pink-primary text-white disabled:bg-gray-600 rounded text-[13px]"
-            disabled={emailOtpStatus === "sent" ? true : false}
-            onClick={
-              emailOtpStatus === "verified"
-                ? () => setEmailOtpStatus("unsent")
-                : () => sendOtpEmail()
-            }
-            type="button">
-            {emailOtpStatus === "verified" ? (
-              <i className="fa-regular fa-pen-to-square text-white w-5 "></i>
-            ) : (
-              "OTP"
-            )}
-          </button>
-        </div>
-
-        {emailOtpStatus === "verified" || emailOtpStatus === "unsent" ? null : (
-          <>
-            <span className="col-span-full text-center text-xs h-3">
-              <ErrorMessage name="otpEmail" />
-            </span>
-            <div className="col-span-full flex h-[34px]">
-              <label
-                htmlFor="otpEmail"
-                className="text-xs w-1/3 text-gray-primary">
-                Otp
-              </label>
-              <Field
-                name="otpEmail"
-                className="border border-pink-primary rounded h-full w-1/4 px-2 "
-                type="tel"
-              />
-              <>
-                {emailOtpStatus === "sent" ? (
-                  emailTime !== 0 ? (
-                    <span className="mx-auto leading-[34px] ">
-                      {`${Math.floor(emailTime / 60)}:${emailTime % 60}`}
-                    </span>
-                  ) : (
-                    <button
-                      className="hover:bg-pink-primary hover:text-white border border-pink-primary rounded text-xs px-1 mx-1"
-                      onClick={resendEmailOtp}>
-                      Resend Otp
-                    </button>
-                  )
-                ) : null}
-              </>
-            </div>
-          </>
-        )}
-
-        {/* phone user section starts */}
-        <span className="col-span-full text-xs text-center h-3">
-          <ErrorMessage name="mobileUser" />
-        </span>
-
-        <label
-          htmlFor="mobileUser"
-          className="text-xs  col-span-2 text-gray-primary">
-          Mobile
-        </label>
-        <div className="flex col-span-4 rounded">
-          <Field
-            name="mobileUser"
-            disabled={
-              phoneOtpStatus === "verified" || phoneOtpStatus === "sent"
-                ? true
-                : false
-            }
-            className="w-full border border-pink-primary rounded px-2 disabled:bg-gray-100"
-            type="tel"
-          />
-
-          <button
-            className="h-[34px] px-1 bg-pink-primary text-white  rounded text-[13px]"
-            disabled={phoneOtpStatus === "sent" ? true : false}
-            onClick={
-              phoneOtpStatus === "verified"
-                ? () => setPhoneOtpStatus("unsent")
-                : () => sendOtpPhone()
-            }
-            type="button">
-            {phoneOtpStatus === "verified" ? (
-              <i className="fa-regular fa-pen-to-square text-white w-5 "></i>
-            ) : (
-              "OTP"
-            )}
-          </button>
-        </div>
-        {phoneOtpStatus === "verified" || phoneOtpStatus === "unsent" ? null : (
-          <>
-            <span className="col-span-full text-center text-xs h-3">
-              <ErrorMessage name="otpPhone" />
-            </span>
-            <div className="col-span-full flex h-[34px]">
-              <label
-                htmlFor="otpPhone"
-                className="text-xs w-1/3 text-gray-primary">
-                Otp
-              </label>
-              <Field
-                name="otpPhone"
-                className="border border-pink-primary rounded h-full w-1/4 px-2"
-                type="tel"
-              />
-              <>
-                {phoneOtpStatus === "sent" ? (
-                  phoneTime !== 0 ? (
-                    <span className="mx-auto leading-[34px] ">
-                      {`${Math.floor(phoneTime / 60)}:${phoneTime % 60}`}
-                    </span>
-                  ) : (
-                    <button
-                      className="hover:bg-pink-primary hover:text-white border border-pink-primary rounded text-xs px-1 mx-1"
-                      onClick={resendPhoneOtp}>
-                      Resend Otp
-                    </button>
-                  )
-                ) : null}
-              </>
-            </div>
-          </>
-        )}
-        {/* phone user section ends */}
-
-        <span className="col-span-full text-xs text-center h-3">
-          <ErrorMessage name="signUpPass1" />
-        </span>
-        <label
-          htmlFor="signUpPass1"
-          className="text-xs  col-span-2 text-gray-primary">
-          Password
-        </label>
-        <div className="flex relative col-span-4 h-[34px]">
-          <Field
-            name="signUpPass1"
-            className="flex-1 border border-pink-primary h-full rounded px-2 w-full"
-            type={values.showPassword === true ? "text" : "password"}
-          />
-
-          <button
-            className="w-8 absolute right-0 top-0 bottom-0  flex items-center justify-center rounded"
-            type="button">
-            <i
-              className={`fa-solid  text-sm ${
-                values.showPassword ? "fa-eye" : "fa-eye-slash "
-              } `}
-              onClick={handleClickShowPassword}></i>
-          </button>
-        </div>
-
-        <span className="col-span-full text-xs text-center h-3">
-          <ErrorMessage name="signUpPass2" />
-        </span>
-        <label
-          htmlFor="signUpPass2"
-          className="text-xs min-w-max col-span-2 text-gray-primary">
-          Re password
-        </label>
-        <div className="flex relative col-span-4 h-[34px] rounded">
-          <Field
-            name="signUpPass2"
-            className="flex-1 border border-pink-primary h-full rounded px-2 w-full"
-            type={values.showPassword2 === true ? "text" : "password"}
-          />
-          <button
-            className="w-8 absolute right-0 top-0 bottom-0  flex items-center justify-center rounded"
-            type="button">
-            <i
-              className={`fa-solid text-sm ${
-                values.showPassword2 ? "fa-eye" : "fa-eye-slash "
-              } `}
-              onClick={handleClickShowPassword2}></i>
-          </button>
-        </div>
-
-        <div className="flex flex-col col-span-full text-center py-2 ">
-          <span className="col-span-full text-xs text-center h-3">
-            {checkboxError === "none" ? null : checkboxError}
+      {(formik) => (
+        <Form className="grid grid-cols-6 gap-2 items-center p-0 md:p-3 lg:p-4">
+          <span className="col-span-full text-base text-center text-gray-600">
+            Looks like you're new here!
           </span>
-          <div className="mx-auto flex">
-            <Checkbox
-              borderColor="#f5317c"
-              icon={<i className="fa-solid fa-square-check text-pink-600"></i>}
-              id="agree"
-              name="agree"
-              // value={formRef.current.agree}
-              checked={checkbox}
-              onChange={() => setCheckboxFunction()}
+
+          <span className="col-span-full text-xs text-center h-3">
+            <ErrorMessage name="NameUser" />
+          </span>
+          <label
+            htmlFor="NameUser"
+            className="text-xs min-w-max col-span-2 text-gray-primary">
+            Name
+          </label>
+          <div className="flex relative col-span-4 h-[34px] rounded">
+            <Field
+              name="NameUser"
+              className="flex-1 border border-pink-primary h-full rounded px-2 w-full"
+              type="text"
             />
-            <p className="text-gray-primary text-sm">
-              &nbsp; I agree to the &nbsp;
-              <Link to="/terms" className="text-pink-primary">
-                Terms
-              </Link>
-              &nbsp; and
-              <Link to="/privacypolicy" className="text-pink-primary">
-                &nbsp; Privacy Policy
-              </Link>
+          </div>
+
+          <span className="col-span-full text-xs text-center h-3">
+            <ErrorMessage name="emailUser" />
+          </span>
+
+          <label
+            htmlFor="emailUser"
+            className="text-xs col-span-2 text-gray-primary ">
+            Email
+          </label>
+          <div className="flex col-span-4 rounded">
+            {console.log(formik)}
+
+            <Field
+              name="emailUser"
+              disabled={
+                emailOtpStatus === "verified" || emailOtpStatus === "sent"
+                  ? true
+                  : false
+              }
+              className="w-full border border-pink-primary rounded px-2  disabled:bg-gray-100"
+              type="text"
+            />
+
+            <button
+              className="h-[34px] px-1 bg-pink-primary text-white disabled:bg-gray-600 rounded text-[13px]"
+              disabled={emailOtpStatus === "sent" ? true : false}
+              onClick={
+                emailOtpStatus === "verified"
+                  ? () => setEmailOtpStatus("unsent")
+                  : () => sendOtpEmail()
+              }
+              type="button">
+              {emailOtpStatus === "verified" ? (
+                <i className="fa-regular fa-pen-to-square text-white w-5 "></i>
+              ) : (
+                "OTP"
+              )}
+            </button>
+          </div>
+
+          {emailOtpStatus === "verified" ||
+          emailOtpStatus === "unsent" ? null : (
+            <>
+              <span className="col-span-full text-center text-xs h-3">
+                <ErrorMessage name="otpEmail" />
+              </span>
+              <div className="col-span-full flex h-[34px]">
+                <label
+                  htmlFor="otpEmail"
+                  className="text-xs w-1/3 text-gray-primary">
+                  Otp
+                </label>
+                <Field
+                  name="otpEmail"
+                  className="border border-pink-primary rounded h-full w-1/4 px-2 "
+                  type="tel"
+                />
+                <>
+                  {emailOtpStatus === "sent" ? (
+                    emailTime !== 0 ? (
+                      <span className="mx-auto leading-[34px] ">
+                        {`${Math.floor(emailTime / 60)}:${emailTime % 60}`}
+                      </span>
+                    ) : (
+                      <button
+                        className="hover:bg-pink-primary hover:text-white border border-pink-primary rounded text-xs px-1 mx-1"
+                        onClick={resendEmailOtp}>
+                        Resend Otp
+                      </button>
+                    )
+                  ) : null}
+                </>
+              </div>
+            </>
+          )}
+
+          {/* phone user section starts */}
+          <span className="col-span-full text-xs text-center h-3">
+            <ErrorMessage name="mobileUser" />
+          </span>
+
+          <label
+            htmlFor="mobileUser"
+            className="text-xs  col-span-2 text-gray-primary">
+            Mobile
+          </label>
+          <div className="flex col-span-4 rounded">
+            {/* <Field
+              name="mobileUser"
+              disabled={
+                phoneOtpStatus === "verified" || phoneOtpStatus === "sent"
+                  ? true
+                  : false
+              }
+              className="w-full border border-pink-primary rounded px-2 disabled:bg-gray-100"
+              type="tel"
+            /> */}
+            <NumberInput
+              name="emailUser"
+              val={formik.values.mobileUser}
+              dis={
+                phoneOtpStatus === "verified" || phoneOtpStatus === "sent"
+                  ? true
+                  : false
+              }
+              Id="mobileUser"
+              numbersOnly={true}
+              maxlen={10}
+              blur={() => formik.setFieldTouched("mobileUser")}
+              fieldClasses="border border-pink-primary"
+              change={(value) =>
+                formik.setFieldValue("mobileUser", value, true)
+              }
+            />
+            <button
+              className="h-[34px] px-1 bg-pink-primary text-white  rounded text-[13px]"
+              disabled={phoneOtpStatus === "sent" ? true : false}
+              onClick={
+                phoneOtpStatus === "verified"
+                  ? () => setPhoneOtpStatus("unsent")
+                  : () => sendOtpPhone()
+              }
+              type="button">
+              {phoneOtpStatus === "verified" ? (
+                <i className="fa-regular fa-pen-to-square text-white w-5 "></i>
+              ) : (
+                "OTP"
+              )}
+            </button>
+          </div>
+          {phoneOtpStatus === "verified" ||
+          phoneOtpStatus === "unsent" ? null : (
+            <>
+              <span className="col-span-full text-center text-xs h-3">
+                <ErrorMessage name="otpPhone" />
+              </span>
+              <div className="col-span-full flex h-[34px]">
+                <label
+                  htmlFor="otpPhone"
+                  className="text-xs w-1/3 text-gray-primary">
+                  Otp
+                </label>
+                <Field
+                  name="otpPhone"
+                  className="border border-pink-primary rounded h-full w-1/4 px-2"
+                  type="tel"
+                />
+                <>
+                  {phoneOtpStatus === "sent" ? (
+                    phoneTime !== 0 ? (
+                      <span className="mx-auto leading-[34px] ">
+                        {`${Math.floor(phoneTime / 60)}:${phoneTime % 60}`}
+                      </span>
+                    ) : (
+                      <button
+                        className="hover:bg-pink-primary hover:text-white border border-pink-primary rounded text-xs px-1 mx-1"
+                        onClick={resendPhoneOtp}>
+                        Resend Otp
+                      </button>
+                    )
+                  ) : null}
+                </>
+              </div>
+            </>
+          )}
+          {/* phone user section ends */}
+
+          <span className="col-span-full text-xs text-center h-3">
+            <ErrorMessage name="signUpPass1" />
+          </span>
+          <label
+            htmlFor="signUpPass1"
+            className="text-xs  col-span-2 text-gray-primary">
+            Password
+          </label>
+          <div className="flex relative col-span-4 h-[34px]">
+            <Field
+              name="signUpPass1"
+              className="flex-1 border border-pink-primary h-full rounded px-2 w-full"
+              type={values.showPassword === true ? "text" : "password"}
+            />
+
+            <button
+              className="w-8 absolute right-0 top-0 bottom-0  flex items-center justify-center rounded"
+              type="button">
+              <i
+                className={`fa-solid  text-sm ${
+                  values.showPassword ? "fa-eye" : "fa-eye-slash "
+                } `}
+                onClick={handleClickShowPassword}></i>
+            </button>
+          </div>
+
+          <span className="col-span-full text-xs text-center h-3">
+            <ErrorMessage name="signUpPass2" />
+          </span>
+          <label
+            htmlFor="signUpPass2"
+            className="text-xs min-w-max col-span-2 text-gray-primary">
+            Re password
+          </label>
+          <div className="flex relative col-span-4 h-[34px] rounded">
+            <Field
+              name="signUpPass2"
+              className="flex-1 border border-pink-primary h-full rounded px-2 w-full"
+              type={values.showPassword2 === true ? "text" : "password"}
+            />
+            <button
+              className="w-8 absolute right-0 top-0 bottom-0  flex items-center justify-center rounded"
+              type="button">
+              <i
+                className={`fa-solid text-sm ${
+                  values.showPassword2 ? "fa-eye" : "fa-eye-slash "
+                } `}
+                onClick={handleClickShowPassword2}></i>
+            </button>
+          </div>
+
+          <div className="flex flex-col col-span-full text-center py-2 ">
+            <span className="col-span-full text-xs text-center h-3">
+              {checkboxError === "none" ? null : checkboxError}
+            </span>
+            <div className="mx-auto flex">
+              <Checkbox
+                borderColor="#f5317c"
+                icon={
+                  <i className="fa-solid fa-square-check text-pink-600"></i>
+                }
+                id="agree"
+                name="agree"
+                // value={formRef.current.agree}
+                checked={checkbox}
+                onChange={() => setCheckboxFunction()}
+              />
+              <p className="text-gray-primary text-sm">
+                &nbsp; I agree to the &nbsp;
+                <Link to="/terms" className="text-pink-primary">
+                  Terms
+                </Link>
+                &nbsp; and
+                <Link to="/privacypolicy" className="text-pink-primary">
+                  &nbsp; Privacy Policy
+                </Link>
+              </p>
+            </div>
+          </div>
+          <button
+            className="h-[34px] px-1 bg-pink-primary text-white col-span-full rounded"
+            type="submit">
+            Submit
+          </button>
+
+          <div className="flex col-span-full text-center py-2 ">
+            <p className="mx-auto text-gray-primary text-center text-sm">
+              Already have an account&nbsp;
+              <span
+                className="text-pink-primary text-center text-sm cursor-pointer"
+                onClick={() => goto("login")}>
+                Log in
+              </span>
             </p>
           </div>
-        </div>
-        <button
-          className="h-[34px] px-1 bg-pink-primary text-white col-span-full rounded"
-          type="submit">
-          Submit
-        </button>
-
-        <div className="flex col-span-full text-center py-2 ">
-          <p className="mx-auto text-gray-primary text-center text-sm">
-            Already have an account&nbsp;
-            <span
-              className="text-pink-primary text-center text-sm cursor-pointer"
-              onClick={() => goto("login")}>
-              Log in
-            </span>
-          </p>
-        </div>
-      </Form>
+        </Form>
+      )}
     </Formik>
   )
 }

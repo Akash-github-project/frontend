@@ -8,6 +8,7 @@ const Button = ({
     console.log("ran")
   },
   dis = false,
+  override = {},
   disM = "",
 }) => {
   if (dis === true) {
@@ -17,7 +18,8 @@ const Button = ({
         disabled={dis}
         onClick={() => click()}>
         <span
-          className={`text-tertiary leading-[13px] text-center text-[13px] w-full ${fClasses}`}>
+          className={`text-tertiary leading-[13px] text-center text-[13px] w-full font-medium ${fClasses}`}
+          style={{ ...override }}>
           {text}
         </span>
       </button>
@@ -28,7 +30,8 @@ const Button = ({
         className={` flex border-box h-9 rounded bg-pink-primary font-normal items-center p-[5px] relative active:bg-pink-800 ${exClasses}`}
         onClick={() => click()}>
         <span
-          className={`text-tertiary leading-[13px] text-center text-[13px] w-full ${fClasses}`}>
+          className={`text-tertiary leading-[13px] text-center text-[13px] w-full font-medium ${fClasses}`}
+          style={{ ...override }}>
           {text}
         </span>
       </button>

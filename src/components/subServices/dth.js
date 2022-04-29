@@ -75,7 +75,7 @@ const Dth = () => {
                 <Input
                   extraClasses="min-h-[36px] rounded-r rounded-l-none"
                   override={{ maxWidth: "100%", flex: 1 }}
-                  holder="Mobile No/ Subscriber No"
+                  holder="Mobile/ Subscriber No"
                 />
                 <span className="text-green-600 text-xs leading-3">
                   {currentMsg}
@@ -93,13 +93,14 @@ const Dth = () => {
                   color="pink"
                 />
               </div>
-              <button
-                className="lg:p-1 h-[36px] w-full bg-pink-primary active:bg-pink-800 text-white rounded text-[15px] lg:text-[15px] leading-[15px] font-medium text-sm"
+              <Button text="Continue to Recharge" />
+
+              {/* <button className="lg:p-1 h-[36px] w-full bg-pink-primary active:bg-pink-800 text-white rounded text-[15px] lg:text-[15px] leading-[15px] font-medium text-sm"
                 placeholder="Ammount"
                 // onClick={handleRechargeRequest}
               >
                 Continue to Recharge
-              </button>
+              </button> */}
             </div>
           </div>
 
@@ -191,7 +192,7 @@ const Dth = () => {
                 <Button
                   text="Pay Rs 1000 "
                   exClasses="w-full "
-                  fClasses="text-[15px] leading-[15px]"
+                  fClasses="text-[13px] leading-[13px]"
                 />
               </div>
               {/* pay ammount button section end*/}

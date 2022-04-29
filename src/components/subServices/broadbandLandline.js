@@ -59,7 +59,7 @@ const BroadbandLandline = () => {
                 name=""
                 id=""
                 onChange={handleServiceChange}
-                className="lg:w-full text-[13px] h-[36px] border border-pink-600 rounded text-gray-primary bg-white">
+                className="lg:w-full h-[36px] border border-pink-600 rounded text-gray-primary bg-white">
                 {["Select A Provider", "broadband", "landline"].map(
                   (optionType) => (
                     <option
@@ -91,14 +91,7 @@ const BroadbandLandline = () => {
                   color="pink"
                 />
               </div>
-
-              <button
-                className="lg:p-1 h-[36px] w-full bg-pink-primary active:bg-pink-800 text-white rounded text-[15px] lg:text-[15px] leading-[15px] font-medium text-sm"
-                placeholder="Amount"
-                // onClick={handleRechargeRequest}
-              >
-                Get Bill Details
-              </button>
+              <Button text="Get Bill Details" />
             </div>
 
             <div className="w-full lg:max-w-[335px]  rounded bg-blue-200 text-xs leading-3 text-blue-800 p-2 mx-auto mt-2 lg:mr-4 lg:ml-auto">
@@ -195,7 +188,7 @@ const BroadbandLandline = () => {
                 <Button
                   text="Pay Rs 1000 "
                   exClasses="w-full "
-                  fClasses="text-[15px] leading-[15px]"
+                  fClasses="text-[13px] leading-[13px]"
                 />
               </div>
               {/* pay ammount button section end*/}
