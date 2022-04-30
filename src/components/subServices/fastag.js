@@ -30,8 +30,8 @@ const Fastag = () => {
     if (!values.vechileNo) {
       errors.vechileNo = "vechile no can't be empty"
     }
-    if (!values.amouont) {
-      errors.amouont = "amount can't be empty"
+    if (!values.amount) {
+      errors.amount = "amount can't be empty"
     }
     console.log(values)
     console.log(errors)
@@ -153,10 +153,10 @@ const Fastag = () => {
                     override={{ maxWidth: "100%", flex: 1 }}
                   />
                   <span className="text-red-600 h-3 text-xs">
-                    {formik.errors.amouont && formik.touched.amouont
-                      ? formik.errors.amouont
+                    {formik.errors.amount && formik.touched.amount
+                      ? formik.errors.amount
                       : null}
-                    {formik.touched.amouont}
+                    {formik.touched.amount}
                   </span>
                 </div>
                 <Button text="Continue to Recharge" />

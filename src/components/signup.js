@@ -402,7 +402,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
           </label>
           <div className="flex col-span-4 rounded">
             <NumberInput
-              name="emailUser"
+              name="mobileUser"
               val={formik.values.mobileUser}
               dis={
                 phoneOtpStatus === "verified" || phoneOtpStatus === "sent"

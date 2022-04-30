@@ -1,17 +1,15 @@
 import React, { useState, useRef } from "react"
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import { useTimer } from "use-timer"
+import { NumberInput } from "./numberInput"
 
 const ForgotPass = ({ goto = () => console.log("hello world") }) => {
   const [values, setValues] = React.useState({
-    text: "",
-    amount: "",
     password: "",
-    weight: "",
-    weightRange: "",
     showPassword: false,
     showPassword2: false,
   })
+
   const [otp, setOtp] = useState("unsent")
   const formRef = useRef("")
   const [otpVal, setOtpVal] = useState(0)
@@ -53,7 +51,7 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
   }
 
   let initialFormValues = {
-    emailOrMobile: "",
+    mobileUser: "",
     newPass: "",
     reNewPass: "",
     otpForgot: "",
@@ -78,13 +76,13 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
   const sendOtp = () => {
     const formikRef = formRef.current
 
-    formikRef.setFieldTouched("emailOrMobile")
-    formikRef.validateField("emailOrMobile")
+    formikRef.setFieldTouched("mobileUser")
+    formikRef.validateField("mobileUser")
 
     if (
-      (formikRef.errors.emailOrMobile === "" ||
-        formikRef.errors.emailOrMobile === undefined) &&
-      formikRef.values.emailOrMobile !== ""
+      (formikRef.errors.mobileUser === "" ||
+        formikRef.errors.mobileUser === undefined) &&
+      formikRef.values.mobileUser !== ""
     ) {
       askOtp()
       setOtp("sent")
@@ -97,27 +95,23 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
     let errors = {}
     let numberAsString
     const formikRef = formRef.current
-    const EMAIL_REGEX =
-      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
-    if (!values.emailOrMobile) {
-      errors.emailOrMobile = "email or mobile can't be empty"
+    if (!values.mobileUser) {
+      errors.mobileUser = " mobile can't be empty"
     } else {
-      if (isNaN(parseInt(values.emailOrMobile)) === false) {
-        numberAsString = Number(values.emailOrMobile).toString()
+      // if (isNaN(parseInt(values.mobileUser)) === false) {
+      numberAsString = Number(values.mobileUser).toString()
 
-        if (
-          numberAsString[0] !== "6" &&
-          numberAsString[0] !== "7" &&
-          numberAsString[0] !== "8" &&
-          numberAsString[0] !== "9"
-        ) {
-          errors.emailOrMobile = "invalid mobile no"
-        } else if (numberAsString.length < 10 || numberAsString.length > 10)
-          errors.emailOrMobile = "invalid mobile no length"
-      } else if (values.emailOrMobile.match(EMAIL_REGEX) === null) {
-        errors.emailOrMobile = "enter a valid email"
-      }
+      if (
+        numberAsString[0] !== "6" &&
+        numberAsString[0] !== "7" &&
+        numberAsString[0] !== "8" &&
+        numberAsString[0] !== "9"
+      ) {
+        errors.mobileUser = "invalid mobile no"
+      } else if (numberAsString.length < 10 || numberAsString.length > 10)
+        errors.mobileUser = "invalid mobile no"
+      // }
     }
 
     if (!values.newPass) {
@@ -168,134 +162,145 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
         onSubmit={(values) => {
           otp !== "verified"
             ? formRef.current.setFieldError(
-                "emailOrMobile",
+                "mobileUser",
                 "Please confirm mobile or email"
               )
-            : formRef.current.setFieldError("emailOrMobile", "")
+            : formRef.current.setFieldError("mobileUser", "")
           console.log(values)
         }}
         innerRef={formRef}>
-        <Form className="grid grid-cols-6 gap-1 p-0 md:p-3 lg:p-4 items-center">
-          <span className="col-span-full text-xs text-center h-3 ">
-            <ErrorMessage name="emailOrMobile" />
-          </span>
-          <label
-            htmlFor="emailOrMobile"
-            className="text-xs col-span-2 text-gray-primary">
-            Mobie No
-          </label>
-          <div className="flex col-span-4 rounded">
-            <Field
-              name="emailOrMobile"
-              disabled={otp === "verified" || otp === "sent" ? true : false}
-              className="w-full border border-pink-primary rounded px-2 disabled:bg-gray-100"
-              type="text"
-            />
+        {(formik) => (
+          <Form className="grid grid-cols-6 gap-1 p-0 md:p-3 lg:p-4 items-center">
+            <span className="col-span-full text-xs text-center h-3 ">
+              <ErrorMessage name="mobileUser" />
+            </span>
+            <label
+              htmlFor="mobileUser"
+              className="text-xs col-span-2 text-gray-primary">
+              Mobie No
+            </label>
+            <div className="flex col-span-4 rounded">
+              <NumberInput
+                name="mobileUser"
+                val={formik.values.mobileUser}
+                dis={otp === "verified" || otp === "sent" ? true : false}
+                Id="mobileUser"
+                numbersOnly={true}
+                maxlen={10}
+                blur={() => formik.setFieldTouched("mobileUser")}
+                fieldClasses="border border-pink-primary"
+                change={(value) =>
+                  formik.setFieldValue("mobileUser", value, true)
+                }
+              />
+
+              <button
+                className="h-[34px] px-1 bg-pink-primary text-white disabled:bg-gray-600 rounded"
+                disabled={otp === "sent" ? true : false}
+                onClick={
+                  otp === "verified" ? () => setOtp("unsent") : () => sendOtp()
+                }
+                type="button">
+                {otp === "verified" ? (
+                  <i className="fa-regular fa-pen-to-square text-white w-5 "></i>
+                ) : (
+                  "OTP"
+                )}
+              </button>
+            </div>
+
+            {otp === "verified" || otp === "unsent" ? null : (
+              <>
+                <span className="col-span-full text-center text-xs h-3">
+                  <ErrorMessage name="otpForgot" />
+                </span>
+                <div className="col-span-full flex h-[34px] items-center">
+                  <label
+                    htmlFor="otpForgot"
+                    className="text-xs w-1/3 text-gray-primary">
+                    OTP
+                  </label>
+                  <Field
+                    name="otpForgot"
+                    className="border border-pink-primary rounded h-full w-1/4"
+                    type="tel"
+                  />
+                  <>
+                    {otp === "sent" ? (
+                      time !== 0 ? (
+                        <span className="mx-auto leading-[34px] ">
+                          {`${Math.floor(time / 60)}:${time % 60}`}
+                        </span>
+                      ) : (
+                        <button
+                          className="hover:bg-pink-primary hover:text-white border border-pink-primary rounded text-xs px-1 mx-1"
+                          onClick={resendOtp}>
+                          Resend Otp
+                        </button>
+                      )
+                    ) : null}
+                  </>
+                </div>
+              </>
+            )}
+            <span className="col-span-full text-xs text-center h-3">
+              <ErrorMessage name="newPass" />
+            </span>
+            <label
+              htmlFor="newPass "
+              className="text-xs col-span-2 text-gray-primary">
+              New Password
+            </label>
+            <div className="flex relative col-span-4 h-[34px]">
+              <Field
+                name="newPass"
+                className="w-full border border-pink-primary h-full rounded px-2"
+                type={values.showPassword === true ? "text" : "password"}
+              />
+
+              <button
+                className="w-8 absolute right-0 top-0 bottom-0  flex items-center justify-center rounded"
+                type="button">
+                <i
+                  className={`fa-solid text-sm ${
+                    values.showPassword ? "fa-eye" : "fa-eye-slash "
+                  } `}
+                  onClick={handleClickShowPassword}></i>
+              </button>
+            </div>
+
+            <span className="col-span-full text-xs text-center h-3">
+              <ErrorMessage name="reNewPass" />
+            </span>
+            <label
+              htmlFor="reNewPass"
+              className="text-xs col-span-2 text-gray-primary">
+              Re password
+            </label>
+            <div className="flex relative col-span-4 h-[34px] rounded">
+              <Field
+                name="reNewPass"
+                className="w-full border border-pink-primary h-full rounded px-2"
+                type={values.showPassword2 === true ? "text" : "password"}
+              />
+              <button
+                className="w-8 absolute right-0 top-0 bottom-0  flex items-center justify-center rounded"
+                type="button">
+                <i
+                  className={`fa-solid text-sm ${
+                    values.showPassword2 ? "fa-eye" : "fa-eye-slash "
+                  } `}
+                  onClick={handleClickShowPassword2}></i>
+              </button>
+            </div>
 
             <button
-              className="h-[34px] px-1 bg-pink-primary text-white disabled:bg-gray-600 rounded"
-              disabled={otp === "sent" ? true : false}
-              onClick={
-                otp === "verified" ? () => setOtp("unsent") : () => sendOtp()
-              }
-              type="button">
-              {otp === "verified" ? (
-                <i className="fa-regular fa-pen-to-square text-white w-5 "></i>
-              ) : (
-                "OTP"
-              )}
+              className="h-[34px] px-1 bg-pink-primary text-white col-span-full rounded"
+              type="submit">
+              Submit
             </button>
-          </div>
-
-          {otp === "verified" || otp === "unsent" ? null : (
-            <>
-              <span className="col-span-full text-center text-xs h-3">
-                <ErrorMessage name="otpForgot" />
-              </span>
-              <div className="col-span-full flex h-[34px]">
-                <label htmlFor="otpForgot" className="text-xs w-1/3">
-                  Otp
-                </label>
-                <Field
-                  name="otpForgot"
-                  className="border border-pink-primary rounded h-full w-1/4"
-                  type="tel"
-                />
-                <>
-                  {otp === "sent" ? (
-                    time !== 0 ? (
-                      <span className="mx-auto leading-[34px] ">
-                        {`${Math.floor(time / 60)}:${time % 60}`}
-                      </span>
-                    ) : (
-                      <button
-                        className="hover:bg-pink-primary hover:text-white border border-pink-primary rounded text-xs px-1 mx-1"
-                        onClick={resendOtp}>
-                        Resend Otp
-                      </button>
-                    )
-                  ) : null}
-                </>
-              </div>
-            </>
-          )}
-          <span className="col-span-full text-xs text-center h-3">
-            <ErrorMessage name="newPass" />
-          </span>
-          <label
-            htmlFor="newPass "
-            className="text-xs col-span-2 text-gray-primary">
-            New Password
-          </label>
-          <div className="flex relative col-span-4 h-[34px]">
-            <Field
-              name="newPass"
-              className="w-full border border-pink-primary h-full rounded px-2"
-              type={values.showPassword === true ? "text" : "password"}
-            />
-
-            <button
-              className="w-8 absolute right-0 top-0 bottom-0  flex items-center justify-center rounded"
-              type="button">
-              <i
-                className={`fa-solid text-sm ${
-                  values.showPassword ? "fa-eye" : "fa-eye-slash "
-                } `}
-                onClick={handleClickShowPassword}></i>
-            </button>
-          </div>
-
-          <span className="col-span-full text-xs text-center h-3">
-            <ErrorMessage name="reNewPass" />
-          </span>
-          <label
-            htmlFor="reNewPass"
-            className="text-xs col-span-2 text-gray-primary">
-            Re password
-          </label>
-          <div className="flex relative col-span-4 h-[34px] rounded">
-            <Field
-              name="reNewPass"
-              className="w-full border border-pink-primary h-full rounded px-2"
-              type={values.showPassword2 === true ? "text" : "password"}
-            />
-            <button
-              className="w-8 absolute right-0 top-0 bottom-0  flex items-center justify-center rounded"
-              type="button">
-              <i
-                className={`fa-solid text-sm ${
-                  values.showPassword2 ? "fa-eye" : "fa-eye-slash "
-                } `}
-                onClick={handleClickShowPassword2}></i>
-            </button>
-          </div>
-
-          <button
-            className="h-[34px] px-1 bg-pink-primary text-white col-span-full rounded"
-            type="submit">
-            Submit
-          </button>
-        </Form>
+          </Form>
+        )}
       </Formik>
       <div className="w-full p-2 flex justify-center items-center">
         <a className="cursor-pointer text-sm" onClick={() => goto("login")}>

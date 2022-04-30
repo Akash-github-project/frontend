@@ -1,23 +1,24 @@
-import React, { useRef, useEffect, useContext } from "react"
-import { ModalContext } from "../App"
-import { useDispatch } from "react-redux"
-import { toggleOverlay, addContent } from "../app/features/overlaySlice"
+import React, { useState } from "react"
+// import { ModalContext } from "../App"
+// import { useDispatch } from "react-redux"
 import Button from "./button"
-
+import LoginModal from "./userpages/loginModal"
+import Danger from "./danger"
 const Offercard = ({ promocode, cashback, title, frequency, details }) => {
-  const dispatch = useDispatch()
-  const mContext = useContext(ModalContext)
-  const detail = useRef()
+  // const mContext = useContext(ModalContext)
+  // const detail = useRef()
+  const [openModal, setOpenModal] = useState(false)
 
   const handleClick = () => {
-    dispatch(addContent(detail.current))
-    dispatch(toggleOverlay())
-    mContext.modalToggle()
+    // dispatch(addContent(detail.current))
+    // dispatch(toggleOverlay())
+    // mContext.modalToggle()
+    setOpenModal(true)
   }
 
-  useEffect(() => {
-    detail.current = details
-  }, [])
+  // useEffect(() => {
+  //   detail.current = details
+  // }, [])
 
   return (
     <div className="offerGrid gap-2 p-4 shadow-lg border border-gray-200 hover:shadow-2xl transition-shadow duration-200">
@@ -43,12 +44,14 @@ const Offercard = ({ promocode, cashback, title, frequency, details }) => {
           {promocode}
         </strong>
       </div>
-      <Button text="View Details" override={{ fontSize: "13px" }} />
-      {/* <button
-        className="bg-pink-primary text-white p-1 rounded capitalize hover:bg-pink-600"
-        onClick={handleClick}>
-        View Details
-      </button> */}
+      <Button
+        text="View Details"
+        override={{ fontSize: "13px" }}
+        click={() => handleClick()}
+      />
+      <LoginModal closeModal={() => setOpenModal(false)} open={openModal}>
+        <Danger content={details} />
+      </LoginModal>
     </div>
   )
 }

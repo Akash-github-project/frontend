@@ -28,7 +28,12 @@ const WithTextInput = ({
         )
       }
     } else {
-      change(e.target.value)
+      if (maxlen <= 0) {
+        change(e.target.value)
+      } else if (maxlen > 0 && len <= maxlen) {
+        console.log(e.target.value)
+        change(e.target.value)
+      }
     }
   }
   return (
