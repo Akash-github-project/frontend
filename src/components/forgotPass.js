@@ -151,7 +151,7 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
   return (
     <>
       <div className="w-full text-center  p-0 md:p-3 md:pb-0 lg:p-4">
-        <h2 className="text-2xl ">Forgot Your Passowrd?</h2>
+        <h2 className="text-2xl ">Forgot Your Password?</h2>
         <p className="text-gray-500 p-0 md:px-2 my-2">
           Enter your Email or Mobile and we’ll help you reset your password
         </p>
@@ -176,8 +176,8 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
             </span>
             <label
               htmlFor="mobileUser"
-              className="text-xs col-span-2 text-gray-primary">
-              Mobie No
+              className="text-sm col-span-2 text-gray-primary">
+              Mobile No
             </label>
             <div className="flex col-span-4 rounded">
               <NumberInput
@@ -188,7 +188,7 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
                 numbersOnly={true}
                 maxlen={10}
                 blur={() => formik.setFieldTouched("mobileUser")}
-                fieldClasses="border border-pink-primary"
+                fieldClasses="border border-pink-primary w-full"
                 change={(value) =>
                   formik.setFieldValue("mobileUser", value, true)
                 }
@@ -217,7 +217,7 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
                 <div className="col-span-full flex h-[34px] items-center">
                   <label
                     htmlFor="otpForgot"
-                    className="text-xs w-1/3 text-gray-primary">
+                    className="text-sm w-1/3 text-gray-primary">
                     OTP
                   </label>
                   <Field
@@ -235,7 +235,7 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
                         <button
                           className="hover:bg-pink-primary hover:text-white border border-pink-primary rounded text-xs px-1 mx-1"
                           onClick={resendOtp}>
-                          Resend Otp
+                          Resend OTP
                         </button>
                       )
                     ) : null}
@@ -248,7 +248,7 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
             </span>
             <label
               htmlFor="newPass "
-              className="text-xs col-span-2 text-gray-primary">
+              className="text-sm col-span-2 text-gray-primary">
               New Password
             </label>
             <div className="flex relative col-span-4 h-[34px]">
@@ -274,8 +274,8 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
             </span>
             <label
               htmlFor="reNewPass"
-              className="text-xs col-span-2 text-gray-primary">
-              Re password
+              className="text-sm col-span-2 text-gray-primary">
+              Re Password
             </label>
             <div className="flex relative col-span-4 h-[34px] rounded">
               <Field

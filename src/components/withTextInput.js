@@ -4,10 +4,12 @@ const WithTextInput = ({
   text = "some text",
   textClick = () => console.log("text clicked"),
   placeholder = "placeholder",
+  Id = "",
   change = (e) => console.log(e.target.value),
   disable = false,
   blur = (e) => console.log(e.target.value),
   val,
+  name = "",
   numbersOnly = false,
   maxlen = -1,
   exClasses = " ",
@@ -44,7 +46,9 @@ const WithTextInput = ({
         <input
           type="tel"
           className="border-0 w-full  m-0 outline-none p-[11px] rounded text-[13px] leading-[21px] h-[34px] text-gray-primary disabled:bg-gray-200 text-base"
+          name={name}
           disabled={disable}
+          id={Id}
           required
           placeholder={placeholder}
           onChange={handleChange}

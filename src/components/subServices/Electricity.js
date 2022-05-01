@@ -1,8 +1,9 @@
 import ConfirmDetails from "./confirmDetails"
 import Button from "../button"
-import { Input } from "../input"
+import { Formik, Form, ErrorMessage } from "formik"
 import Checkbox from "react-custom-checkbox"
 import React, { useState } from "react"
+import { getRenderFormValue } from "./renderFormValue"
 import Wrapper from "../wrapper"
 //to change
 import WithTextInput from "../withTextInput"
@@ -11,7 +12,6 @@ import electricityState from "./specialJsons/ElectricityStateList.json"
 import SelectSearch from "react-select-search"
 import recents from "./specialJsons/recents.json"
 import { Radio, InputLabel } from "@mui/material"
-import { RecentActorsSharp } from "@mui/icons-material"
 
 const Electricity = () => {
   const [openCoupon, setCouponState] = useState(false)
@@ -23,6 +23,12 @@ const Electricity = () => {
   const [promo, setPromo] = useState(" ")
   const [have, setHave] = useState(false)
 
+  const inittialState = {
+    state: "",
+    circle: "",
+    consumerId: "",
+  }
+
   const setCls = () => {
     let x = " "
     setPromo(x)
@@ -30,6 +36,17 @@ const Electricity = () => {
   }
   const handleApplyCoupon = () => {
     toggleCouponState(!couponState)
+  }
+
+  let renderCircle = getRenderFormValue("circle")
+  const handleSubmit = (values) => {
+    console.log(values)
+  }
+
+  const validate = (values) => {
+    const errors = {}
+
+    return errors
   }
 
   const handleStateChange = (e) => {
@@ -54,69 +71,85 @@ const Electricity = () => {
     <Wrapper>
       <div className="w-full">
         <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-6 justify-center">
-          <div className="col-span-1 md:col-span-6">
-            <div className="grid grid-cols-1 gap-4 w-full mx-auto lg:ml-auto lg:mr-4 lg:max-w-[335px] lg:mt-3">
-              <div className="w-full col-span-full font-medium leading-[19px]">
-                Pay For Electriciry
-              </div>
-              {/* select operator*/}
+          <Formik
+            initialValues={{}}
+            validate={validate}
+            onSubmit={handleSubmit}>
+            {(formik) => (
+              <Form className="col-span-1 md:col-span-6">
+                <div className="grid grid-cols-1 gap-4 w-full mx-auto lg:ml-auto lg:mr-4 lg:max-w-[335px] lg:mt-3">
+                  <div className="w-full col-span-full font-medium leading-[19px]">
+                    Pay For Electriciry
+                  </div>
+                  {/* select operator*/}
 
-              <div className="flex gap-1">
-                <Radio
-                  value="special"
-                  id="spc"
-                  onClick={() => console.log("clicked")}
-                  checked={true}
-                  style={{ padding: "1px" }}
-                  size="small"
-                />
-                <InputLabel
-                  htmlFor="spc"
-                  style={{ fontSize: "14px", marginRight: "1rem" }}>
-                  Electricity Boards
-                </InputLabel>
-              </div>
+                  <div className="flex gap-1">
+                    <Radio
+                      value="special"
+                      id="spc"
+                      onClick={() => console.log("clicked")}
+                      checked={true}
+                      style={{ padding: "1px" }}
+                      size="small"
+                    />
+                    <InputLabel
+                      htmlFor="spc"
+                      style={{ fontSize: "14px", marginRight: "1rem" }}>
+                      Electricity Boards
+                    </InputLabel>
+                  </div>
 
-              <select
-                name=""
-                id=""
-                onChange={handleStateChange}
-                className="lg:w-full h-[36px] border border-pink-600 rounded text-gray-primary bg-white">
-                {boardList.Names.map((stateObj) => (
-                  <option
-                    value={stateObj.stateName}
-                    className="lg:max-w-[218px] text-inherit">
-                    {stateObj.stateName}
-                  </option>
-                ))}
-              </select>
+                  <select
+                    name="state"
+                    id="state"
+                    value="state"
+                    onChange={handleStateChange}
+                    className="lg:w-full h-[36px] border border-pink-600 rounded text-gray-primary bg-white">
+                    {boardList.Names.map((stateObj) => (
+                      <option
+                        value={stateObj.stateName}
+                        className="lg:max-w-[218px] text-inherit">
+                        {stateObj.stateName}
+                      </option>
+                    ))}
+                  </select>
 
-              {/*  select operator ends*/}
+                  {/*  select operator ends*/}
 
-              {currentBoard.length === 0 ? null : (
-                <SelectSearch
-                  options={currentBoard}
-                  value="sv"
-                  name="circle"
-                  placeholder="Select A Water Provider"
-                  onChange={(value) => console.log(value)}
-                />
-              )}
+                  {currentBoard.length === 0 ? null : (
+                    <SelectSearch
+                      options={currentBoard}
+                      value="sv"
+                      id=""
+                      renderValue={renderCircle}
+                      placeholder="Select A Water Provider"
+                      onChange={(value) => console.log(value)}
+                    />
+                  )}
 
-              <div className="flex gap-2 w-full h-[36px]">
-                <WithTextInput
-                  placeholder="Consumer No"
-                  text="View Sample Bill"
-                />
-              </div>
-              <Button text="Get Bill Details" />
-            </div>
+                  <div className="flex gap-2 w-full h-[36px]">
+                    <WithTextInput
+                      name="consumerId"
+                      val={formik.values.consumerId}
+                      Id="consumerId"
+                      change={(value) =>
+                        formik.setFieldValue("consumerId", value, true)
+                      }
+                      blur={formik.handleBlur}
+                      placeholder="Consumer No"
+                      text="View Sample Bill"
+                    />
+                  </div>
+                  <Button text="Get Bill Details" />
+                </div>
 
-            <div className="w-full lg:max-w-[335px]  rounded bg-blue-200 text-xs leading-3 text-blue-800 p-2 mx-auto mt-2 lg:mr-4 lg:ml-auto">
-              Your service provider will take two working days to consider bill
-              paid in their accounts.
-            </div>
-          </div>
+                <div className="w-full lg:max-w-[335px]  rounded bg-blue-200 text-xs leading-3 text-blue-800 p-2 mx-auto mt-2 lg:mr-4 lg:ml-auto">
+                  Your service provider will take two working days to consider
+                  bill paid in their accounts.
+                </div>
+              </Form>
+            )}
+          </Formik>
 
           {/* <div className="hidden md:block lg:col-span-1"></div> */}
           {/* bill display section */}

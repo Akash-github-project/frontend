@@ -28,19 +28,6 @@ const Suggestions = () => {
   let postfix = ""
   let sizeNumber = 0
 
-  // const fileChecker = (userFile) => {
-  //   fileRef.current.files
-  //   if (userFile) {
-  //     if (userFile.size / 1024 >= 1024) {
-  //       postfix = "MB"
-  //       sizeNumber = userFile.size / (1024 * 1024)
-  //     } else {
-  //       postfix = "KB "
-  //       sizeNumber = userFile.size / 1024
-  //     }
-  //   }
-  // }
-
   if (fileRef.current.files) {
     if (fileRef.current.files[0]) {
       if (fileRef.current.files[0].size / 1024 >= 1024) {
@@ -158,7 +145,7 @@ const Suggestions = () => {
                       Name
                     </span>
 
-                    <span className="text-red-600 text-xs h-3">
+                    <span className="text-red-600 text-xs h-3 ml-auto">
                       <ErrorMessage name="customerName" />
                     </span>
                   </div>
@@ -183,7 +170,7 @@ const Suggestions = () => {
                       Email
                     </span>
 
-                    <span className="text-red-600 text-xs h-3">
+                    <span className="text-red-600 text-xs h-3 ml-auto">
                       <ErrorMessage name="email" />
                     </span>
                   </div>
@@ -205,7 +192,7 @@ const Suggestions = () => {
                     <span className="text-gray-primary req  text-sm leading-[14px]">
                       Mobile
                     </span>
-                    <span className="text-red-600 text-xs h-3">
+                    <span className="text-red-600 text-xs h-3  ml-auto">
                       <ErrorMessage name="phoneNo" />
                     </span>
                   </div>
@@ -231,7 +218,7 @@ const Suggestions = () => {
                       Message Type
                     </span>
 
-                    <span className="text-red-600 text-xs h-3">
+                    <span className="text-red-600 text-xs h-3 ml-auto">
                       <ErrorMessage name="msgType" />
                     </span>
                   </div>
@@ -255,7 +242,7 @@ const Suggestions = () => {
                       Query
                     </span>
 
-                    <span className="text-red-600 text-xs h-3">
+                    <span className="text-red-600 text-xs h-3 ml-auto">
                       <ErrorMessage name="query" />
                     </span>
                   </div>

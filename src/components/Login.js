@@ -85,7 +85,7 @@ export const Login = ({ goto = () => console.log("forgotPass") }) => {
           </span>
           <label
             htmlFor="username"
-            className="text-xs min-w-max col-span-2 text-gray-primary">
+            className="text-sm min-w-max col-span-2 text-gray-primary">
             Mobile/Email
           </label>
           <div className="flex relative col-span-4 h-[34px] rounded">
@@ -101,7 +101,7 @@ export const Login = ({ goto = () => console.log("forgotPass") }) => {
           </span>
           <label
             htmlFor="passwd"
-            className="text-xs  col-span-2 text-gray-primary">
+            className="text-sm  col-span-2 text-gray-primary">
             Password
           </label>
           <div className="flex relative col-span-4 h-[34px]">

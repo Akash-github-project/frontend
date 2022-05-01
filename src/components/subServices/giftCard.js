@@ -105,11 +105,11 @@ const GiftCard = () => {
                     <option value="none" className="text-inherit">
                       Select A Gift Card Provider
                     </option>
-                    <option value="googlePay" className="text-inherit">
-                      Google Pay
+                    <option value="googlePlay" className="text-inherit">
+                      Google Play E-Gift Card
                     </option>
                     <option value="amazonPay" className="text-inherit">
-                      Amazon Pay
+                      Amazon Gift Card
                     </option>
                   </select>
                   <span className="h-3 text-red-600 text-xs">

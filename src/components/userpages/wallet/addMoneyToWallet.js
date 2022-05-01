@@ -68,6 +68,14 @@ const AddMoneyToWallet = () => {
             </div>
             {/* input section  */}
             <div className="grid grid-cols-12 gap-2 xl:gap-1 mt-2">
+              <div className="col-span-full h-3 text-right text-xs flex">
+                <div className="flex mx-auto pl-3 md:pl-0 md:min-w-[300px]">
+                  <span></span>
+                  <span className="ml-auto">
+                    <ErrorMessage name="amount" />
+                  </span>
+                </div>
+              </div>
               <div className="mx-auto flex flex-1 lg:flex-row items-center justify-center gap-2 col-span-full lg:col-span-full md:max-w-[500px]">
                 <span className="text-sm xl:text-md xl:mr-4 w-max">
                   Enter Amount
@@ -76,7 +84,7 @@ const AddMoneyToWallet = () => {
                   <NumberInput
                     extraClasses="h-full rounded-r rounded-l-none w-full"
                     numbersOnly={true}
-                    maxlen={5}
+                    maxlen={4}
                     name="amount"
                     val={formik.values.amount}
                     Id="amount"
@@ -92,9 +100,6 @@ const AddMoneyToWallet = () => {
                 </div>
               </div>
               {/* button */}
-              <div className="col-span-full h-3 text-center border text-xs">
-                <ErrorMessage name="amount" />
-              </div>
               <div className="flex col-span-full w-full mt-3 justify-center">
                 <Button
                   text="Add Money"
@@ -117,7 +122,7 @@ const AddMoneyToWallet = () => {
                     <>
                       <WithTextInput
                         change={(value) => setPromo(value)}
-                        maxlen={6}
+                        maxlen={12}
                         val={promo}
                         disable={otp ? true : false}
                         text={

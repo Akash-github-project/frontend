@@ -303,7 +303,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
           </span>
           <label
             htmlFor="NameUser"
-            className="text-xs min-w-max col-span-2 text-gray-primary">
+            className="text-sm min-w-max col-span-2 text-gray-primary">
             Name
           </label>
           <div className="flex relative col-span-4 h-[34px] rounded">
@@ -320,7 +320,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
 
           <label
             htmlFor="emailUser"
-            className="text-xs col-span-2 text-gray-primary ">
+            className="text-sm col-span-2 text-gray-primary ">
             Email
           </label>
           <div className="flex col-span-4 rounded">
@@ -363,8 +363,8 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
               <div className="col-span-full flex h-[34px]">
                 <label
                   htmlFor="otpEmail"
-                  className="text-xs w-1/3 text-gray-primary">
-                  Otp
+                  className="text-sm w-1/3 text-gray-primary">
+                  OTP
                 </label>
                 <Field
                   name="otpEmail"
@@ -381,7 +381,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
                       <button
                         className="hover:bg-pink-primary hover:text-white border border-pink-primary rounded text-xs px-1 mx-1"
                         onClick={resendEmailOtp}>
-                        Resend Otp
+                        Resend OTP
                       </button>
                     )
                   ) : null}
@@ -413,7 +413,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
               numbersOnly={true}
               maxlen={10}
               blur={() => formik.setFieldTouched("mobileUser")}
-              fieldClasses="border border-pink-primary"
+              fieldClasses="border border-pink-primary w-full"
               change={(value) =>
                 formik.setFieldValue("mobileUser", value, true)
               }
@@ -443,8 +443,8 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
               <div className="col-span-full flex h-[34px]">
                 <label
                   htmlFor="otpPhone"
-                  className="text-xs w-1/3 text-gray-primary">
-                  Otp
+                  className="text-sm w-1/3 text-gray-primary">
+                  OTP
                 </label>
                 <Field
                   name="otpPhone"
@@ -476,7 +476,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
           </span>
           <label
             htmlFor="signUpPass1"
-            className="text-xs  col-span-2 text-gray-primary">
+            className="text-sm  col-span-2 text-gray-primary">
             Password
           </label>
           <div className="flex relative col-span-4 h-[34px]">
@@ -502,7 +502,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
           </span>
           <label
             htmlFor="signUpPass2"
-            className="text-xs min-w-max col-span-2 text-gray-primary">
+            className="text-sm min-w-max col-span-2 text-gray-primary">
             Re password
           </label>
           <div className="flex relative col-span-4 h-[34px] rounded">

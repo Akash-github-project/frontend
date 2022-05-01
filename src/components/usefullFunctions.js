@@ -30,3 +30,19 @@ export const isValidEmail = (email) => {
     return "none"
   }
 }
+
+export const isValidPass = (password) => {
+  if (password.length < 8) {
+    return "Password must be at least 8 characters"
+  } else if (password.search(/[a-z]/i) < 0) {
+    return "Password must contain at least one letter"
+  } else if (password.search(/(?=.*[A-Z])/) < 0) {
+    return "Password must contain at least one uppercase"
+  } else if (password.search(/[0-9]/) < 0) {
+    return "Password must contain at least one digit"
+  } else if (password.search(/(?=.*[!@#$%^&*])/) < 0) {
+    return "Password must contain at least one special character"
+  } else {
+    return "none"
+  }
+}

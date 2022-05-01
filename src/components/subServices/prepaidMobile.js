@@ -147,6 +147,7 @@ const PrepaidMobile = ({ open }) => {
               formik.setFieldValue("circle", c.value, false)
               formik.setFieldError("circle", "")
               formik.setFieldError("operator", "")
+              formik.setFieldError("amount", "")
               console.log(response.data.data.circle)
 
               formik.setFieldValue(
@@ -227,6 +228,7 @@ const PrepaidMobile = ({ open }) => {
       circle: "",
       operator: "",
       amount: "",
+      mode: "web",
     },
     validate,
     onSubmit: (value) => HandleSubmit(value),
