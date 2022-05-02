@@ -34,9 +34,9 @@ const BroadbandLandline = () => {
     console.log(e.target.value)
     let service
     //work req
-    if (e.target.value == "broadband")
+    if (e.target.value == "Broadband")
       service = [...landlineProvider.broadbandList]
-    else if (e.target.value == "landline")
+    else if (e.target.value == "Landline")
       service = [...landlineProvider.landlineList]
     else {
       service = []
@@ -60,7 +60,7 @@ const BroadbandLandline = () => {
                 id=""
                 onChange={handleServiceChange}
                 className="lg:w-full h-[36px] border border-pink-600 rounded text-gray-primary bg-white">
-                {["Select A Provider", "broadband", "landline"].map(
+                {["Select A Provider", "Broadband", "Landline"].map(
                   (optionType) => (
                     <option
                       value={optionType}
@@ -86,8 +86,7 @@ const BroadbandLandline = () => {
                 <NumberInput
                   extraClasses="h-full rounded-r rounded-l-none w-full"
                   fieldClasses="border border-pink-primary w-full"
-                  holder="Amount"
-                  onleft="₹"
+                  holder="Consumer Number"
                   color="pink"
                 />
               </div>

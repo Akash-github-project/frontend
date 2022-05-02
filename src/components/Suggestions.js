@@ -248,7 +248,6 @@ const Suggestions = () => {
                   </div>
 
                   <textarea
-                    required
                     name="query"
                     id="query"
                     value={formik.values.query}

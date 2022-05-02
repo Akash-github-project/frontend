@@ -7,7 +7,7 @@ export const NumberInput = ({
   fieldClasses = " ",
   holder = " ",
   iType = "text",
-  req = true,
+  req = false,
   change = () => console.log("hello"),
   blur = () => console.log("blur"),
   val,
@@ -19,7 +19,7 @@ export const NumberInput = ({
 }) => {
   let defaultClasses =
     "border rounded-md text-black focus:text-red-400 border-0 w-full outline-none text-[16px] leading-[21px] disabled:bg-gray-200"
-  let defaultField = `flex border rounded items-center p-1 ${
+  let defaultField = `flex border rounded items-center p-1 max-h-[36px] ${
     dis ? "bg-gray-200 " : ""
   }`
 

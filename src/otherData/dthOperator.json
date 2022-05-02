@@ -1,70 +1,39 @@
 {
-	"list": [
-		{
-			"op_key": "AR",
-			"op_name": "Airtel Digital TV",
-			"bill_fetch_api": "",
-			"pay_api": "payoneapi",
-			"op_image": "",
-			"code_ambika": "3",
-			"code_payoneapi": "AR",
-			"status": 1,
-			"op_code": "AT",
-			"image": "/images/dth/airtelDigital.webp",
-			"msg":"Enter 10 digit Customer ID starting with 3"
-
-		},
-		{
-			"op_key": "BS",
-			"op_name": "Dish TV",
-			"bill_fetch_api": "",
-			"pay_api": "payoneapi",
-			"op_image": "",
-			"code_ambika": "5",
-			"code_payoneapi": "BS",
-			"status": 1,
-			"op_code": "CG",
-			"image": "/images/dth/dishtv.webp",
-			"msg":"Enter Registered Mobile Number or 11-digit Viewing Card Number, starting with 0"
-		},
-		{
-			"op_key": "MD",
-			"op_name": "Tata Sky DTH",
-			"bill_fetch_api": "",
-			"pay_api": "payoneapi",
-			"op_image": "",
-			"code_ambika": "13",
-			"code_payoneapi": "MD",
-			"status": 1,
-			"op_code": "DP",
-			"image": "/images/dth/tataplay.webp",
-			"msg":"Enter Registered Mobile Number or 10 digit Subscriber ID starting with 1"
-		},
-		{
-			"op_key": "MM",
-			"op_name": "Videocon D2H",
-			"bill_fetch_api": "",
-			"pay_api": "payoneapi",
-			"op_image": "",
-			"code_ambika": "68",
-			"code_payoneapi": "MM",
-			"status": 1,
-			"op_code": "DP",
-			"image": "/images/dth/d2h.webp",
-			"msg":"Enter Subscriber ID or Registered Mobile number with your D2H account"
-		},
-		{
-			"op_key": "RJ",
-			"op_name": "Sun Direct DTH",
-			"bill_fetch_api": "",
-			"pay_api": "payoneapi",
-			"op_image": "",
-			"code_ambika": "116",
-			"code_payoneapi": "RJ",
-			"status": 1,
-			"op_code": "RJ",
-			"image": "/images/dth/sun-direct.webp",
-			"msg":"Enter your 11-digit Sun TV Smart Card Number"
-		}	
-    ]
+  "list": [
+    {
+      "op_key": "AD",
+      "op_name": "Airtel Digital TV",
+      "op_code": "AT",
+      "image": "/images/dth/airtelDigital.webp",
+      "msg": "Enter 10 digit Customer ID starting with 3"
+    },
+    {
+      "op_key": "DT",
+      "op_name": "Dish TV",
+      "op_code": "CG",
+      "image": "/images/dth/dishtv.webp",
+      "msg": "Enter Registered Mobile Number or 11-digit Viewing Card Number, starting with 0"
+    },
+    {
+      "op_key": "TP",
+      "op_name": "Tata Play",
+      "op_code": "DP",
+      "image": "/images/dth/tataplay.webp",
+      "msg": "Enter Registered Mobile Number or 10 digit Subscriber ID starting with 1"
+    },
+    {
+      "op_key": "VH",
+      "op_name": "Videocon D2H",
+      "op_code": "DP",
+      "image": "/images/dth/d2h.webp",
+      "msg": "Enter Subscriber ID or Registered Mobile number with your D2H account"
+    },
+    {
+      "op_key": "SD",
+      "op_name": "Sun Direct DTH",
+      "op_code": "SD",
+      "image": "/images/dth/sun-direct.webp",
+      "msg": "Enter your 11-digit Sun TV Smart Card Number"
+    }
+  ]
 }

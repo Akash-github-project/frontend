@@ -1,10 +1,10 @@
 import ConfirmDetails from "./confirmDetails"
 import Button from "../button"
-import { Formik, Form, ErrorMessage } from "formik"
 import Checkbox from "react-custom-checkbox"
 import React, { useState } from "react"
 import { getRenderFormValue } from "./renderFormValue"
 import Wrapper from "../wrapper"
+import { Formik, Form, ErrorMessage } from "formik"
 //to change
 import WithTextInput from "../withTextInput"
 import electricityConfirm from "./specialJsons/ElectricityConfirm.json"
@@ -45,34 +45,54 @@ const Electricity = () => {
 
   const validate = (values) => {
     const errors = {}
+    console.log(values.state)
+    handleStateChange(values.state)
 
+    if (values.state === "" || values.state === "Select State") {
+      errors.state = "Select A State"
+    }
+
+    if (values.circle === "") {
+      errors.circle = "select an electricity board"
+    }
+
+    if (values.consumerId === "") {
+      errors.consumerId = "please enter consumser id"
+    }
+
+    if (values.consumerId.length < 2) {
+      errors.consumerId = "invalid consumer id"
+    }
     return errors
   }
 
-  const handleStateChange = (e) => {
-    console.log(e.target.value)
+  const handleStateChange = (value) => {
+    console.log(value)
     //work req
     let currentBoard = boardList.Names.filter((operator) => {
-      return operator.stateName === e.target.value
+      return operator.stateName === value
     })
 
-    console.log(currentBoard[0].boards)
-    let requiredFormatData = currentBoard[0].boards.map(
-      (eachElectricProvider) => ({
-        name: eachElectricProvider,
-        value: eachElectricProvider,
-      })
-    )
+    if (value != "") {
+      console.log(currentBoard[0].boards)
+      let requiredFormatData = currentBoard[0].boards.map(
+        (eachElectricProvider) => ({
+          name: eachElectricProvider,
+          value: eachElectricProvider,
+        })
+      )
+
+      setCurrentBoard(requiredFormatData)
+    }
 
     // setCurrentBoard(currentBoard[0].boards)
-    setCurrentBoard(requiredFormatData)
   }
   return (
     <Wrapper>
       <div className="w-full">
         <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-6 justify-center">
           <Formik
-            initialValues={{}}
+            initialValues={inittialState}
             validate={validate}
             onSubmit={handleSubmit}>
             {(formik) => (
@@ -99,39 +119,52 @@ const Electricity = () => {
                     </InputLabel>
                   </div>
 
-                  <select
-                    name="state"
-                    id="state"
-                    value="state"
-                    onChange={handleStateChange}
-                    className="lg:w-full h-[36px] border border-pink-600 rounded text-gray-primary bg-white">
-                    {boardList.Names.map((stateObj) => (
-                      <option
-                        value={stateObj.stateName}
-                        className="lg:max-w-[218px] text-inherit">
-                        {stateObj.stateName}
-                      </option>
-                    ))}
-                  </select>
-
+                  <div className="flex flex-col w-full">
+                    <select
+                      name="state"
+                      id="state"
+                      value={formik.values.state}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      className="lg:w-full h-[36px] border border-pink-600 rounded text-gray-primary bg-white">
+                      {boardList.Names.map((stateObj) => (
+                        <option
+                          value={stateObj.stateName}
+                          className="lg:max-w-[218px] text-inherit">
+                          {stateObj.stateName}
+                        </option>
+                      ))}
+                    </select>
+                    <span className="text-xs text-red-600 h-3">
+                      <ErrorMessage name="state" />
+                    </span>
+                  </div>
                   {/*  select operator ends*/}
 
                   {currentBoard.length === 0 ? null : (
-                    <SelectSearch
-                      options={currentBoard}
-                      value="sv"
-                      id=""
-                      renderValue={renderCircle}
-                      placeholder="Select A Water Provider"
-                      onChange={(value) => console.log(value)}
-                    />
+                    <div className="flex flex-col w-full">
+                      <SelectSearch
+                        options={currentBoard}
+                        value={formik.values.circle}
+                        renderValue={renderCircle}
+                        placeholder="Select An Electricity Board "
+                        onChange={(value) => {
+                          formik.setFieldTouched("circle", true)
+                          formik.setFieldValue("circle", value, true)
+                        }}
+                      />
+                      <span className="text-xs text-red-600 h-3">
+                        <ErrorMessage name="circle" />
+                      </span>
+                    </div>
                   )}
 
-                  <div className="flex gap-2 w-full h-[36px]">
+                  <div className="flex flex-col w-full">
                     <WithTextInput
                       name="consumerId"
                       val={formik.values.consumerId}
                       Id="consumerId"
+                      numbersOnly={true}
                       change={(value) =>
                         formik.setFieldValue("consumerId", value, true)
                       }
@@ -139,6 +172,10 @@ const Electricity = () => {
                       placeholder="Consumer No"
                       text="View Sample Bill"
                     />
+
+                    <span className="text-xs text-red-600 h-3">
+                      <ErrorMessage name="consumerId" />
+                    </span>
                   </div>
                   <Button text="Get Bill Details" />
                 </div>

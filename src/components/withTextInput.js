@@ -12,6 +12,7 @@ const WithTextInput = ({
   name = "",
   numbersOnly = false,
   maxlen = -1,
+  req = false,
   exClasses = " ",
 }) => {
   const handleChange = (e) => {
@@ -49,7 +50,7 @@ const WithTextInput = ({
           name={name}
           disabled={disable}
           id={Id}
-          required
+          required={req}
           placeholder={placeholder}
           onChange={handleChange}
           onBlur={blur}
