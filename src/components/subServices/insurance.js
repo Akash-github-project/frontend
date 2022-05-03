@@ -70,6 +70,9 @@ const Insurance = () => {
       errors.mobileNo = isValidMobileNo(values.mobileNo)
     }
     if (showDateOfBirth === true) {
+      if (values.dob === "") {
+        errors.dob = "select a date"
+      }
     }
     console.log(errors)
     return errors
