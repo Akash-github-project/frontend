@@ -32,7 +32,7 @@ const Insurance = () => {
   const initialValues = {
     provider: "",
     policyNo: "",
-    dob: new Date(),
+    dob: "",
     mobileNo: "",
   }
 
