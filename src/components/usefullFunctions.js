@@ -46,3 +46,18 @@ export const isValidPass = (password) => {
     return "none"
   }
 }
+
+export const isThisOnList = (toMatch, from) => {
+  let x = from
+
+  let keys = Object.keys(x)
+  let ret = keys.filter((val) => x[`${val}`].includes(toMatch) === true)
+  // console.log("operator ----", ret[0])
+  console.log(ret, "--changedto")
+
+  if (ret.length === 0) {
+    return "none"
+  } else {
+    return ret[0]
+  }
+}

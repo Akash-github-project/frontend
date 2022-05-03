@@ -284,7 +284,7 @@ const Suggestions = () => {
                             : sizeNumber.toFixed(2)
                         } ${postfix}`}
                       </span>
-                      <span className="ml-auto mr-10 text-gray-600 ml-auto">
+                      <span className="ml-auto mr-10 text-gray-600">
                         {fileName}
                       </span>
                     </div>

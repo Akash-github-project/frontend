@@ -16,7 +16,6 @@ export const Input = ({
   maxlen = -1,
   override = {},
 }) => {
-  console.log(change)
   let defaultClasses =
     "border rounded-md text-black focus:text-red-500 field  h-[36px] disabled:bg-gray-100 text-base leading-[21px] "
   if (extraClasses !== " ") {
@@ -24,6 +23,7 @@ export const Input = ({
   }
 
   function changer(e) {
+    console.log(e.target.value)
     let len = e.target.value.length
     if (numbersOnly) {
       if (maxlen != -1) {

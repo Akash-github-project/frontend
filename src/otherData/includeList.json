@@ -1,0 +1,9 @@
+{
+  "insuranceProviderDateFormat": {
+    "yyyy-mm-dd": ["BALI", "AXLI", "MAXL"],
+    "dd-mm-yyyy": ["CHOL", "ETLI", "ICIC", "SUDI", "TALI"],
+    "yyyymmdd": ["EXLI ", "AVLI "],
+    "dd/mm/yyyy": ["FGIL", "RNLI", "IDBI", "SBIL"],
+    "ddmmyyyy": ["HDFC", "SLIC"]
+  }
+}

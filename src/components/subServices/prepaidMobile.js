@@ -34,9 +34,7 @@ import {
 } from "../../app/features/prepaidPlansSlice"
 import { toggleUserLogged } from "../../app/features/LoginSlice"
 import { addElement, toggleOverlay } from "../../app/features/overlaySlice"
-import { CallToActionSharp, ConstructionOutlined } from "@mui/icons-material"
 import axios from "axios"
-import { faFilterCircleXmark } from "@fortawesome/free-solid-svg-icons"
 
 //converts circle list from default
 let circleList = circle.list.map((item) => ({
