@@ -45,14 +45,14 @@ const OtpInput = ({
               ? () => dispatcher({ type: "sent" })
               : () => dispatcher({ type: "unsent" })
           }
-          dis={
-            valid === false ||
-            state.status === "sent" ||
-            state.status === "resent" ||
-            state.status === "incorrect"
-              ? true
-              : false
-          }
+          // dis={
+          //   valid === false ||
+          //   state.status === "sent" ||
+          //   state.status === "resent" ||
+          //   state.status === "incorrect"
+          //     ? true
+          //     : false
+          // }
           text={
             state.status !== "verified" ? (
               "OTP"

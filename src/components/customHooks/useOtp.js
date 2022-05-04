@@ -28,7 +28,7 @@ const useOtp = (match) => {
         message: "Enter a valid Number",
         type: OTP_ERROR.INVALID_NUMBER,
       }
-    } else if (value.toString().length != 6) {
+    } else if (value.toString().length != 4) {
       return {
         isError: true,
         message: "invalid otp length",
@@ -103,11 +103,12 @@ const useOtp = (match) => {
         break
 
       case "verified":
-        temp.error = resetError()
         timer.reset()
+        temp.error = resetError()
         temp.value = ""
         temp.status = "verified"
         break
+
       case "incorrct":
         temp.error.isError = true
         temp.error.message = "Otp does not match"

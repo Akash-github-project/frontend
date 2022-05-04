@@ -154,7 +154,7 @@ const ContactUs = () => {
                 <h3 className="px-2">Unlock Account</h3>
                 <p className="px-2 text-gray-primary flex gap-1">
                   <OtpInput
-                    fun={(value) => "111111" === value}
+                    fun={(value) => "1111" === value}
                     val={otpVal}
                     change={(e) => setOtpVal(e)}
                   />

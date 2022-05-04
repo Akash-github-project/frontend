@@ -4,9 +4,16 @@ import WithTextInput from "./withTextInput"
 import Checkbox from "react-custom-checkbox"
 import Button from "./button"
 
-const Card = ({ cardConfirmList, otp, setOtp, applied, msgCoupon = "" }) => {
+const Card = ({
+  cardConfirmList,
+  otp,
+  setOtp,
+  applied,
+  msgCoupon = "",
+  exClasses = "",
+}) => {
   const [have, setHave] = useState(false)
-  const [promo, setPromo] = useState(" ")
+  const [promo, setPromo] = useState("")
   const [allowed, isAllowed] = useState(true)
 
   const setCls = () => {
@@ -17,7 +24,7 @@ const Card = ({ cardConfirmList, otp, setOtp, applied, msgCoupon = "" }) => {
 
   return (
     <div
-      className={`grid grid-cols-2 w-full lg:w-[348px] border mx-auto mt-4 md:mt-0 `}>
+      className={`grid grid-cols-2 w-full lg:w-[348px] border mx-auto mt-4 md:mt-0 ${exClasses} `}>
       {/* card details section start*/}
       <ConfirmDetails dataPlan={cardConfirmList} />
       {/* card details section end*/}
@@ -31,48 +38,49 @@ const Card = ({ cardConfirmList, otp, setOtp, applied, msgCoupon = "" }) => {
       </div>
       {/* ammount showing section end*/}
 
-      {/* Apply coupon section start*/}
-      <div className="capitalize col-span-full text-xs mt-1">
-        <span
-          className="inline-block w-full text-center cursor-pointer hover:text-black text-sm"
-          onClick={() => setHave(!have)}>
-          Apply Coupon code
-          <i
-            className={`fas fa-chevron-down text-xs mx-1 hover:text-black`}></i>
-        </span>
-        {/* Apply coupon input start */}
+      {/* from here */}
+      {allowed === false ? null : (
+        <>
+          {/* Apply coupon section start*/}
+          <div className="capitalize col-span-full text-xs mt-1">
+            <span
+              className="inline-block w-full text-center cursor-pointer hover:text-black text-sm"
+              onClick={() => setHave(!have)}>
+              Apply Coupon code
+              <i
+                className={`fas fa-chevron-down text-xs mx-1 hover:text-black`}></i>
+            </span>
+            {/* Apply coupon input start */}
 
-        <div className="mx-auto flex items-center scale-90 w-3/5">
-          {have ? (
-            <>
-              <WithTextInput
-                change={(e) => setPromo(e.target.value)}
-                val={promo}
-                disable={otp === true || allowed === false ? true : false}
-                text={otp ? <i className="fa-solid fa-trash-can"></i> : " "}
-                textClick={setCls}
-                exClasses={`${otp ? "" : " mx-auto "} `}
-              />
-              {otp ? null : (
-                <Button
-                  click={() => setOtp(true)}
-                  dis={!allowed}
-                  text="Apply"
-                />
-              )}
-            </>
-          ) : null}
-        </div>
-        {/* Apply coupon input end*/}
-      </div>
-      {/* Apply coupon section end*/}
-      <div
-        className={`${
-          applied ? "" : "hidden"
-        } col-span-full text-xs mt-1 text-green-600 text-center`}>
-        {msgCoupon}
-      </div>
-
+            <div className="mx-auto flex items-center scale-90 w-3/5">
+              {have ? (
+                <>
+                  <WithTextInput
+                    change={(value) => setPromo(value)}
+                    val={promo}
+                    disable={otp === true ? true : false}
+                    text={otp ? <i className="fa-solid fa-trash-can"></i> : " "}
+                    textClick={setCls}
+                    exClasses={`${otp ? "" : " mx-auto "} `}
+                  />
+                  {otp ? null : (
+                    <Button click={() => setOtp(true)} text="Apply" />
+                  )}
+                </>
+              ) : null}
+            </div>
+            {/* Apply coupon input end*/}
+          </div>
+          {/* Apply coupon section end*/}
+          <div
+            className={`${
+              applied ? "" : "hidden"
+            } col-span-full text-xs mt-1 text-green-600 text-center`}>
+            {msgCoupon}
+          </div>
+        </>
+      )}
+      {/* to here  */}
       <div className="col-span-full flex mt-1">
         {/* wallet balance section start */}
         <div className="flex ml-1 items-center">

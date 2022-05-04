@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import Button from "../../button"
 import { Input } from "../../input"
+import OtpInput from "../../otp"
 import WithTextInput from "../../withTextInput"
 import PasswordModal from "../../modals/passwordModal"
 

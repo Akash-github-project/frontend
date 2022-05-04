@@ -1,0 +1,29 @@
+{
+  "heading": "Confirm Recharge",
+  "dataColumns": [
+    {
+      "type": "n",
+      "bold": false,
+      "title": "Mobile No",
+      "value": 1234567890
+    },
+    {
+      "type": "n",
+      "bold": false,
+      "title": "Operator",
+      "value": "MTNL Mumbai"
+    },
+    {
+      "type": "n",
+      "bold": false,
+      "title": "Circle",
+      "value": "Uttar Pradesh (West) & Uttarakhand"
+    },
+    {
+      "type": "p",
+      "bold": false,
+      "title": "Plan Description",
+      "value": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium, illum quas, consequuntur dicta tempore ad tenetur maiores voluptas et ipsum obcaecati iste ratione! Minus, fugit quaerat vero magnam aut repudiandae?"
+    }
+  ]
+}
