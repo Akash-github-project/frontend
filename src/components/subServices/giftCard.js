@@ -13,6 +13,7 @@ import { useFormik } from "formik"
 import giftCardConfirm from "./specialJsons/giftCardConfirm.json"
 import "../../css/grids.css"
 import { NumberInput } from "../numberInput"
+import Card from "../card"
 
 const GiftCard = () => {
   const [openCoupon, setCouponState] = useState(false)
@@ -158,6 +159,13 @@ const GiftCard = () => {
           {/* bill display section */}
 
           <div className="grid col-span-1 md:col-span-5 lg:mt-4 lg:mx-auto">
+            <Card
+              cardConfirmList={giftCardConfirm}
+              otp={otp}
+              setOtp={(value) => setOtp(value)}
+              msgCoupon="Coupon applied"
+              applied={false}
+            />
             <div
               className={`grid grid-cols-2 w-full lg:w-[348px] border mx-auto mt-4 md:mt-0 `}>
               {/* card details section start*/}

@@ -23,7 +23,7 @@ const EachTransaction = ({
           <span>{name}</span>
           <span className="text-xs">{userIdentifier}</span>
         </div>
-        <div className="px-1">₹ {value}</div>
+        <div className="px-1 roboto">₹ {value}</div>
       </div>
       <div className="flex justify-between">
         <span className="text-xs px-2 text-gray-primary ">{`${date}:${time}`}</span>

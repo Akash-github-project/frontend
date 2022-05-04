@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import "../../../css/transaction.css"
 import TransactionListUser from "../../TransactionList2"
+import CashbackList from "../profile/userTransactions/cashbackList"
 
 const CashbackInfo = () => {
   const [walletBalance, setWalletBalance] = useState(100)
@@ -24,9 +25,10 @@ const CashbackInfo = () => {
       <span className="text-xs text-gray-500 font-normal text-left">
         History last 20 Transaction
       </span>
-      <section className="w-full grid grid-cols-1 lg:grid-cols-2 flex-1 gap-2 overflow-y-auto">
-        <TransactionListUser />
-        <TransactionListUser />
+      <section className="w-full grid grid-cols-1 flex-1 gap-2 overflow-y-auto">
+        <CashbackList />
+        {/* <TransactionListUser />
+        <TransactionListUser /> */}
       </section>
     </div>
   )
