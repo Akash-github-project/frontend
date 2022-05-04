@@ -1,52 +1,52 @@
 {
   "insuranceList": [
     { "name": " Life Insurance Corporation of India", "value": "LICOF" },
-    { "name": "Aditya Birla Sun Life Insurance ", "value": "ABSL " },
-    { "name": "Aviva Life ", "value": "AVLI " },
+    { "name": "Aditya Birla Sun Life Insurance ", "value": "ABSL" },
+    { "name": "Aviva Life ", "value": "AVLI" },
     {
       "name": "Bajaj Allianz Life Insurance ",
-      "value": "BALI "
+      "value": "BALI"
     },
-    { "name": "Bharti AXA Life Insurance ", "value": "AXLI " },
+    { "name": "Bharti AXA Life Insurance ", "value": "AXLI" },
     {
       "name": "Canara HSBC OBC Life Insurance",
-      "value": "CHOL "
+      "value": "CHOL"
     },
     {
       "name": "Edelweiss Tokio Life Insurance",
-      "value": "ETLI "
+      "value": "ETLI"
     },
-    { "name": "Exide Life Insurance", "value": "EXLI " },
+    { "name": "Exide Life Insurance", "value": "EXLI" },
     {
       "name": "Future Generali India Life Insurance Company Limited ",
-      "value": "FGIL "
+      "value": "FGIL"
     },
     { "name": "HDFC Life Insurance", "value": "HDFC" },
     {
       "name": "ICICI Prudential Life Insurance",
-      "value": "ICIC "
+      "value": "ICIC"
     },
     {
       "name": "IDBI Federal Life Insurance",
-      "value": "IDBI "
+      "value": "IDBI"
     },
-    { "name": "IndiaFirst Life Insurance", "value": "IFLI " },
-    { "name": "Max Life Insurance ", "value": "MAXL " },
-    { "name": "PNB MetLife Insurance", "value": "PNBM " },
-    { "name": "Pramerica Life Insurance", "value": "PRLI " },
+    { "name": "IndiaFirst Life Insurance", "value": "IFLI" },
+    { "name": "Max Life Insurance ", "value": "MAXL" },
+    { "name": "PNB MetLife Insurance", "value": "PNBM" },
+    { "name": "Pramerica Life Insurance", "value": "PRLI" },
     {
       "name": "Reliance Nippon Life Insurance",
-      "value": "RNLI "
+      "value": "RNLI"
     },
-    { "name": "SBI Life Insurance", "value": "SBIL " },
+    { "name": "SBI Life Insurance", "value": "SBIL" },
     {
       "name": "Shriram Life Insurance Co Ltd",
-      "value": "SLIC "
+      "value": "SLIC"
     },
     {
       "name": "Star Union Dai Ichi Life Insurance",
-      "value": "SUDI "
+      "value": "SUDI"
     },
-    { "name": "Tata AIA Life Insurance", "value": "TALI " }
+    { "name": "Tata AIA Life Insurance", "value": "TALI" }
   ]
 }

@@ -55,7 +55,7 @@ const Insurance = () => {
 
   const validate = (values) => {
     const errors = {}
-    console.log(values)
+    // console.log(values)
 
     handleShouldShowDob(values.provider)
     if (values.provider === "") {
@@ -74,7 +74,7 @@ const Insurance = () => {
         errors.dob = "select a date"
       }
     }
-    console.log(errors)
+    // console.log(errors)
     return errors
   }
 
