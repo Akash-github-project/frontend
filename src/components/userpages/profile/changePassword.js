@@ -5,25 +5,26 @@ import Button from "../../button"
 import Password from "../../password"
 
 const ChangePassword = () => {
-  const [value, setValue] = useState(" ")
-
   const initialValues = {
-    exPass: " ",
+    exPass: "",
     pass1: "",
     pass2: "",
   }
 
-  useEffect(() => {
-    setValue("Aks@3434ll")
-    initialValues.exPass = value
-  }, [])
-
   const handleSubmit = (values) => {
-    console.log({ exp: value, ...values })
+    console.log({ ...values })
   }
 
   const validate = (values) => {
     const errors = {}
+    if (values.exPass === "") {
+      errors.exPass = "please enter the old password"
+    }
+
+    if (isValidPass(values.exPass) !== "none") {
+      errors.exPass = isValidPass(values.exPass)
+    }
+
     if (!values.pass1) {
       errors.pass1 = "password can't be empty"
     }
@@ -40,8 +41,8 @@ const ChangePassword = () => {
     if (values.pass1 !== values.pass2) {
       errors.pass2 = "passwords don't match"
     }
-    if (values.pass1 === value) {
-      errors.pass1 = "you can't re-enter the previous password"
+    if (values.pass1 === values.exPass) {
+      errors.pass1 = "you can't re-enter the old password"
     }
 
     return errors
@@ -57,12 +58,24 @@ const ChangePassword = () => {
           <div className="grid grid-cols-12 w-full gap-2 p-2 mt-2 shadow-default">
             <div className="flex flex-col lg:flex-row col-span-full xl:col-span-9 gap-2 p-2  lg:pl-6">
               <span className="text-gray-primary w-40">Existing Password</span>
-              <Password
-                change={(value) => setValue(value)}
-                val={value}
-                dis={true}
-                fClasses="flex-1"
-              />
+
+              <div className="flex flex-col col-span-6 flex-1">
+                <Password
+                  change={(value) =>
+                    formik.setFieldValue("exPass", value, true)
+                  }
+                  blurFunction={formik.handleBlur}
+                  val={formik.values.exPass}
+                  name="exPass"
+                  dis={false}
+                  Id="exPass"
+                  fClasses="flex-1"
+                />
+
+                <span className="h-3 text-xs text-red-600">
+                  <ErrorMessage name="exPass" />
+                </span>
+              </div>
             </div>
 
             <div className="flex flex-col lg:flex-row col-span-full xl:col-span-9 gap-2 p-2  lg:pl-6">
@@ -72,9 +85,7 @@ const ChangePassword = () => {
                   Id="pass1"
                   name="pass1"
                   change={(value) => formik.setFieldValue("pass1", value, true)}
-                  blurFunction={() =>
-                    formik.setFieldTouched("pass1", value, true)
-                  }
+                  blurFunction={formik.handleBlur}
                   dis={false}
                   val={formik.values.pass1}
                   fClasses="flex-1"
@@ -92,9 +103,7 @@ const ChangePassword = () => {
                   Id="pass2"
                   name="pass2"
                   change={(value) => formik.setFieldValue("pass2", value, true)}
-                  blurFunction={() =>
-                    formik.setFieldTouched("pass2", value, true)
-                  }
+                  blurFunction={formik.handleBlur}
                   val={formik.values.pass2}
                   dis={false}
                   fClasses="flex-1"
