@@ -1,11 +1,24 @@
 import React, { useState } from "react"
 import OtpInput from "./otp"
+import { isValidMobileNo } from "./usefullFunctions"
 import Wrapper from "./wrapper"
-import { Input } from "./input"
 import "../css/ContactUs.css"
 
 const ContactUs = () => {
   const [otpVal, setOtpVal] = useState("")
+  const [isValid, setIsValid] = useState(true)
+  const handlePhoneNoInput = (value) => {
+    setOtpVal(value)
+  }
+
+  const validate = (value) => {
+    if (isValidMobileNo(value) === "none") {
+      setIsValid(false)
+    } else {
+      setIsValid(true)
+    }
+    console.log(value)
+  }
   return (
     <Wrapper>
       <div className="w-full">
@@ -156,7 +169,12 @@ const ContactUs = () => {
                   <OtpInput
                     fun={(value) => "1111" === value}
                     val={otpVal}
-                    change={(e) => setOtpVal(e)}
+                    change={(value) => setOtpVal(value)}
+                    outer="w-64"
+                    disOrNot={isValid}
+                    runBlur={validate}
+                    otpInputStyle="min-w-[6rem] max-w-[6rem]"
+                    resendBtn=""
                   />
                 </p>
               </div>

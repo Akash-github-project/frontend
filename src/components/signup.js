@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react"
 import Checkbox from "react-custom-checkbox"
-import { Formik, Form, Field, ErrorMessage } from "formik"
+import { Formik, Form, Field, ErrorMessage, FormikProvider } from "formik"
 import { Link } from "react-router-dom"
 import { useTimer } from "use-timer"
 import { NumberInput } from "./numberInput"
@@ -339,14 +339,23 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
 
             <button
               className="h-[34px] px-1 bg-pink-primary text-white disabled:bg-gray-600 rounded text-[13px]"
-              disabled={emailOtpStatus === "sent" ? true : false}
+              disabled={
+                (formik.errors.emailUser === "" ||
+                  formik.errors.emailUser === undefined) &&
+                formik.values.emailUser != ""
+                  ? false
+                  : true
+              }
               onClick={
-                emailOtpStatus === "verified"
-                  ? () => setEmailOtpStatus("unsent")
+                emailOtpStatus !== "unsent"
+                  ? () => {
+                      emailTimeReset()
+                      setEmailOtpStatus("unsent")
+                    }
                   : () => sendOtpEmail()
               }
               type="button">
-              {emailOtpStatus === "verified" ? (
+              {emailOtpStatus !== "unsent" ? (
                 <i className="fa-regular fa-pen-to-square text-white w-5 "></i>
               ) : (
                 "OTP"
@@ -419,15 +428,24 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
               }
             />
             <button
-              className="h-[34px] px-1 bg-pink-primary text-white  rounded text-[13px]"
-              disabled={phoneOtpStatus === "sent" ? true : false}
+              className="h-[34px] px-1 bg-pink-primary text-white disabled:bg-gray-600 rounded text-[13px]"
+              disabled={
+                (formik.errors.mobileUser === "" ||
+                  formik.errors.mobileUser === undefined) &&
+                formik.values.mobileUser != ""
+                  ? false
+                  : true
+              }
               onClick={
-                phoneOtpStatus === "verified"
-                  ? () => setPhoneOtpStatus("unsent")
+                phoneOtpStatus !== "unsent"
+                  ? () => {
+                      phoneTimeReset()
+                      setPhoneOtpStatus("unsent")
+                    }
                   : () => sendOtpPhone()
               }
               type="button">
-              {phoneOtpStatus === "verified" ? (
+              {phoneOtpStatus !== "unsent" ? (
                 <i className="fa-regular fa-pen-to-square text-white w-5 "></i>
               ) : (
                 "OTP"

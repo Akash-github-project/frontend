@@ -1,11 +1,30 @@
 import React, { useState } from "react"
 import Button from "../../button"
+import { isValidMobileNo } from "../../usefullFunctions"
 import { Input } from "../../input"
 import OtpInput from "../../otp"
 import WithTextInput from "../../withTextInput"
 import PasswordModal from "../../modals/passwordModal"
 
 const PersonalInfo = () => {
+  //section specific to otp
+  const [otpVal, setOtpVal] = useState("")
+  const [isValid, setIsValid] = useState(true)
+  const [existing, setExisting] = useState("")
+  const handlePhoneNoInput = (value) => {
+    setOtpVal(value)
+  }
+
+  const validate = (value) => {
+    if (isValidMobileNo(value) === "none") {
+      setIsValid(false)
+    } else {
+      setIsValid(true)
+    }
+    console.log(value)
+  }
+  //specific section ends here
+
   const [modalState, setModalState] = useState(false)
   const showPasswordModal = () => {
     setModalState(true)
@@ -36,14 +55,30 @@ const PersonalInfo = () => {
               <div className="w-full h-full flex flex-col">
                 <span className="text-gray-primary">Existing Mobile No</span>
                 <Input
+                  numbersOnly={true}
+                  val={existing}
+                  change={(value) => setExisting(value)}
+                  maxlen={10}
                   override={{ maxWidth: "100%" }}
                   extraClasses="text-gray-primary"
                 />
                 <span className="inline-block h-3  "></span>
                 <span className="mt-2 text-gray-primary">New Mobile No</span>
                 <div className="flex w-full">
-                  <Input override={{ maxWidth: "100%", width: "100%" }} />
-                  <Button text="OTP" exClasses="ml-auto" />
+                  <OtpInput
+                    fun={(value) => "1111" === value}
+                    val={otpVal}
+                    change={(value) => setOtpVal(value)}
+                    outer="w-full"
+                    disOrNot={isValid}
+                    labelFirst="hidden"
+                    contactInput="w-full"
+                    runBlur={validate}
+                    otpInputStyle="min-w-[6rem] max-w-[6rem]"
+                    resendBtn=""
+                  />
+                  {/* <Input override={{ maxWidth: "100%", width: "100%" }} />
+                  <Button text="OTP" exClasses="ml-auto" /> */}
                 </div>
                 <span className="text-xs text-red-600">
                   Note: Please enter unique mobile number

@@ -196,12 +196,25 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
 
               <button
                 className="h-[34px] px-1 bg-pink-primary text-white disabled:bg-gray-600 rounded"
-                disabled={otp === "sent" ? true : false}
+                disabled={
+                  (formik.errors.mobileUser === "" ||
+                    formik.errors.mobileUser === undefined) &&
+                  formik.values.mobileUser != ""
+                    ? false
+                    : true
+                }
                 onClick={
-                  otp === "verified" ? () => setOtp("unsent") : () => sendOtp()
+                  otp !== "unsent"
+                    ? () => {
+                        reset()
+                        setOtp("unsent")
+                      }
+                    : () => sendOtp()
+
+                  // otp === "verified" ? () => setOtp("unsent") : () => sendOtp()
                 }
                 type="button">
-                {otp === "verified" ? (
+                {otp !== "unsent" ? (
                   <i className="fa-regular fa-pen-to-square text-white w-5 "></i>
                 ) : (
                   "OTP"
@@ -233,7 +246,7 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
                         </span>
                       ) : (
                         <button
-                          className="hover:bg-pink-primary hover:text-white border border-pink-primary rounded text-xs px-1 mx-1"
+                          className="hover:bg-pink-primary hover:text-white border border-pink-primary rounded text-xs px-1 mx-1 h-[34px]"
                           onClick={resendOtp}>
                           Resend OTP
                         </button>

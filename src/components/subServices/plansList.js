@@ -45,22 +45,41 @@ const PlansList = () => {
     setState(0)
   }, [])
 
+  // let config = {
+  //   method: "get",
+  //   url: "http://65.0.216.133:8080/rechaxn/api/mplans",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  //   data: data,
+  // }
+
   const { isLoading, error, data } = useQuery("repoData", () =>
-    axios
-      .get(
-        `http://localhost:3001/?token=${"zJcgbVlZCbMfglmsPCv3cxxfzCDtnY2t"}&operator=${
-          opList[`${operator}`]
-        }&circle=${JSON.parse(circle).code}`
-      )
-      .then((res) => {
-        let response = res.data
-        console.log(res)
-        let x = response.categories.map((category) => category.name)
-        setPlanType(x)
-        let y = response.categories.map((category) => category.plans)
-        setList(y)
-        return res.data
-      })
+    axios(
+      {
+        method: "get",
+        url: "http://65.0.216.133:8080/rechaxn/api/mplans",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: JSON.stringify({
+          operatorcode: opList[`${operator}`],
+          circlecode: JSON.parse(circle).code,
+        }),
+      }
+      // .get(
+      //   `http://65.0.216.133:8080/rechaxn/api/mplans&operatorcode=${
+      //     opList[`${operator}`]
+      //   }&circlecode=${JSON.parse(circle).code}`
+    ).then((res) => {
+      let response = res.data
+      console.log(res)
+      let x = response.categories.map((category) => category.name)
+      setPlanType(x)
+      let y = response.categories.map((category) => category.plans)
+      setList(y)
+      return res.data
+    })
   )
 
   const handlePlanChoose = (e) => {
