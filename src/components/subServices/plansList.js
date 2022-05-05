@@ -54,24 +54,23 @@ const PlansList = () => {
   //   data: data,
   // }
 
+  // axios
+  //   .get("http://localhost:3001/operator=AT", {
+  //     operatorcode: opList[`${operator}`],
+  //     circlecode: JSON.parse(circle).code,
+  //   })
   const { isLoading, error, data } = useQuery("repoData", () =>
-    axios(
-      {
-        method: "get",
-        url: "http://65.0.216.133:8080/rechaxn/api/mplans",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: JSON.stringify({
-          operatorcode: opList[`${operator}`],
-          circlecode: JSON.parse(circle).code,
-        }),
-      }
-      // .get(
-      //   `http://65.0.216.133:8080/rechaxn/api/mplans&operatorcode=${
-      //     opList[`${operator}`]
-      //   }&circlecode=${JSON.parse(circle).code}`
-    ).then((res) => {
+    axios({
+      method: "get",
+      url: "http://65.0.216.133:8080/rechaxn/api/mplans",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      params: {
+        operatorcode: opList[`${operator}`],
+        circlecode: JSON.parse(circle).code,
+      },
+    }).then((res) => {
       let response = res.data
       console.log(res)
       let x = response.categories.map((category) => category.name)
