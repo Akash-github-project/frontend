@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react"
 import { Tabs, useTabState, Panel } from "@bumaga/tabs"
-import apires from "../../otherData/api_finder_response.json"
 import "../../css/planList.css"
 import { toggleOverlay } from "../../app/features/overlaySlice"
 import { useSelector, useDispatch } from "react-redux"
