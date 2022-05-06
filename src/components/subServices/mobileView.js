@@ -43,7 +43,7 @@ const MobileView = ({ close }) => {
   const { isLoading, error, data } = useQuery("repoData", () =>
     axios
       .get(
-        `http://65.0.216.133:8080/rechaxn/api/mplansparam/${
+        `https://65.0.216.133:8080/rechaxn/api/mplansparam/${
           opList[`${operator}`]
         }/${JSON.parse(circleItem).code}`
       )
