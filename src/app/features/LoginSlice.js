@@ -5,7 +5,7 @@ const initialState = {
   password: "",
   rememberMe: false,
   loginScreenShow: false,
-  isUserLogged: true,
+  isUserLogged: false,
 }
 
 export const loginSlice = createSlice({

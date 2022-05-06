@@ -16,7 +16,7 @@ import "../../css/searchWithImages.css"
 import "../../css/selectSearch.css"
 import dataPlan from "./dataPlan.json"
 import prepaidChangeJson from "./specialJsons/preapidChangeList.json"
-import { useFormik } from "formik"
+import { Formik, useFormik } from "formik"
 import { NumberInput } from "../numberInput"
 import { isValidMobileNo } from "../usefullFunctions"
 import MobileView from "./mobileView"
@@ -33,6 +33,7 @@ import {
   storeRenderType,
   showConfirmBill,
   toggleCouponState,
+  setAmountValid,
 } from "../../app/features/prepaidPlansSlice"
 import { toggleUserLogged } from "../../app/features/LoginSlice"
 import { addElement, toggleOverlay } from "../../app/features/overlaySlice"
@@ -65,6 +66,7 @@ const PrepaidMobile = ({ open }) => {
   const [fakeRadio, setFakeRadio] = useState(true)
 
   const [otp, setOtp] = useState(false)
+  const [isValidAmount, setIsValidAmount] = useState(false)
   const [promo, setPromo] = useState(" ")
 
   const [outputOperator, setOperator] = useState(operatorList)
@@ -76,6 +78,9 @@ const PrepaidMobile = ({ open }) => {
   const circle2 = useSelector((state) => state.prepaidPlan.circle)
   const planInfo = useSelector((state) => state.prepaidPlan.plansInfo)
   const billState = useSelector((state) => state.prepaidPlan.confirmBillState)
+  const amouontValidity = useSelector(
+    (state) => state.prepaidPlan.isValidAmount
+  )
   const couponState = useSelector((state) => state.prepaidPlan.couponState)
   const renderCircle = getRenderFormValue("circle")
   const render = getRenderFormValue("operator")
@@ -109,12 +114,9 @@ const PrepaidMobile = ({ open }) => {
     }
   }
 
-  const clearErrors = (errorsFields) => {
-    errorsFields.forEach((element) => {
-      formik.setFieldError(element, "")
-    })
-    console.log(errorsFields)
-  }
+  useEffect(() => {
+    if (amouontValidity === true) showModal()
+  }, [amouontValidity])
   //validate function of formik
   const validate = (values) => {
     const errors = {}
@@ -217,7 +219,11 @@ const PrepaidMobile = ({ open }) => {
   }
 
   function HandleSubmit() {
-    showModal()
+    console.log("ran handle submit")
+    console.log("timeout ran")
+    if (amouontValidity === true) {
+      showModal()
+    }
   }
   //useFromik hook
   const formik = useFormik({
@@ -298,7 +304,7 @@ const PrepaidMobile = ({ open }) => {
         x.operator.length != 0 &&
         x.circle.length != 0
       ) {
-        setTimeout(show, 400)
+        show()
       }
     }
   }
@@ -326,7 +332,32 @@ const PrepaidMobile = ({ open }) => {
 
   const handleFakeRadio = (e) => {}
 
+  //async validator
+
+  const checkPlanValid = async () => {
+    console.log("ran hello")
+    let response = await axios.get(
+      "http://65.0.216.133:8080/rechaxn/api/mplansparam/" +
+        formik.values.operator +
+        "/" +
+        JSON.parse(formik.values.circle).code
+    )
+    console.log(response, "this is response")
+    let data = response.data
+    let result = data.categories.map((each) => each.plans)
+    let final = result.flat(2)
+    let isOk = final.filter((each) => each.amount == formik.values.amount)
+    console.log(isOk)
+    if (isOk.length === 0) {
+      formik.setFieldError("amount", "invalid amount")
+      return 0
+    } else {
+      return 1
+    }
+  }
+
   const handleRechargeRequest = () => {
+    console.log("first handler recharge")
     let err = formik.errors.touched
 
     formik.setTouched({
@@ -336,9 +367,15 @@ const PrepaidMobile = ({ open }) => {
       amount: true,
     })
     formik.validateForm()
+
+    checkPlanValid().then((res) => {
+      if (res === 0) dispatch(setAmountValid(false))
+      else dispatch(setAmountValid(true))
+    })
   }
 
   function showModal() {
+    console.log("ran show modal")
     if (userLogged) {
       dispatch(showConfirmBill(true))
     } else {
