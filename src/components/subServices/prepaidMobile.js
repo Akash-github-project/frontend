@@ -129,6 +129,7 @@ const PrepaidMobile = ({ open }) => {
       errors.phoneNo = isValidMobileNo(values.phoneNo)
     }
     if (validationRef.phoneNo != values.phoneNo) {
+      dispatch(storeShowPlan(false))
       validationRef.phoneNo = values.phoneNo
       // clearErrors(["hello", "bolle", "hello"])
       formik.setFieldValue("circle", "", false)
@@ -187,6 +188,7 @@ const PrepaidMobile = ({ open }) => {
     console.log(validationRef.operator !== values.operator)
 
     if (validationRef.operator !== values.operator) {
+      dispatch(storeShowPlan(false))
       console.log(validationRef.operator !== values.operator, "texting")
       formik.setFieldValue("circle", "", false)
       formik.setFieldValue("amount", "", false)
@@ -205,6 +207,7 @@ const PrepaidMobile = ({ open }) => {
 
     console.log(validationRef.circle != values.circle)
     if (validationRef.circle != values.circle) {
+      dispatch(storeShowPlan(false))
       console.log("circle changed")
       formik.setFieldValue("amount", "", false)
       validationRef.circle = values.circle
