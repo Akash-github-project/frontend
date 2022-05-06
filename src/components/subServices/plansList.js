@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import axios from "axios"
 import opr from "../../otherData/operator.json"
+import superagent from "superagent"
 import { useQuery } from "react-query"
 import { Tabs, useTabState, Panel } from "@bumaga/tabs"
 import "../../css/planList.css"
@@ -58,27 +59,24 @@ const PlansList = () => {
   //   .get("http://localhost:3001/operator=AT", {
   //     operatorcode: opList[`${operator}`],
   //     circlecode: JSON.parse(circle).code,
-  //   })
+  //   })SuperAgent
+
   const { isLoading, error, data } = useQuery("repoData", () =>
-    axios({
-      method: "get",
-      url: "http://65.0.216.133:8080/rechaxn/api/mplans",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      params: {
-        operatorcode: opList[`${operator}`],
-        circlecode: JSON.parse(circle).code,
-      },
-    }).then((res) => {
-      let response = res.data
-      console.log(res)
-      let x = response.categories.map((category) => category.name)
-      setPlanType(x)
-      let y = response.categories.map((category) => category.plans)
-      setList(y)
-      return res.data
-    })
+    axios
+      .get(
+        `http://65.0.216.133:8080/rechaxn/api/mplansparam/${
+          opList[`${operator}`]
+        }/${JSON.parse(circle).code}`
+      )
+      .then((res) => {
+        let response = res.data
+        console.log(res)
+        let x = response.categories.map((category) => category.name)
+        setPlanType(x)
+        let y = response.categories.map((category) => category.plans)
+        setList(y)
+        return res.data
+      })
   )
 
   const handlePlanChoose = (e) => {

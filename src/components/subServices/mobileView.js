@@ -44,9 +44,9 @@ const MobileView = ({ close }) => {
   const { isLoading, error, data } = useQuery("repoData", () =>
     axios
       .get(
-        `http://localhost:3001/?token=${"zJcgbVlZCbMfglmsPCv3cxxfzCDtnY2t"}&operator=${
+        `http://65.0.216.133:8080/rechaxn/api/mplansparam/${
           opList[`${operator}`]
-        }&circle=${JSON.parse(circleItem).code}`
+        }/${JSON.parse(circleItem).code}`
       )
       .then((res) => {
         let response = res.data
