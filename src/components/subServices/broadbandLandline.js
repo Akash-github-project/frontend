@@ -88,6 +88,7 @@ const BroadbandLandline = () => {
                   extraClasses="h-full rounded-r rounded-l-none w-full"
                   fieldClasses="border border-pink-primary w-full"
                   holder="Consumer Number"
+                  iType="tel"
                   color="pink"
                 />
               </div>

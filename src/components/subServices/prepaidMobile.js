@@ -4,10 +4,8 @@ import Card from "../card"
 import LoginModal from "../userpages/loginModal"
 import prepaidConfirm from "./specialJsons/prepaidConfirm.json"
 import WithTextInput from "../withTextInput"
-import Checkbox from "react-custom-checkbox"
 import SelectSearch, { fuzzySearch } from "react-select-search"
 import operator from "../../otherData/operator.json"
-import ConfirmDetails from "./confirmDetails"
 import { getRenderFormValue } from "./renderFormValue"
 import circle from "../../otherData/circle.json"
 import { Radio, RadioGroup, InputLabel } from "@mui/material"
@@ -19,24 +17,19 @@ import prepaidChangeJson from "./specialJsons/preapidChangeList.json"
 import { Formik, useFormik } from "formik"
 import { NumberInput } from "../numberInput"
 import { isValidMobileNo } from "../usefullFunctions"
-import MobileView from "./mobileView"
 import { Input } from "../input"
 import Button from "../button"
 
 // imports for using redux
 import { useSelector, useDispatch } from "react-redux"
 import {
-  storePhoneNo,
   storeCircle,
   storeOperator,
   storeShowPlan,
   storeRenderType,
   showConfirmBill,
-  toggleCouponState,
   setAmountValid,
 } from "../../app/features/prepaidPlansSlice"
-import { toggleUserLogged } from "../../app/features/LoginSlice"
-import { addElement, toggleOverlay } from "../../app/features/overlaySlice"
 import axios from "axios"
 
 //converts circle list from default
@@ -73,9 +66,7 @@ const PrepaidMobile = ({ open }) => {
   const dispatch = useDispatch()
   const [openModal, setOpenModal] = useState(false)
   const userLogged = useSelector((state) => state.login.isUserLogged)
-  const phoneNo = useSelector((state) => state.prepaidPlan.phoneNo)
   const Operator = useSelector((state) => state.prepaidPlan.operator)
-  const circle2 = useSelector((state) => state.prepaidPlan.circle)
   const planInfo = useSelector((state) => state.prepaidPlan.plansInfo)
   const billState = useSelector((state) => state.prepaidPlan.confirmBillState)
   const amouontValidity = useSelector(
@@ -117,6 +108,7 @@ const PrepaidMobile = ({ open }) => {
   useEffect(() => {
     if (amouontValidity === true) showModal()
   }, [amouontValidity])
+
   //validate function of formik
   const validate = (values) => {
     const errors = {}
@@ -224,10 +216,9 @@ const PrepaidMobile = ({ open }) => {
   function HandleSubmit() {
     console.log("ran handle submit")
     console.log("timeout ran")
-    if (amouontValidity === true) {
-      showModal()
-    }
+    //do submittion stuff here later on
   }
+
   //useFromik hook
   const formik = useFormik({
     initialValues: {
@@ -432,9 +423,6 @@ const PrepaidMobile = ({ open }) => {
             renderValue={operatorProvider}
           />
           <span className="h-3 text-red-600 text-xs">
-            {/* {isValid.operator === "none" || isValid.operator === ""
-              ? null
-              : isValid.operator} */}
             {formik.errors.operator && formik.touched.operator
               ? formik.errors.operator
               : null}
@@ -442,7 +430,6 @@ const PrepaidMobile = ({ open }) => {
         </div>
         {/* circle dropdown */}
 
-        {/* onChange={(value) => dispatch(storeCircle(value))} */}
         <div className="flex flex-col h-auto">
           <SelectSearch
             options={outputCircle}
@@ -460,9 +447,6 @@ const PrepaidMobile = ({ open }) => {
             {formik.errors.circle && formik.touched.circle
               ? formik.errors.circle
               : null}
-            {/* {isValid.circle === "none" || isValid.circle === ""
-              ? null
-              : isValid.circle} */}
           </span>
         </div>
         {/* spacially made custom input box just for this page to show view plans */}
@@ -471,6 +455,7 @@ const PrepaidMobile = ({ open }) => {
             maxlen={5}
             numbersOnly={true}
             placeholder="Amount"
+            type="tel"
             text="View Plans"
             val={formik.values.amount}
             blur={() => formik.setFieldTouched("amount")}

@@ -58,6 +58,9 @@ const Card = ({
                   <WithTextInput
                     change={(value) => setPromo(value)}
                     val={promo}
+                    type="tel"
+                    maxlen={12}
+                    alphanumeric={true}
                     disable={otp === true ? true : false}
                     text={otp ? <i className="fa-solid fa-trash-can"></i> : " "}
                     textClick={setCls}

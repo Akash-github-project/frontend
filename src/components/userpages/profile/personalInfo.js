@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import Button from "../../button"
 import { isValidMobileNo } from "../../usefullFunctions"
 import { Input } from "../../input"
@@ -9,20 +9,24 @@ import PasswordModal from "../../modals/passwordModal"
 const PersonalInfo = () => {
   //section specific to otp
   const [otpVal, setOtpVal] = useState("")
-  const [isValid, setIsValid] = useState(true)
+  const [isInvalid, setIsInvalid] = useState(true)
   const [existing, setExisting] = useState("")
+  const [current, setCurrent] = useState("")
   const handlePhoneNoInput = (value) => {
     setOtpVal(value)
   }
 
-  const validate = (value) => {
-    if (isValidMobileNo(value) === "none") {
-      setIsValid(false)
+  useEffect(() => {
+    if (
+      isValidMobileNo(otpVal) === "none" &&
+      isValidMobileNo(existing) == "none"
+    ) {
+      setIsInvalid(false)
     } else {
-      setIsValid(true)
+      setIsInvalid(true)
     }
-    console.log(value)
-  }
+  }, [otpVal, existing])
+
   //specific section ends here
 
   const [modalState, setModalState] = useState(false)
@@ -44,6 +48,7 @@ const PersonalInfo = () => {
         <div className="flex flex-col">
           <span className="text-gray-primary">Mobile No</span>
           <WithTextInput
+            type="tel"
             text="Change Mobile No"
             holder="Mobile No"
             textClick={() => showPasswordModal()}
@@ -56,6 +61,7 @@ const PersonalInfo = () => {
                 <span className="text-gray-primary">Existing Mobile No</span>
                 <Input
                   numbersOnly={true}
+                  iType="tel"
                   val={existing}
                   change={(value) => setExisting(value)}
                   maxlen={10}
@@ -70,19 +76,18 @@ const PersonalInfo = () => {
                     val={otpVal}
                     change={(value) => setOtpVal(value)}
                     outer="w-full"
-                    disOrNot={isValid}
+                    type="tel"
+                    disOrNot={isInvalid}
                     labelFirst="hidden"
                     contactInput="w-full"
-                    runBlur={validate}
-                    otpInputStyle="min-w-[6rem] max-w-[6rem]"
+                    middleData="Please enter a unique mobile no"
+                    middleStyle="text-red-600"
+                    otpInputStyle="min-w-[5rem] max-w-[6rem]"
                     resendBtn=""
                   />
                   {/* <Input override={{ maxWidth: "100%", width: "100%" }} />
                   <Button text="OTP" exClasses="ml-auto" /> */}
                 </div>
-                <span className="text-xs text-red-600">
-                  Note: Please enter unique mobile number
-                </span>
               </div>
             </PasswordModal>
           ) : null}

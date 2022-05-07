@@ -99,6 +99,7 @@ const Water = () => {
                         val={formik.values.subscriberNo}
                         blurFunction={formik.handleBlur}
                         Id="subscriberNo"
+                        iType="tel"
                         numbersOnly={true}
                         name="subscriberNo"
                         extraClasses="min-h-[36px] rounded-r rounded-l-none"

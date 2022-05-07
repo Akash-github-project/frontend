@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react"
 import axios from "axios"
 import opr from "../../otherData/operator.json"
-import superagent from "superagent"
 import { useQuery } from "react-query"
 import { Tabs, useTabState, Panel } from "@bumaga/tabs"
 import "../../css/planList.css"
@@ -45,21 +44,6 @@ const PlansList = () => {
   useEffect(() => {
     setState(0)
   }, [])
-
-  // let config = {
-  //   method: "get",
-  //   url: "http://65.0.216.133:8080/rechaxn/api/mplans",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  //   data: data,
-  // }
-
-  // axios
-  //   .get("http://localhost:3001/operator=AT", {
-  //     operatorcode: opList[`${operator}`],
-  //     circlecode: JSON.parse(circle).code,
-  //   })SuperAgent
 
   const { isLoading, error, data } = useQuery("repoData", () =>
     axios

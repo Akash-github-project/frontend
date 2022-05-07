@@ -121,6 +121,7 @@ const AddMoneyToWallet = () => {
                   {have ? (
                     <>
                       <WithTextInput
+                        alphanumeric={true}
                         change={(value) => setPromo(value)}
                         maxlen={12}
                         val={promo}

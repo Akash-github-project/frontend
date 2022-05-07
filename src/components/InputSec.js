@@ -11,7 +11,7 @@ const InputSec = ({
   req = false,
 }) => {
   let defClasses =
-    "border-0 w-full p-0 m-0 outline-none leading-[21px] text-[16px] h-[34px] p-[11px] rounded text-gray-primary "
+    "border-0 w-full p-0 m-0 outline-none leading-[21px] text-[16px] h-[34px] p-[11px] rounded text-gray-primary focus:text-pink-primary"
   let wrapClasses =
     "border border-pink-600 focus-within:border-blue-400 inline-block m-0 w-full rounded "
 

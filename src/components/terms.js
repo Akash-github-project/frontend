@@ -1,6 +1,6 @@
-import React from "react";
-import Wrapper from "./wrapper";
-import "../css/terms.css";
+import React, { useEffect } from "react"
+import Wrapper from "./wrapper"
+import "../css/terms.css"
 
 let cmsData = `<p><strong>Terms of Use</strong><br />
 By using this Website (&quot;Site&quot;) https://www.rechargeaxn.com you indicate your agreement to these terms of use (&quot;Terms&quot;). You have the power and authority to enter into this agreement. If you do not agree to these Terms, please do not use the Site and exit now.</p>
@@ -32,25 +32,24 @@ We do not charge any fee for membership/recharge/pay bills. We reserves the righ
 <p><strong>Cashback</strong><br />
 Earned cashback has no expiry and valid for life. Cashback earning against coupon will be processed under terms &amp; condition of applied coupon. These terms &amp; conditions can be seen during applying coupon.</p>
 
-`;
+`
 
 const Terms = () => {
-	return (
-		<Wrapper>
-			<div className="w-full">
-				<div className="flex items-center justify-right bg-primary  h-[40px] px-[15px] w-order box-border">
-					<h1 className="text-white text-[18px] py-[10px] px-1">
-						Terms & Conditions
-					</h1>
-				</div>
-				<div
-					data-content
-					dangerouslySetInnerHTML={{ __html: cmsData }}
-					className="mt-4  terms"
-				></div>
-			</div>
-		</Wrapper>
-	);
-};
+  return (
+    <Wrapper>
+      <div className="w-full">
+        <div className="flex items-center justify-right bg-primary  h-[40px] px-[15px] w-order box-border">
+          <h1 className="text-white text-[18px] py-[10px] px-1">
+            Terms & Conditions
+          </h1>
+        </div>
+        <div
+          data-content
+          dangerouslySetInnerHTML={{ __html: cmsData }}
+          className="mt-4  terms"></div>
+      </div>
+    </Wrapper>
+  )
+}
 
-export default Terms;
+export default Terms

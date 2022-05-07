@@ -17,7 +17,7 @@ export const Input = ({
   override = {},
 }) => {
   let defaultClasses =
-    "border rounded-md text-black focus:text-red-500 field  h-[36px] disabled:bg-gray-100 text-base leading-[21px] "
+    "border rounded-md text-black focus:text-red-500 field  h-[36px] disabled:bg-gray-100 text-base leading-[21px] focus:text-pink-primary"
   if (extraClasses !== " ") {
     defaultClasses += extraClasses
   }

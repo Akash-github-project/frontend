@@ -412,6 +412,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
           <div className="flex col-span-4 rounded">
             <NumberInput
               name="mobileUser"
+              iType="tel"
               val={formik.values.mobileUser}
               dis={
                 phoneOtpStatus === "verified" || phoneOtpStatus === "sent"

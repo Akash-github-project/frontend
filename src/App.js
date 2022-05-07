@@ -7,7 +7,6 @@ import "./App.css"
 import "./index.css"
 import { Outlet } from "react-router-dom"
 import { Footer } from "./components/Footer"
-// import { Dropdown, NormalElement } from "./components/Dropdown";
 import Wrapper from "./components/wrapper"
 import { HeaderLogged } from "./components/HeaderLogged"
 import MainWrapper from "./components/MainWrapper"
@@ -22,17 +21,6 @@ function App() {
   )
 
   const queryClient = new QueryClient()
-  // const [store, setStore] = useState("");
-  // let item = {
-  // 	one: {
-  // 		text: "option 1",
-  // 		value: "op 1",
-  // 	},
-  // 	two: {
-  // 		text: "option 2",
-  // 		value: "op 2",
-  // 	},
-  // };
   return (
     <ModalContext.Provider
       value={{

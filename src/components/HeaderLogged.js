@@ -97,11 +97,9 @@ export const HeaderLogged = () => {
         </div>
 
         <Link to="/addBalance">
-          <span className="flex items-center justify-center show-in scale-small">
-            <button className="flex w-[2rem] h-[2rem]  items-center justify-center add-money show-in-small ml-[0.9rem] small-margin  mt-[6px] scale-small sm-font-sm small-btn"></button>
-            <span className="hide-in-small hide-at-large text-sm">
-              Add Money
-            </span>
+          <span className="flex items-center justify-center show-in  sm:scale-[.85] flex-col lg:flex-row md:mt-2 lg:mt-auto">
+            <button className="flex w-[2rem] h-[2rem]  items-center justify-center add-money sm:scale-[.9] show-in-small ml-[0.9rem] small-margin  mt-[6px] scale-small sm-font-sm small-btn"></button>
+            <span className="hide-at-large text-sm">Add Money</span>
           </span>
         </Link>
 

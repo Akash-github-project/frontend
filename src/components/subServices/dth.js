@@ -174,6 +174,7 @@ const Dth = () => {
                     <div className="flex flex-col w-full ">
                       <Input
                         Id="mobileOrSubscriber"
+                        iType="tel"
                         name="mobileOrSubscriber"
                         val={formik.values.mobileOrSubscriber}
                         change={(value) =>

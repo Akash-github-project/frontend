@@ -201,6 +201,7 @@ const Suggestions = () => {
                     numbersOnly={true}
                     name="phoneNo"
                     Id="phoneNo"
+                    iType="tel"
                     val={formik.values.phoneNo}
                     change={(value) =>
                       formik.setFieldValue("phoneNo", value, true)
@@ -264,7 +265,7 @@ const Suggestions = () => {
                 <div
                   className="text-gray-primary flex flex-col msg text-sm "
                   data-message=" ">
-                  <div className="flex items-center px-1 w-full gap-1">
+                  <div className="flex items-center w-full gap-1">
                     <input
                       ref={fileRef}
                       type="file"
@@ -275,18 +276,16 @@ const Suggestions = () => {
                       title="select a file"
                       onChange={handleFileUpload}
                     />
-                    <div className="flex border border-pink-primary w-full py-1 rounded">
-                      <span className="text-gray-600 inline-block mr-auto ">
+                    <div className="flex border border-pink-primary w-full py-1 px-1 rounded">
+                      {/* <span className="text-gray-600 inline-block mr-auto ">
                         Size:
                         {`${
                           sizeNumber.toFixed(2) == 0
                             ? ""
                             : sizeNumber.toFixed(2)
                         } ${postfix}`}
-                      </span>
-                      <span className="ml-auto mr-10 text-gray-600">
-                        {fileName}
-                      </span>
+                      </span> */}
+                      <span className="mr-10 text-gray-600">{fileName}</span>
                     </div>
                     <label
                       htmlFor="file"
@@ -300,6 +299,15 @@ const Suggestions = () => {
                     } text-red-600`}>
                     {isFileError.errorMessage}
                   </div>
+                </div>
+                <div></div>
+                <div className="border border-pink-primary rounded py-1 text-sm px-1">
+                  <span className="text-gray-600 inline-block">
+                    Size:
+                    {`${
+                      sizeNumber.toFixed(2) == 0 ? "" : sizeNumber.toFixed(2)
+                    } ${postfix}`}
+                  </span>
                 </div>
                 <div></div>
                 <Button

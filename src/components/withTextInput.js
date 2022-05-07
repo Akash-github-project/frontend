@@ -9,6 +9,8 @@ const WithTextInput = ({
   disable = false,
   blur = (e) => console.log(e.target.value),
   val,
+  alphanumeric = false,
+  type = "text",
   name = "",
   numbersOnly = false,
   maxlen = -1,
@@ -18,24 +20,42 @@ const WithTextInput = ({
   const handleChange = (e) => {
     console.log(e.target.value)
     let len = e.target.value.length
+    //check if alphanumeric is allowed
+    if (alphanumeric) {
+      if (maxlen != -1) {
+        if (maxlen > 0 && len <= maxlen) {
+          change(e.target.value.replace(/[^A-Za-z0-9]/g, ""))
+          return
+        }
+      } else {
+        change(e.target.value.replace(/[^0-9A-Za-z]/g, ""))
+        return
+      }
+    }
+
+    //check if number only is allowed
     if (numbersOnly) {
       if (maxlen != -1) {
         if (maxlen > 0 && len <= maxlen) {
           change(
             e.target.value.replace(/[^0-9]/g, "").replace(/(\..*?)\..*/g, "$1")
           )
+          return
         }
       } else {
         change(
           e.target.value.replace(/[^0-9]/g, "").replace(/(\..*?)\..*/g, "$1")
         )
+        return
       }
     } else {
       if (maxlen <= 0) {
         change(e.target.value)
+        return
       } else if (maxlen > 0 && len <= maxlen) {
         console.log(e.target.value)
         change(e.target.value)
+        return
       }
     }
   }
@@ -45,8 +65,8 @@ const WithTextInput = ({
         className={`flex border border-pink-600 focus-within:border-blue-400  m-0 w-full relative rounded ${exClasses}`}
         tabIndex={0}>
         <input
-          type="tel"
-          className="border-0 w-full  m-0 outline-none p-[11px] rounded text-[13px] leading-[21px] h-[34px] text-gray-primary disabled:bg-gray-200 text-base"
+          type={type}
+          className="border-0 w-full  m-0 outline-none p-[11px] rounded text-[13px] leading-[21px] h-[34px] text-gray-primary disabled:bg-gray-200 text-base focus:text-pink-primary "
           name={name}
           disabled={disable}
           id={Id}

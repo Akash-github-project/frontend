@@ -11,6 +11,7 @@ const OtpInput = ({
   error = "",
   runBlur = () => console.log("hello"),
   defLabel = "",
+  otherFunction = (value) => console.log(value),
   statusOtp = (value) => console.log(value),
   valid = false,
   outer = "",
@@ -24,6 +25,8 @@ const OtpInput = ({
   resendBtn = "",
   otpErrorStyle = "",
   disOrNot = false,
+  middleData = "",
+  middleStyle = "",
 }) => {
   const [state, dispatcher, timer] = useOtp((value) => fun(value))
 
@@ -49,7 +52,10 @@ const OtpInput = ({
           fieldClasses={`border border-pink-primary focus-within:border-blue-500 focus-within:border-2 ${contactInput}`}
           dis={state.status !== "unsent"}
           val={val}
-          change={(value) => change(value)}
+          change={(value) => {
+            otherFunction(value)
+            return change(value)
+          }}
         />
         <Button
           click={
@@ -68,16 +74,17 @@ const OtpInput = ({
           exClasses={`px-2 ${otpBtn}`}
         />
       </div>
+      <div className={`text-xs ${middleStyle}`}>{middleData}</div>
       <div className={`w-full ${errorStyle}`}>{error}</div>
       {state.status === "unsent" || state.status === "verified" ? null : (
-        <div className=" flex gap-3 m-1">
-          <span className="">Otp</span>
+        <div className=" flex gap-3 m-1 items-center">
+          <span className="">OTP</span>
           <NumberInput
-            iType="text"
+            iType="tel"
             maxlen={4}
             numbersOnly={true}
             change={(value) => dispatcher({ type: "edit", payload: value })}
-            extraClasses="w-28"
+            extraClasses="w-full"
             fieldClasses={`border-pink-600 focus:outline-none focus-within:border-blue-400 flex-1 min-h-[36px] w-full ${otpInputStyle}`}
             blurFunction={setBlur}
             blur={(value) => setBlur(value)}
@@ -104,7 +111,7 @@ const OtpInput = ({
       )}
 
       {state.show && state.error.isError ? (
-        <div className={`block p-1 m-1 text-xs text-red-600 ${otpErrorStyle}`}>
+        <div className={`block  h-3 m-1 text-xs text-red-600 ${otpErrorStyle}`}>
           {state.error.message}
         </div>
       ) : null}

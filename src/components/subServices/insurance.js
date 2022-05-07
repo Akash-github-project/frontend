@@ -131,6 +131,7 @@ const Insurance = () => {
                         extraClasses="min-h-[36px] rounded-r rounded-l-none"
                         Id="policyNo"
                         name="policyNo"
+                        iType="tel"
                         blurFunction={formik.handleBlur}
                         change={(value) =>
                           formik.setFieldValue("policyNo", value, true)
