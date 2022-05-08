@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import ForgotPass from "./forgotPass"
 import { Login } from "./Login"
 import { SignUp } from "./signup"
+import { SuccessFulRegistered } from "./userpages/sucessRegistered"
 
 const LoginWrapper = ({}) => {
   const [part, setPart] = useState("login")
@@ -31,6 +32,8 @@ const LoginWrapper = ({}) => {
               <Login goto={setPart} />
             ) : part == "signUp" ? (
               <SignUp goto={setPart} />
+            ) : part === "successfulReg" ? (
+              <SuccessFulRegistered goto={setPart} />
             ) : null}
           </div>
         </>

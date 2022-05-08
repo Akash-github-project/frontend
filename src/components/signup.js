@@ -4,6 +4,7 @@ import { Formik, Form, Field, ErrorMessage, FormikProvider } from "formik"
 import { Link } from "react-router-dom"
 import { useTimer } from "use-timer"
 import { NumberInput } from "./numberInput"
+import { isValidEmail, isValidMobileNo } from "./usefullFunctions"
 
 export const SignUp = ({ goto = () => console.log("login") }) => {
   const [values, setValues] = useState({
@@ -11,22 +12,9 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
     showPassword2: false,
   })
 
-  const [checkboxError, setCheckboxError] = useState("none")
-  const [checkbox, setCheckbox] = useState(false)
-  const checkboxRef = useRef(false)
-  // call it at each render
-
-  useEffect(() => {
-    console.log(checkboxRef.current === checkbox)
-    console.log(checkboxRef.current)
-    if (checkboxRef.current !== checkbox) {
-      if (checkbox === false) {
-        setCheckboxError("Please Agree to terms and conditions")
-      }
-    } else {
-      setCheckboxError("none")
-    }
-  }, [checkbox])
+  const [termsError, setTermsError] = useState("none")
+  const [terms, setTerms] = useState(false)
+  const termsRef = useRef(false)
 
   const formRef = useRef("")
   const [emailOtp, setEmailOtp] = useState(0)
@@ -53,10 +41,18 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
     console.error(value)
   }
   const setCheckboxFunction = () => {
-    checkboxRef.current = true
-    setCheckbox(!checkbox)
+    if (terms === true) {
+      setTermsError("Please Accept terms and conditions")
+    } else {
+      setTermsError("none")
+    }
+    setTerms(!terms)
   }
 
+  useEffect(() => {
+    formRef.current.validateForm()
+    console.log(formRef)
+  }, [emailOtpStatus, phoneOtpStatus])
   const {
     time: emailTime,
     start: emailTimeStart,
@@ -102,37 +98,15 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
   }
 
   const sendOtpEmail = () => {
-    let formikRef = formRef.current
-    formikRef.setFieldTouched("emailUser")
-    formikRef.validateField("emailUser")
-
-    console.log(formikRef)
-    if (
-      (formikRef.errors.emailUser === "" ||
-        formikRef.errors.emailUser === undefined) &&
-      formikRef.values.emailUser !== ""
-    ) {
-      askOtp("email")
-      setEmailOtpStatus("sent")
-      emailTimeStart()
-    }
+    askOtp("email")
+    setEmailOtpStatus("sent")
+    emailTimeStart()
   }
 
   const sendOtpPhone = () => {
-    let formikRef = formRef.current
-    formikRef.setFieldTouched("mobileUser")
-    formikRef.validateField("mobileUser")
-
-    console.log(formikRef)
-    if (
-      (formikRef.errors.mobileUser === "" ||
-        formikRef.errors.mobileUser === undefined) &&
-      formikRef.values.mobileUser !== ""
-    ) {
-      askOtp("mobile")
-      setPhoneOtpStatus("sent")
-      phoneTimeStart()
-    }
+    askOtp("mobile")
+    setPhoneOtpStatus("sent")
+    phoneTimeStart()
   }
 
   const resendPhoneOtp = () => {
@@ -193,30 +167,48 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
     if (values.signUpPass1 !== values.signUpPass2) {
       errors.signUpPass2 = "passwords don't match"
     }
-    if (isNaN(parseInt(values.mobileUser)) === false) {
-      numberAsString = Number(values.mobileUser).toString()
-      if (
-        numberAsString[0] !== "6" &&
-        numberAsString[0] !== "7" &&
-        numberAsString[0] !== "8" &&
-        numberAsString[0] !== "9"
-      ) {
-        errors.mobileUser = "invalid mobile no"
-      } else if (numberAsString.length < 10 || numberAsString.length > 10) {
-        errors.mobileUser = "invalid mobile no length"
+    if (isValidMobileNo(values.mobileUser) !== "none") {
+      errors.mobileUser = isValidMobileNo(values.mobileUser)
+    }
+
+    if (Object.keys(errors).length === 0 && emailOtpStatus !== "verified") {
+      errors.emailUser = "Please verify Email"
+    }
+    //otp email section
+    if (
+      typeof values.otpEmail !== "undefined" &&
+      emailOtpStatus !== "verified"
+    ) {
+      if (values.otpEmail == emailOtp && values.otpEmail !== "") {
+        formikRef.setFieldError("emailUser", "")
+        formikRef.setFieldValue("otpEmail", "")
+        setEmailOtpStatus("verified")
+        emailTimeReset()
+        console.log(errors)
+      } else {
+        if (formikRef.touched.otpEmail === true) {
+          errors.otpEmail = "otp does not match"
+        }
       }
-    } else {
-      errors.mobileUser = "invalid Mobile no"
+    }
+
+    if (values.emailUser.match(EMAIL_REGEX) === null) {
+      errors.emailUser = "enter a valid email"
     }
 
     //otp moobile section
+    //if there is no errors above it
+    //it means that there is no errors above it
+    if (Object.keys(errors).length === 0 && phoneOtpStatus !== "verified") {
+      errors.mobileUser = "Please verify phone No"
+    }
     if (
       typeof values.otpPhone !== "undefined" &&
       phoneOtpStatus !== "verified"
     ) {
       if (values.otpPhone == phoneOtp && values.otpPhone !== "") {
-        console.log("ran ")
         setPhoneOtpStatus("verified")
+        formikRef.setFieldError("mobileUser", "")
         formikRef.setFieldValue("otpPhone", "")
         phoneTimeReset()
       } else {
@@ -227,36 +219,8 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
           errors.otpPhone = "otp does not match"
         }
       }
-    } else {
-      if (formikRef.errors.otpPhone !== "") {
-        errors.otpPhone = ""
-      }
     }
-
-    //errors related to email
-    if (values.emailUser.match(EMAIL_REGEX) === null) {
-      errors.emailUser = "enter a valid email"
-    }
-
-    //otp email section
-    if (
-      typeof values.otpEmail !== "undefined" &&
-      emailOtpStatus !== "verified"
-    ) {
-      if (values.otpEmail == emailOtp && values.otpEmail !== "") {
-        setEmailOtpStatus("verified")
-        formikRef.setFieldValue("otpEmail", "")
-        emailTimeReset()
-      } else {
-        if (formikRef.touched.otpEmail === true) {
-          errors.otpEmail = "otp does not match"
-        }
-      }
-    } else {
-      if (formikRef.errors.otpEmail !== "") {
-        errors.otpEmail = ""
-      }
-    }
+    console.log(errors)
     return errors
   }
 
@@ -273,24 +237,29 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
     })
   }
 
+  const handleSubmit = (values, formikbag) => {
+    console.log("camehere")
+    // console.log(values)
+    if (terms === false) {
+      setTermsError("Please Accept terms and conditions")
+    }
+    if (
+      emailOtpStatus === "verified" &&
+      phoneOtpStatus === "verified" &&
+      terms === true
+    ) {
+      console.log(values)
+    }
+
+    formikbag.setSubmitting(false)
+  }
+
   return (
     <Formik
       initialValues={{ ...initialFormValues }}
       validate={validateFormSignUp}
-      onSubmit={(values, { setSubmitting }) => {
-        setSubmitting(true)
-        console.log(checkbox === false)
-        if (checkbox === false) {
-          checkboxRef.current = true
-          setCheckboxError("Please Agree to terms and conditions")
-        } else if (phoneOtpStatus !== "verified") {
-          formRef.current.setFieldError("mobileUser", "Please Verify Mobile")
-        } else if (emailOtpStatus !== "verified") {
-          formRef.current.setFieldError("emailUser", "Please Verify Mobile")
-        } else {
-          help(values)
-        }
-      }}
+      onSubmit={handleSubmit}
+      validateOnMount={true}
       innerRef={formRef}>
       {(formik) => (
         <Form className="grid grid-cols-6 gap-1 items-center p-0 md:p-3 lg:p-4">
@@ -340,8 +309,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
             <button
               className="h-[34px] px-1 bg-pink-primary text-white disabled:bg-gray-600 rounded text-[13px]"
               disabled={
-                (formik.errors.emailUser === "" ||
-                  formik.errors.emailUser === undefined) &&
+                isValidEmail(formik.values.emailUser) === "none" &&
                 formik.values.emailUser != ""
                   ? false
                   : true
@@ -431,8 +399,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
             <button
               className="h-[34px] px-1 bg-pink-primary text-white disabled:bg-gray-600 rounded text-[13px]"
               disabled={
-                (formik.errors.mobileUser === "" ||
-                  formik.errors.mobileUser === undefined) &&
+                isValidMobileNo(formik.values.mobileUser) === "none" &&
                 formik.values.mobileUser != ""
                   ? false
                   : true
@@ -543,7 +510,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
 
           <div className="flex flex-col col-span-full text-center py-2 ">
             <span className="col-span-full text-xs text-center h-3">
-              {checkboxError === "none" ? null : checkboxError}
+              {termsError === "none" ? null : termsError}
             </span>
             <div className="mx-auto flex">
               <Checkbox
@@ -554,7 +521,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
                 id="agree"
                 name="agree"
                 // value={formRef.current.agree}
-                checked={checkbox}
+                checked={terms}
                 onChange={() => setCheckboxFunction()}
               />
               <p className="text-gray-primary text-sm">
