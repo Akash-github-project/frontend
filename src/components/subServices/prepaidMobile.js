@@ -29,6 +29,7 @@ import {
   storeRenderType,
   showConfirmBill,
   setAmountValid,
+  clearAll,
 } from "../../app/features/prepaidPlansSlice"
 import axios from "axios"
 
@@ -127,6 +128,10 @@ const PrepaidMobile = ({ open }) => {
       formik.setFieldValue("circle", "", false)
       formik.setFieldValue("operator", "", false)
       formik.setFieldValue("amount", "", false)
+      dispatch(clearAll())
+      formik.setFieldTouched("circle", false, false)
+      formik.setFieldTouched("operator", false, false)
+      formik.setFieldTouched("amount", false, false)
       if (isValidMobileNo(values.phoneNo) == "none") {
         axios
           .get(
@@ -184,11 +189,12 @@ const PrepaidMobile = ({ open }) => {
       console.log(validationRef.operator !== values.operator, "texting")
       formik.setFieldValue("circle", "", false)
       formik.setFieldValue("amount", "", false)
-
+      formik.setFieldTouched("amount", false, false)
       validationRef.operator = values.operator
       validationRef.circle = ""
       validationRef.amount = ""
 
+      dispatch(clearAll())
       handleOperator(values.operator)
     } else if (validationRef.operator === "") {
       errors.operator = "select an operator"
@@ -202,12 +208,14 @@ const PrepaidMobile = ({ open }) => {
       dispatch(storeShowPlan(false))
       console.log("circle changed")
       formik.setFieldValue("amount", "", false)
+      dispatch(clearAll())
       validationRef.circle = values.circle
       validationRef.amount = ""
     } else if (values.circle === "") {
       errors.circle = "Please select a circle"
     }
     if (values.amount === "") {
+      dispatch(clearAll())
       errors.amount = "please enter a valid amount"
     }
     return { ...errors }

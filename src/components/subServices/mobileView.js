@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react"
 import { Tabs, useTabState, Panel } from "@bumaga/tabs"
 import "../../css/planList.css"
-import { toggleOverlay } from "../../app/features/overlaySlice"
 import { useSelector, useDispatch } from "react-redux"
 import { storetPlansInfo } from "../../app/features/prepaidPlansSlice"
 import axios from "axios"
 import opr from "../../otherData/operator.json"
 import { useQuery } from "react-query"
+import { BASE_ROUTE } from "../routes"
 
 // import circleList from "../../otherData/circle.json";
 
@@ -43,9 +43,9 @@ const MobileView = ({ close }) => {
   const { isLoading, error, data } = useQuery("repoData", () =>
     axios
       .get(
-        `http://65.0.216.133:8080/rechaxn/api/mplansparam/${
-          opList[`${operator}`]
-        }/${JSON.parse(circleItem).code}`
+        `${BASE_ROUTE}/api/mplansparam/${opList[`${operator}`]}/${
+          JSON.parse(circleItem).code
+        }`
       )
       .then((res) => {
         let response = res.data

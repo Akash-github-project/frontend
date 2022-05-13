@@ -53,6 +53,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
     formRef.current.validateForm()
     console.log(formRef)
   }, [emailOtpStatus, phoneOtpStatus])
+
   const {
     time: emailTime,
     start: emailTimeStart,

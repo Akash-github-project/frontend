@@ -29,6 +29,7 @@ const WrapperPrepaid = () => {
             <PlansList />
           ) : (
             <SimpleModal
+              exClasses="p-1"
               open={openModal}
               closeModal={() => setOpenModal(false)}>
               <MobileView close={() => setOpenModal(false)} />

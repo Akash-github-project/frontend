@@ -14,10 +14,10 @@ import {
   showConfirmBill,
   toggleCouponState,
 } from "../../app/features/prepaidPlansSlice"
-
-const cn = (...args) => args.filter(Boolean).join(" ")
+import { BASE_ROUTE } from "../routes"
 
 const Tab = ({ children }) => {
+  const cn = (...args) => args.filter(Boolean).join(" ")
   const { isActive, onClick } = useTabState()
 
   return (
@@ -48,9 +48,9 @@ const PlansList = () => {
   const { isLoading, error, data } = useQuery("repoData", () =>
     axios
       .get(
-        `${process.env.REACT_APP_BASE_URL}/api/mplansparam/${
-          opList[`${operator}`]
-        }/${JSON.parse(circle).code}`
+        `${BASE_ROUTE}/api/mplansparam/${opList[`${operator}`]}/${
+          JSON.parse(circle).code
+        }`
       )
       .then((res) => {
         let response = res.data
