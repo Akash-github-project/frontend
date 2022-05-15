@@ -4,6 +4,7 @@ import opr from "../../otherData/operator.json"
 import { useQuery } from "react-query"
 import { Tabs, useTabState, Panel } from "@bumaga/tabs"
 import "../../css/planList.css"
+import operator from "../../otherData/operator.json"
 import { useDispatch, useSelector } from "react-redux"
 import { storetPlansInfo } from "../../app/features/prepaidPlansSlice"
 import {
@@ -15,6 +16,13 @@ import {
   toggleCouponState,
 } from "../../app/features/prepaidPlansSlice"
 import { BASE_ROUTE } from "../routes"
+//operator list
+let operatorList = operator.list.map((item) => ({
+  name: item.op_name,
+  value: item.op_key,
+  photo: item.image,
+  code: item.op_code,
+}))
 
 const Tab = ({ children }) => {
   const cn = (...args) => args.filter(Boolean).join(" ")
@@ -44,6 +52,14 @@ const PlansList = () => {
   useEffect(() => {
     setState(0)
   }, [])
+
+  const filterOperator = () => {
+    let returnValue = operatorList.filter(
+      (element) => element.value == operator
+    )
+    let operatorName = returnValue[0].name
+    return operatorName
+  }
 
   const { isLoading, error, data } = useQuery("repoData", () =>
     axios
@@ -84,7 +100,7 @@ const PlansList = () => {
       <Tabs state={[state, setState]}>
         <div className="hidden lg:grid grid-cols-12 w-full gap-1 mt-2 ">
           <div className="lg:hidden w-full font-medium leading-5 capitalize col-span-full text-center">
-            some company plans
+            Recharge Plans of {filterOperator()} - {JSON.parse(circle).name}
           </div>
           {/* <div className="flex flex-col col-span-full w-full lg:col-span-2 lg:max-w-40 xl:w-48 mr-auto"> */}
           <div className="flex flex-col w-full col-span-2 mr-auto">
@@ -98,7 +114,7 @@ const PlansList = () => {
           </div>
           <div className=" col-span-full lg:col-span-10 pl-8 xl:pl-4">
             <h2 className="hidden lg:block w-full font-medium leading-5 capitalize">
-              some company plans
+              Recharge Plans of {filterOperator()} - {JSON.parse(circle).name}
             </h2>
             <hr className="mt-4" />
 

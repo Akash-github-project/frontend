@@ -12,6 +12,7 @@ const initialState = {
   confirmBillState: false,
   couponVal: "",
   couponState: true,
+  amount: "",
   couponLegal: false,
   isValidAmount: false,
 }
@@ -33,6 +34,24 @@ export const prepaidPlan = createSlice({
       state.couponState = true
       state.couponVal = ""
       state.isValidAmount = false
+      state.amount = ""
+    },
+    clearAllExceptAmount: function (state) {
+      state.plansList = []
+      state.plansInfo = {}
+      state.phoneNo = ""
+      state.operator = {}
+      state.selectedPlan = ""
+      state.circle = ""
+      state.showPlan = false
+      state.confirmBillState = false
+      state.couponLegal = false
+      state.couponState = true
+      state.couponVal = ""
+      state.isValidAmount = false
+    },
+    storeAmount: function (state, action) {
+      state.amount = action.payload
     },
     storeCouponVal: function (state, action) {
       state.couponVal = action.payload
@@ -93,5 +112,6 @@ export const {
   storeCouponVal,
   toggleCouponState,
   setAmountValid,
+  storeAmount,
 } = prepaidPlan.actions
 export default prepaidPlan.reducer

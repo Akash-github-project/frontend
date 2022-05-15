@@ -7,9 +7,14 @@ import axios from "axios"
 import opr from "../../otherData/operator.json"
 import { useQuery } from "react-query"
 import { BASE_ROUTE } from "../routes"
-
+import operatorDetails from "../../otherData/operator.json"
 // import circleList from "../../otherData/circle.json";
-
+let operatorList = operatorDetails.list.map((item) => ({
+  name: item.op_name,
+  value: item.op_key,
+  photo: item.image,
+  code: item.op_code,
+}))
 const cn = (...args) => args.filter(Boolean).join(" ")
 const Tab = ({ children }) => {
   const { isActive, onClick } = useTabState()
@@ -39,7 +44,6 @@ const MobileView = ({ close }) => {
   const circleItem = useSelector((state) => state.prepaidPlan.circle)
   const operator = useSelector((state) => state.prepaidPlan.operator)
   const dispatch = useDispatch()
-
   const { isLoading, error, data } = useQuery("repoData", () =>
     axios
       .get(
@@ -58,6 +62,13 @@ const MobileView = ({ close }) => {
       })
   )
 
+  const filterOperator = () => {
+    let returnValue = operatorList.filter(
+      (element) => element.value == operator
+    )
+    let operatorName = returnValue[0].name
+    return operatorName
+  }
   const handlePlanChoose = (e) => {
     let flatList
     let plan
@@ -79,7 +90,7 @@ const MobileView = ({ close }) => {
       <Tabs state={[state, setState]}>
         <div className="grid grid-cols-12 w-full gap-2 mt-2">
           <h2 className=" stickey top-6 col-span-full font-medium leading-5 capitalize text-center">
-            Recharge Plans of {operator.name} -{" "}
+            Recharge Plans of {filterOperator()} -{" "}
             {circleItem.length > 1 ? JSON.parse(circleItem).name : ""}
           </h2>
           <div className="col-span-full mx-auto w-11/12">

@@ -17,9 +17,13 @@ export const SuccessFulRegistered = ({
             />
           </div>
         </div>
-        <div className="mt-2 text-black text-center col-span-full text-sm py-2 w-full flex justify-center items-center">
-          You have succesfully Registered Now go to &nbsp;
-          <Button click={() => goto("login")} text="Login" />
+        <div className="mt-2 text-black text-center col-span-full text-sm py-2 w-full flex justify-center items-center flex-col">
+          <span>You have succesfully Registered</span>
+          <Button
+            click={() => goto("login")}
+            text="Please go to login"
+            exClasses="w-full"
+          />
         </div>
       </div>
     </>

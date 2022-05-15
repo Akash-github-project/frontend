@@ -104,6 +104,12 @@ const PrepaidMobile = ({ open }) => {
     }
   }
 
+  useEffect(() => {
+    if (planInfo.amount !== undefined) {
+      formik.setFieldValue("amount", planInfo.amount, false)
+    }
+  }, [planInfo.amount])
+
   //this useEffect takes cate of dispaching the action to show modal
   useEffect(() => {
     if (amouontValidity === true) showModal()
@@ -213,7 +219,8 @@ const PrepaidMobile = ({ open }) => {
     } else if (values.circle === "") {
       errors.circle = "Please select a circle"
     }
-    if (values.amount === "") {
+    // if (values.amount === "") {
+    if (values.amount != planInfo.amount) {
       dispatch(clearAll())
       errors.amount = "please enter a valid amount"
     }
@@ -238,13 +245,6 @@ const PrepaidMobile = ({ open }) => {
     validate,
     onSubmit: (value) => HandleSubmit(value),
   })
-
-  useEffect(() => {
-    if (planInfo.amount !== undefined) {
-      formik.setFieldValue("amount", planInfo.amount, false)
-    }
-  }, [planInfo.amount])
-
   const setProps = (field, value) => {
     formik.setFieldValue(field, value)
   }
