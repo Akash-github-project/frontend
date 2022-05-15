@@ -3,18 +3,26 @@ import ForgotPass from "./forgotPass"
 import { Login } from "./Login"
 import { SignUp } from "./signup"
 import { SuccessFulRegistered } from "./userpages/sucessRegistered"
+import TwoFactorOtp from "./userpages/twoFactorOtp"
 
 const LoginWrapper = ({}) => {
   const [part, setPart] = useState("login")
   return (
     <div className="w-full">
-      {part === "forgotPass" ? <ForgotPass goto={setPart} /> : null}
-      {part === "forgotPass" ? null : (
+      {part === "forgotPass" ? (
+        <ForgotPass goto={setPart} />
+      ) : part === "successfulReg" ? (
+        <SuccessFulRegistered goto={setPart} />
+      ) : null}
+
+      {part === "forgotPass" || part === "successfulReg" ? null : (
         <>
           <div className="w-full ">
             <button
               className={`w-1/2 px-4 py-2 text-[21px] font-medium border-b-2 border-b-gray-separator ${
-                part == "login" ? "border-b-pink-primary" : ""
+                part == "login" || part == "twoFactorAuth"
+                  ? "border-b-pink-primary"
+                  : ""
               }`}
               onClick={() => setPart("login")}>
               Login
@@ -34,6 +42,8 @@ const LoginWrapper = ({}) => {
               <SignUp goto={setPart} />
             ) : part === "successfulReg" ? (
               <SuccessFulRegistered goto={setPart} />
+            ) : part === "twoFactorAuth" ? (
+              <TwoFactorOtp goto={setPart} />
             ) : null}
           </div>
         </>

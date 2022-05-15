@@ -37,9 +37,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
       return "none"
     }
   }
-  const help = (value) => {
-    console.error(value)
-  }
+
   const setCheckboxFunction = () => {
     if (terms === true) {
       setTermsError("Please Accept terms and conditions")
@@ -74,6 +72,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
     timerType: "DECREMENTAL",
   })
 
+  //replace this logic with network request logic and don't store otp on system
   const askOtp = (type) => {
     console.log("called askOtp")
     let generatedOtpEmail = 0
@@ -81,21 +80,46 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
     let generatedOtpPhone = 0
 
     if (type === "email") {
-      generatedOtpEmail =
-        Math.random() * 6 + Math.random() * 6 * 10 + Math.random() * 6 * 100
-      generatedOtpEmail = Math.floor(generatedOtpEmail)
-      console.dir("otpEmail", generatedOtpEmail)
+      generatedOtpEmail = 122121
       //setting otp email
       setEmailOtp(generatedOtpEmail)
+      console.log("otpEmail", generatedOtpEmail)
     } else if (type === "mobile") {
-      generatedOtpPhone =
-        Math.random() * 6 + Math.random() * 6 * 10 + Math.random() * 6 * 100
-      generatedOtpPhone = Math.floor(generatedOtpPhone)
+      generatedOtpPhone = 222222
 
       //setting otp mobile
       console.log("otpMobile", generatedOtpPhone)
       setPhoneOtp(generatedOtpPhone)
     }
+  }
+
+  const matchPhoneOtp = (value) => {
+    if (value.length < 6) {
+      return false
+    }
+    // const req = fetch("comeijeroej/")
+    // const res = await req.json()
+    // if (res === true) return true
+    // else return false
+
+    if (value == phoneOtp && value !== "") {
+      return true
+    } else return false
+  }
+
+  const matchEmailOtp = (value) => {
+    if (value.length < 6) {
+      return false
+    }
+    // const req = fetch("comeijeroej/")
+    // const res = await req.json()
+
+    if (value == emailOtp && value !== "") {
+      return true
+    } else return false
+    // if(res === true)
+    // return true
+    // else return false
   }
 
   const sendOtpEmail = () => {
@@ -180,7 +204,10 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
       typeof values.otpEmail !== "undefined" &&
       emailOtpStatus !== "verified"
     ) {
-      if (values.otpEmail == emailOtp && values.otpEmail !== "") {
+      //need to replace this to actually do validation
+      //write a function to do so
+      // if (values.otpEmail == emailOtp && values.otpEmail !== "") {
+      if (matchEmailOtp(values.otpEmail) === true) {
         formikRef.setFieldError("emailUser", "")
         formikRef.setFieldValue("otpEmail", "")
         setEmailOtpStatus("verified")
@@ -207,7 +234,10 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
       typeof values.otpPhone !== "undefined" &&
       phoneOtpStatus !== "verified"
     ) {
-      if (values.otpPhone == phoneOtp && values.otpPhone !== "") {
+      //need to replace this to actually do validation
+      //write a function to do so
+      // if (values.otpPhone == phoneOtp && values.otpPhone !== "") {
+      if (matchPhoneOtp(values.otpPhone) === true) {
         setPhoneOtpStatus("verified")
         formikRef.setFieldError("mobileUser", "")
         formikRef.setFieldValue("otpPhone", "")
@@ -250,9 +280,10 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
       terms === true
     ) {
       console.log(values)
+      formikbag.setSubmitting(true)
+      formikbag.setSubmitting(false)
+      goto("successfulReg")
     }
-
-    formikbag.setSubmitting(false)
   }
 
   return (
@@ -344,10 +375,23 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
                   className="text-sm w-1/3 text-gray-primary">
                   OTP
                 </label>
-                <Field
+                {/* <Field
                   name="otpEmail"
                   className="border border-pink-primary rounded h-full w-1/4 px-2 "
                   type="tel"
+                /> */}
+                <NumberInput
+                  Id="otpEmail"
+                  name="otpEmail"
+                  iType="tel"
+                  maxlen={6}
+                  numbersOnly={true}
+                  val={formik.values.otpEmail}
+                  fieldClasses="border border-pink-primary focus-within:border-blue-500 focus-within:border-2 w-24"
+                  change={(value) =>
+                    formik.setFieldValue("otpEmail", value, true)
+                  }
+                  blur={formik.handleBlur}
                 />
                 <>
                   {emailOtpStatus === "sent" ? (
@@ -433,10 +477,23 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
                   className="text-sm w-1/3 text-gray-primary">
                   OTP
                 </label>
-                <Field
+                {/* <Field
                   name="otpPhone"
                   className="border border-pink-primary rounded h-full w-1/4 px-2"
                   type="tel"
+                /> */}
+                <NumberInput
+                  Id="otpPhone"
+                  name="otpPhone"
+                  iType="tel"
+                  maxlen={6}
+                  numbersOnly={true}
+                  val={formik.values.otpPhone}
+                  fieldClasses="border border-pink-primary focus-within:border-blue-500 focus-within:border-2 w-24"
+                  change={(value) =>
+                    formik.setFieldValue("otpPhone", value, true)
+                  }
+                  blur={formik.handleBlur}
                 />
                 <>
                   {phoneOtpStatus === "sent" ? (

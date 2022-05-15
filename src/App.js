@@ -1,6 +1,6 @@
 import { Header } from "./components/Header"
 import React, { createContext } from "react"
-import { QueryClient, QueryClientProvider, useQuery } from "react-query"
+import { QueryClient, QueryClientProvider } from "react-query"
 import { useState } from "react"
 import { useSelector } from "react-redux"
 import "./App.css"
@@ -10,7 +10,7 @@ import { Footer } from "./components/Footer"
 import Wrapper from "./components/wrapper"
 import { HeaderLogged } from "./components/HeaderLogged"
 import MainWrapper from "./components/MainWrapper"
-// import NotificationBar from "./components/NotificationBar";
+
 import LoginOverlay from "./components/loginOverlay"
 export const ModalContext = createContext()
 function App() {

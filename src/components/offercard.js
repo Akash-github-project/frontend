@@ -49,7 +49,11 @@ const Offercard = ({ promocode, cashback, title, frequency, details }) => {
         override={{ fontSize: "13px" }}
         click={() => handleClick()}
       />
+      {/* this is not for login it just uses the modal used by login screen */}
       <LoginModal closeModal={() => setOpenModal(false)} open={openModal}>
+        <div className="text-2xl text-center p-4 font-semibold">
+          Terms &amp; Conditions{" "}
+        </div>
         <Danger content={details} />
       </LoginModal>
     </div>

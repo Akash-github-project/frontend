@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { Tabs, useTabState, Panel } from "@bumaga/tabs"
 import "../../css/planList.css"
 import { useSelector, useDispatch } from "react-redux"

@@ -3,11 +3,8 @@ import { useSelector, useDispatch } from "react-redux"
 import { loginId, password, remember } from "../app/features/LoginSlice"
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import Checkbox from "react-custom-checkbox"
-import { useMediaQuery } from "@mui/material"
-import { NumberInput } from "./numberInput"
 
 export const Login = ({ goto = () => console.log("forgotPass") }) => {
-  const screen = useMediaQuery("(min-width:)")
   const [value, setValues] = React.useState({
     showPassword: false,
   })
@@ -59,8 +56,18 @@ export const Login = ({ goto = () => console.log("forgotPass") }) => {
     })
   }
 
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault()
+  const doLogin = (username, pass) => {
+    if (username === "akashlj2@gmail.com" && pass === "10Essic@") {
+      goto("twoFactorAuth")
+    } else {
+      ref.current.setFieldError("otpValue", "wrong credentials", false)
+    }
+  }
+
+  const handleSunmit = (values, { setSubmitting }) => {
+    setSubmitting(false)
+    doLogin(values.username, values.passwd)
+    console.log(values)
   }
 
   const dispatch = useDispatch()
@@ -71,11 +78,7 @@ export const Login = ({ goto = () => console.log("forgotPass") }) => {
         initialValues={{ ...initialFormValues }}
         validate={validateForm}
         innerRef={ref}
-        onSubmit={(values, { setSubmitting }) => {
-          setSubmitting(false)
-          console.log(values)
-          return
-        }}>
+        onSubmit={handleSunmit}>
         <Form className="grid grid-cols-6 gap-2 items-center p-0 md:p-3 lg:p-4">
           <span className="col-span-full text-base text-center text-gray-600">
             We are glad to see you again!
@@ -164,75 +167,7 @@ export const Login = ({ goto = () => console.log("forgotPass") }) => {
             </a>
           </div>
         </Form>
-        {/* {(formik) => (
-          <form onSubmit={formik.handleSubmit}>
-            <div className="px-1 py-1 mx-1 mt-4 text-left">
-              <div className="mt-4 w-full "> */}
-        {/* username */}
-        {/* {formik.errors.username && formik.touched.username ? (
-                  <div className="w-full text-center text-xs">
-                    {formik.errors.username}
-                  </div>
-                ) : (
-                  <div className="w-full text-center text-xs"></div>
-                )}
 
-                <div className=" mb-2 flex gap-4 items-center ">
-                  <Label
-                    forItem="username"
-                    message="Mobile of Email"
-                    extraClasses="w-[30%]"
-                  />
-                  <OutlinedInput
-                    style={{ width: "70%" }}
-                    size="small"
-                    id="username"
-                    name="username"
-                    type="text"
-                    {...formik.getFieldProps("username")}
-                  />
-                </div> */}
-        {/* username end*/}
-        {/* password */}
-
-        {/* {formik.errors.passwd && formik.touched.passwd ? (
-                  <div className="w-full text-center text-xs">
-                    {formik.errors.passwd}
-                  </div>
-                ) : (
-                  <div className="w-full text-center text-xs"></div>
-                )}
-                <div className=" mb-2 flex gap-4 items-center ">
-                  <Label
-                    forItem="passwd"
-                    message="Password"
-                    extraClasses="w-[30%]"
-                  />
-
-                  <OutlinedInput
-                    style={{ width: "70%" }}
-                    size="small"
-                    id="passwd"
-                    name="passwd"
-                    type={value.showPassword ? "text" : "password"}
-                    {...formik.getFieldProps("passwd")}
-                    endAdornment={
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={handleClickShowPassword}
-                          onMouseDown={handleMouseDownPassword}
-                          edge="end">
-                          {value.showPassword ? (
-                            <Visibility />
-                          ) : (
-                            <VisibilityOff />
-                          )}
-                        </IconButton>
-                      </InputAdornment>
-                    }
-                  />
-                </div> */}
         {/* password end */}
 
         {/*forgot password and rememer me  */}

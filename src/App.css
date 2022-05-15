@@ -59,7 +59,7 @@ li {
 }
 
 input.field {
-  max-width: 65%;
+  /* max-width: 65%; */
   padding: 0.375rem 0.75rem;
   font-weight: 400;
   border: 1px solid #f5317c;
@@ -425,4 +425,25 @@ lh-14 {
 }
 i {
   font-size: 20px;
+}
+
+.react-datepicker__year-option:first-of-type {
+  position: relative;
+}
+.react-datepicker__year-option:first-of-type::after {
+  content: "\25B2";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.react-datepicker__year-option:last-of-type {
+  position: relative;
+}
+.react-datepicker__year-option:last-of-type::after {
+  content: "\25BC";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

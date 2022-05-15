@@ -5,16 +5,14 @@ import { Input } from "../../input"
 import OtpInput from "../../otp"
 import WithTextInput from "../../withTextInput"
 import PasswordModal from "../../modals/passwordModal"
+import DateField from "../../DateInput"
 
 const PersonalInfo = () => {
   //section specific to otp
   const [otpVal, setOtpVal] = useState("")
   const [isInvalid, setIsInvalid] = useState(true)
   const [existing, setExisting] = useState("")
-  const [current, setCurrent] = useState("")
-  const handlePhoneNoInput = (value) => {
-    setOtpVal(value)
-  }
+  const [currentDate, setDate] = useState("")
 
   useEffect(() => {
     if (
@@ -98,10 +96,12 @@ const PersonalInfo = () => {
         </div>
         <div className="flex flex-col ">
           <span className="text-gray-primary">Date of Birth (DD-MM-YYYY)</span>
-          <Input
-            iType="date"
-            override={{ maxWidth: "100%" }}
-            holder="Date Of Birth"
+          <DateField
+            name="dob"
+            Id="dob"
+            currentDate={currentDate}
+            change={(date) => setDate(date)}
+            holder="Select Date Of Birth"
           />
         </div>
         <div className="flex flex-col">

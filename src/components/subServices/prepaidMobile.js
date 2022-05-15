@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer, useRef } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import LoginWrapper from "../LoginWrapper"
 import Card from "../card"
 import LoginModal from "../userpages/loginModal"
@@ -12,13 +12,11 @@ import { Radio, RadioGroup, InputLabel } from "@mui/material"
 import { renderProvider } from "../../otherData/inputWithImage"
 import "../../css/searchWithImages.css"
 import "../../css/selectSearch.css"
-import dataPlan from "./dataPlan.json"
+
 import prepaidChangeJson from "./specialJsons/preapidChangeList.json"
-import { Formik, useFormik } from "formik"
+import { useFormik } from "formik"
 import { NumberInput } from "../numberInput"
 import { isValidMobileNo } from "../usefullFunctions"
-import { Input } from "../input"
-import Button from "../button"
 
 // imports for using redux
 import { useSelector, useDispatch } from "react-redux"
@@ -106,6 +104,7 @@ const PrepaidMobile = ({ open }) => {
     }
   }
 
+  //this useEffect takes cate of dispaching the action to show modal
   useEffect(() => {
     if (amouontValidity === true) showModal()
   }, [amouontValidity])
