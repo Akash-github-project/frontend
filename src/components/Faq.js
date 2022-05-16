@@ -42,131 +42,6 @@ function process(x) {
   return [...list]
 }
 
-const data = [
-  {
-    title: "FAQ (How it works)",
-    rows: [
-      {
-        title: (
-          <div className="hover:text-blue-500 text-gray-primary">
-            Lorem ipsum dolor sit amet
-          </div>
-        ),
-        content: (
-          <p>
-            Lorem ipjsum dolor sit amet, consectetur adipiscing elit. In sed
-            tempor sem. Aenean vel turpis feugiat, ultricies metus at, consequat
-            velit. Curabitur est nibh, varius in tellus nec, mattis pulvinar
-            metus. In maximus cursus lorem, nec laoreet velit eleifend vel. Ut
-            aliquet mauris tortor, sed egestas libero interdum vitae. Fusce sed
-            commodo purus, at tempus turpis.
-          </p>
-        ),
-      },
-      {
-        title: (
-          <div className="hover:text-blue-500 text-gray-primary">
-            Nunc maximus, magna at ultricies elementum,
-          </div>
-        ),
-        content: (
-          <p>
-            Nunc maximus, magna at ultricies elementum, risus turpis vulputate
-            quam, vitae convallis ex tortor sed dolor.
-          </p>
-        ),
-      },
-      {
-        title: (
-          <div className="hover:text-blue-500 text-gray-primary">
-            Nunc maximus, magna at ultricies elementum,
-          </div>
-        ),
-        content: (
-          <p>
-            Nunc maximus, magna at ultricies elementum, risus turpis vulputate
-            quam, vitae convallis ex tortor sed dolor.
-          </p>
-        ),
-      },
-      {
-        title: (
-          <div className="hover:text-blue-500 text-gray-primary">
-            Nunc maximus, magna at ultricies elementum,
-          </div>
-        ),
-        content: (
-          <p>
-            Nunc maximus, magna at ultricies elementum, risus turpis vulputate
-            quam, vitae convallis ex tortor sed dolor.
-          </p>
-        ),
-      },
-    ],
-  },
-  {
-    title: "FAQ (How it works)",
-    rows: [
-      {
-        title: (
-          <div className="hover:text-blue-500 text-gray-primary">
-            Lorem ipsum dolor sit amet
-          </div>
-        ),
-        content: (
-          <p>
-            `Lorem ipjsum dolor sit amet, consectetur adipiscing elit. In sed
-            tempor sem. Aenean vel turpis feugiat, ultricies metus at, consequat
-            velit. Curabitur est nibh, varius in tellus nec, mattis pulvinar
-            metus. In maximus cursus lorem, nec laoreet velit eleifend vel. Ut
-            aliquet mauris tortor, sed egestas libero interdum vitae. Fusce sed
-            commodo purus, at tempus turpis.`
-          </p>
-        ),
-      },
-      {
-        title: (
-          <div className="hover:text-blue-500 text-gray-primary">
-            Nunc maximus, magna at ultricies elementum,
-          </div>
-        ),
-        content: (
-          <p>
-            Nunc maximus, magna at ultricies elementum, risus turpis vulputate
-            quam, vitae convallis ex tortor sed dolor.
-          </p>
-        ),
-      },
-      {
-        title: (
-          <div className="hover:text-blue-500 text-gray-primary">
-            Nunc maximus, magna at ultricies elementum,
-          </div>
-        ),
-        content: (
-          <p>
-            Nunc maximus, magna at ultricies elementum, risus turpis vulputate
-            quam, vitae convallis ex tortor sed dolor.
-          </p>
-        ),
-      },
-      {
-        title: (
-          <div className="hover:text-blue-500 text-gray-primary">
-            Nunc maximus, magna at ultricies elementum,
-          </div>
-        ),
-        content: (
-          <p>
-            Nunc maximus, magna at ultricies elementum, risus turpis vulputate
-            quam, vitae convallis ex tortor sed dolor.
-          </p>
-        ),
-      },
-    ],
-  },
-]
-
 const styles = {
   bgColor: "white",
   titleTextColor: "#f5317c",
@@ -175,14 +50,11 @@ const styles = {
   titleTextSize: "21px",
   rowContentColor: "#535b61",
   rowContentTextSize: "14px",
-  // rowContentColor: 'grey',
-  // arrowColor: "red",
 }
 
 const config = {
   animate: true,
   arrowIcon: <Arrowdown clickHandler={() => console.log("clicked arrow")} />,
-  // tabFocus: true,
 }
 
 function FaqSection() {
