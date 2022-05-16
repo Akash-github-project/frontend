@@ -1,14 +1,36 @@
-import React from "react";
-import "../css/notificationBar.css";
-import Marquee from "react-fast-marquee";
+import React from "react"
+import "../css/notificationBar.css"
+import Marquee from "react-fast-marquee"
+import axios from "axios"
+import { BASE_ROUTE } from "./routes"
+import { useQuery } from "react-query"
 
 const NotificationBar = () => {
-	return (
-		<Marquee gradient={false} className="marqueeStyles">
-			Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vitae
-			distinctio, quibusdam odio hic labore optio? Enim esse fugit optio neque?
-		</Marquee>
-	);
-};
+  const { isLoading, error, data } = useQuery("privacyPolicy", () =>
+    axios.get(`${BASE_ROUTE}/footer/name/noticebar`).then((res) => {
+      return res.data
+    })
+  )
+  if (isLoading) {
+    return (
+      <div>
+        <p className="text-current text-xs">{"Loading..."}</p>
+      </div>
+    )
+  }
+  if (error) {
+    return (
+      <div>
+        <p className="text-current text-xs">{"Sorry some error happened"}</p>
+      </div>
+    )
+  }
 
-export default NotificationBar;
+  return (
+    <Marquee gradient={false} className="marqueeStyles">
+      {data.Message}
+    </Marquee>
+  )
+}
+
+export default NotificationBar

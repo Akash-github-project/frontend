@@ -7,29 +7,17 @@ import ThumbsUp from "./images/thumbsUp"
 import Eye from "./images/eye"
 import Plane from "./images/plane"
 import axios from "axios"
+import { BASE_ROUTE } from "./routes"
 
 const AboutUs = () => {
   let iconList = []
   iconList[0] = <ThumbsUp />
   iconList[1] = <Plane />
   iconList[2] = <Eye />
-  let requestAbout = axios.get("request 1")
-  let requestWhy = axios.get("request 1")
-  let requestMission = axios.get("request 1")
-  let requestVision = axios.get("request 1")
-
   const { isLoading, error, data } = useQuery("repoData", () =>
     axios
-      .all([requestAbout, requestWhy, requestMission, requestVision])
-      .then(
-        axios.spread((...response) => {
-          const responseAbout = response[0]
-          const responseWhy = response[1]
-          const responseMission = response[2]
-          const responseVision = response[3]
-          return [responseAbout, responseWhy, responseMission, responseVision]
-        })
-      )
+      .get(`${BASE_ROUTE}/footer/name/aboutus`)
+      .then((res) => res.data)
       .catch((errors) => console.log(errors))
   )
 
@@ -48,6 +36,12 @@ const AboutUs = () => {
 			To grow and reach to everyone mind.
 			</p>`,
   }
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
+  if (error) {
+    return <div>Sorry some error happened</div>
+  }
   return (
     <Wrapper>
       <div className="w-full">
@@ -60,7 +54,8 @@ const AboutUs = () => {
           </div>
           <div
             data-content
-            dangerouslySetInnerHTML={{ __html: cmsData.AboutUs }}></div>
+            // dangerouslySetInnerHTML={{ __html: cmsData.AboutUs }}></div>
+            dangerouslySetInnerHTML={{ __html: data.aboutus }}></div>
 
           <div
             className="grid mt-6 grid-cols-1 lg:grid-cols-3 mb-2 "
@@ -72,7 +67,10 @@ const AboutUs = () => {
               <h3 className="text-[1.25rem] pl-[45px] ">Why Choose Us</h3>
               <div
                 data-content
-                dangerouslySetInnerHTML={{ __html: cmsData.WhyUs }}></div>
+                // dangerouslySetInnerHTML={{ __html: cmsData.WhyUs }}></div>
+                dangerouslySetInnerHTML={{
+                  __html: `<p>${data.chooseus}</p>`,
+                }}></div>
             </div>
 
             <div className="relative px-[15px]  pt-2">
@@ -82,13 +80,16 @@ const AboutUs = () => {
               <h3 className="text-[1.25rem] pl-[45px] ">Our Mission</h3>
               <div
                 data-content
-                dangerouslySetInnerHTML={{ __html: cmsData.OurMission }}></div>
+                dangerouslySetInnerHTML={{
+                  __html: `<p>${data.ourmission}</p>`,
+                }}></div>
             </div>
             <div className="relative  px-[15px]  pt-2">
               <div className="absolute top-0 left-0 w-[45px] h-[45px]  flex justify-center items-center  ">
                 <Eye />
               </div>
               <h3 className="text-[1.25rem] pl-[45px] ">Our Vision</h3>
+              {/* pending no api route provided */}
               <div
                 data-content
                 dangerouslySetInnerHTML={{ __html: cmsData.OutVision }}></div>

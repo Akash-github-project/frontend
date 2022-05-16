@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react"
+import axios from "axios"
 import OtpInput from "./otp"
+import Danger from "./danger"
 import { isValidMobileNo } from "./usefullFunctions"
 import Wrapper from "./wrapper"
 import "../css/ContactUs.css"
+import { useQuery } from "react-query"
+import { BASE_ROUTE } from "./routes"
 
 const ContactUs = () => {
   const [otpVal, setOtpVal] = useState("")
@@ -11,6 +15,19 @@ const ContactUs = () => {
     setOtpVal(value)
   }
 
+  const { isLoading, error, data } = useQuery("contactus", () =>
+    axios.get(`${BASE_ROUTE}/footer/name/contactus`).then((res) => {
+      return res.data
+    })
+  )
+  // baseurl: 65.0.216.133:8080/rechaxn
+
+  // footer -
+  // 	[GET] /footer/name/{name}
+  // 	name -> aboutus, contactus, tnc, privpolicy, refundpolicy, noticebar
+  // footer FAQ -
+  // 	[GET] /faq
+
   useEffect(() => {
     if (isValidMobileNo(otpVal) === "none") {
       setIsValid(false)
@@ -18,14 +35,13 @@ const ContactUs = () => {
       setIsValid(true)
     }
   }, [otpVal])
-  // const validate = (value) => {
-  //   if (isValidMobileNo(value) === "none") {
-  //     setIsValid(false)
-  //   } else {
-  //     setIsValid(true)
-  //   }
-  //   console.log(value)
-  // }
+
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
+  if (error) {
+    return <div>Some Error Happened</div>
+  }
   return (
     <Wrapper>
       <div className="w-full">
@@ -76,10 +92,13 @@ const ContactUs = () => {
                 </div>
                 <h3 className="px-2">RechargeAXN</h3>
                 <p className="px-2 text-gray-primary text-justify text-sm leading-[21px]">
-                  RechargeAXN Technologies Ltd <br />
-                  Khara Kuan, Idgah Road <br />
-                  Gulzarbagh, Patna <br />
-                  800007 Bihar
+                  {/* {data.contactus_address} */}
+
+                  <Danger content={data.contactus_address} exClasses="h-auto" />
+                  {/* RechargeAXN Technologies Ltd <br />
+                    Khara Kuan, Idgah Road <br />
+                    Gulzarbagh, Patna <br />
+                    800007 Bihar */}
                 </p>
               </div>
 
@@ -102,7 +121,7 @@ const ContactUs = () => {
                 </div>
                 <h3 className="px-2">Telephone</h3>
                 <p className="px-2 text-gray-primary text-sm leading-[21px]">
-                  9523150373
+                  {data.contactus_mobile}
                 </p>
               </div>
               <div className="flex flex-col relative pl-10 my-2 gap-1">
@@ -124,7 +143,7 @@ const ContactUs = () => {
                 </div>
                 <h3 className="px-2">Whatsapp</h3>
                 <p className="px-2  text-gray-primary text-sm leading-[21px]">
-                  9523150373
+                  {data.contactus_whatsapp}
                 </p>
               </div>
               <div className="flex flex-col relative pl-10  my-2 gap-1">
@@ -146,7 +165,7 @@ const ContactUs = () => {
                 </div>
                 <h3 className="px-2">Enquiries</h3>
                 <p className="px-2 text-gray-primary text-sm leading-[21px]">
-                  help@rechargeaxn.com
+                  {data.contactus_email}
                 </p>
               </div>
               <div className="flex flex-col relative pl-10  my-2 gap-1">
