@@ -92,7 +92,9 @@ const AboutUs = () => {
               {/* pending no api route provided */}
               <div
                 data-content
-                dangerouslySetInnerHTML={{ __html: cmsData.OutVision }}></div>
+                dangerouslySetInnerHTML={{
+                  __html: `<p>${data.ourvision}</p>`,
+                }}></div>
             </div>
           </div>
         </div>
