@@ -94,7 +94,10 @@ const ContactUs = () => {
                 <p className="px-2 text-gray-primary text-justify text-sm leading-[21px]">
                   {/* {data.contactus_address} */}
 
-                  <Danger content={data.contactus_address} exClasses="h-auto" />
+                  <Danger
+                    content={data.contactus_address}
+                    style={{ height: "auto" }}
+                  />
                   {/* RechargeAXN Technologies Ltd <br />
                     Khara Kuan, Idgah Road <br />
                     Gulzarbagh, Patna <br />
