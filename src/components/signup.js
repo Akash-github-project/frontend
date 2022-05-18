@@ -7,6 +7,7 @@ import { NumberInput } from "./numberInput"
 import { isValidEmail, isValidMobileNo } from "./usefullFunctions"
 import axios from "axios"
 import { BASE_ROUTE } from "./routes"
+import { OTP_SUCCESS, OTP_SENT, SUCCESS } from "./constants"
 
 export const SignUp = ({ goto = () => console.log("login") }) => {
   const [values, setValues] = useState({
@@ -79,7 +80,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
   })
 
   //replace this logic with network request logic and don't store otp on system
-  const askOtp = (type) => {
+  const askOtp = (type, value) => {
     console.log("called askOtp")
 
     let generatedOtpEmail = 0
@@ -87,6 +88,24 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
     let generatedOtpPhone = 0
 
     if (type === "email") {
+      axios
+        .post(
+          `${BASE_ROUTE}/getotp`,
+          {
+            servicename: "signupusr",
+            identifier: value,
+            mode: "web",
+          },
+          {
+            "Content-type": "text/json",
+          }
+        )
+        .then((resp) => {
+          if (resp.data.Message == OTP_SENT) {
+            console.log("otp sent for email")
+          }
+        })
+
       generatedOtpEmail = 122121
       //setting otp email
       setEmailOtp(generatedOtpEmail)
@@ -114,16 +133,31 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
     } else return false
   }
 
-  const matchEmailOtp = (value) => {
+  const matchEmailOtp = (value, email) => {
     if (value.length < 6) {
       return false
+    } else {
+      axios
+        .put(`${BASE_ROUTE}/verifyotp`, {
+          servicename: "signupusr",
+          identifier: email,
+          mode: "web",
+          otp: value,
+        })
+        .then((res) => {
+          if (res.data.Status == SUCCESS && res.data.Message == OTP_SUCCESS)
+            setEmailOtpStatus()
+          return true
+        })
     }
+    // {"Status":"Success","Message":"OTP matched & verified"}
+    // {"Status":"Success","Message":"OTP generated"}
     // const req = fetch("comeijeroej/")
     // const res = await req.json()
 
-    if (value == emailOtp && value !== "") {
-      return true
-    } else return false
+    // if (value == emailOtp && value !== "") {
+    //   return true
+    // } else return false
     // if(res === true)
     // return true
     // else return false
@@ -214,12 +248,18 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
       //need to replace this to actually do validation
       //write a function to do so
       // if (values.otpEmail == emailOtp && values.otpEmail !== "") {
-      if (matchEmailOtp(values.otpEmail) === true) {
-        formikRef.setFieldError("emailUser", "")
-        formikRef.setFieldValue("otpEmail", "")
-        setEmailOtpStatus("verified")
-        emailTimeReset()
-        console.log(errors)
+      if (values.otpEmail.length === 6) {
+        matchEmailOtp(values.otpEmail, values.emailUser).then((res) => {
+          if (res === true) {
+            formikRef.setFieldError("emailUser", "")
+            formikRef.setFieldValue("otpEmail", "")
+            setEmailOtpStatus("verified")
+            emailTimeReset()
+            console.log(errors)
+          } else {
+            errors.otpEmail = "otp does not match"
+          }
+        })
       } else {
         if (formikRef.touched.otpEmail === true) {
           errors.otpEmail = "otp does not match"
@@ -486,7 +526,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
                       phoneTimeReset()
                       setPhoneOtpStatus("unsent")
                     }
-                  : () => sendOtpPhone()
+                  : () => sendOtpPhone(formik.values.mobileUser)
               }
               type="button">
               {phoneOtpStatus !== "unsent" ? (
@@ -535,7 +575,9 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
                     ) : (
                       <button
                         className="hover:bg-pink-primary hover:text-white border border-pink-primary rounded text-xs px-1 mx-1"
-                        onClick={resendPhoneOtp}>
+                        onClick={() =>
+                          resendPhoneOtp(formik.values.mobileUser)
+                        }>
                         Resend Otp
                       </button>
                     )
