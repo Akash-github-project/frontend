@@ -1,6 +1,9 @@
 import React, { useState, useRef } from "react"
+import SimpleModal from "./userpages/simpleModal"
+import axios from "axios"
 import Wrapper from "./wrapper"
 import Button from "./button"
+import { BASE_ROUTE } from "./routes"
 import { NumberInput } from "./numberInput"
 import { isValidEmail, isValidMobileNo } from "./usefullFunctions"
 import { Input } from "./input"
@@ -8,11 +11,13 @@ import { Formik, Form, ErrorMessage } from "formik"
 
 const Suggestions = () => {
   const [fileName, changeName] = useState("Select a File...")
+  const [referenceNo, setReferenceNo] = useState("")
   const [isFileError, changeError] = useState({
     isError: false,
     errorMessage: "",
   })
   const fileRef = useRef(false)
+  const [openModal, setOpenModal] = useState(false)
 
   const options = [
     { name: "Select a value", value: "sv" },
@@ -108,6 +113,41 @@ const Suggestions = () => {
     }
   }
 
+  const submitForm = (values, formikBag) => {
+    // formikBag.setSubmitting(false)
+    if (isFileError.isError) return
+    const formData = new FormData()
+    formData.append(
+      "file",
+      fileRef.current.files ? fileRef.current.files[0] : null
+    )
+    formData.append("name", values.customerName)
+    formData.append("email", values.email)
+    formData.append("mobile", values.phoneNo)
+    formData.append("messagetype", values.msgType)
+    formData.append("query", values.query)
+    formData.append("mode", "web")
+    formData.append("username", "someusername")
+    console.log({
+      ...values,
+      file: fileRef.current.files ? fileRef.current.files[0] : null,
+    })
+
+    axios
+      .post(`${BASE_ROUTE}/postsuggestion`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        console.log(res.data)
+        if (res.data.Status !== undefined && res.data.Status === "Success") {
+          setReferenceNo(res.data["Reference Number"])
+          setOpenModal(true)
+        }
+        formikBag.setSubmitting(false)
+      })
+  }
   return (
     <Wrapper>
       <div className="w-full">
@@ -128,14 +168,7 @@ const Suggestions = () => {
         <Formik
           initialValues={{ ...initialFormValues }}
           validate={validate}
-          onSubmit={(values, { setSubmitting }) => {
-            setSubmitting(false)
-            console.log(values)
-            console.log({
-              ...values,
-              file: fileRef.current.files ? fileRef.current.files[0] : null,
-            })
-          }}>
+          onSubmit={submitForm}>
           {(formik) => (
             <Form>
               <div className="grid grid-col-1 md:grid-cols-2 gap-2 ">
@@ -277,14 +310,6 @@ const Suggestions = () => {
                       onChange={handleFileUpload}
                     />
                     <div className="flex border border-pink-primary w-full py-1 px-1 rounded">
-                      {/* <span className="text-gray-600 inline-block mr-auto ">
-                        Size:
-                        {`${
-                          sizeNumber.toFixed(2) == 0
-                            ? ""
-                            : sizeNumber.toFixed(2)
-                        } ${postfix}`}
-                      </span> */}
                       <span className="mr-10 text-gray-600">{fileName}</span>
                     </div>
                     <label
@@ -316,6 +341,22 @@ const Suggestions = () => {
                   exClasses="self-end mt-4 "
                 />
               </div>
+              <SimpleModal
+                open={openModal}
+                closeModal={() => setOpenModal(false)}>
+                <div className="h-full w-full flex justify-center items-center">
+                  <div className="text-center text-xl">
+                    <p className="text-gray-primary">
+                      Thank you for your Feedback.
+                    </p>
+                    <br />
+                    <span className="text-gray-primary">
+                      We will reach you within 24 hours reference no is
+                    </span>
+                    <span className="text-2xl px-4">{referenceNo}</span>
+                  </div>
+                </div>
+              </SimpleModal>
             </Form>
           )}
         </Formik>

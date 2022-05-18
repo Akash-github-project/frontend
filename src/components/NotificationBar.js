@@ -6,10 +6,16 @@ import { BASE_ROUTE } from "./routes"
 import { useQuery } from "react-query"
 
 const NotificationBar = () => {
-  const { isLoading, error, data } = useQuery("privacyPolicy", () =>
-    axios.get(`${BASE_ROUTE}/footer/name/noticebar`).then((res) => {
-      return res.data
-    })
+  const { isLoading, error, data } = useQuery(
+    "privacyPolicy",
+    () =>
+      axios.get(`${BASE_ROUTE}/footer/name/noticebar`).then((res) => {
+        return res.data
+      }),
+    {
+      // enabled: false,
+      staleTime: Infinity,
+    }
   )
   if (isLoading) {
     return (
