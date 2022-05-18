@@ -5,12 +5,15 @@ import { Link } from "react-router-dom"
 import { useTimer } from "use-timer"
 import { NumberInput } from "./numberInput"
 import { isValidEmail, isValidMobileNo } from "./usefullFunctions"
+import axios from "axios"
+import { BASE_ROUTE } from "./routes"
 
 export const SignUp = ({ goto = () => console.log("login") }) => {
   const [values, setValues] = useState({
     showPassword: false,
     showPassword2: false,
   })
+  const [ipuser, setIpUser] = useState("")
 
   const [termsError, setTermsError] = useState("none")
   const [terms, setTerms] = useState(false)
@@ -46,6 +49,9 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
     }
     setTerms(!terms)
   }
+  const getIp = (json) => {
+    console.log(json.ip)
+  }
 
   useEffect(() => {
     formRef.current.validateForm()
@@ -75,6 +81,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
   //replace this logic with network request logic and don't store otp on system
   const askOtp = (type) => {
     console.log("called askOtp")
+
     let generatedOtpEmail = 0
 
     let generatedOtpPhone = 0
@@ -122,27 +129,27 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
     // else return false
   }
 
-  const sendOtpEmail = () => {
-    askOtp("email")
+  const sendOtpEmail = (email) => {
+    askOtp("email", email)
     setEmailOtpStatus("sent")
     emailTimeStart()
   }
 
-  const sendOtpPhone = () => {
-    askOtp("mobile")
+  const sendOtpPhone = (mobile) => {
+    askOtp("mobile", mobile)
     setPhoneOtpStatus("sent")
     phoneTimeStart()
   }
 
-  const resendPhoneOtp = () => {
+  const resendPhoneOtp = (mobile) => {
     phoneTimeReset()
-    askOtp("mobile")
+    askOtp("mobile", mobile)
     phoneTimeStart()
   }
 
-  const resendEmailOtp = () => {
+  const resendEmailOtp = (email) => {
     emailTimeReset()
-    askOtp("email")
+    askOtp("email", email)
     emailTimeStart()
   }
 
@@ -279,9 +286,32 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
       phoneOtpStatus === "verified" &&
       terms === true
     ) {
-      console.log(values)
+      axios
+        .get("https://api.ipify.org?format=json")
+        .then((res) => {
+          if (res.data != undefined && res.data.ip != undefined)
+            return res.data.ip
+        })
+        .then((ip) => {
+          axios
+            .post(`${BASE_ROUTE}/register`, {
+              name: values.NameUser,
+              mobile: values.mobileUser,
+              email: values.emailUser,
+              password: values.singUpPass1,
+              tnc: true,
+              mode: "web",
+              servicename: "signupusr",
+              userip: ip,
+            })
+            .then((resp) => {
+              console.log(resp.data)
+            })
+        })
+
       formikbag.setSubmitting(true)
       formikbag.setSubmitting(false)
+
       goto("successfulReg")
     }
   }
@@ -352,7 +382,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
                       emailTimeReset()
                       setEmailOtpStatus("unsent")
                     }
-                  : () => sendOtpEmail()
+                  : () => sendOtpEmail(formik.values.emailUser)
               }
               type="button">
               {emailOtpStatus !== "unsent" ? (
@@ -402,7 +432,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
                     ) : (
                       <button
                         className="hover:bg-pink-primary hover:text-white border border-pink-primary rounded text-xs px-1 mx-1"
-                        onClick={resendEmailOtp}>
+                        onClick={() => resendEmailOtp(formik.values.emailUser)}>
                         Resend OTP
                       </button>
                     )
@@ -435,6 +465,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
               Id="mobileUser"
               numbersOnly={true}
               maxlen={10}
+              onleft="+91"
               blur={() => formik.setFieldTouched("mobileUser")}
               fieldClasses="border border-pink-primary w-full"
               change={(value) =>
