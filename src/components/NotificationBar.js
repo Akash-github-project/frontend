@@ -7,7 +7,7 @@ import { useQuery } from "react-query"
 
 const NotificationBar = () => {
   const { isLoading, error, data } = useQuery(
-    "privacyPolicy",
+    "noticebar",
     () =>
       axios.get(`${BASE_ROUTE}/footer/name/noticebar`).then((res) => {
         return res.data

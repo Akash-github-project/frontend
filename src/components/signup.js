@@ -1,31 +1,34 @@
 import React, { useState, useRef, useEffect } from "react"
 import Checkbox from "react-custom-checkbox"
-import { Formik, Form, Field, ErrorMessage, FormikProvider } from "formik"
+import { Formik, Form, Field, ErrorMessage } from "formik"
 import { Link } from "react-router-dom"
 import { useTimer } from "use-timer"
 import { NumberInput } from "./numberInput"
 import { isValidEmail, isValidMobileNo } from "./usefullFunctions"
 import axios from "axios"
 import { BASE_ROUTE } from "./routes"
-import { OTP_SUCCESS, OTP_SENT, SUCCESS } from "./constants"
+import {
+  OTP_SUCCESS,
+  OTP_SENT,
+  SUCCESS,
+  FAIL_STAUS,
+  EMAIL_ALREADY_REGISTERED,
+  PHONE_ALREADY_REGISTERED,
+} from "./constants"
 
 export const SignUp = ({ goto = () => console.log("login") }) => {
   const [values, setValues] = useState({
     showPassword: false,
     showPassword2: false,
   })
-  const [ipuser, setIpUser] = useState("")
 
   const [termsError, setTermsError] = useState("none")
   const [terms, setTerms] = useState(false)
   const termsRef = useRef(false)
 
   const formRef = useRef("")
-  const [emailOtp, setEmailOtp] = useState(0)
-  const [phoneOtp, setPhoneOtp] = useState(0)
   const [emailOtpStatus, setEmailOtpStatus] = useState("unsent")
   const [phoneOtpStatus, setPhoneOtpStatus] = useState("unsent")
-
   const checkPassword = (password) => {
     if (password.length < 8) {
       return "Password must be at least 8 characters"
@@ -41,6 +44,15 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
       return "none"
     }
   }
+  let initialFormValues = {
+    NameUser: "",
+    emailUser: "",
+    mobileUser: "",
+    signUpPass1: "",
+    signUpPass2: "",
+    otpEmail: "",
+    otpPhone: "",
+  }
 
   const setCheckboxFunction = () => {
     if (terms === true) {
@@ -50,10 +62,6 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
     }
     setTerms(!terms)
   }
-  const getIp = (json) => {
-    console.log(json.ip)
-  }
-
   useEffect(() => {
     formRef.current.validateForm()
     console.log(formRef)
@@ -80,19 +88,18 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
   })
 
   //replace this logic with network request logic and don't store otp on system
-  const askOtp = (type, value) => {
+  const askOtp = async (type, value) => {
     console.log("called askOtp")
+    let returnValue = ""
 
-    let generatedOtpEmail = 0
-
-    let generatedOtpPhone = 0
+    //setting otp mobile
 
     if (type === "email") {
-      axios
+      returnValue = axios
         .post(
           `${BASE_ROUTE}/getotp`,
           {
-            servicename: "signupusr",
+            servicename: "resetpwd",
             identifier: value,
             mode: "web",
           },
@@ -103,15 +110,20 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
         .then((resp) => {
           if (resp.data.Message == OTP_SENT) {
             console.log("otp sent for email")
+            return OTP_SENT
           }
         })
+        .catch((error) => {
+          if (
+            error.response.Status == FAIL_STAUS &&
+            error.response.Message === EMAIL_ALREADY_REGISTERED
+          )
+            return EMAIL_ALREADY_REGISTERED
+        })
 
-      generatedOtpEmail = 122121
       //setting otp email
-      setEmailOtp(generatedOtpEmail)
-      console.log("otpEmail", generatedOtpEmail)
     } else if (type === "mobile") {
-      axios
+      returnValue = axios
         .post(
           `${BASE_ROUTE}/getotp`,
           {
@@ -126,21 +138,25 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
         .then((resp) => {
           if (resp.data.Message == OTP_SENT) {
             console.log("otp sent for mobile")
+            return OTP_SENT
           }
         })
-      generatedOtpPhone = 222222
-
-      //setting otp mobile
-      console.log("otpMobile", generatedOtpPhone)
-      setPhoneOtp(generatedOtpPhone)
+        .catch((error) => {
+          if (
+            error.response.Status == FAIL_STAUS &&
+            error.response.Message === PHONE_ALREADY_REGISTERED
+          )
+            return PHONE_ALREADY_REGISTERED
+        })
     }
+    return returnValue
   }
 
-  const matchPhoneOtp = (value, phone) => {
+  const matchPhoneOtp = async (value, phone) => {
     if (value.length < 6) {
       return false
     } else {
-      axios
+      let ax = axios
         .put(`${BASE_ROUTE}/verifyotp`, {
           servicename: "signupusr",
           identifier: phone,
@@ -153,22 +169,18 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
           // setEmailOtpStatus()
           return true
         })
+        .catch((error) => {
+          return false
+        })
+      return ax
     }
-    // const req = fetch("comeijeroej/")
-    // const res = await req.json()
-    // if (res === true) return true
-    // else return false
-
-    if (value == phoneOtp && value !== "") {
-      return true
-    } else return false
   }
 
-  const matchEmailOtp = (value, email) => {
+  const matchEmailOtp = async (value, email) => {
     if (value.length < 6) {
       return false
     } else {
-      axios
+      let ax = axios
         .put(`${BASE_ROUTE}/verifyotp`, {
           servicename: "signupusr",
           identifier: email,
@@ -176,24 +188,42 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
           otp: value,
         })
         .then((res) => {
-          if (res.data.Status == SUCCESS && res.data.Message == OTP_SUCCESS)
-            setEmailOtpStatus("verified")
+          if (res.data.Status == SUCCESS && res.data.Message == OTP_SUCCESS) {
+            // setEmailOtpStatus("verified")
+            emailTimeReset()
+            return true
+          }
           // setEmailOtpStatus()
-          return true
         })
+        .catch((error) => {
+          return false
+        })
+      return ax
     }
   }
 
-  const sendOtpEmail = (email) => {
-    askOtp("email", email)
-    setEmailOtpStatus("sent")
-    emailTimeStart()
+  const sendOtpEmail = (email, formik) => {
+    askOtp("email", email).then((ret) => {
+      console.log(ret, "tag")
+      if (ret === OTP_SENT) {
+        setEmailOtpStatus("sent")
+        emailTimeStart()
+      } else if (ret === EMAIL_ALREADY_REGISTERED) {
+        formik.setFieldError("emailUser", EMAIL_ALREADY_REGISTERED)
+      }
+    })
   }
 
-  const sendOtpPhone = (mobile) => {
-    askOtp("mobile", mobile)
-    setPhoneOtpStatus("sent")
-    phoneTimeStart()
+  const sendOtpPhone = (mobile, formik) => {
+    askOtp("mobile", mobile).then((ret) => {
+      console.log(ret, "tagp")
+      if (ret === OTP_SENT) {
+        setPhoneOtpStatus("sent")
+        phoneTimeStart()
+      } else {
+        formik.setFieldError("mobileUser", PHONE_ALREADY_REGISTERED)
+      }
+    })
   }
 
   const resendPhoneOtp = (mobile) => {
@@ -208,22 +238,9 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
     emailTimeStart()
   }
 
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value })
-  }
-
-  let initialFormValues = {
-    NameUser: "",
-    emailUser: "",
-    mobileUser: "",
-    signUpPass1: "",
-    signUpPass2: "",
-    otpEmail: "",
-    otpPhone: "",
-  }
   const validateFormSignUp = (values) => {
+    // console.log(formikret, "formikret")
     const errors = {}
-    let numberAsString
     let formikRef = formRef.current
     const EMAIL_REGEX =
       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -270,20 +287,21 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
       //write a function to do so
       // if (values.otpEmail == emailOtp && values.otpEmail !== "") {
       if (values.otpEmail.length === 6) {
-        if (matchEmailOtp(values.otpEmail, values.emailUser)) {
-          // if (res === true) {
-          formikRef.setFieldError("emailUser", "")
-          formikRef.setFieldValue("otpEmail", "")
-          setEmailOtpStatus("verified")
-          emailTimeReset()
-          console.log(errors)
-          // } else {
-          //   errors.otpEmail = "otp does not match"
-          // }
-        }
+        matchEmailOtp(values.otpEmail, values.emailUser).then((resp) => {
+          console.log(resp)
+          if (resp === true) {
+            formikRef.setFieldError("emailUser", "")
+            formikRef.setFieldValue("otpEmail", "", false)
+            formikRef.setFieldTouched("otpEmail", false, false)
+            setEmailOtpStatus("verified")
+          } else {
+            formikRef.setFieldTouched("otpEmail", true, false)
+            formikRef.setFieldError("otpEmail", "OTP does not match")
+          }
+        })
       } else {
         if (formikRef.touched.otpEmail === true) {
-          errors.otpEmail = "otp does not match"
+          errors.otpEmail = "OTP does not match"
         }
       }
     }
@@ -302,23 +320,21 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
       typeof values.otpPhone !== "undefined" &&
       phoneOtpStatus !== "verified"
     ) {
-      //need to replace this to actually do validation
-      //write a function to do so
-      // if (values.otpPhone == phoneOtp && values.otpPhone !== "") {
-      // if (matchPhoneOtp(values.otpPhone) === true) {
       if (values.otpPhone.length === 6) {
-        if (matchPhoneOtp(values.otpPhone, values.mobileUser)) {
-          setPhoneOtpStatus("verified")
-          formikRef.setFieldError("mobileUser", "")
-          formikRef.setFieldValue("otpPhone", "")
-          phoneTimeReset()
-        }
+        matchPhoneOtp(values.otpPhone, values.mobileUser).then((resp) => {
+          if (resp) {
+            formikRef.setFieldError("otpPhone", "")
+            formikRef.setFieldValue("otpPhone", "")
+            formikRef.setFieldTouched("otpPhone", false, false)
+            phoneTimeReset()
+          } else {
+            formikRef.setFieldError("otpPhone", "OTP does not match")
+            formikRef.setFieldTouched("otpPhone", true, false)
+          }
+        })
       } else {
-        if (
-          formikRef.touched.otpPhone === true &&
-          phoneOtpStatus != "verified"
-        ) {
-          errors.otpPhone = "otp does not match"
+        if (formikRef.touched.otpPhone === true) {
+          errors.otpPhone = "OTP does not match"
         }
       }
     }
@@ -446,7 +462,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
                       emailTimeReset()
                       setEmailOtpStatus("unsent")
                     }
-                  : () => sendOtpEmail(formik.values.emailUser)
+                  : () => sendOtpEmail(formik.values.emailUser, formik)
               }
               type="button">
               {emailOtpStatus !== "unsent" ? (
@@ -509,7 +525,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
 
           <label
             htmlFor="mobileUser"
-            className="text-xs  col-span-2 text-gray-primary">
+            className="text-sm  col-span-2 text-gray-primary">
             Mobile
           </label>
           <div className="flex col-span-4 rounded">
@@ -546,7 +562,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
                       phoneTimeReset()
                       setPhoneOtpStatus("unsent")
                     }
-                  : () => sendOtpPhone(formik.values.mobileUser)
+                  : () => sendOtpPhone(formik.values.mobileUser, formik)
               }
               type="button">
               {phoneOtpStatus !== "unsent" ? (

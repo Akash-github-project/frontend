@@ -27,7 +27,7 @@ const Refund = () => {
         </div>
         <div
           data-content
-          dangerouslySetInnerHTML={{ __html: data.Message }}
+          dangerouslySetInnerHTML={{ __html: data.refundpolicy }}
           className="mt-4 terms privacy"></div>
       </div>
     </Wrapper>

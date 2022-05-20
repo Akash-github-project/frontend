@@ -27,7 +27,7 @@ const Terms = () => {
         </div>
         <div
           data-content
-          dangerouslySetInnerHTML={{ __html: data.Message }}
+          dangerouslySetInnerHTML={{ __html: data.tnc }}
           className="mt-4  terms"></div>
       </div>
     </Wrapper>

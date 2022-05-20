@@ -4,14 +4,10 @@ import { Link, useNavigate } from "react-router-dom"
 import DropMenu from "./dropMenu"
 import LoginWrapper from "./LoginWrapper"
 import LoginModal from "./userpages/loginModal"
-import { useContext } from "react"
-import { ModalContext } from "../App"
 import { useDispatch } from "react-redux"
 import { clearAll } from "../app/features/prepaidPlansSlice"
 
 export const Header = () => {
-  const mContext = useContext(ModalContext)
-
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [openModal, setOpenModal] = useState(false)

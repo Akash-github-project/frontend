@@ -58,7 +58,7 @@ const config = {
 }
 
 function FaqSection() {
-  const { isLoading, error, data } = useQuery("terms", () =>
+  const { isLoading, error, data } = useQuery("faq", () =>
     axios.get(`${BASE_ROUTE}/faq`).then((res) => {
       return process(res.data)
     })

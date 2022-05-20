@@ -18,6 +18,14 @@ export const isValidMobileNo = (no) => {
   return "none"
 }
 
+const canBeMobileNo = (no) => {
+  if (isNaN(parseInt(no)) === false) {
+    return true
+  } else {
+    return false
+  }
+}
+
 export const isValidEmail = (email) => {
   const EMAIL_REGEX =
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -62,5 +70,21 @@ export const isThisOnList = (toMatch, from) => {
     return "none"
   } else {
     return ret[0]
+  }
+}
+
+export const isValidEmailOrMobile = (value) => {
+  if (canBeMobileNo(value) === true) {
+    if (isValidMobileNo(value) === "none") {
+      return "none"
+    } else {
+      return isValidMobileNo(value)
+    }
+  } else {
+    if (isValidEmail(value) === "none") {
+      return "none"
+    } else {
+      return isValidEmail(value)
+    }
   }
 }

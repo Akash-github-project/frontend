@@ -2,6 +2,16 @@ import React, { useState, useRef } from "react"
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import { useTimer } from "use-timer"
 import { NumberInput } from "./numberInput"
+import { BASE_ROUTE } from "./routes"
+import {
+  OTP_SENT,
+  OTP_SUCCESS,
+  SUCCESS,
+  FAIL_STAUS,
+  EMAIL_MOBILE_NOT_REGISTERED,
+} from "./constants"
+import { isValidPass, isValidEmailOrMobile } from "./usefullFunctions"
+import axios from "axios"
 
 const ForgotPass = ({ goto = () => console.log("hello world") }) => {
   const [values, setValues] = React.useState({
@@ -20,20 +30,68 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
     timerType: "DECREMENTAL",
   })
 
-  const resendOtp = () => {
+  const resendOtp = (value) => {
     reset()
-    askOtp()
+    askOtp(value)
     start()
   }
 
-  const askOtp = () => {
-    let otpGenerated =
-      Math.random() * 6 + Math.random() * 6 * 10 + Math.random() * 6 * 100
-    otpGenerated = Math.floor(otpGenerated)
-    console.log("otprepass", otpGenerated)
+  const verifyOtp = async (value, emailOrMobile) => {
+    let response = ""
+    response = axios
+      .put(`${BASE_ROUTE}/verifyotp`, {
+        servicename: "resetpwd",
+        identifier: emailOrMobile,
+        mode: "web",
+        otp: value,
+      })
+      .then((res) => {
+        if (res.data.Status == SUCCESS && res.data.Message == OTP_SUCCESS) {
+          reset()
+          return true
+        }
+      })
+      .catch((error) => {
+        return false
+      })
 
-    setOtpVal(() => otpGenerated)
-    console.log(otpVal)
+    return response
+  }
+
+  const askOtp = async (value) => {
+    let returnValue = ""
+    if (value.length < 6) {
+      return false
+    } else {
+      returnValue = axios
+        .post(
+          `${BASE_ROUTE}/getotp`,
+          {
+            servicename: "resetpwd",
+            identifier: value,
+            mode: "web",
+          },
+          {
+            "Content-type": "text/json",
+          }
+        )
+        .then((resp) => {
+          if (resp.data.Message == OTP_SENT) {
+            console.log("otp sent")
+            return OTP_SENT
+          }
+        })
+        .catch((error) => {
+          if (
+            error.response.Status == FAIL_STAUS &&
+            error.response.Message === EMAIL_MOBILE_NOT_REGISTERED
+          )
+            return EMAIL_MOBILE_NOT_REGISTERED
+        })
+
+      //setting otp email
+      return returnValue
+    }
   }
 
   const handleClickShowPassword = () => {
@@ -51,69 +109,34 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
   }
 
   let initialFormValues = {
-    mobileUser: "",
+    mobileOrEmailUser: "",
     newPass: "",
     reNewPass: "",
     otpForgot: "",
   }
 
-  const checkPassword = (password) => {
-    if (password.length < 8) {
-      return "Password must be at least 8 characters"
-    } else if (password.search(/[a-z]/i) < 0) {
-      return "Password must contain at least one letter"
-    } else if (password.search(/(?=.*[A-Z])/) < 0) {
-      return "Password must contain at least one uppercase"
-    } else if (password.search(/[0-9]/) < 0) {
-      return "Password must contain at least one digit"
-    } else if (password.search(/(?=.*[!@#$%^&*])/) < 0) {
-      return "Password must contain at least one special character"
-    } else {
-      return "none"
-    }
+  const sendOtp = (value, formik) => {
+    askOtp(value).then((res) => {
+      if (res === OTP_SENT) {
+        setOtp("sent")
+        start()
+      } else if (res === EMAIL_MOBILE_NOT_REGISTERED) {
+        formik.setFieldError("mobileOrEmailUser", EMAIL_MOBILE_NOT_REGISTERED)
+      }
+    })
   }
 
-  const sendOtp = () => {
-    const formikRef = formRef.current
-
-    formikRef.setFieldTouched("mobileUser")
-    formikRef.validateField("mobileUser")
-
-    if (
-      (formikRef.errors.mobileUser === "" ||
-        formikRef.errors.mobileUser === undefined) &&
-      formikRef.values.mobileUser !== ""
-    ) {
-      askOtp()
-      setOtp("sent")
-      start()
-    }
-    console.log(formikRef)
-  }
-
+  //function for validating form
   const validateForm = (values) => {
     let errors = {}
-    let numberAsString
     const formikRef = formRef.current
 
-    if (!values.mobileUser) {
-      errors.mobileUser = " mobile can't be empty"
-    } else {
-      // if (isNaN(parseInt(values.mobileUser)) === false) {
-      numberAsString = Number(values.mobileUser).toString()
-
-      if (
-        numberAsString[0] !== "6" &&
-        numberAsString[0] !== "7" &&
-        numberAsString[0] !== "8" &&
-        numberAsString[0] !== "9"
-      ) {
-        errors.mobileUser = "invalid mobile no"
-      } else if (numberAsString.length < 10 || numberAsString.length > 10)
-        errors.mobileUser = "invalid mobile no"
-      // }
+    if (isValidEmailOrMobile(values.mobileOrEmailUser) != "none") {
+      errors.mobileOrEmailUser = isValidEmailOrMobile(values.mobileOrEmailUser)
     }
-
+    if (!values.mobileOrEmailUser) {
+      errors.mobileOrEmailUser = "mobile or email can't be empty"
+    }
     if (!values.newPass) {
       errors.newPass = "new password can't be empty"
     } else if (values.newPass !== values.reNewPass) {
@@ -123,29 +146,60 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
       errors.reNewPass = "re password can't be empty"
     }
 
-    if (checkPassword(values.newPass) !== "none") {
-      errors.newPass = checkPassword(values.newPass)
+    if (isValidPass(values.newPass) !== "none") {
+      errors.newPass = isValidPass(values.newPass)
     }
 
-    if (checkPassword(values.reNewPass) !== "none") {
-      errors.reNewPass = checkPassword(values.reNewPass)
+    if (isValidPass(values.reNewPass) !== "none") {
+      errors.reNewPass = isValidPass(values.reNewPass)
     }
 
-    if (typeof values.otpForgot !== "undefined") {
-      if (values.otpForgot == otpVal && values.otpForgot !== "") {
-        setOtp("verified")
-        formikRef.setFieldValue("otpForgot", "")
-        reset()
+    if (typeof values.otpForgot !== "undefined" && otp !== "verified") {
+      if (values.otpForgot.length === 6) {
+        verifyOtp(values.otpForgot, values.emailOrMobile).then((res) => {
+          if (res) {
+            setOtp("verified")
+            formikRef.setFieldError("otpForgot", "")
+            formikRef.setFieldValue("otpForgot", "", false)
+            formikRef.setFieldTouched("otpForgot", false, false)
+          }
+        })
+      } else {
+        formikRef.setFieldTouched("otpForgot", true, false)
+        formikRef.setFieldError("otpForgot", "OTP does not match")
       }
-      if (values.otpForgot != otpVal && values.otpForgot !== "") {
-        errors.otpVal = "otp does not match"
-      }
-    } else {
-      if (formikRef.errors.otpForgot !== "")
-        formikRef.setFieldError("otpForgot", "")
     }
-
     return errors
+  }
+
+  //handle submit function for form submittion
+  const handleSubmit = (values, formikbag) => {
+    if (otp !== "verified") {
+      formikbag.setFieldError(
+        "mobileOrEmailUser",
+        "Please confirm mobile or email"
+      )
+    } else {
+      formikbag.setFieldError("mobielOrEmailUser", "")
+
+      axios
+        .get("https://api.ipify.org?format=json")
+        .then((res) => {
+          if (res.data != undefined && res.data.ip != undefined)
+            return res.data.ip
+        })
+        .then((ip) => {
+          axios.post(`${BASE_ROUTE}/register`, {
+            mobile: values.mobileUser,
+            email: values.emailUser,
+            password: `${values.signUpPass1}`,
+            tnc: "true",
+            mode: "web",
+            servicename: "signupusr",
+            userip: ip,
+          })
+        })
+    }
   }
 
   return (
@@ -159,47 +213,38 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
       <Formik
         initialValues={{ ...initialFormValues }}
         validate={validateForm}
-        onSubmit={(values) => {
-          otp !== "verified"
-            ? formRef.current.setFieldError(
-                "mobileUser",
-                "Please confirm mobile or email"
-              )
-            : formRef.current.setFieldError("mobileUser", "")
-          console.log(values)
-        }}
+        onSubmit={handleSubmit}
         innerRef={formRef}>
         {(formik) => (
           <Form className="grid grid-cols-6 gap-1 p-0 md:p-3 lg:p-4 items-center">
             <span className="col-span-full text-xs text-center h-3 ">
-              <ErrorMessage name="mobileUser" />
+              <ErrorMessage name="mobileOrEmailUser" />
             </span>
             <label
-              htmlFor="mobileUser"
+              htmlFor="mobileOrEmailUser"
               className="text-sm col-span-2 text-gray-primary">
               Mobile No
             </label>
             <div className="flex col-span-4 rounded">
               <NumberInput
-                name="mobileUser"
-                val={formik.values.mobileUser}
+                name="mobileOrEmailUser"
+                val={formik.values.mobileOrEmailUser}
+                numbersOnly={false}
                 dis={otp === "verified" || otp === "sent" ? true : false}
-                Id="mobileUser"
-                numbersOnly={true}
-                maxlen={10}
-                blur={() => formik.setFieldTouched("mobileUser")}
+                Id="mobileOrEmailUser"
+                blur={() => formik.setFieldTouched("mobileOrEmailUser")}
                 fieldClasses="border border-pink-primary w-full"
                 change={(value) =>
-                  formik.setFieldValue("mobileUser", value, true)
+                  formik.setFieldValue("mobileOrEmailUser", value, true)
                 }
               />
 
               <button
                 className="h-[34px] px-1 bg-pink-primary text-white disabled:bg-gray-600 rounded"
                 disabled={
-                  (formik.errors.mobileUser === "" ||
-                    formik.errors.mobileUser === undefined) &&
-                  formik.values.mobileUser != ""
+                  (formik.errors.mobileOrEmailUser === "" ||
+                    formik.errors.mobileOrEmailUser === undefined) &&
+                  formik.values.mobileOrEmailUser != ""
                     ? false
                     : true
                 }
@@ -209,7 +254,7 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
                         reset()
                         setOtp("unsent")
                       }
-                    : () => sendOtp()
+                    : () => sendOtp(formik.values.mobileOrEmailUser, formik)
 
                   // otp === "verified" ? () => setOtp("unsent") : () => sendOtp()
                 }
@@ -233,11 +278,24 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
                     className="text-sm w-1/3 text-gray-primary">
                     OTP
                   </label>
-                  <Field
+                  <NumberInput
+                    Id="otpForgot"
+                    name="otpForgot"
+                    iType="tel"
+                    maxlen={6}
+                    numbersOnly={true}
+                    val={formik.values.otpForgot}
+                    fieldClasses="border border-pink-primary focus-within:border-blue-500 focus-within:border-2 w-24"
+                    change={(value) =>
+                      formik.setFieldValue("otpForgot", value, true)
+                    }
+                    blur={formik.handleBlur}
+                  />
+                  {/* <Field
                     name="otpForgot"
                     className="border border-pink-primary rounded h-full w-1/4"
                     type="tel"
-                  />
+                  /> */}
                   <>
                     {otp === "sent" ? (
                       time !== 0 ? (
@@ -247,7 +305,9 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
                       ) : (
                         <button
                           className="hover:bg-pink-primary hover:text-white border border-pink-primary rounded text-xs px-1 mx-1 h-[34px]"
-                          onClick={resendOtp}>
+                          onClick={() =>
+                            resendOtp(formik.values.mobileOrEmailUser, formik)
+                          }>
                           Resend OTP
                         </button>
                       )

@@ -8,7 +8,7 @@ import TwoFactorOtp from "./userpages/twoFactorOtp"
 const LoginWrapper = ({}) => {
   const [part, setPart] = useState("login")
   return (
-    <div className="w-full">
+    <div className="w-full md:w-[34rem]">
       {part === "forgotPass" ? (
         <ForgotPass goto={setPart} />
       ) : part === "successfulReg" ? (

@@ -1,4 +1,7 @@
 export const OTP_SUCCESS = "OTP matched & verified"
 export const OTP_SENT = "OTP generated"
-export const FAIL_STAUS = ""
+export const FAIL_STAUS = "Error"
+export const EMAIL_ALREADY_REGISTERED = "Email is already registered"
+export const PHONE_ALREADY_REGISTERED = "Mobile is already registered"
 export const SUCCESS = "Success"
+export const EMAIL_MOBILE_NOT_REGISTERED = "User mobile/email is not registered"
