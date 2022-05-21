@@ -404,7 +404,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
       validateOnMount={true}
       innerRef={formRef}>
       {(formik) => (
-        <Form className="grid grid-cols-6 gap-1 items-center p-0 md:p-3 lg:p-4">
+        <Form className="grid grid-cols-6 gap-1 items-center p-0 md:p-2">
           <span className="col-span-full text-base text-center text-gray-600">
             Looks like you're new here!
           </span>

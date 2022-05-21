@@ -12,7 +12,7 @@ export const Login = ({ goto = () => console.log("forgotPass") }) => {
 
   const changeSize = useContext(LoginModalContext)
   useEffect(() => {
-    changeSize.changeSize("34")
+    changeSize.changeSize("30")
   }, [])
   const ref = useRef("")
   let initialFormValues = {
@@ -84,7 +84,7 @@ export const Login = ({ goto = () => console.log("forgotPass") }) => {
         validate={validateForm}
         innerRef={ref}
         onSubmit={handleSunmit}>
-        <Form className="grid grid-cols-6 gap-2 items-center p-0 md:p-3 lg:p-4">
+        <Form className="grid grid-cols-6 gap-2 items-center p-0 md:p-2">
           <span className="col-span-full text-base text-center text-gray-600">
             We are glad to see you again!
           </span>
@@ -165,7 +165,7 @@ export const Login = ({ goto = () => console.log("forgotPass") }) => {
           {/* login button end */}
 
           {/* additional sign up prompt  */}
-          <div className="mt-2 text-black text-center col-span-full text-sm py-2">
+          <div className="mt-1 text-black text-center col-span-full text-sm py-1">
             Not having account, Please &nbsp;
             <a className="text-primary" href="#" onClick={() => goto("signUp")}>
               Sign Up

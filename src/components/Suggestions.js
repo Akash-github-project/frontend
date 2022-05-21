@@ -12,6 +12,8 @@ import { Formik, Form, ErrorMessage } from "formik"
 const Suggestions = () => {
   const [fileName, changeName] = useState("Select a File...")
   const [referenceNo, setReferenceNo] = useState("")
+  const [sizeNumber, setSizeNumber] = useState(0)
+  const [postfix, setPostfix] = useState("")
   const [isFileError, changeError] = useState({
     isError: false,
     errorMessage: "",
@@ -29,21 +31,6 @@ const Suggestions = () => {
     { name: "Wallet Payment Issue", value: "Wallet Payment Issue" },
     { name: "Giftcards", value: "Giftcards" },
   ]
-
-  let postfix = ""
-  let sizeNumber = 0
-
-  if (fileRef.current.files) {
-    if (fileRef.current.files[0]) {
-      if (fileRef.current.files[0].size / 1024 >= 1024) {
-        postfix = "MB"
-        sizeNumber = fileRef.current.files[0].size / (1024 * 1024)
-      } else {
-        postfix = "KB "
-        sizeNumber = fileRef.current.files[0].size / 1024
-      }
-    }
-  }
 
   // file cheaking function
 
@@ -77,6 +64,18 @@ const Suggestions = () => {
   }
 
   const handleFileUpload = () => {
+    if (fileRef.current.files) {
+      if (fileRef.current.files[0]) {
+        if (fileRef.current.files[0].size / 1024 >= 1024) {
+          setPostfix("MB")
+          setSizeNumber(fileRef.current.files[0].size / (1024 * 1024))
+        } else {
+          setPostfix("KB")
+          setSizeNumber(fileRef.current.files[0].size / 1024)
+        }
+      }
+    }
+
     changeName(fileRef.current.files[0].name)
     if (fileRef.current.files[0].size / (1024 * 1024) > 2) {
       changeError({
@@ -114,39 +113,42 @@ const Suggestions = () => {
   }
 
   const submitForm = (values, formikBag) => {
-    // formikBag.setSubmitting(false)
+    formikBag.setSubmitting(false)
     if (isFileError.isError) return
-    const formData = new FormData()
-    formData.append(
-      "file",
-      fileRef.current.files ? fileRef.current.files[0] : null
-    )
-    formData.append("name", values.customerName)
-    formData.append("email", values.email)
-    formData.append("mobile", values.phoneNo)
-    formData.append("messagetype", values.msgType)
-    formData.append("query", values.query)
-    formData.append("mode", "web")
-    formData.append("username", "someusername")
-    console.log({
-      ...values,
-      file: fileRef.current.files ? fileRef.current.files[0] : null,
-    })
+    else {
+      const formData = new FormData()
+      formikBag.setSubmitting(true)
+      formData.append(
+        "file",
+        fileRef.current.files ? fileRef.current.files[0] : null
+      )
+      formData.append("name", values.customerName)
+      formData.append("email", values.email)
+      formData.append("mobile", values.phoneNo)
+      formData.append("messagetype", values.msgType)
+      formData.append("query", values.query)
+      formData.append("mode", "web")
+      formData.append("username", "someusername")
 
-    axios
-      .post(`${BASE_ROUTE}/postsuggestion`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-      .then((res) => {
-        console.log(res.data)
-        if (res.data.Status !== undefined && res.data.Status === "Success") {
-          setReferenceNo(res.data["Reference Number"])
-          setOpenModal(true)
-        }
-        formikBag.setSubmitting(false)
-      })
+      axios
+        .post(`${BASE_ROUTE}/postsuggestion`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((res) => {
+          console.log(res.data)
+          if (res.data.Status !== undefined && res.data.Status === "Success") {
+            setReferenceNo(res.data["Reference Number"])
+            setOpenModal(true)
+            changeName("Select a File...")
+            setPostfix("")
+            setSizeNumber(0)
+            formikBag.resetForm()
+            formikBag.setSubmitting(false)
+          }
+        })
+    }
   }
   return (
     <Wrapper>
@@ -336,13 +338,18 @@ const Suggestions = () => {
                 </div>
                 <div></div>
                 <Button
-                  text="submit"
+                  text={`${
+                    formik.isSubmitting === false ? "Submit" : "Please wait ..."
+                  }`}
+                  dis={formik.isSubmitting}
                   type="submit"
-                  exClasses="self-end mt-4 "
+                  exClasses="self-end mt-4"
                 />
               </div>
               <SimpleModal
+                size={false}
                 open={openModal}
+                height={false}
                 closeModal={() => setOpenModal(false)}>
                 <div className="h-full w-full flex justify-center items-center">
                   <div className="text-center text-xl">

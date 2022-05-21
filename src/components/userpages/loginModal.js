@@ -3,7 +3,7 @@ import ReactDOM from "react-dom"
 
 export const LoginModalContext = createContext()
 const LoginModal = ({ closeModal, open, children }) => {
-  const [modalSize, changeModalSize] = useState("34")
+  const [modalSize, changeModalSize] = useState("30")
   // useEffect(() => runOnEnd)
   if (!open) return null
 
@@ -14,7 +14,7 @@ const LoginModal = ({ closeModal, open, children }) => {
         onClick={() => closeModal()}></div>
       <div
         className={`p-6 fixed inset-0 top-[20%] md:top-1/2 left-1/2 -translate-x-1/2 md:-translate-y-1/2 grid w-full ${
-          modalSize === "34" ? "md:w-[34rem]" : "md:w-[20rem]"
+          modalSize === "30" ? "md:w-[30rem]" : "md:w-[20rem]"
         } h-fit bg-white z-base`}>
         <div className="flex items-end h-2 w-full absolute top-7">
           <button

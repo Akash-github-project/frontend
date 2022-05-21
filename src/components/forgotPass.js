@@ -25,7 +25,6 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
 
   const [otp, setOtp] = useState("unsent")
   const formRef = useRef("")
-  const [otpVal, setOtpVal] = useState(0)
 
   const loginChanger = useContext(LoginModalContext)
   const { time, start, reset } = useTimer({
@@ -213,9 +212,9 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
 
   return (
     <>
-      <div className="w-full text-center  p-0 md:p-3 md:pb-0 lg:p-4">
+      <div className="w-full text-center  p-0 md:p-2 md:pb-0">
         <h2 className="text-2xl ">Forgot Your Password?</h2>
-        <p className="text-gray-500 p-0 md:px-2 my-2">
+        <p className="text-gray-500 p-0 md:px-2">
           Enter your Email or Mobile and we’ll help you reset your password
         </p>
       </div>
@@ -225,7 +224,7 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
         onSubmit={handleSubmit}
         innerRef={formRef}>
         {(formik) => (
-          <Form className="grid grid-cols-6 gap-1 p-0 md:p-3 lg:p-4 items-center">
+          <Form className="grid grid-cols-6 gap-1 p-0 md:p-2 items-center">
             <span className="col-span-full text-xs text-center h-3 ">
               <ErrorMessage name="mobileOrEmailUser" />
             </span>
@@ -358,7 +357,7 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
               className="text-sm col-span-2 text-gray-primary">
               Re Password
             </label>
-            <div className="flex relative col-span-4 h-[34px] rounded">
+            <div className="flex relative col-span-4 h-[34px] rounded mb-1">
               <Field
                 name="reNewPass"
                 className="w-full border border-pink-primary h-full rounded px-2"

@@ -1,7 +1,14 @@
 import React from "react"
 import ReactDOM from "react-dom"
 
-const SimpleModal = ({ closeModal, open, exClasses = " ", children }) => {
+const SimpleModal = ({
+  closeModal,
+  open,
+  exClasses = " ",
+  size = true,
+  height = true,
+  children,
+}) => {
   if (!open) return null
 
   return ReactDOM.createPortal(
@@ -10,7 +17,11 @@ const SimpleModal = ({ closeModal, open, exClasses = " ", children }) => {
         className="fixed inset-0 bg-gray-900/70 z-base"
         onClick={() => closeModal()}></div>
       <div
-        className={`p-6 fixed inset-0 md:top-1/2 left-1/2 -translate-x-1/2 md:-translate-y-1/2 grid w-full md:w-[34rem] md:h-[28rem] bg-white z-base ${exClasses}`}>
+        className={`p-6 fixed inset-0 md:top-1/2 left-1/2 -translate-x-1/2 md:-translate-y-1/2 grid w-full ${
+          size === true ? "md:w-[34rem]" : "md:w-[28rem]"
+        } 
+        ${height === true ? "md:h-[28rem]" : "md:h-[20rem]"} 
+         bg-white z-base ${exClasses}`}>
         <div className="flex items-end h-2 w-full absolute top-7">
           <button
             className="flex absolute -top-5 right-2"
