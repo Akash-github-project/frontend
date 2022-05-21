@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react"
+import React, { useState, useRef, useEffect, useContext } from "react"
 import Checkbox from "react-custom-checkbox"
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import { Link } from "react-router-dom"
@@ -7,6 +7,7 @@ import { NumberInput } from "./numberInput"
 import { isValidEmail, isValidMobileNo } from "./usefullFunctions"
 import axios from "axios"
 import { BASE_ROUTE } from "./routes"
+import { LoginModalContext } from "./userpages/loginModal"
 import {
   OTP_SUCCESS,
   OTP_SENT,
@@ -22,6 +23,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
     showPassword2: false,
   })
 
+  const changeModalSize = useContext(LoginModalContext)
   const [termsError, setTermsError] = useState("none")
   const [terms, setTerms] = useState(false)
   const termsRef = useRef(false)
@@ -99,7 +101,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
         .post(
           `${BASE_ROUTE}/getotp`,
           {
-            servicename: "resetpwd",
+            servicename: "signupusr",
             identifier: value,
             mode: "web",
           },
@@ -300,9 +302,8 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
           }
         })
       } else {
-        if (formikRef.touched.otpEmail === true) {
-          errors.otpEmail = "OTP does not match"
-        }
+        formikRef.setFieldTouched("otpEmail", true, false)
+        formikRef.setFieldError("otpEmail", "OTP does not match")
       }
     }
 
@@ -333,9 +334,8 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
           }
         })
       } else {
-        if (formikRef.touched.otpPhone === true) {
-          errors.otpPhone = "OTP does not match"
-        }
+        formikRef.setFieldTouched("otpPhone", true, false)
+        formikRef.setFieldError("otpPhone", "OTP does not match")
       }
     }
     console.log(errors)
@@ -367,6 +367,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
       phoneOtpStatus === "verified" &&
       terms === true
     ) {
+      formikbag.setSubmitting(true)
       axios
         .get("https://api.ipify.org?format=json")
         .then((res) => {
@@ -387,12 +388,11 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
             })
             .then((resp) => {
               console.log(resp.data)
+              formikbag.setSubmitting(false)
+              changeModalSize.changeSize("20")
               goto("successfulReg")
             })
         })
-
-      formikbag.setSubmitting(true)
-      formikbag.setSubmitting(false)
     }
   }
 
@@ -705,8 +705,9 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
           </div>
           <button
             className="h-[34px] px-1 bg-pink-primary text-white col-span-full rounded"
+            disabled={formik.isSubmitting}
             type="submit">
-            Submit
+            {formik.isSubmitting ? "Please wait..." : "Submit"}
           </button>
 
           <div className="flex col-span-full text-center py-2 ">

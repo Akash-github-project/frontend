@@ -1,14 +1,19 @@
-import React, { useRef } from "react"
+import React, { useRef, useContext, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { loginId, password, remember } from "../app/features/LoginSlice"
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import Checkbox from "react-custom-checkbox"
+import { LoginModalContext } from "./userpages/loginModal"
 
 export const Login = ({ goto = () => console.log("forgotPass") }) => {
   const [value, setValues] = React.useState({
     showPassword: false,
   })
 
+  const changeSize = useContext(LoginModalContext)
+  useEffect(() => {
+    changeSize.changeSize("34")
+  }, [])
   const ref = useRef("")
   let initialFormValues = {
     username: "",

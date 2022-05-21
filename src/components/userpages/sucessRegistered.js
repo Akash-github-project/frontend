@@ -3,10 +3,11 @@ import Button from "../button"
 
 export const SuccessFulRegistered = ({
   goto = () => console.log("sucessful"),
+  message = "",
 }) => {
   return (
     <>
-      <div className="grid grid-cols-6 gap-2 items-center p-0 md:p-3 lg:p-4 md:w-[20rem]">
+      <div className="grid grid-cols-6 gap-2 items-center p-0 md:p-3 lg:p-4 w-full">
         {/* additional sign up prompt  */}
         <div className="col-span-full flex flex-col">
           <div className="flex flex-1 w-full items-center  ">
@@ -21,7 +22,7 @@ export const SuccessFulRegistered = ({
           </div>
         </div>
         <div className="mt-2 text-black text-center col-span-full text-sm py-2 w-full flex justify-center items-center flex-col">
-          <span>You have succesfully Registered</span>
+          <span>{message}</span>
           <Button
             click={() => goto("login")}
             text="Please go to login"

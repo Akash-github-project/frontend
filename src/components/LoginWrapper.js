@@ -8,14 +8,24 @@ import TwoFactorOtp from "./userpages/twoFactorOtp"
 const LoginWrapper = ({}) => {
   const [part, setPart] = useState("login")
   return (
-    <div className="w-full md:w-[34rem]">
+    <div className="w-full md:min-w-min">
       {part === "forgotPass" ? (
         <ForgotPass goto={setPart} />
       ) : part === "successfulReg" ? (
-        <SuccessFulRegistered goto={setPart} />
+        <SuccessFulRegistered
+          goto={setPart}
+          message="You have succesfully Registered"
+        />
+      ) : part === "successfulReset" ? (
+        <SuccessFulRegistered
+          goto={setPart}
+          message="You have succesfully Restted your password"
+        />
       ) : null}
 
-      {part === "forgotPass" || part === "successfulReg" ? null : (
+      {part === "forgotPass" ||
+      part === "successfulReg" ||
+      part === "successfulReset" ? null : (
         <>
           <div className="w-full ">
             <button
@@ -40,8 +50,6 @@ const LoginWrapper = ({}) => {
               <Login goto={setPart} />
             ) : part == "signUp" ? (
               <SignUp goto={setPart} />
-            ) : part === "successfulReg" ? (
-              <SuccessFulRegistered goto={setPart} />
             ) : part === "twoFactorAuth" ? (
               <TwoFactorOtp goto={setPart} />
             ) : null}
@@ -53,3 +61,6 @@ const LoginWrapper = ({}) => {
 }
 
 export default LoginWrapper
+// : part === "successfulReg" ? (
+//               <SuccessFulRegistered goto={setPart} />
+//             )

@@ -9,13 +9,11 @@ const NotificationBar = () => {
   const { isLoading, error, data } = useQuery(
     "noticebar",
     () =>
-      axios.get(`${BASE_ROUTE}/footer/name/noticebar`).then((res) => {
-        return res.data
-      }),
-    {
-      // enabled: false,
-      staleTime: Infinity,
-    }
+      axios
+        .get(`${BASE_ROUTE}/footer/name/noticebar`)
+        .then((res) => res.data)
+        .catch((error) => console.log(error)),
+    { staleTime: 50000 }
   )
   if (isLoading) {
     return (
@@ -34,7 +32,7 @@ const NotificationBar = () => {
 
   return (
     <Marquee gradient={false} className="marqueeStyles">
-      {data.Message}
+      {data.noticebar}
     </Marquee>
   )
 }
