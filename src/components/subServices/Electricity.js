@@ -30,11 +30,6 @@ const Electricity = () => {
     consumerId: "",
   }
 
-  const setCls = () => {
-    let x = " "
-    setPromo(x)
-    setOtp(false)
-  }
   const handleApplyCoupon = () => {
     toggleCouponState(!couponState)
   }

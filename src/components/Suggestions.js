@@ -350,17 +350,19 @@ const Suggestions = () => {
                 size={false}
                 open={openModal}
                 height={false}
-                closeModal={() => setOpenModal(false)}>
+                closeModal={() => setOpenModal(false)}
+                exClasses="px-1 py-1 md:h-[15rem] top-1/4 bottom-1/2">
                 <div className="h-full w-full flex justify-center items-center">
                   <div className="text-center text-xl">
                     <p className="text-gray-primary">
                       Thank you for your Feedback.
                     </p>
                     <br />
-                    <span className="text-gray-primary">
+                    <span className="text-gray-primary ">
                       We will reach you within 24 hours reference no is
+                      <br />
                     </span>
-                    <span className="text-2xl px-4">{referenceNo}</span>
+                    <span className="text-lg px-4">{referenceNo}</span>
                   </div>
                 </div>
               </SimpleModal>

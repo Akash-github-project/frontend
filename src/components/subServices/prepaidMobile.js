@@ -531,7 +531,10 @@ const PrepaidMobile = ({ open }) => {
           Continue to Recharge
         </button>
 
-        <LoginModal closeModal={() => setOpenModal(false)} open={openModal}>
+        <LoginModal
+          closeModal={() => setOpenModal(false)}
+          open={openModal}
+          exClasses="px-3 py-3 pb-1">
           <LoginWrapper />
         </LoginModal>
       </form>

@@ -19,7 +19,7 @@ const LoginWrapper = ({}) => {
       ) : part === "successfulReset" ? (
         <SuccessFulRegistered
           goto={setPart}
-          message="You have succesfully Restted your password"
+          message="Your password reset completed"
         />
       ) : null}
 

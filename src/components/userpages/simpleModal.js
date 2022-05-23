@@ -18,7 +18,7 @@ const SimpleModal = ({
         onClick={() => closeModal()}></div>
       <div
         className={`p-6 fixed inset-0 md:top-1/2 left-1/2 -translate-x-1/2 md:-translate-y-1/2 grid w-full ${
-          size === true ? "md:w-[34rem]" : "md:w-[28rem]"
+          size === true ? "md:w-[34rem]" : "md:w-[20rem]"
         } 
         ${height === true ? "md:h-[28rem]" : "md:h-[20rem]"} 
          bg-white z-base ${exClasses}`}>

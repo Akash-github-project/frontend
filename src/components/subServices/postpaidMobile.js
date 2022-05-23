@@ -272,7 +272,10 @@ const PostpaidMobile = () => {
         </button>
       </form>
 
-      <LoginModal closeModal={() => setOpenModal(false)} open={openModal}>
+      <LoginModal
+        closeModal={() => setOpenModal(false)}
+        open={openModal}
+        exClasses="px-3 py-3 pb-1">
         <LoginWrapper />
       </LoginModal>
       {/* bill display section */}

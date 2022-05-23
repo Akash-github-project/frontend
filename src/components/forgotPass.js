@@ -212,7 +212,7 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
 
   return (
     <>
-      <div className="w-full text-center  p-0 md:p-2 md:pb-0">
+      <div className="w-full text-center  p-0 md:p-1 md:pb-0">
         <h2 className="text-2xl ">Forgot Your Password?</h2>
         <p className="text-gray-500 p-0 md:px-2">
           Enter your Email or Mobile and we’ll help you reset your password
@@ -224,14 +224,14 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
         onSubmit={handleSubmit}
         innerRef={formRef}>
         {(formik) => (
-          <Form className="grid grid-cols-6 gap-1 p-0 md:p-2 items-center">
+          <Form className="grid grid-cols-6 gap-1 p-0 md:px-2 md:py-1 items-center">
             <span className="col-span-full text-xs text-center h-3 ">
               <ErrorMessage name="mobileOrEmailUser" />
             </span>
             <label
               htmlFor="mobileOrEmailUser"
               className="text-sm col-span-2 text-gray-primary">
-              Mobile No
+              Mobile/Email
             </label>
             <div className="flex col-span-4 rounded">
               <NumberInput
