@@ -61,6 +61,3 @@ const LoginWrapper = ({}) => {
 }
 
 export default LoginWrapper
-// : part === "successfulReg" ? (
-//               <SuccessFulRegistered goto={setPart} />
-//             )

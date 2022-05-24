@@ -44,22 +44,27 @@ const MobileView = ({ close }) => {
   const circleItem = useSelector((state) => state.prepaidPlan.circle)
   const operator = useSelector((state) => state.prepaidPlan.operator)
   const dispatch = useDispatch()
-  const { isLoading, error, data } = useQuery("repoData", () =>
-    axios
-      .get(
-        `${BASE_ROUTE}/api/mplansparam/${opList[`${operator}`]}/${
-          JSON.parse(circleItem).code
-        }`
-      )
-      .then((res) => {
-        let response = res.data
-        console.log(res)
-        let x = response.categories.map((category) => category.name)
-        setPlanType(x)
-        let y = response.categories.map((category) => category.plans)
-        setList(y)
-        return res.data
-      })
+  const { isLoading, error, data } = useQuery(
+    "repoData",
+    () =>
+      axios
+        .get(
+          `${BASE_ROUTE}/api/mplansparam/${opList[`${operator}`]}/${
+            JSON.parse(circleItem).code
+          }`
+        )
+        .then((res) => {
+          let response = res.data
+          console.log(res)
+          let x = response.categories.map((category) => category.name)
+          setPlanType(x)
+          let y = response.categories.map((category) => category.plans)
+          setList(y)
+          return res.data
+        }),
+    {
+      staleTime: Infinity,
+    }
   )
 
   const filterOperator = () => {

@@ -1,16 +1,18 @@
 import "../App.css"
-import React, { useState } from "react"
+import React from "react"
 import { Link, useNavigate } from "react-router-dom"
 import DropMenu from "./dropMenu"
 import LoginWrapper from "./LoginWrapper"
 import LoginModal from "./userpages/loginModal"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { clearAll } from "../app/features/prepaidPlansSlice"
+import { useLoginModal } from "./userpages/useLoginModal"
 
 export const Header = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const [openModal, setOpenModal] = useState(false)
+
+  const { actionFuncion, modalState, close } = useLoginModal()
 
   return (
     <>
@@ -44,7 +46,7 @@ export const Header = () => {
             <button
               className="flex border-box h-9 rounded bg-primary font-normal  px-[5px] py-[4px] items-center  relative  -top-[2px] active:bg-pink-800"
               title="Login / Sign Up"
-              onClick={() => setOpenModal(true)}>
+              onClick={actionFuncion}>
               <span className="text-tertiary leading-[13px] text-[13px]">
                 Login / Sign Up
               </span>
@@ -57,7 +59,7 @@ export const Header = () => {
             className="flex border-box h-9 rounded bg-primary font-normal  items-center p-[5px] relative show-small active:bg-pink-800 -top-[1px]"
             style={{ top: "-1px" }}
             title="Login / Sign Up"
-            onClick={() => setOpenModal(true)}>
+            onClick={actionFuncion}>
             <span className="text-tertiary leading-[13px] text-[13px]">
               Login / Sign Up
             </span>
@@ -65,8 +67,8 @@ export const Header = () => {
           {/* button for login/sign Up  shown when small screen end*/}
 
           <LoginModal
-            closeModal={() => setOpenModal(false)}
-            open={openModal}
+            closeModal={() => close()}
+            open={modalState}
             exClasses="px-3 py-3 pb-1">
             <LoginWrapper />
           </LoginModal>

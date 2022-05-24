@@ -7,10 +7,15 @@ import { useQuery } from "react-query"
 import axios from "axios"
 
 const Privacy = () => {
-  const { isLoading, error, data } = useQuery("privacyPolicy", () =>
-    axios.get(`${BASE_ROUTE}/footer/name/privpolicy`).then((res) => {
-      return res.data
-    })
+  const { isLoading, error, data } = useQuery(
+    "privacyPolicy",
+    () =>
+      axios.get(`${BASE_ROUTE}/footer/name/privpolicy`).then((res) => {
+        return res.data
+      }),
+    {
+      staleTime: Infinity,
+    }
   )
   if (isLoading) {
     return <div>Loading...</div>

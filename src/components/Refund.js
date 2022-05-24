@@ -6,10 +6,15 @@ import { useQuery } from "react-query"
 import { BASE_ROUTE } from "./routes"
 
 const Refund = () => {
-  const { isLoading, error, data } = useQuery("refundPolicy", () =>
-    axios.get(`${BASE_ROUTE}/footer/name/refundpolicy`).then((res) => {
-      return res.data
-    })
+  const { isLoading, error, data } = useQuery(
+    "refundPolicy",
+    () =>
+      axios.get(`${BASE_ROUTE}/footer/name/refundpolicy`).then((res) => {
+        return res.data
+      }),
+    {
+      staleTime: Infinity,
+    }
   )
   if (isLoading) {
     return <div>Loading...</div>

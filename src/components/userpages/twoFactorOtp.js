@@ -4,10 +4,21 @@ import { useTimer } from "use-timer"
 import { Input } from "../input"
 import { ModalContext } from "../../App"
 import { Formik, Form, ErrorMessage } from "formik"
+import axios from "axios"
+import { BASE_ROUTE } from "../routes"
+import { useDispatch } from "react-redux"
+import {
+  setJwtAndAuth,
+  userId,
+  changeUserLoginState,
+} from "../../app/features/loginManager"
+import { useLoginModal } from "./useLoginModal"
 
 const TwoFactorOtp = ({ goto = () => console.log("presed") }) => {
   const toogle = useContext(ModalContext)
+  const dispatch = useDispatch()
   const formRef = useRef("")
+  const { close } = useLoginModal()
   const initialValues = {
     otpValue: "",
   }
@@ -21,14 +32,27 @@ const TwoFactorOtp = ({ goto = () => console.log("presed") }) => {
     timer.start()
   }, [])
 
-  const handleSubmit = (values) => {
+  const handleSubmit = (values, formikbag) => {
     console.log(values)
-    if (values.otpValue == "111111") {
-      toogle.toggleMenu()
-      //log user
-    } else {
-      return false
-    }
+    axios
+      .post(`${BASE_ROUTE}/nextlogin`, {
+        identifier: sessionStorage.getItem("id"),
+        otp: values.otpValue,
+        servicename: "loginusr",
+        mode: "web",
+      })
+      .then((res) => {
+        if (res.data !== null && res.data !== undefined) {
+          dispatch(setJwtAndAuth(res.data))
+          dispatch(changeUserLoginState(true))
+          sessionStorage.removeItem("id")
+          toogle.toggleMenu()
+          close()
+        }
+      })
+      .catch((error) => {
+        formikbag.setFieldError("otpValue", "invalid otp")
+      })
   }
 
   const resendOtp = () => {

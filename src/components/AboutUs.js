@@ -14,11 +14,16 @@ const AboutUs = () => {
   iconList[0] = <ThumbsUp />
   iconList[1] = <Plane />
   iconList[2] = <Eye />
-  const { isLoading, error, data } = useQuery("repoData", () =>
-    axios
-      .get(`${BASE_ROUTE}/footer/name/aboutus`)
-      .then((res) => res.data)
-      .catch((errors) => console.log(errors))
+  const { isLoading, error, data } = useQuery(
+    "repoData",
+    () =>
+      axios
+        .get(`${BASE_ROUTE}/footer/name/aboutus`)
+        .then((res) => res.data)
+        .catch((errors) => console.log(errors)),
+    {
+      staleTime: Infinity,
+    }
   )
 
   let cmsData = {

@@ -3,7 +3,10 @@ import { useSelector, useDispatch } from "react-redux"
 import { loginId, password, remember } from "../app/features/LoginSlice"
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import Checkbox from "react-custom-checkbox"
+import { useQuery } from "react-query"
+import axios from "axios"
 import { LoginModalContext } from "./userpages/loginModal"
+import { BASE_ROUTE } from "./routes"
 
 export const Login = ({ goto = () => console.log("forgotPass") }) => {
   const [value, setValues] = React.useState({
@@ -62,11 +65,29 @@ export const Login = ({ goto = () => console.log("forgotPass") }) => {
   }
 
   const doLogin = (username, pass) => {
-    if (username === "akashlj2@gmail.com" && pass === "10Essic@") {
-      goto("twoFactorAuth")
-    } else {
-      ref.current.setFieldError("otpValue", "wrong credentials", false)
-    }
+    axios
+      .post(`${BASE_ROUTE}/login`, {
+        identifier: username,
+        password: pass,
+        servicename: "loginusr",
+        mode: "web",
+      })
+      .then((res) => {
+        if (res.data.Message === "Login OTP generated") {
+          sessionStorage.setItem("id", username)
+          goto("twoFactorAuth")
+        }
+      })
+      .catch((error) => {
+        if (error.response) {
+          ref.current.setFieldError("otpValue", "wrong credentials", false)
+        }
+      })
+
+    // if (username === "akashlj2@gmail.com" && pass === "10Essic@") {
+    // } else {
+    //   ref.current.setFieldError("otpValue", "wrong credentials", false)
+    // }
   }
 
   const handleSunmit = (values, { setSubmitting }) => {

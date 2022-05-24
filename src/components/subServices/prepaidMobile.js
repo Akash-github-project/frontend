@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useRef } from "react"
-import LoginWrapper from "../LoginWrapper"
 import Card from "../card"
-import LoginModal from "../userpages/loginModal"
 import prepaidConfirm from "./specialJsons/prepaidConfirm.json"
 import WithTextInput from "../withTextInput"
 import SelectSearch, { fuzzySearch } from "react-select-search"
@@ -17,6 +15,7 @@ import prepaidChangeJson from "./specialJsons/preapidChangeList.json"
 import { useFormik } from "formik"
 import { NumberInput } from "../numberInput"
 import { isValidMobileNo } from "../usefullFunctions"
+import { useLoginModal } from "../userpages/useLoginModal"
 
 // imports for using redux
 import { useSelector, useDispatch } from "react-redux"
@@ -44,13 +43,6 @@ let operatorList = operator.list.map((item) => ({
   code: item.op_code,
 }))
 
-const initialState = {
-  mobileNo: "none",
-  operator: "none",
-  circle: "none",
-  amount: "none",
-}
-
 const PrepaidMobile = ({ open }) => {
   const [outputCircle, setCircle] = useState(circleList)
   const cir = useRef(circle)
@@ -58,12 +50,11 @@ const PrepaidMobile = ({ open }) => {
   const [fakeRadio, setFakeRadio] = useState(true)
 
   const [otp, setOtp] = useState(false)
-  const [isValidAmount, setIsValidAmount] = useState(false)
   const [promo, setPromo] = useState(" ")
+  const { actionFuncion } = useLoginModal()
 
   const [outputOperator, setOperator] = useState(operatorList)
   const dispatch = useDispatch()
-  const [openModal, setOpenModal] = useState(false)
   const userLogged = useSelector((state) => state.login.isUserLogged)
   const Operator = useSelector((state) => state.prepaidPlan.operator)
   const planInfo = useSelector((state) => state.prepaidPlan.plansInfo)
@@ -71,10 +62,6 @@ const PrepaidMobile = ({ open }) => {
   const amouontValidity = useSelector(
     (state) => state.prepaidPlan.isValidAmount
   )
-  const couponState = useSelector((state) => state.prepaidPlan.couponState)
-  const renderCircle = getRenderFormValue("circle")
-  const render = getRenderFormValue("operator")
-
   const giveCircleValue = (code) => {
     console.log(code)
 
@@ -222,8 +209,12 @@ const PrepaidMobile = ({ open }) => {
     // if (values.amount === "") {
     if (values.amount != planInfo.amount) {
       dispatch(clearAll())
-      errors.amount = "please enter a valid amount"
+      // errors.amount = "please enter a valid amount"
     }
+    if (values.amount === "") {
+      errors.amount = "invalid amount"
+    }
+
     return { ...errors }
   }
 
@@ -380,7 +371,8 @@ const PrepaidMobile = ({ open }) => {
     if (userLogged) {
       dispatch(showConfirmBill(true))
     } else {
-      setOpenModal(true)
+      // setOpenModal(true)
+      actionFuncion()
     }
   }
 
@@ -530,13 +522,6 @@ const PrepaidMobile = ({ open }) => {
           onClick={handleRechargeRequest}>
           Continue to Recharge
         </button>
-
-        <LoginModal
-          closeModal={() => setOpenModal(false)}
-          open={openModal}
-          exClasses="px-3 py-3 pb-1">
-          <LoginWrapper />
-        </LoginModal>
       </form>
       {/* row 2 for information display */}
       <div className="hidden lg:grid grid-col-1 md:grid-cols-5 gap-3 w-full">

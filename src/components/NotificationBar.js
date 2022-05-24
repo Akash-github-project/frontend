@@ -13,7 +13,7 @@ const NotificationBar = () => {
         .get(`${BASE_ROUTE}/footer/name/noticebar`)
         .then((res) => res.data)
         .catch((error) => console.log(error)),
-    { staleTime: 50000 }
+    { staleTime: Infinity }
   )
   if (isLoading) {
     return (

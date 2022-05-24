@@ -15,10 +15,15 @@ const ContactUs = () => {
     setOtpVal(value)
   }
 
-  const { isLoading, error, data } = useQuery("contactus", () =>
-    axios.get(`${BASE_ROUTE}/footer/name/contactus`).then((res) => {
-      return res.data
-    })
+  const { isLoading, error, data } = useQuery(
+    "contactus",
+    () =>
+      axios.get(`${BASE_ROUTE}/footer/name/contactus`).then((res) => {
+        return res.data
+      }),
+    {
+      staleTime: Infinity,
+    }
   )
   // baseurl: 65.0.216.133:8080/rechaxn
 

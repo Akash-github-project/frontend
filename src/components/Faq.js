@@ -58,10 +58,15 @@ const config = {
 }
 
 function FaqSection() {
-  const { isLoading, error, data } = useQuery("faq", () =>
-    axios.get(`${BASE_ROUTE}/faq`).then((res) => {
-      return process(res.data)
-    })
+  const { isLoading, error, data } = useQuery(
+    "faq",
+    () =>
+      axios.get(`${BASE_ROUTE}/faq`).then((res) => {
+        return process(res.data)
+      }),
+    {
+      staleTime: Infinity,
+    }
   )
   if (isLoading) {
     return <div>Loading...</div>

@@ -61,22 +61,27 @@ const PlansList = () => {
     return operatorName
   }
 
-  const { isLoading, error, data } = useQuery("repoData", () =>
-    axios
-      .get(
-        `${BASE_ROUTE}/api/mplansparam/${opList[`${operator}`]}/${
-          JSON.parse(circle).code
-        }`
-      )
-      .then((res) => {
-        let response = res.data
-        console.log(res)
-        let x = response.categories.map((category) => category.name)
-        setPlanType(x)
-        let y = response.categories.map((category) => category.plans)
-        setList(y)
-        return res.data
-      })
+  const { isLoading, error, data } = useQuery(
+    "repoData",
+    () =>
+      axios
+        .get(
+          `${BASE_ROUTE}/api/mplansparam/${opList[`${operator}`]}/${
+            JSON.parse(circle).code
+          }`
+        )
+        .then((res) => {
+          let response = res.data
+          console.log(res)
+          let x = response.categories.map((category) => category.name)
+          setPlanType(x)
+          let y = response.categories.map((category) => category.plans)
+          setList(y)
+          return res.data
+        }),
+    {
+      staleTime: Infinity,
+    }
   )
 
   const handlePlanChoose = (e) => {
