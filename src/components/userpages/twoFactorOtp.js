@@ -9,12 +9,12 @@ import { BASE_ROUTE } from "../routes"
 import { useDispatch } from "react-redux"
 import {
   setJwtAndAuth,
-  userId,
   changeUserLoginState,
 } from "../../app/features/loginManager"
 import { useLoginModal } from "./useLoginModal"
+import { motion } from "framer-motion"
 
-const TwoFactorOtp = ({ goto = () => console.log("presed") }) => {
+const TwoFactorOtp = ({ goto = () => console.log("presed"), userAuth }) => {
   const toogle = useContext(ModalContext)
   const dispatch = useDispatch()
   const formRef = useRef("")
@@ -28,36 +28,66 @@ const TwoFactorOtp = ({ goto = () => console.log("presed") }) => {
     endTime: 0,
     timerType: "DECREMENTAL",
   })
+
   useEffect(() => {
     timer.start()
   }, [])
 
-  const handleSubmit = (values, formikbag) => {
-    console.log(values)
-    axios
+  const askOtp = async () => {
+    let response = ""
+    response = axios
+      .post(`${BASE_ROUTE}/login`, {
+        identifier: userAuth.usernameUser,
+        password: userAuth.passwordUser,
+        servicename: "loginusr",
+        mode: "web",
+      })
+      .then((res) => res)
+      .catch((error) => error.response)
+    return response
+  }
+
+  const submitOtp = async (values) => {
+    let response = ""
+    response = axios
       .post(`${BASE_ROUTE}/nextlogin`, {
-        identifier: sessionStorage.getItem("id"),
+        identifier: userAuth.usernameUser,
         otp: values.otpValue,
         servicename: "loginusr",
         mode: "web",
       })
-      .then((res) => {
-        if (res.data !== null && res.data !== undefined) {
-          dispatch(setJwtAndAuth(res.data))
-          dispatch(changeUserLoginState(true))
-          sessionStorage.removeItem("id")
-          toogle.toggleMenu()
-          close()
-        }
-      })
-      .catch((error) => {
+      .then((res) => res)
+      .catch((error) => error.response)
+
+    return response
+  }
+
+  const handleSubmit = (values, formikbag) => {
+    console.log(values)
+    submitOtp(values).then((res) => {
+      console.log(res)
+      if (res.status === 200) {
+        dispatch(setJwtAndAuth(res.data))
+        dispatch(changeUserLoginState(true))
+        toogle.toggleMenu()
+        close()
+      } else {
         formikbag.setFieldError("otpValue", "invalid otp")
-      })
+      }
+    })
   }
 
   const resendOtp = () => {
-    timer.reset()
-    timer.start()
+    askOtp().then((resp) => {
+      console.log(resp)
+      if (resp.status === 200) {
+        formRef.current.setFieldError("otpValue", "")
+        timer.reset()
+        timer.start()
+      } else {
+        formRef.current.setFieldError("otpValue", "some error happened")
+      }
+    })
   }
 
   const validate = (values) => {
@@ -68,58 +98,71 @@ const TwoFactorOtp = ({ goto = () => console.log("presed") }) => {
     return errors
   }
   return (
-    <Formik
-      initialValues={initialValues}
-      validate={validate}
-      innerRef={formRef}
-      onSubmit={handleSubmit}>
-      {(formik) => (
-        <Form>
-          <div className="w-full flex flex-col">
-            <div className="flex flex-col gap-2">
-              <div className="w-full text-gray-primary">
-                Enter OTP send to your mobile number
+    <motion.div
+      className="h-[17rem]"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}>
+      <Formik
+        initialValues={initialValues}
+        validate={validate}
+        innerRef={formRef}
+        onSubmit={handleSubmit}>
+        {(formik) => (
+          <Form className="h-[17rem]">
+            <div className="w-full flex h-[15rem] flex-col">
+              <div className="flex flex-1 flex-col gap-2 ">
+                <div className="w-full text-gray-primary text-center text-base mt-4">
+                  Enter OTP
+                </div>
+                <Input
+                  numbersOnly={true}
+                  name="otpValue"
+                  Id="otpValue"
+                  holder="Enter OTP"
+                  maxlen={6}
+                  val={formik.values.otpValue}
+                  extraClasses="max-w-[10rem] mx-auto mt-auto"
+                  change={(value) =>
+                    formik.setFieldValue("otpValue", value, true)
+                  }
+                  blurFunction={formik.handleBlur}
+                />
+                <span className="col-span-full text-xs text-center h-3">
+                  <ErrorMessage name="otpValue" />
+                </span>
+                <div className="w-full ">
+                  {timer.time !== 0 ? (
+                    <>
+                      If not receive OTP in
+                      {Math.floor(timer.time / 60)}:{timer.time % 60} sec
+                    </>
+                  ) : (
+                    <>
+                      <a
+                        href="#"
+                        className="text-pink-primary text-sm"
+                        onClick={() => resendOtp()}>
+                        Resend OTP
+                      </a>
+                      {/* <Button text="resend otp" click={() => resendOtp()} /> */}
+                    </>
+                  )}
+                </div>
+                <div className="w-full ">
+                  <Button text="submit" type="submit" exClasses="w-full" />
+                </div>
               </div>
-              <Input
-                numbersOnly={true}
-                name="otpValue"
-                Id="otpValue"
-                holder="Enter OTP"
-                maxlen={6}
-                val={formik.values.otpValue}
-                change={(value) =>
-                  formik.setFieldValue("otpValue", value, true)
-                }
-                blurFunction={formik.handleBlur}
-              />
-              <span className="col-span-full text-xs text-center h-3">
-                <ErrorMessage name="otpValue" />
-              </span>
-              <div className="w-full ">
-                {timer.time !== 0 ? (
-                  <>
-                    If not receive OTP in
-                    {Math.floor(timer.time / 60)}:{timer.time % 60} sec
-                  </>
-                ) : (
-                  <>
-                    <Button text="resend otp" click={() => resendOtp()} />
-                  </>
-                )}
-              </div>
-              <div className="w-full ">
-                <Button text="submit" type="submit" exClasses="w-full" />
+              <div className="text-center">
+                <span onClick={() => goto("login")} className="cursor-pointer">
+                  Back to Login
+                </span>
               </div>
             </div>
-            <div className="text-center">
-              <span onClick={() => goto("login")} className="cursor-pointer">
-                Back to Login
-              </span>
-            </div>
-          </div>
-        </Form>
-      )}
-    </Formik>
+          </Form>
+        )}
+      </Formik>
+    </motion.div>
   )
 }
 

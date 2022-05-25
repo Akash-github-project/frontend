@@ -1,18 +1,17 @@
 import React, { useRef, useContext, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { loginId, password, remember } from "../app/features/LoginSlice"
+import { remember } from "../app/features/LoginSlice"
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import Checkbox from "react-custom-checkbox"
-import { useQuery } from "react-query"
 import axios from "axios"
 import { LoginModalContext } from "./userpages/loginModal"
 import { BASE_ROUTE } from "./routes"
+import { motion } from "framer-motion"
 
-export const Login = ({ goto = () => console.log("forgotPass") }) => {
+export const Login = ({ goto = () => console.log("forgotPass"), userAuth }) => {
   const [value, setValues] = React.useState({
     showPassword: false,
   })
-
   const changeSize = useContext(LoginModalContext)
   useEffect(() => {
     changeSize.changeSize("30")
@@ -64,42 +63,44 @@ export const Login = ({ goto = () => console.log("forgotPass") }) => {
     })
   }
 
-  const doLogin = (username, pass) => {
-    axios
+  //fuction for asking for
+  const doLoginAndAskOTP = (username, pass) => {
+    let response = ""
+    response = axios
       .post(`${BASE_ROUTE}/login`, {
         identifier: username,
         password: pass,
         servicename: "loginusr",
         mode: "web",
       })
-      .then((res) => {
-        if (res.data.Message === "Login OTP generated") {
-          sessionStorage.setItem("id", username)
-          goto("twoFactorAuth")
-        }
-      })
-      .catch((error) => {
-        if (error.response) {
-          ref.current.setFieldError("otpValue", "wrong credentials", false)
-        }
-      })
-
-    // if (username === "akashlj2@gmail.com" && pass === "10Essic@") {
-    // } else {
-    //   ref.current.setFieldError("otpValue", "wrong credentials", false)
-    // }
+      .then((res) => res)
+      .catch((error) => error.response)
+    return response
   }
 
-  const handleSunmit = (values, { setSubmitting }) => {
+  const handleSunmit = (values, { setSubmitting, setFieldError }) => {
     setSubmitting(false)
-    doLogin(values.username, values.passwd)
-    console.log(values)
+
+    doLoginAndAskOTP(values.username, values.passwd).then((resp) => {
+      console.log(resp)
+      if (resp.status == 200) {
+        userAuth.setUsernameUser(values.username)
+        userAuth.setPassword(values.passwd)
+        goto("twoFactorAuth")
+      } else {
+        setFieldError("username", "wrong credentials")
+      }
+    })
   }
 
   const dispatch = useDispatch()
 
   return (
-    <>
+    <motion.div
+      className="h-[17rem]"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}>
       <Formik
         initialValues={{ ...initialFormValues }}
         validate={validateForm}
@@ -151,7 +152,7 @@ export const Login = ({ goto = () => console.log("forgotPass") }) => {
             </button>
           </div>
 
-          <div className="flex items-center col-span-full">
+          <div className="flex items-center col-span-full pl-1">
             {/* remember me chackbox */}
             <Checkbox
               borderColor="#f5316c"
@@ -199,6 +200,6 @@ export const Login = ({ goto = () => console.log("forgotPass") }) => {
         {/*forgot password and rememer me  */}
         {/* additional sign up prompt  end*/}
       </Formik>
-    </>
+    </motion.div>
   )
 }

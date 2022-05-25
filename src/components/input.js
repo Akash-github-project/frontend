@@ -16,11 +16,10 @@ export const Input = ({
   maxlen = -1,
   override = {},
 }) => {
-  let defaultClasses =
-    "border rounded-md text-black focus:text-red-500 field  h-[36px] disabled:bg-gray-100 text-base leading-[21px] focus:text-pink-primary"
-  if (extraClasses !== " ") {
-    defaultClasses += extraClasses
-  }
+  let defaultClasses = `border rounded-md text-black focus:text-red-500 field  h-[36px] disabled:bg-gray-100 text-base leading-[21px] focus:text-pink-primary ${extraClasses}`
+  // if (extraClasses !== " ") {
+  //   defaultClasses += extraClasses
+  // }
 
   function changer(e) {
     console.log(e.target.value)

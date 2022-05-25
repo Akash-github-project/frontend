@@ -7,6 +7,9 @@ import TwoFactorOtp from "./userpages/twoFactorOtp"
 
 const LoginWrapper = ({}) => {
   const [part, setPart] = useState("login")
+  const [passwordUser, setPassword] = useState("")
+  const [usernameUser, setUsernameUser] = useState("")
+
   return (
     <div className="w-full md:min-w-min">
       {part === "forgotPass" ? (
@@ -27,13 +30,16 @@ const LoginWrapper = ({}) => {
       part === "successfulReg" ||
       part === "successfulReset" ? null : (
         <>
-          <div className="w-full ">
+          <div className="w-full cursor-pointer ">
             <button
               className={`w-1/2 px-4 py-2 text-[21px] font-medium border-b-2 border-b-gray-separator ${
                 part == "login" || part == "twoFactorAuth"
                   ? "border-b-pink-primary"
                   : ""
-              }`}
+              } `}
+              style={
+                part === "login" ? { cursor: "auto" } : { cursor: "pointer" }
+              }
               onClick={() => setPart("login")}>
               Login
             </button>
@@ -41,17 +47,32 @@ const LoginWrapper = ({}) => {
               className={`w-1/2 px-4 py-2 border-b-2 text-[21px] font-medium border-b-gray-separator ${
                 part == "signUp" ? "border-b-pink-primary" : ""
               }`}
-              onClick={() => setPart("signUp")}>
+              onClick={() => setPart("signUp")}
+              style={
+                part === "signUp" ? { cursor: "auto" } : { cursor: "pointer" }
+              }>
               Sign Up
             </button>
           </div>
           <div className="w-full">
             {part == "login" ? (
-              <Login goto={setPart} />
+              <Login
+                goto={setPart}
+                userAuth={{
+                  setUsernameUser,
+                  setPassword,
+                }}
+              />
             ) : part == "signUp" ? (
               <SignUp goto={setPart} />
             ) : part === "twoFactorAuth" ? (
-              <TwoFactorOtp goto={setPart} />
+              <TwoFactorOtp
+                goto={setPart}
+                userAuth={{
+                  usernameUser,
+                  passwordUser,
+                }}
+              />
             ) : null}
           </div>
         </>

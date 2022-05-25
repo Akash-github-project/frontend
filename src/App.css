@@ -447,3 +447,7 @@ i {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.t-height {
+  transition: height 2s ease-in;
+}

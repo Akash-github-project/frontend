@@ -19,6 +19,7 @@
 		"classnames": "^2.3.1",
 		"formik": "^2.2.9",
 		"formik-mui": "^4.0.0-alpha.3",
+		"framer-motion": "^6.3.4",
 		"global": "^4.4.0",
 		"http-headers": "^3.0.2",
 		"http-params": "^1.0.1",
