@@ -4,6 +4,7 @@ import overlayReducer from "./features/overlaySlice"
 import prepaidPlansSlice from "./features/prepaidPlansSlice"
 import loginOverlaySlice from "./features/loginOverlaySlice"
 import loginManager from "./features/loginManager"
+import userInfo from "./features/userInfoSlice"
 
 export const store = configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export const store = configureStore({
     prepaidPlan: prepaidPlansSlice,
     loginOverlay: loginOverlaySlice,
     loginManager: loginManager,
+    userInfo: userInfo,
   },
 })

@@ -15,14 +15,6 @@ export const AuthFunctions = async (auth, isRefreshTokenRequired) => {
   return returnValue
 }
 
-export const makeUserSpecificRequest = async (
-  requestFunction = async () => {}
-) => {
-  let response = await requestFunction()
-  if (response.data.status !== 200 && response.data.status !== 403) {
-  }
-}
-
 export const getClientIpAddress = async () => {
   let response = axios
     .get(IP_API)

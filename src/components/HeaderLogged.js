@@ -1,16 +1,27 @@
 //header for logged user
 import "../App.css"
 import "../css/loggedHeader.css"
-import React from "react"
+import React, { useEffect } from "react"
 import UserMenu from "./userMenu"
 import { Link, useNavigate } from "react-router-dom"
 import DropMenu from "./dropMenu"
 import { useDispatch } from "react-redux"
 import { clearAll } from "../app/features/prepaidPlansSlice"
+import { useRequestWithAuth } from "./customHooks/useRequestWithAuth"
+import { setUserInfo } from "../app/features/userInfoSlice"
 
 export const HeaderLogged = () => {
+  const { getRequsetWithAuth } = useRequestWithAuth()
   const navigate = useNavigate()
   const dispatch = useDispatch()
+
+  //getting userinfo and saving to redux store
+  useEffect(() => {
+    getRequsetWithAuth("userinfo").then((res) => {
+      console.log(res)
+      dispatch(setUserInfo(res))
+    })
+  }, [])
 
   return (
     <header className="">

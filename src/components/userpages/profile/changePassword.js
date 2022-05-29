@@ -3,6 +3,7 @@ import { isValidPass } from "../../usefullFunctions"
 import { Formik, Form, ErrorMessage } from "formik"
 import Button from "../../button"
 import Password from "../../password"
+import { useRequestWithAuth } from "../../customHooks/useRequestWithAuth"
 
 const ChangePassword = () => {
   const initialValues = {
@@ -10,8 +11,9 @@ const ChangePassword = () => {
     pass1: "",
     pass2: "",
   }
-
+  const { postRequsetWithAuth } = useRequestWithAuth()
   const handleSubmit = (values) => {
+    postRequsetWithAuth("")
     console.log({ ...values })
   }
 

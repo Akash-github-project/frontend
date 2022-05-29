@@ -11,6 +11,7 @@ const useBreakpoint = createBreakpoint({ XL: 1200, L: 820 })
 const UserMenu = ({ showInSmall = false }) => {
   const dispatch = useDispatch()
   const userId = useSelector((state) => state.loginManager.userId)
+  const nameOfUser = useSelector((state) => state.userInfo.userInfo.name)
   const ref = useRef(null)
   const [open, setOpen] = useState(false)
   useClickAway(ref, () => setOpen(false))
@@ -41,7 +42,7 @@ const UserMenu = ({ showInSmall = false }) => {
         className={`absolute  right-0  w-[200px] top-8 lg:top-10 z-base rounded border border-pink-primary bg-white ${
           open === true ? "block" : "hidden"
         }`}>
-        <MenuBtn value="Hi User" click={closeMenu} link="#" />
+        <MenuBtn value={`Hi ${nameOfUser}`} click={closeMenu} link="#" />
         <MenuBtn
           value="My Profile"
           click={closeMenu}

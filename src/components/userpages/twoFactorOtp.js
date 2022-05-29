@@ -16,6 +16,7 @@ import { useLoginModal } from "./useLoginModal"
 import { motion } from "framer-motion"
 import { getClientIpAddress } from "../../Auth/AuthFunctions"
 import { getUserAgent } from "../../Auth/UserAgentParser"
+import { getUserInfo } from "../../Auth/UserRequests"
 
 const TwoFactorOtp = ({ goto = () => console.log("presed"), userAuth }) => {
   const toogle = useContext(ModalContext)
@@ -60,8 +61,8 @@ const TwoFactorOtp = ({ goto = () => console.log("presed"), userAuth }) => {
           otp: values.otpValue,
           servicename: "loginusr",
           ipaddress: ipClient,
-          Browserinfo: userAgent.Browserinfo,
-          Deviceinfo: userAgent.Deviceinfo,
+          browserinfo: userAgent.Browserinfo,
+          deviceinfo: userAgent.Deviceinfo,
           mode: "web",
         })
         .then((res) => res)
@@ -81,6 +82,7 @@ const TwoFactorOtp = ({ goto = () => console.log("presed"), userAuth }) => {
         dispatch(userId(res.data.Username))
         toogle.toggleMenu()
         close()
+        getUserInfo(res.data.token)
       } else {
         formikbag.setFieldError("otpValue", "invalid otp")
       }
