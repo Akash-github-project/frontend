@@ -18,6 +18,9 @@ module.exports = {
         ms: "13px",
       },
       colors: {
+        red: {
+          error: "rgb(220,38,38)",
+        },
         pink: {
           primary: "#f5317c",
         },

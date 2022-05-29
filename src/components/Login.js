@@ -110,7 +110,7 @@ export const Login = ({ goto = () => console.log("forgotPass"), userAuth }) => {
           <span className="col-span-full text-base text-center text-gray-600">
             We are glad to see you again!
           </span>
-          <span className="col-span-full text-xs text-center h-3">
+          <span className="col-span-full text-sm text-center h-3 text-red-error">
             <ErrorMessage name="username" />
           </span>
           <label
@@ -126,7 +126,7 @@ export const Login = ({ goto = () => console.log("forgotPass"), userAuth }) => {
             />
           </div>
 
-          <span className="col-span-full text-xs text-center h-3">
+          <span className="col-span-full text-sm text-center h-3 text-red-error">
             <ErrorMessage name="passwd" />
           </span>
           <label
@@ -180,7 +180,7 @@ export const Login = ({ goto = () => console.log("forgotPass"), userAuth }) => {
 
           {/* login button */}
           <button
-            className="h-[34px] px-1 bg-pink-primary text-white col-span-full rounded"
+            className="h-[34px] px-1 bg-pink-primary text-white col-span-full rounded active:bg-pink-900"
             type="submit">
             Login
           </button>

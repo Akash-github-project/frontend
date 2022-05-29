@@ -2,11 +2,15 @@ import React, { useState, useRef } from "react"
 import { createBreakpoint } from "react-use"
 import { useClickAway } from "react-use"
 import { Link } from "react-router-dom"
-
+import { logout } from "./logout"
+import { logOutUser } from "../app/features/loginManager"
+import { useDispatch, useSelector } from "react-redux"
 //defining  breakpoints for removal of hover action on user meanu
 const useBreakpoint = createBreakpoint({ XL: 1200, L: 820 })
 
 const UserMenu = ({ showInSmall = false }) => {
+  const dispatch = useDispatch()
+  const userId = useSelector((state) => state.loginManager.userId)
   const ref = useRef(null)
   const [open, setOpen] = useState(false)
   useClickAway(ref, () => setOpen(false))
@@ -14,6 +18,11 @@ const UserMenu = ({ showInSmall = false }) => {
 
   const closeMenu = () => {
     setOpen(false)
+  }
+  const logUserOut = () => {
+    logout(userId).then((res) => {
+      dispatch(logOutUser())
+    })
   }
 
   return (
@@ -69,18 +78,13 @@ const UserMenu = ({ showInSmall = false }) => {
           link="/confirm"
           cls="text-left"
         />
-        <MenuBtn
-          value="Logout"
-          click={closeMenu}
-          link="/feedback"
-          cls="text-left"
-        />
+        <MenuBtn value="Logout" click={logUserOut} cls="text-left" />
       </div>
     </div>
   )
 }
 
-const MenuBtn = ({ value, click, link, cls }) => {
+const MenuBtn = ({ value, click, link = "#", cls }) => {
   return (
     <Link to={link} className="w-full m-0 ">
       <button

@@ -414,7 +414,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
               Looks like you're new here!
             </span>
 
-            <span className="col-span-full text-xs text-center h-3">
+            <span className="col-span-full text-sm text-center h-3 text-red-error">
               <ErrorMessage name="NameUser" />
             </span>
             <label
@@ -430,7 +430,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
               />
             </div>
 
-            <span className="col-span-full text-xs text-center h-3">
+            <span className="col-span-full text-sm text-center h-3 text-red-error">
               <ErrorMessage name="emailUser" />
             </span>
 
@@ -481,7 +481,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
             {emailOtpStatus === "verified" ||
             emailOtpStatus === "unsent" ? null : (
               <>
-                <span className="col-span-full text-center text-xs h-3">
+                <span className="col-span-full text-center text-sm h-3 text-red-error">
                   <ErrorMessage name="otpEmail" />
                 </span>
                 <div className="col-span-full flex h-[34px]">
@@ -526,7 +526,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
             )}
 
             {/* phone user section starts */}
-            <span className="col-span-full text-xs text-center h-3">
+            <span className="col-span-full text-sm text-center h-3 text-red-error">
               <ErrorMessage name="mobileUser" />
             </span>
 
@@ -582,7 +582,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
             {phoneOtpStatus === "verified" ||
             phoneOtpStatus === "unsent" ? null : (
               <>
-                <span className="col-span-full text-center text-xs h-3">
+                <span className="col-span-full text-center text-sm h-3 text-red-error">
                   <ErrorMessage name="otpPhone" />
                 </span>
                 <div className="col-span-full flex h-[34px]">
@@ -631,7 +631,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
             )}
             {/* phone user section ends */}
 
-            <span className="col-span-full text-xs text-center h-3">
+            <span className="col-span-full text-sm text-center h-3 text-red-error ">
               <ErrorMessage name="signUpPass1" />
             </span>
             <label
@@ -657,7 +657,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
               </button>
             </div>
 
-            <span className="col-span-full text-xs text-center h-3">
+            <span className="col-span-full text-sm text-center h-3 text-red-error">
               <ErrorMessage name="signUpPass2" />
             </span>
             <label
@@ -677,13 +677,13 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
                 <i
                   className={`fa-solid text-sm ${
                     values.showPassword2 ? "fa-eye" : "fa-eye-slash "
-                  } `}
+                  }`}
                   onClick={handleClickShowPassword2}></i>
               </button>
             </div>
 
             <div className="flex flex-col col-span-full text-center py-2 ">
-              <span className="col-span-full text-xs text-center h-3">
+              <span className="col-span-full text-sm text-center h-3 text-red-error">
                 {termsError === "none" ? null : termsError}
               </span>
               <div className="mx-auto flex">
@@ -711,7 +711,7 @@ export const SignUp = ({ goto = () => console.log("login") }) => {
               </div>
             </div>
             <button
-              className="h-[34px] px-1 bg-pink-primary text-white col-span-full rounded"
+              className="h-[34px] px-1 bg-pink-primary text-white col-span-full rounded active:bg-pink-900"
               disabled={formik.isSubmitting}
               type="submit">
               {formik.isSubmitting ? "Please wait..." : "Submit"}

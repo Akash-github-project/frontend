@@ -10,9 +10,12 @@ import { useDispatch } from "react-redux"
 import {
   setJwtAndAuth,
   changeUserLoginState,
+  userId,
 } from "../../app/features/loginManager"
 import { useLoginModal } from "./useLoginModal"
 import { motion } from "framer-motion"
+import { getClientIpAddress } from "../../Auth/AuthFunctions"
+import { getUserAgent } from "../../Auth/UserAgentParser"
 
 const TwoFactorOtp = ({ goto = () => console.log("presed"), userAuth }) => {
   const toogle = useContext(ModalContext)
@@ -48,16 +51,22 @@ const TwoFactorOtp = ({ goto = () => console.log("presed"), userAuth }) => {
   }
 
   const submitOtp = async (values) => {
+    let userAgent = getUserAgent()
     let response = ""
-    response = axios
-      .post(`${BASE_ROUTE}/nextlogin`, {
-        identifier: userAuth.usernameUser,
-        otp: values.otpValue,
-        servicename: "loginusr",
-        mode: "web",
-      })
-      .then((res) => res)
-      .catch((error) => error.response)
+    response = getClientIpAddress().then(async (ipClient) => {
+      return axios
+        .post(`${BASE_ROUTE}/nextlogin`, {
+          identifier: userAuth.usernameUser,
+          otp: values.otpValue,
+          servicename: "loginusr",
+          ipaddress: ipClient,
+          Browserinfo: userAgent.Browserinfo,
+          Deviceinfo: userAgent.Deviceinfo,
+          mode: "web",
+        })
+        .then((res) => res)
+        .catch((error) => error.response)
+    })
 
     return response
   }
@@ -65,10 +74,11 @@ const TwoFactorOtp = ({ goto = () => console.log("presed"), userAuth }) => {
   const handleSubmit = (values, formikbag) => {
     console.log(values)
     submitOtp(values).then((res) => {
-      console.log(res)
+      console.log(res.status)
       if (res.status === 200) {
         dispatch(setJwtAndAuth(res.data))
         dispatch(changeUserLoginState(true))
+        dispatch(userId(res.data.Username))
         toogle.toggleMenu()
         close()
       } else {
@@ -112,8 +122,8 @@ const TwoFactorOtp = ({ goto = () => console.log("presed"), userAuth }) => {
           <Form className="h-[17rem]">
             <div className="w-full flex h-[15rem] flex-col">
               <div className="flex flex-1 flex-col gap-2 ">
-                <div className="w-full text-gray-primary text-center text-base mt-4">
-                  Enter OTP
+                <div className="w-full text-center text-sm mt-auto text-red-error">
+                  <ErrorMessage name="otpValue" />
                 </div>
                 <Input
                   numbersOnly={true}
@@ -122,15 +132,12 @@ const TwoFactorOtp = ({ goto = () => console.log("presed"), userAuth }) => {
                   holder="Enter OTP"
                   maxlen={6}
                   val={formik.values.otpValue}
-                  extraClasses="max-w-[10rem] mx-auto mt-auto"
+                  extraClasses="max-w-[10rem] mx-auto "
                   change={(value) =>
                     formik.setFieldValue("otpValue", value, true)
                   }
                   blurFunction={formik.handleBlur}
                 />
-                <span className="col-span-full text-xs text-center h-3">
-                  <ErrorMessage name="otpValue" />
-                </span>
                 <div className="w-full ">
                   {timer.time !== 0 ? (
                     <>
@@ -150,7 +157,11 @@ const TwoFactorOtp = ({ goto = () => console.log("presed"), userAuth }) => {
                   )}
                 </div>
                 <div className="w-full ">
-                  <Button text="submit" type="submit" exClasses="w-full" />
+                  <Button
+                    text="submit"
+                    type="submit"
+                    exClasses="w-full active:bg-pink-900"
+                  />
                 </div>
               </div>
               <div className="text-center">

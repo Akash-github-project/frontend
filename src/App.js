@@ -11,14 +11,10 @@ import Wrapper from "./components/wrapper"
 import { HeaderLogged } from "./components/HeaderLogged"
 import MainWrapper from "./components/MainWrapper"
 
-import LoginOverlay from "./components/loginOverlay"
 export const ModalContext = createContext()
 function App() {
   const [modal, setModal] = useState(false)
   const [toggleMenu, setMenu] = useState(false)
-  const showLogin = useSelector(
-    (state) => state.loginOverlay.loginOverlayStatus
-  )
 
   const queryClient = new QueryClient()
   return (
@@ -32,12 +28,9 @@ function App() {
           className={`m-0 p-0 ${
             modal === true ? "h-screen overflow-hidden" : ""
           }`}>
-          {showLogin === true ? <LoginOverlay /> : <div></div>}
           <MainWrapper>
             {toggleMenu === true ? <HeaderLogged /> : <Header />}
-            {/* change */}
             <Outlet />
-            {/* change here */}
             <Wrapper>
               <Footer />
             </Wrapper>
