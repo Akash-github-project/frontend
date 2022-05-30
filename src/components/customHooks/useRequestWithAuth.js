@@ -31,14 +31,18 @@ export const useRequestWithAuth = () => {
     extraHeaders = {},
     body = {}
   ) => {
+    console.log(`Bearer ${authHeader}`)
     response = axios
-      .post(`${BASE_ROUTE}/${route}${params == null ? "" : params}`, {
-        ...body,
-        headers: {
-          Authorization: `Bearer ${authHeader}`,
-          ...extraHeaders,
-        },
-      })
+      .post(
+        `${BASE_ROUTE}/${route}${params == null ? "" : params}`,
+        { ...body },
+        {
+          headers: {
+            Authorization: `Bearer ${authHeader}`,
+            ...extraHeaders,
+          },
+        }
+      )
       .then((res) => res.data)
       .catch((error) => error.response)
     return response

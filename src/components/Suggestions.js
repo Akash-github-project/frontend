@@ -8,6 +8,7 @@ import { NumberInput } from "./numberInput"
 import { isValidEmail, isValidMobileNo } from "./usefullFunctions"
 import { Input } from "./input"
 import { Formik, Form, ErrorMessage } from "formik"
+import { useSelector } from "react-redux"
 
 const Suggestions = () => {
   const [fileName, changeName] = useState("Select a File...")
@@ -20,6 +21,8 @@ const Suggestions = () => {
   })
   const fileRef = useRef(false)
   const [openModal, setOpenModal] = useState(false)
+  const isUserLogged = useSelector((state) => state.loginManager.isUserLogged)
+  const userInfo = useSelector((state) => state.userInfo.userInfo)
 
   const options = [
     { name: "Select a value", value: "sv" },
@@ -35,9 +38,9 @@ const Suggestions = () => {
   // file cheaking function
 
   const initialFormValues = {
-    customerName: "",
-    email: "",
-    phoneNo: "",
+    customerName: Object.keys(userInfo).length === 0 ? "" : userInfo.name,
+    email: Object.keys(userInfo).length === 0 ? "" : userInfo.email,
+    phoneNo: Object.keys(userInfo).length === 0 ? "" : userInfo.mobile,
     msgType: "none",
     query: "",
   }

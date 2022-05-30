@@ -84,7 +84,7 @@ const TwoFactorOtp = ({ goto = () => console.log("presed"), userAuth }) => {
         close()
         getUserInfo(res.data.token)
       } else {
-        formikbag.setFieldError("otpValue", "invalid otp")
+        formikbag.setFieldError("otpValue", "Invalid OTP")
       }
     })
   }
@@ -105,7 +105,7 @@ const TwoFactorOtp = ({ goto = () => console.log("presed"), userAuth }) => {
   const validate = (values) => {
     const errors = {}
     if (values.otpValue.length < 6) {
-      errors.otpValue = "Invalid Otp"
+      errors.otpValue = "Invalid OTP"
     }
     return errors
   }
@@ -124,6 +124,9 @@ const TwoFactorOtp = ({ goto = () => console.log("presed"), userAuth }) => {
           <Form className="h-[17rem]">
             <div className="w-full flex h-[15rem] flex-col">
               <div className="flex flex-1 flex-col gap-2 ">
+                <span className="mx-auto pt-2 text-base text-gray-primary">
+                  OTP sent to Mobile & Email
+                </span>
                 <div className="w-full text-center text-sm mt-auto text-red-error">
                   <ErrorMessage name="otpValue" />
                 </div>
@@ -134,7 +137,7 @@ const TwoFactorOtp = ({ goto = () => console.log("presed"), userAuth }) => {
                   holder="Enter OTP"
                   maxlen={6}
                   val={formik.values.otpValue}
-                  extraClasses="max-w-[10rem] mx-auto "
+                  extraClasses="max-w-[10rem] mx-auto mb-auto"
                   change={(value) =>
                     formik.setFieldValue("otpValue", value, true)
                   }

@@ -6,6 +6,7 @@ import OtpInput from "../../otp"
 import WithTextInput from "../../withTextInput"
 import PasswordModal from "../../modals/passwordModal"
 import DateField from "../../DateInput"
+// import { useSelector } from "react-redux"
 
 const PersonalInfo = () => {
   //section specific to otp
@@ -13,6 +14,7 @@ const PersonalInfo = () => {
   const [isInvalid, setIsInvalid] = useState(true)
   const [existing, setExisting] = useState("")
   const [currentDate, setDate] = useState("")
+  // const userinfo = useSelector(state=>state.userInfo.userInfo)
 
   useEffect(() => {
     if (

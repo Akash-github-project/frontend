@@ -1,7 +1,7 @@
 import React, { createContext, useState } from "react"
 import ReactDOM from "react-dom"
 import { motion } from "framer-motion"
-
+import { useWindowSize } from "react-use"
 export const LoginModalContext = createContext()
 const LoginModal = ({
   closeModal,
@@ -11,6 +11,7 @@ const LoginModal = ({
   children,
 }) => {
   const [modalSize, changeModalSize] = useState("30")
+  const { width, height } = useWindowSize()
 
   // useEffect(() => runOnEnd)
   if (!open) return null
@@ -25,7 +26,9 @@ const LoginModal = ({
           modalSize === "30" ? "md:w-[30rem]" : "md:w-[20rem] "
         } h-fit bg-white z-base ${exClasses}`}
         initial={{ top: "10%", opacity: 0 }}
-        animate={{ top: "50%", opacity: 1 }}
+        animate={
+          width > 576 ? { top: "50%", opacity: 1 } : { top: "25%", opacity: 1 }
+        }
         transition={{ duration: 0.5 }}>
         <div className="flex items-end h-2 w-full absolute top-7 pointer-events-none ">
           <button

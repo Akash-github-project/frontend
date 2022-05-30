@@ -7,3 +7,5 @@ export const SUCCESS = "Success"
 export const EMAIL_MOBILE_NOT_REGISTERED = "User mobile/email is not registered"
 export const OTP_NOT_VERIFIED = "OTP Not Verified"
 export const RESET_PASSWORD_COMPLETE = "Reset password completed"
+export const PASS_CHANGE_COMPLETE =
+  "Password changed successfully. Please logout and login again"

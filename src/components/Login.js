@@ -1,5 +1,5 @@
-import React, { useRef, useContext, useEffect } from "react"
-import { useSelector, useDispatch } from "react-redux"
+import React, { useRef, useContext, useEffect, useState } from "react"
+import { useDispatch } from "react-redux"
 import { remember } from "../app/features/LoginSlice"
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import Checkbox from "react-custom-checkbox"
@@ -22,6 +22,7 @@ export const Login = ({ goto = () => console.log("forgotPass"), userAuth }) => {
     passwd: "",
     rememberMe: false,
   }
+  const [bolder, setBolder] = useState(false)
 
   const validateForm = (values) => {
     const errors = {}
@@ -52,7 +53,9 @@ export const Login = ({ goto = () => console.log("forgotPass"), userAuth }) => {
     if (!values.passwd) {
       errors.passwd = "password can't be empty"
     }
-
+    if (bolder) {
+      setBolder(false)
+    }
     return errors
   }
 
@@ -88,6 +91,7 @@ export const Login = ({ goto = () => console.log("forgotPass"), userAuth }) => {
         userAuth.setPassword(values.passwd)
         goto("twoFactorAuth")
       } else {
+        setBolder(true)
         setFieldError("username", "wrong credentials")
       }
     })
@@ -110,7 +114,10 @@ export const Login = ({ goto = () => console.log("forgotPass"), userAuth }) => {
           <span className="col-span-full text-base text-center text-gray-600">
             We are glad to see you again!
           </span>
-          <span className="col-span-full text-sm text-center h-3 text-red-error">
+          <span
+            className={`col-span-full relative -top-1 ${
+              bolder ? "text-xl" : "text-sm"
+            } text-center h-4 text-red-error`}>
             <ErrorMessage name="username" />
           </span>
           <label

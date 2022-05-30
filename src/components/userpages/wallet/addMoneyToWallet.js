@@ -3,11 +3,14 @@ import { NumberInput } from "../../numberInput"
 import Button from "../../button"
 import { Formik, ErrorMessage, Form, FormikProvider } from "formik"
 import WithTextInput from "../../withTextInput"
+import { useSelector } from "react-redux"
 
 const AddMoneyToWallet = () => {
   const [otp, setOtp] = useState(false)
   const [promo, setPromo] = useState("")
   const [have, setHave] = useState(false)
+  const walletBalance = useSelector((state) => state.userInfo.userInfo)
+  console.log(walletBalance)
 
   const initialFormValues = {
     amount: "",
@@ -64,7 +67,11 @@ const AddMoneyToWallet = () => {
                 alt=""
                 className="w-3 h-7 text-pink-primary"
               />
-              <span className="text-lg">100</span>
+              <span className="text-lg">
+                {Object.keys(walletBalance).length === 0
+                  ? ""
+                  : `${walletBalance.walletBalance}`}
+              </span>
             </div>
             {/* input section  */}
             <div className="grid grid-cols-12 gap-2 xl:gap-1 mt-2">

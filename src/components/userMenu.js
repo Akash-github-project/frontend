@@ -1,9 +1,10 @@
 import React, { useState, useRef } from "react"
 import { createBreakpoint } from "react-use"
 import { useClickAway } from "react-use"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { logout } from "./logout"
 import { logOutUser } from "../app/features/loginManager"
+import { setUserInfo } from "../app/features/userInfoSlice"
 import { useDispatch, useSelector } from "react-redux"
 //defining  breakpoints for removal of hover action on user meanu
 const useBreakpoint = createBreakpoint({ XL: 1200, L: 820 })
@@ -16,6 +17,7 @@ const UserMenu = ({ showInSmall = false }) => {
   const [open, setOpen] = useState(false)
   useClickAway(ref, () => setOpen(false))
   const breakpoint = useBreakpoint()
+  const navigate = useNavigate()
 
   const closeMenu = () => {
     setOpen(false)
@@ -23,6 +25,9 @@ const UserMenu = ({ showInSmall = false }) => {
   const logUserOut = () => {
     logout(userId).then((res) => {
       dispatch(logOutUser())
+      dispatch(setUserInfo({}))
+      setOpen(false)
+      navigate("/home")
     })
   }
 

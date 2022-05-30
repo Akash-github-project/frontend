@@ -5,6 +5,7 @@ import PointsCounter from "./rewardPoints/pointsCounter"
 import TransactionList from "./TransactionList"
 import EarnPoints from "./EarnPoints"
 import Redeem from "./Redeem"
+import { useSelector } from "react-redux"
 
 const cn = (...args) => args.filter(Boolean).join(" ")
 const Tab = ({ children }) => {
@@ -20,6 +21,7 @@ const Tab = ({ children }) => {
 }
 
 export default ({ data }) => {
+  const points = useSelector((value) => value.userInfo.userInfo)
   const [state, setState] = useState(0)
   useEffect(() => {
     setState(0)
@@ -37,7 +39,9 @@ export default ({ data }) => {
         {/* tabs 1 */}
         <Panel>
           <div className="">
-            <PointsCounter points={88882} />
+            <PointsCounter
+              points={Object.keys(points).length === 0 ? 0 : points.rewardPoint}
+            />
             <TransactionList />
           </div>
         </Panel>

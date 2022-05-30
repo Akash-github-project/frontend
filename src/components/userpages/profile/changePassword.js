@@ -4,6 +4,9 @@ import { Formik, Form, ErrorMessage } from "formik"
 import Button from "../../button"
 import Password from "../../password"
 import { useRequestWithAuth } from "../../customHooks/useRequestWithAuth"
+import { useSelector } from "react-redux"
+import { PASS_CHANGE_COMPLETE } from "../../constants"
+import NonCLoseableLogoutModal from "./nonCLoseableLogoutModal"
 
 const ChangePassword = () => {
   const initialValues = {
@@ -11,10 +14,22 @@ const ChangePassword = () => {
     pass1: "",
     pass2: "",
   }
+  const username = useSelector((state) => state.loginManager.userId)
   const { postRequsetWithAuth } = useRequestWithAuth()
-  const handleSubmit = (values) => {
-    postRequsetWithAuth("")
-    console.log({ ...values })
+  const [modal, setModal] = useState(false)
+  //function to do password change requset
+  const handleSubmit = (values, formikbag) => {
+    postRequsetWithAuth("user/changepwd", null, null, {
+      oldpassword: values.exPass,
+      newpassword: values.pass1,
+      mode: "web",
+      username: `${username}`,
+    }).then((res) => {
+      if (res.Message == PASS_CHANGE_COMPLETE) {
+        formikbag.resetForm()
+        setModal(true)
+      }
+    })
   }
 
   const validate = (values) => {
@@ -51,80 +66,93 @@ const ChangePassword = () => {
   }
 
   return (
-    <Formik
-      initialValues={initialValues}
-      validate={validate}
-      onSubmit={handleSubmit}>
-      {(formik) => (
-        <Form>
-          <div className="grid grid-cols-12 w-full gap-2 p-2 mt-2 shadow-default">
-            <div className="flex flex-col lg:flex-row col-span-full xl:col-span-9 gap-2 p-2  lg:pl-6">
-              <span className="text-gray-primary w-40">Existing Password</span>
-
-              <div className="flex flex-col col-span-6 flex-1">
-                <Password
-                  change={(value) =>
-                    formik.setFieldValue("exPass", value, true)
-                  }
-                  blurFunction={formik.handleBlur}
-                  val={formik.values.exPass}
-                  name="exPass"
-                  dis={false}
-                  Id="exPass"
-                  fClasses="flex-1"
-                />
-
-                <span className="h-3 text-xs text-red-600">
-                  <ErrorMessage name="exPass" />
+    <>
+      {modal ? <NonCLoseableLogoutModal open={modal} /> : null}
+      <Formik
+        initialValues={initialValues}
+        validate={validate}
+        onSubmit={handleSubmit}>
+        {(formik) => (
+          <Form>
+            <div className="grid grid-cols-12 w-full gap-2 p-2 mt-2 shadow-default">
+              <div className="flex flex-col lg:flex-row col-span-full xl:col-span-9 gap-2 p-2  lg:pl-6">
+                <span className="text-gray-primary w-40">
+                  Existing Password
                 </span>
+
+                <div className="flex flex-col col-span-6 flex-1">
+                  <Password
+                    change={(value) =>
+                      formik.setFieldValue("exPass", value, true)
+                    }
+                    blurFunction={formik.handleBlur}
+                    val={formik.values.exPass}
+                    name="exPass"
+                    dis={false}
+                    Id="exPass"
+                    fClasses="flex-1"
+                  />
+
+                  <span className="h-3 text-xs text-red-600">
+                    <ErrorMessage name="exPass" />
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex flex-col lg:flex-row col-span-full xl:col-span-9 gap-2 p-2  lg:pl-6">
+                <span className="text-gray-primary w-40">New Password</span>
+                <div className="flex flex-col col-span-6 flex-1">
+                  <Password
+                    Id="pass1"
+                    name="pass1"
+                    change={(value) =>
+                      formik.setFieldValue("pass1", value, true)
+                    }
+                    blurFunction={formik.handleBlur}
+                    dis={false}
+                    val={formik.values.pass1}
+                    fClasses="flex-1"
+                  />
+                  <span className="h-3 text-xs text-red-600">
+                    <ErrorMessage name="pass1" />
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex flex-col lg:flex-row col-span-full xl:col-span-9 gap-2  p-2 lg:pl-6">
+                <span className="text-gray-primary w-40">Confirm Password</span>
+                <div className="flex flex-col col-span-6 flex-1">
+                  <Password
+                    Id="pass2"
+                    name="pass2"
+                    change={(value) =>
+                      formik.setFieldValue("pass2", value, true)
+                    }
+                    blurFunction={formik.handleBlur}
+                    val={formik.values.pass2}
+                    dis={false}
+                    fClasses="flex-1"
+                  />
+
+                  <span className="h-3 text-xs text-red-600">
+                    <ErrorMessage name="pass2" className="text-xs" />
+                  </span>
+                </div>
+              </div>
+
+              <div className="col-span-full flex gap-2 lg:pl-6">
+                <span className="lg:w-40"></span>
+                <Button
+                  text="Update Passowrd"
+                  fClasses="flex-1"
+                  type="submit"
+                />
               </div>
             </div>
-
-            <div className="flex flex-col lg:flex-row col-span-full xl:col-span-9 gap-2 p-2  lg:pl-6">
-              <span className="text-gray-primary w-40">New Password</span>
-              <div className="flex flex-col col-span-6 flex-1">
-                <Password
-                  Id="pass1"
-                  name="pass1"
-                  change={(value) => formik.setFieldValue("pass1", value, true)}
-                  blurFunction={formik.handleBlur}
-                  dis={false}
-                  val={formik.values.pass1}
-                  fClasses="flex-1"
-                />
-                <span className="h-3 text-xs text-red-600">
-                  <ErrorMessage name="pass1" />
-                </span>
-              </div>
-            </div>
-
-            <div className="flex flex-col lg:flex-row col-span-full xl:col-span-9 gap-2  p-2 lg:pl-6">
-              <span className="text-gray-primary w-40">Confirm Password</span>
-              <div className="flex flex-col col-span-6 flex-1">
-                <Password
-                  Id="pass2"
-                  name="pass2"
-                  change={(value) => formik.setFieldValue("pass2", value, true)}
-                  blurFunction={formik.handleBlur}
-                  val={formik.values.pass2}
-                  dis={false}
-                  fClasses="flex-1"
-                />
-
-                <span className="h-3 text-xs text-red-600">
-                  <ErrorMessage name="pass2" className="text-xs" />
-                </span>
-              </div>
-            </div>
-
-            <div className="col-span-full flex gap-2 lg:pl-6">
-              <span className="lg:w-40"></span>
-              <Button text="Update Passowrd" fClasses="flex-1" type="submit" />
-            </div>
-          </div>
-        </Form>
-      )}
-    </Formik>
+          </Form>
+        )}
+      </Formik>
+    </>
   )
 }
 
