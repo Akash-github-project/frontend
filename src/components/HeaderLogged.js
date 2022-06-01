@@ -15,7 +15,7 @@ export const HeaderLogged = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  //getting userinfo and saving to redux store
+  // getting userinfo and saving to redux store
   useEffect(() => {
     getRequsetWithAuth("userinfo").then((res) => {
       console.log(res)

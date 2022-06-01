@@ -4,6 +4,7 @@ import Button from "../button"
 export const SuccessFulRegistered = ({
   goto = () => console.log("sucessful"),
   message = "",
+  hideBtn = false,
 }) => {
   return (
     <>
@@ -23,11 +24,13 @@ export const SuccessFulRegistered = ({
         </div>
         <div className="mt-2 text-black text-center col-span-full text-sm py-2 w-full flex justify-center items-center flex-col">
           <span>{message}</span>
-          <Button
-            click={() => goto("login")}
-            text="Please go to login"
-            exClasses="w-36"
-          />
+          {hideBtn ? null : (
+            <Button
+              click={() => goto("login")}
+              text="Please go to login"
+              exClasses="w-36"
+            />
+          )}
         </div>
       </div>
     </>

@@ -34,6 +34,9 @@ export const loginManager = createSlice({
       state.jwtAndAuth = {}
       state.loginScreenStatus = false
     },
+    setOnlyJwt: function (state, action) {
+      state.jwtAndAuth.Token = action.payload
+    },
   },
 })
 
@@ -46,6 +49,7 @@ export const {
   changeUserLoginState,
   setJwtAndAuth,
   logOutUser,
+  setOnlyJwt,
 } = loginManager.actions
 
 export default loginManager.reducer

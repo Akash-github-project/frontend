@@ -1,125 +1,209 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
+import { Formik, Form, ErrorMessage } from "formik"
 import Button from "../../button"
-import { isValidMobileNo } from "../../usefullFunctions"
 import { Input } from "../../input"
-import OtpInput from "../../otp"
 import WithTextInput from "../../withTextInput"
-import PasswordModal from "../../modals/passwordModal"
 import DateField from "../../DateInput"
-// import { useSelector } from "react-redux"
+import ChangeMobile from "./ChangeMobile"
+import { useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
+import { setUserInfo } from "../../../app/features/userInfoSlice"
+import { useRequestWithAuth } from "../../customHooks/useRequestWithAuth"
+import SmallModal, { smallModal } from "../../userpages/smallModal"
+import { SUCCESS } from "../../constants"
+import { SuccessFulRegistered } from "../../userpages/sucessRegistered"
 
 const PersonalInfo = () => {
-  //section specific to otp
-  const [otpVal, setOtpVal] = useState("")
-  const [isInvalid, setIsInvalid] = useState(true)
-  const [existing, setExisting] = useState("")
-  const [currentDate, setDate] = useState("")
-  // const userinfo = useSelector(state=>state.userInfo.userInfo)
+  const [editName, setEditName] = useState(false)
+  const userinfo = useSelector((state) => state.userInfo.userInfo)
+  const dispatch = useDispatch()
+  const [confirmModal, setConnfirmModal] = useState(false)
+  const { getRequsetWithAuth, postRequsetWithAuth } = useRequestWithAuth()
 
-  useEffect(() => {
-    if (
-      isValidMobileNo(otpVal) === "none" &&
-      isValidMobileNo(existing) == "none"
-    ) {
-      setIsInvalid(false)
-    } else {
-      setIsInvalid(true)
-    }
-  }, [otpVal, existing])
-
-  //specific section ends here
-
+  //section specific to modal
   const [modalState, setModalState] = useState(false)
   const showPasswordModal = () => {
     setModalState(true)
   }
 
+  const refetchUserInfo = () => {
+    getRequsetWithAuth("userinfo").then((res) => {
+      console.log(res)
+      dispatch(setUserInfo(res))
+    })
+  }
+  //modal specific section ends here
+  console.log(userinfo)
+  const initialValues = {
+    username: userinfo.name === undefined ? "" : userinfo.name,
+    email: userinfo.email === undefined ? "" : userinfo.email,
+    mobile: userinfo.mobile === undefined ? "" : userinfo.mobile,
+    city: userinfo.city === undefined ? "" : userinfo.city,
+    dob: userinfo.dob === undefined ? "" : new Date(userinfo.dob),
+  }
+  const validate = (values) => {
+    const errors = {}
+    if (values.username === "") {
+      errors.username = "Full name can't be empty"
+    }
+    if (isNaN(parseFloat(values.city)) === false) {
+      errors.city = "city name can't be a number"
+    }
+    return errors
+  }
+
+  const handleSubmit = (values) => {
+    console.log(values)
+    let dateOfBrith = ""
+    if (values.dob) {
+      dateOfBrith = new Date(values.dob).toISOString().split("T")[0]
+    }
+
+    postRequsetWithAuth("user/updateprofile", null, null, {
+      name: values.username,
+      dob: dateOfBrith,
+      city: values.city,
+      mode: "web",
+      username: userinfo.username,
+    })
+      .then((res) => {
+        console.log(res)
+        if (res.Status === SUCCESS) {
+          setConnfirmModal(true)
+        }
+      })
+      .catch((error) => {
+        if (error.response.status === 412) {
+        }
+        console.log(error)
+      })
+  }
+
   return (
-    <div className="grid grid-cols-1 w-full p-2 shadow-default mt-2">
-      <div className="col-span-full grid grid-cols-1 lg:grid-cols-2 gap-4 p-2">
-        <div className="flex flex-col">
-          <span className="text-gray-primary">Full Name</span>
-          <Input
-            iType="text"
-            override={{ maxWidth: "100%" }}
-            holder="Full Name"
-          />
-        </div>
-        <div className="flex flex-col">
-          <span className="text-gray-primary">Mobile No</span>
-          <WithTextInput
-            type="tel"
-            text="Change Mobile No"
-            holder="Mobile No"
-            textClick={() => showPasswordModal()}
-          />
-          {modalState === true ? (
-            <PasswordModal
-              closeModal={() => setModalState(false)}
-              open={modalState}>
-              <div className="w-full h-full flex flex-col">
-                <span className="text-gray-primary">Existing Mobile No</span>
-                <Input
-                  numbersOnly={true}
-                  iType="tel"
-                  val={existing}
-                  change={(value) => setExisting(value)}
-                  maxlen={10}
-                  override={{ maxWidth: "100%" }}
-                  extraClasses="text-gray-primary"
-                />
-                <span className="inline-block h-3  "></span>
-                <span className="mt-2 text-gray-primary">New Mobile No</span>
-                <div className="flex w-full">
-                  <OtpInput
-                    fun={(value) => "1111" === value}
-                    val={otpVal}
-                    change={(value) => setOtpVal(value)}
-                    outer="w-full"
+    <>
+      <Formik
+        initialValues={initialValues}
+        validate={validate}
+        onSubmit={handleSubmit}>
+        {(formik) => (
+          <Form>
+            <div className="grid grid-cols-1 w-full p-2 shadow-default mt-2">
+              <div className="col-span-full grid grid-cols-1 lg:grid-cols-2 gap-4 p-2">
+                <div className="flex flex-col">
+                  <div>
+                    <span className="text-gray-primary">Full Name</span>
+                    <span className="text-red-error">
+                      <ErrorMessage name="username" />
+                    </span>
+                  </div>
+                  <div className="flex">
+                    <Input
+                      Id="username"
+                      name="username"
+                      dis={!editName}
+                      val={formik.values.username}
+                      change={(values) =>
+                        formik.setFieldValue("username", values, true)
+                      }
+                      blurFunction={formik.handleBlur}
+                      iType="text"
+                      override={{ maxWidth: "100%", width: "100%" }}
+                      holder="Full Name"
+                    />
+                    <Button
+                      text={"Edit"}
+                      type="button"
+                      click={() => setEditName(!editName)}
+                    />
+                  </div>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-gray-primary">Mobile No</span>
+                  <WithTextInput
                     type="tel"
-                    disOrNot={isInvalid}
-                    labelFirst="hidden"
-                    contactInput="w-full"
-                    middleData="Please enter a unique mobile no"
-                    middleStyle="text-red-600"
-                    otpInputStyle="min-w-[5rem] max-w-[6rem]"
-                    resendBtn=""
+                    disable={true}
+                    val={formik.values.mobile}
+                    text="Change Mobile No"
+                    holder="Mobile No"
+                    textClick={() => showPasswordModal()}
                   />
-                  {/* <Input override={{ maxWidth: "100%", width: "100%" }} />
-                  <Button text="OTP" exClasses="ml-auto" /> */}
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-gray-primary">Email ID</span>
+                  <Input
+                    iType="email"
+                    dis={true}
+                    val={formik.values.email}
+                    override={{ maxWidth: "100%" }}
+                    holder="Email"
+                  />
+                </div>
+                <div className="flex flex-col ">
+                  <span className="text-gray-primary">
+                    Date of Birth (DD-MM-YYYY)
+                  </span>
+                  <DateField
+                    name="dob"
+                    Id="dob"
+                    currentDate={formik.values.dob}
+                    change={(date) => formik.setFieldValue("dob", date, true)}
+                    holder="Select Date Of Birth"
+                  />
+                </div>
+                <div className="flex flex-col">
+                  <div>
+                    <span className="text-gray-primary">City</span>
+                    <span className="text-red-error">
+                      <ErrorMessage name="city" />
+                    </span>
+                  </div>
+                  <Input
+                    iType="text"
+                    Id="city"
+                    name="city"
+                    val={formik.values.city}
+                    blurFunction={formik.handleBlur}
+                    change={(values) =>
+                      formik.setFieldValue("city", values, true)
+                    }
+                    override={{ maxWidth: "100%" }}
+                    holder="city"
+                  />
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-gray-primary"></span>
+                </div>
+                <div className="flex flex-col col-span-full">
+                  <span>
+                    <Button
+                      text="Update Now"
+                      type="submit"
+                      exClasses="max-w-[]"
+                    />
+                  </span>
                 </div>
               </div>
-            </PasswordModal>
-          ) : null}
-        </div>
-        <div className="flex flex-col">
-          <span className="text-gray-primary">Email ID</span>
-          <Input iType="email" override={{ maxWidth: "100%" }} holder="Email" />
-        </div>
-        <div className="flex flex-col ">
-          <span className="text-gray-primary">Date of Birth (DD-MM-YYYY)</span>
-          <DateField
-            name="dob"
-            Id="dob"
-            currentDate={currentDate}
-            change={(date) => setDate(date)}
-            holder="Select Date Of Birth"
-          />
-        </div>
-        <div className="flex flex-col">
-          <span className="text-gray-primary">City</span>
-          <Input iType="text" override={{ maxWidth: "100%" }} holder="city" />
-        </div>
-        <div className="flex flex-col">
-          <span className="text-gray-primary"></span>
-        </div>
-        <div className="flex flex-col col-span-full">
-          <span>
-            <Button text="Update Now" exClasses="max-w-[]" />
-          </span>
-        </div>
-      </div>
-    </div>
+            </div>
+          </Form>
+        )}
+      </Formik>
+
+      {modalState ? (
+        <ChangeMobile
+          closeModal={() => setModalState(false)}
+          callback={() => refetchUserInfo()}
+          open={modalState}
+        />
+      ) : null}
+      <SmallModal
+        open={confirmModal}
+        closeModal={() => setConnfirmModal(false)}>
+        <SuccessFulRegistered
+          hideBtn={true}
+          message="Personal Details Update Successful"
+        />
+      </SmallModal>
+    </>
   )
 }
 
