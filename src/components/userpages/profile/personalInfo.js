@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { Formik, Form, ErrorMessage } from "formik"
 import Button from "../../button"
 import { Input } from "../../input"
@@ -19,7 +19,18 @@ const PersonalInfo = () => {
   const dispatch = useDispatch()
   const [confirmModal, setConnfirmModal] = useState(false)
   const { getRequsetWithAuth, postRequsetWithAuth } = useRequestWithAuth()
+  const [simpleText, setSimpleText] = useState("")
+  const formRef = useRef("")
 
+  let initialValues = {
+    username: userinfo.name === undefined ? "" : userinfo.name,
+    email: userinfo.email === undefined ? "" : userinfo.email,
+    mobile: userinfo.mobile === undefined ? "" : userinfo.mobile,
+    city: userinfo.city === undefined ? "" : userinfo.city,
+    dob: userinfo.dob === undefined ? "" : new Date(userinfo.dob),
+  }
+
+  useEffect(() => {}, [userinfo])
   //section specific to modal
   const [modalState, setModalState] = useState(false)
   const showPasswordModal = () => {
@@ -29,18 +40,22 @@ const PersonalInfo = () => {
   const refetchUserInfo = () => {
     getRequsetWithAuth("userinfo").then((res) => {
       console.log(res)
+      setSimpleText("Phone Details Update Successful")
       dispatch(setUserInfo(res))
+      setConnfirmModal(true)
+      formRef.current.setFieldValue("mobile", res.mobile, false)
     })
   }
   //modal specific section ends here
-  console.log(userinfo)
-  const initialValues = {
-    username: userinfo.name === undefined ? "" : userinfo.name,
-    email: userinfo.email === undefined ? "" : userinfo.email,
-    mobile: userinfo.mobile === undefined ? "" : userinfo.mobile,
-    city: userinfo.city === undefined ? "" : userinfo.city,
-    dob: userinfo.dob === undefined ? "" : new Date(userinfo.dob),
+
+  const refetchUserInfoAndStore = () => {
+    getRequsetWithAuth("userinfo").then((res) => {
+      console.log(res)
+      dispatch(setUserInfo(res))
+    })
   }
+
+  console.log(userinfo)
   const validate = (values) => {
     const errors = {}
     if (values.username === "") {
@@ -69,7 +84,9 @@ const PersonalInfo = () => {
       .then((res) => {
         console.log(res)
         if (res.Status === SUCCESS) {
+          setSimpleText("Personal Details Update Successful")
           setConnfirmModal(true)
+          refetchUserInfoAndStore()
         }
       })
       .catch((error) => {
@@ -84,7 +101,8 @@ const PersonalInfo = () => {
       <Formik
         initialValues={initialValues}
         validate={validate}
-        onSubmit={handleSubmit}>
+        onSubmit={handleSubmit}
+        innerRef={formRef}>
         {(formik) => (
           <Form>
             <div className="grid grid-cols-1 w-full p-2 shadow-default mt-2">
@@ -198,10 +216,7 @@ const PersonalInfo = () => {
       <SmallModal
         open={confirmModal}
         closeModal={() => setConnfirmModal(false)}>
-        <SuccessFulRegistered
-          hideBtn={true}
-          message="Personal Details Update Successful"
-        />
+        <SuccessFulRegistered hideBtn={true} message={simpleText} />
       </SmallModal>
     </>
   )
