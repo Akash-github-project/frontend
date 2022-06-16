@@ -1,0 +1,39 @@
+log into aws
+    become root
+    mkdir workspace
+
+    requirements
+        install git
+        install nodejs{
+                refer docs
+        }
+
+
+        install pm2 globally{
+                npm install pm2@latest --global
+        }
+
+        install serve globally
+
+    clone inside workspace your project
+    cd into your project
+
+    go to your aws panel
+       go to security panel
+       select securiy group
+              select launch wizard file
+                     Edit inbound rules
+                          Add Rules
+                          Select HTTP
+                          select 0.0.0.0/0 in info section (inbound)
+                          give description "anything"
+                          Save rules
+
+                    run yarn install or npm install in workspace
+
+//syntax {pm2 serve (build folder) (port number) --spa}
+pm2 serve build 80 --spa
+
+
+
+//npm section

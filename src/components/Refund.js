@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import Wrapper from "./wrapper"
 import "../css/terms.css"
 import axios from "axios"
@@ -6,7 +6,7 @@ import { useQuery } from "react-query"
 import { BASE_ROUTE } from "./routes"
 
 const Refund = () => {
-  const { isLoading, error, data } = useQuery(
+  const { isLoading, error, data, refetch } = useQuery(
     "refundPolicy",
     () =>
       axios.get(`${BASE_ROUTE}/footer/name/refundpolicy`).then((res) => {
@@ -16,6 +16,11 @@ const Refund = () => {
       staleTime: Infinity,
     }
   )
+
+  useEffect(() => {
+    refetch()
+  }, [])
+
   if (isLoading) {
     return <div>Loading...</div>
   }

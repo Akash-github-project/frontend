@@ -61,7 +61,7 @@ const PlansList = () => {
     return operatorName
   }
 
-  const { isLoading, error, data } = useQuery(
+  const { isLoading, error, data, refetch } = useQuery(
     "repoData",
     () =>
       axios
@@ -83,6 +83,9 @@ const PlansList = () => {
       staleTime: Infinity,
     }
   )
+  useEffect(() => {
+    refetch()
+  }, [])
 
   const handlePlanChoose = (e) => {
     let flatList

@@ -15,7 +15,7 @@ const ContactUs = () => {
     setOtpVal(value)
   }
 
-  const { isLoading, error, data } = useQuery(
+  const { isLoading, error, data, refetch } = useQuery(
     "contactus",
     () =>
       axios.get(`${BASE_ROUTE}/footer/name/contactus`).then((res) => {
@@ -39,6 +39,7 @@ const ContactUs = () => {
     } else {
       setIsValid(true)
     }
+    refetch()
   }, [otpVal])
 
   if (isLoading) {

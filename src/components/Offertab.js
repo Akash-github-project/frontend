@@ -22,6 +22,107 @@ export default ({ data }) => {
     setState(0)
   }, [])
 
+  const returnIntArray = (stringArray) => {
+    let baseArray = stringArray.substring(
+      stringArray.indexOf("[") + 1,
+      stringArray.indexOf("]")
+    )
+    console.log(baseArray)
+    let intArray = baseArray.split(",")
+    console.log(intArray)
+    let finalArray = intArray.map((ele) => Number(ele))
+    return [...finalArray]
+  }
+
+  const giveCashback = (dataItem) => {
+    //let dataItem = JSON.parse(dataItem)
+    let message = ""
+    let finalData = ""
+    if (
+      dataItem.percentCashbackAppMode != undefined ||
+      dataItem.percentCashbackWebMode !== undefined
+    ) {
+      //type = "percent"
+
+      if (dataItem.percentCashbackAppMode !== undefined) {
+        finalData = `Upto ${dataItem.percentCashbackAppMode}% (App)`
+      }
+      if (dataItem.percentCashbackWebMode !== undefined) {
+        finalData = `Upto ${dataItem.percentCashbackWebMode}% (Website)`
+      }
+
+      if (
+        dataItem.percentCashbackAppMode !== undefined &&
+        dataItem.percentCashbackWebMode !== undefined
+      ) {
+        finalData = `Upto ${dataItem.percentCashbackWebMode}% (Website)  or Upto ${dataItem.percentCashbackAppMode}% (App)`
+      }
+      message = finalData
+    }
+
+    //type = "recurring"
+    else if (
+      dataItem.recurringCashbackAppMode !== undefined ||
+      dataItem.recurringCashbackWebMode !== undefined
+    ) {
+      let appCashback = returnIntArray(dataItem.recurringCashbackAppMode)
+      let appValue = appCashback.reduce((total, number) => total + number)
+      let webCashback = returnIntArray(dataItem.recurringCashbackWebMode)
+      let webValue = webCashback.reduce((total, number) => total + number)
+
+      if (dataItem.recurringCashbackAppMode !== undefined) {
+        finalData = `Rs ${appValue} (App)`
+      }
+
+      if (dataItem.recurringCashbackWebMode !== undefined) {
+        finalData = `Rs ${webValue} (Website)`
+      }
+
+      if (
+        dataItem.recurringCashbackAppMode !== undefined &&
+        dataItem.recurringCashbackWebMode !== undefined
+      ) {
+        finalData = `Rs ${webValue} (Website) or Rs ${appValue} (App) `
+      }
+      message = finalData
+    }
+    //instant
+    else if (
+      dataItem.instantCashbackAppMode !== undefined &&
+      dataItem.instantCashbackWebMode !== undefined
+    ) {
+      if (dataItem.instantCashbackAppMode !== undefined) {
+        finalData = `Rs ${dataItem.instantCashbackAppMode} (App)`
+      }
+      if (dataItem.instantCashbackWebMode !== undefined) {
+        finalData = `Rs ${dataItem.instantCashbackWebMode} (Website)`
+      }
+
+      if (
+        dataItem.instantCashbackAppMode !== undefined &&
+        dataItem.instantCashbackWebMode !== undefined
+      ) {
+        finalData = `Rs ${dataItem.instantCashbackWebMode} (Website) or Rs ${dataItem.instantCashbackAppMode} (App)`
+      }
+      message = finalData
+    }
+    return message
+  }
+
+  const giveUseTime = (usetime) => {
+    let frequency = ""
+    if (usetime == 1) {
+      frequency = "once per account"
+    } else if (usetime == 2) {
+      frequency = "twice per account"
+    } else if (usetime == 3) {
+      frequency = "thrice per account"
+    } else {
+      frequency = `${usetime} times per account`
+    }
+    return frequency
+  }
+
   return (
     <Tabs state={[state, setState]}>
       <div className="tabs">
@@ -45,11 +146,12 @@ export default ({ data }) => {
                       "self-center": data[`${element}`].length === 1,
                     })}>
                     <Offercard
-                      promocode={dat.promocode}
-                      title={dat.title}
-                      cashback={dat.cashback}
-                      frequency={dat.frequency}
-                      details={dat.details}
+                      promocode={dat.code}
+                      title={dat.description}
+                      cashback={giveCashback(dat)}
+                      frequency={giveUseTime(dat.usetime)}
+                      details={dat.tnc}
+                      validTill={dat.endDate}
                     />
                   </p>
                 ))

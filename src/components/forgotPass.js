@@ -182,11 +182,13 @@ const ForgotPass = ({ goto = () => console.log("hello world") }) => {
 
   //handle submit function for form submittion
   const handleSubmit = (values, formikbag) => {
+    formikbag.setSubmitting(false)
     if (otp !== "verified") {
       formikbag.setFieldError(
         "mobileOrEmailUser",
         "Please confirm mobile or email"
       )
+      return
     } else {
       formikbag.setFieldError("mobielOrEmailUser", "")
       formikbag.setSubmitting("true")

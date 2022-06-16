@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import Wrapper from "./wrapper"
 import Arrowdown from "./Arrowdown"
 import Faq from "react-faq-component"
@@ -58,7 +58,7 @@ const config = {
 }
 
 function FaqSection() {
-  const { isLoading, error, data } = useQuery(
+  const { isLoading, error, data, refetch } = useQuery(
     "faq",
     () =>
       axios.get(`${BASE_ROUTE}/faq`).then((res) => {
@@ -68,6 +68,11 @@ function FaqSection() {
       staleTime: Infinity,
     }
   )
+
+  useEffect(() => {
+    refetch()
+  }, [])
+
   if (isLoading) {
     return <div>Loading...</div>
   }

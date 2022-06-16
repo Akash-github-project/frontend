@@ -4,7 +4,14 @@ import React, { useState } from "react"
 import Button from "./button"
 import LoginModal from "./userpages/loginModal"
 import Danger from "./danger"
-const Offercard = ({ promocode, cashback, title, frequency, details }) => {
+const Offercard = ({
+  promocode,
+  cashback,
+  title,
+  frequency,
+  details,
+  validTill,
+}) => {
   // const mContext = useContext(ModalContext)
   // const detail = useRef()
   const [openModal, setOpenModal] = useState(false)
@@ -15,13 +22,60 @@ const Offercard = ({ promocode, cashback, title, frequency, details }) => {
     // mContext.modalToggle()
     setOpenModal(true)
   }
+  const formatDate = (dateAsString) => {
+    let data = new Date(dateAsString)
+    let day = data.getDate()
+    let month = data.getMonth() + 1
+    let year = data.getFullYear()
 
-  // useEffect(() => {
-  //   detail.current = details
-  // }, [])
+    switch (data.getMonth() + 1) {
+      case 1:
+        month = "Jan"
+        break
+      case 2:
+        month = "Feb"
+        break
+      case 3:
+        month = "March"
+        break
+      case 4:
+        month = "April"
+        break
+      case 5:
+        month = "May"
+        break
+      case 6:
+        month = "June"
+        break
+      case 7:
+        month = "July"
+        break
+      case 8:
+        month = "Aug"
+        break
+      case 9:
+        month = "Sept"
+        break
+      case 10:
+        month = "Oct"
+        break
+      case 11:
+        month = "Nov"
+        break
+      case 12:
+        month = "Dec"
+        break
+    }
+    return `${day}-${month}-${year}`
+  }
 
   return (
     <div className="offerGrid gap-2 p-4 shadow-lg border border-gray-200 hover:shadow-2xl transition-shadow duration-200">
+      <strong
+        className="col-span-full text-pink-primary text-right self-center leading-5 "
+        style={{ fontSize: "13px" }}>
+        Valid Till: {formatDate(validTill)}
+      </strong>
       {/* row 1 */}
       <strong className="col-span-full text-black text-center p-1 self-center ">
         {title}

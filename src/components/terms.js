@@ -6,7 +6,7 @@ import { useQuery } from "react-query"
 import { BASE_ROUTE } from "./routes"
 
 const Terms = () => {
-  const { isLoading, error, data } = useQuery(
+  const { isLoading, error, data, refetch } = useQuery(
     "terms",
     () =>
       axios.get(`${BASE_ROUTE}/footer/name/tnc`).then((res) => {
@@ -16,6 +16,9 @@ const Terms = () => {
       staleTime: Infinity,
     }
   )
+  useEffect(() => {
+    refetch()
+  }, [])
   if (isLoading) {
     return <div>Loading...</div>
   }

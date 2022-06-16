@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Tabs, useTabState, Panel } from "@bumaga/tabs"
 import "../../css/planList.css"
 import { useSelector, useDispatch } from "react-redux"
@@ -44,7 +44,7 @@ const MobileView = ({ close }) => {
   const circleItem = useSelector((state) => state.prepaidPlan.circle)
   const operator = useSelector((state) => state.prepaidPlan.operator)
   const dispatch = useDispatch()
-  const { isLoading, error, data } = useQuery(
+  const { isLoading, error, data, refetch } = useQuery(
     "repoData",
     () =>
       axios
@@ -66,6 +66,10 @@ const MobileView = ({ close }) => {
       staleTime: Infinity,
     }
   )
+
+  useEffect(() => {
+    refetch()
+  }, [])
 
   const filterOperator = () => {
     let returnValue = operatorList.filter(

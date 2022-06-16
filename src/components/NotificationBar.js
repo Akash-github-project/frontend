@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import "../css/notificationBar.css"
 import Marquee from "react-fast-marquee"
 import axios from "axios"
@@ -6,7 +6,7 @@ import { BASE_ROUTE } from "./routes"
 import { useQuery } from "react-query"
 
 const NotificationBar = () => {
-  const { isLoading, error, data } = useQuery(
+  const { isLoading, error, data, refetch } = useQuery(
     "noticebar",
     () =>
       axios
@@ -15,6 +15,11 @@ const NotificationBar = () => {
         .catch((error) => console.log(error)),
     { staleTime: Infinity }
   )
+
+  useEffect(() => {
+    refetch()
+  }, [])
+
   if (isLoading) {
     return (
       <div>

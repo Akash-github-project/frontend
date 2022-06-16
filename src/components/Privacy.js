@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import Wrapper from "./wrapper"
 import "../css/terms.css"
 import "../css/privacy.css"
@@ -7,7 +7,7 @@ import { useQuery } from "react-query"
 import axios from "axios"
 
 const Privacy = () => {
-  const { isLoading, error, data } = useQuery(
+  const { isLoading, error, data, refetch } = useQuery(
     "privacyPolicy",
     () =>
       axios.get(`${BASE_ROUTE}/footer/name/privpolicy`).then((res) => {
@@ -17,6 +17,10 @@ const Privacy = () => {
       staleTime: Infinity,
     }
   )
+  useEffect(() => {
+    refetch()
+  }, [])
+
   if (isLoading) {
     return <div>Loading...</div>
   }

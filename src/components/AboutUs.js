@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import Wrapper from "./wrapper"
 import { useQuery } from "react-query"
 import "../css/AboutUs.css"
@@ -14,7 +14,7 @@ const AboutUs = () => {
   iconList[0] = <ThumbsUp />
   iconList[1] = <Plane />
   iconList[2] = <Eye />
-  const { isLoading, error, data } = useQuery(
+  const { isLoading, error, data, refetch } = useQuery(
     "repoData",
     () =>
       axios
@@ -25,6 +25,10 @@ const AboutUs = () => {
       staleTime: Infinity,
     }
   )
+
+  useEffect(() => {
+    refetch()
+  }, [])
 
   let cmsData = {
     AboutUs: `

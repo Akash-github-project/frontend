@@ -37,7 +37,7 @@ export const useRequestWithAuth = () => {
                 `${BASE_ROUTE}/${route}${params == null ? "" : params}`,
                 {
                   headers: {
-                    Authorization: `Bearer ${authHeader}`,
+                    Authorization: `Bearer ${res.RefreshToken}`,
                     ...extraHeaders,
                   },
                 }
@@ -75,9 +75,24 @@ export const useRequestWithAuth = () => {
       .catch((error) => error.response)
       .then((eres) => {
         if (eres.status === 412) {
-          AuthFunctions(authHeader, true).then((res) => {
+          AuthFunctions(authHeader, true).then(async (res) => {
             dispatch(setOnlyJwt(res.RefreshToken))
-            postRequsetWithAuth(route, params, extraHeaders, body)
+
+            try {
+              const res_1 = await axios.post(
+                `${BASE_ROUTE}/${route}${params == null ? "" : params}`,
+                { ...body },
+                {
+                  headers: {
+                    Authorization: `Bearer ${res.RefreshToken}`,
+                    ...extraHeaders,
+                  },
+                }
+              )
+              return res_1.data
+            } catch (error) {
+              return error.response
+            }
           })
         }
         return eres
